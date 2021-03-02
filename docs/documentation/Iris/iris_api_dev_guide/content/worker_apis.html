@@ -1,0 +1,4619 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  
+
+  <link rel="shortcut icon" href="/volt-mx-docs/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/volt-mx-docs/assets/css/just-the-docs-default.css">
+  <link rel="stylesheet" href="/volt-mx-docs/assets/css/custom.css">
+  
+
+  
+    <script type="text/javascript" src="/volt-mx-docs/assets/js/vendor/lunr.min.js"></script>
+  
+  <script type="text/javascript" src="/volt-mx-docs/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Worker Thread API | VoltMx</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Worker Thread API" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform." />
+<meta property="og:description" content="Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform." />
+<link rel="canonical" href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/worker_apis.html" />
+<meta property="og:url" content="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/worker_apis.html" />
+<meta property="og:site_name" content="VoltMx" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Worker Thread API" />
+<script type="application/ld+json">
+{"url":"https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/worker_apis.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hcl-tech-software.github.io/volt-mx-docs/Volt_Mx_logo.png"}},"headline":"Worker Thread API","description":"Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+</head>
+
+<body>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-search" viewBox="0 0 24 24">
+    <title>Search</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+      <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+  </symbol>
+</svg>
+<style>
+  .sub-nav a[href*="/documentation/"] {
+   border-bottom: 3px #d694f9 solid;
+}
+</style>
+ 
+
+  <div class="top-header">
+    <div class="site-header">
+      <a href="https://hcl-tech-software.github.io/volt-mx-docs/" class="site-title lh-tight">
+  <div class="site-logo"></div>
+
+</a>
+      <a href="#" id="mainmenu-button"  class="site-button">
+        <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg>
+      </a>
+    </div>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="svg-link" viewBox="0 0 24 24">
+      <title>Link</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+      </svg>
+    </symbol>
+    <symbol id="svg-search" viewBox="0 0 24 24">
+      <title>Search</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-menu" viewBox="0 0 24 24">
+      <title>Menu</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+      <title>Expand</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </symbol>
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+      <title>Document</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+      </svg>
+    </symbol>
+  </svg>
+
+<div id="main-header" class="main-header">
+      
+
+    
+      <div class="search">
+        <ul class="page-nav" id="page-nav">
+          <li><a href="#">Community</a></li>
+          <li><a href="#" class="active">Learn</a></li>
+          <li><a href="#">Releases</a></li>
+          <li><a href="#">Training</a></li>
+          <li><a href="#">Ideas</a></li>
+          <li><a href="#">Marketplace</a></li>
+          <li><a href="#">Login</a></li>
+        </ul>
+        <div class="search-input-wrap">
+          <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="search resources..." aria-label="Search VoltMx" autocomplete="off">
+          <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label>
+       
+        </div>
+        <div id="search-results" class="search-results"></div>
+      </div>
+    
+    
+   
+  </div>
+  <script>
+    const pageNav = document.getElementById('page-nav');
+     const mainHeader = document.getElementById('main-header');
+     const mainmenuButton = document.getElementById('mainmenu-button');
+   (function(){
+    
+    mainmenuButton.addEventListener('click', function(){
+      pageNav.classList.toggle('nav-open');
+ });
+})();
+ </script>
+<div class="sub-nav-wrap" id="myDIV">
+    <ul class="sub-nav" >
+        <li >
+            <a href="/volt-mx-docs/docs/getting-started/"  class="sub-link">Getting Started</a>
+        </li>
+        <li>
+            <a href="/volt-mx-docs/docs/tutorials/" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="/volt-mx-docs/docs/documentation/" class="sub-link">Documentation</a>
+        </li>
+        <li>
+            <a href="/volt-mx-docs/docs/articles/" title="test" class="sub-link">Articles</a>
+        </li>
+    </ul>
+    <a href="#" id="menu-button" class="site-button">
+        <!-- <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> -->
+        select a topic <svg viewBox="0 0 24 24" class="carat-topic"><use xlink:href="#svg-arrow-right"></use></svg>
+      </a>
+</div>
+<div class="side-bar">
+  <nav role="navigation" aria-label="Main" id="site-nav" class="site-nav">
+ 
+    <ul class="nav-list"><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/" class="nav-list-link">Home</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/fundamentals.html" class="nav-list-link">Fundamentals</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/projectorg.html" class="nav-list-link">Project Organization</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/appUserInterface.html" class="nav-list-link">App User Interface</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/widgetApiReference.html" class="nav-list-link">Widgets & API Reference</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/webAppDevelopment.html" class="nav-list-link">Web App Development</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/dataBackEndIntergration.html" class="nav-list-link">Data & Back-end Integration</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/buildAndPublish.html" class="nav-list-link">Build and Publish</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/extensibility.html" class="nav-list-link">Extensibility</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/security.html" class="nav-list-link">Security</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/howTosSampleApps.html" class="nav-list-link">How Tos & Sample Apps</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/dataIntegrationServices.html" class="nav-list-link">Data Integration Services</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/offlineObjects.html" class="nav-list-link">Offline Objects</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/apiMangement.html" class="nav-list-link">API Management</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/appServicesAdminitration.html" class="nav-list-link">App Services Administration</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/advancedServerFeature.html" class="nav-list-link">Advanced Server Features</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/analyticsAndApm.html" class="nav-list-link">Analytics and APM</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/engagementServices.html" class="nav-list-link">Engagement Services</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/quantumSync.html" class="nav-list-link">VoltMX Sync (Legacy)</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/devOps.html" class="nav-list-link">DevOps</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/heradlessAndContinuousIntegration.html" class="nav-list-link">Headless and Continuous Integration Build</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/installationManagement.html" class="nav-list-link">Installation & Management</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/deployment.html" class="nav-list-link">Deployment</a></li></ul>
+  </nav>
+
+</div>
+
+  <div class="main" id="top">
+    
+    <div id="main-content-wrap" class="main-content-wrap">
+      
+        
+      
+      <div id="main-content" class="main-content" role="main">
+        
+          <p>You are here: Worker Thread API</p>
+      <h1 id="worker-thread-api">
+        
+        
+          <a href="#worker-thread-api" class="anchor-heading" aria-labelledby="worker-thread-api"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Worker Thread API
+        
+        
+      </h1>
+    
+
+<p>Worker threads are a means to execute different tasks in multiple parallel contexts of execution in a concurrent manner, which can take advantage of multiprocessor and multithreaded environments as well as to keep UI Thread in Application responsive by delegating or offloading work which need not be handled in UI Main thread, to a different secondary thread.</p>
+
+<p>Worker thread is a continuous parallel thread that runs and accepts messages until the time it is explicitly closed or terminated. Messages to a worker thread can be sent from the parent thread or its child worker threads. Through out this document, parent thread is referred as thread where a worker thread is spawned.</p>
+
+<p>Worker can have logic that gets executed parallel for each of the messages that it receives. If worker thread is busy handling messages, incoming messages that it receives will be queued for processing.</p>
+
+<p>Sharing data between parent thread and worker threads is done through message passing and by default variables, functions, or state is not shared.</p>
+
+<p>The current specification is inspired from and based on HTML5 Web Worker threads standard, that use <em>Message Passing</em> model or mechanism for communication between threads.</p>
+
+<p> </p>
+
+<p>The Worker Thread API contains the following API Elements:</p>
+
+<p><a href="hcl.worker_functions.htm">hcl.worker Namespace</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[hcl.worker.hasWorkerThreadSupport](hcl.worker_functions.htm#hasWorkerThreadSupport)</code></td>
+      <td>Determines whether the current platform environment has worker thread support.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[hcl.worker.WorkerThread](hcl.worker_functions.htm#WorkerThread)</code></td>
+      <td>Creates a WorkerThread object and returns a handle to it. The worker object represents a worker thread.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="workerthreadobject_methods.htm">WorkerThread Object</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[addEventListener](workerthreadobject_methods.htm#getRange)</code></td>
+      <td>Event Handlers can be registered using <em>addEventListener()</em> method on the worker Objects and once registered messages and errors from a worker thread can be received in parent thread.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[close](workerthreadobject_methods.htm#setAutho)</code></td>
+      <td>Worker thread can be terminated from inner scope of the worker by invoking close(). The worker thread is killed immediately without an opportunity to complete its operations or clean up.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[postMessage](workerthreadobject_methods.htm#getMonit2)</code></td>
+      <td>postMessage() sends a JSON object or String message to the Parent/worker’s scope by invoking respective registered “message” event handlers.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[removeEventListener](workerthreadobject_methods.htm#isRangin)</code></td>
+      <td>removeEventListener() is used to remove the previously registered <em>message</em> or <em>error</em> event listener that was registered using <em>addEventListener</em>().</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[terminate](workerthreadobject_methods.htm#requestS)</code></td>
+      <td>When called from parent scope immediately terminates the worker. This does not offer the worker an opportunity to finish its operations. It is simply stopped at once.</td>
+    </tr>
+  </tbody>
+</table>
+      <h2 id="scope">
+        
+        
+          <a href="#scope" class="anchor-heading" aria-labelledby="scope"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Scope
+        
+        
+      </h2>
+    
+
+<ol>
+  <li>VoltMX Iris platform version &gt;= 5.6.2.</li>
+  <li>Support for JavaScript.</li>
+  <li>Supported mobile Platforms:
+    <ol>
+      <li>iOS</li>
+      <li>Android</li>
+      <li>SPA: Supported List of browsers starting from versions.</li>
+    </ol>
+  </li>
+  <li>Supported List of Browsers</li>
+</ol>
+
+<p><strong>SPA</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>iOS</th>
+      <th>Android Native</th>
+      <th>Android Chrome</th>
+      <th>Windows</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt;p&gt;5.0-5.1&lt;/p&gt;</td>
+      <td>&lt;p&gt;4.4&lt;/p&gt;</td>
+      <td>&lt;p&gt;33.0&lt;/p&gt;</td>
+      <td>&lt;p&gt;10&lt;/p&gt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>DesktopWeb</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>IE</th>
+      <th>Firefox</th>
+      <th>Chrome</th>
+      <th>Safari</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>10.0</td>
+      <td>4.0</td>
+      <td>20</td>
+      <td>5.0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p> </p>
+
+<ol>
+  <li>Windows</li>
+</ol>
+      <h2 id="introduction-to-constructor---workerthread">
+        
+        
+          <a href="#introduction-to-constructor---workerthread" class="anchor-heading" aria-labelledby="introduction-to-constructor---workerthread"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Introduction to Constructor - WorkerThread()
+        
+        
+      </h2>
+    
+
+<ul>
+  <li>The <em>WorkerThread()</em> constructor creates and returns the handle to the newly created worker thread. The new worker thread can be used by the Parent thread for any further communication with the worker thread.</li>
+  <li>To create a worker thread, it requires a JavaScript file name or a functional module name. The <em>WorkerThread()</em> constructor is invoked with the JavaScript file or a functional module name as its only argument and a worker thread instance is then created and returned.</li>
+  <li>Worker threads may in turn initiate new worker threads.</li>
+  <li>If a Javascript file name with “.js” extension is passed as <em>WorkerThread()</em> constructor argument, it looks up only in the <code class="language-plaintext highlighter-rouge">workerthreads</code> directory in <code class="language-plaintext highlighter-rouge">modules/js</code> path and loads if the file is found. This holds good for functional modules based projects as well as non-functional modules based projects.</li>
+  <li>If a function module name is provided as an argument for <em>WorkerThread()</em> constructor, in case of functional modules based project then the module will be loaded if found in the modules listing.</li>
+</ul>
+      <h3 id="worker-thread-scenarios">
+        
+        
+          <a href="#worker-thread-scenarios" class="anchor-heading" aria-labelledby="worker-thread-scenarios"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Worker Thread Scenarios
+        
+        
+      </h3>
+    
+
+<p>The scenarios of using <em>WorkerThread()</em> constructor are as follows:</p>
+
+<ul>
+  <li>
+    <p>The <em>WorkerThread()</em> constructor creates a new worker thread and returns a handle to the new worker thread, which can be used by the parent thread for any further communication with the worker thread.</p>
+
+    <p>Creating a worker thread requires a JavaScript file name or a functional module name. The <em>WorkerThread()</em> constructor is invoked with the JavaScript file or a functional module name as its only argument and a worker thread instance is then created and returned:</p>
+
+    <blockquote>
+      <p>var worker = new hcl.worker.WorkerThread(‘helper.js’);</p>
+
+      <p>var worker = new hcl.worker.WorkerThread(‘functionModuleName’);</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>A <em>message</em> event handler can be registered with the worker by parent thread to receive messages from the worker thread.</p>
+
+    <blockquote>
+      <p>worker.addEventListener(“message”, function (event) { … });</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>To send data from parent to a worker, <em>postMessage()</em> method can be used from parent.</p>
+
+    <blockquote>
+      <p>worker.postMessage({ operation: ‘find-edges’, input: ‘buffer’, threshold: 0.6 } );</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>To send messages back from worker thread to parent thread scope, <em>postMessage()</em> can be used.</p>
+
+    <blockquote>
+      <p>postMessage({‘msg’:’Data’});</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>To receive a messages inside the worker thread from parent thread, the <em>message</em> event handler can be registered using <em>addEventListener()</em> inside worker thread.</p>
+
+    <blockquote>
+      <p>self.addEventListener( “message”, function (event) { … });</p>
+    </blockquote>
+  </li>
+</ul>
+      <h3 id="worker-thread-life-cycle">
+        
+        
+          <a href="#worker-thread-life-cycle" class="anchor-heading" aria-labelledby="worker-thread-life-cycle"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Worker Thread Life Cycle
+        
+        
+      </h3>
+    
+
+<p>The following steps provide the work flow to use worker thread:</p>
+
+<ol>
+  <li>
+    <p>Call to Worker constructor will create a new Worker instance and a new parallel execution environment context is created, and immediately starts execution in the new parallel thread of control in an asynchronous manner. In this new thread, first the Worker will try to load the ‘workerjs’ script.</p>
+  </li>
+  <li>
+    <p>As a result of the asynchronous parallel nature of execution in worker thread context, invocation of Worker constructor call in Parent thread will return a new Worker instance handle and Parent proceeds with execution of next instructions.</p>
+  </li>
+  <li>
+    <p>Every Worker thread will have its own event loop which takes care of the execution of all the received message tasks which are queued for this worker in that order until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked.</p>
+  </li>
+  <li>
+    <p>From the moment of successful creation of worker thread and until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked, the worker thread will be alive and can receive and process messages which are sent to this worker form its parent or from its child workers if created, as well as it can send messages using postMessage() to its parent thread and its child worker threads if created.</p>
+  </li>
+</ol>
+      <h2 id="message-event-handler">
+        
+        
+          <a href="#message-event-handler" class="anchor-heading" aria-labelledby="message-event-handler"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> message event handler
+        
+        
+      </h2>
+    
+
+<p>“message” event handler receives an “event” object which contains the JSON or string message that is passed to postMessage() during invocation and the same message can be accessed from its “event.data” field. The data passed to postMessage() should be a String or JSON object.</p>
+
+<p>Adhering to the JSON standard, the JSON object passed to postMessage() API should be serializable JSON without opaque object handles or function object handles etc. The data which is passed between the parent thread and worker thread using postMessage() API are copied, not shared, so the end result is that a duplicate is created on each end.</p>
+
+<p>Multiple “message” event handlers can also be registered in Parent scope and in workers inner scope and all the registered event handlers will be invoked in the registered order whenever a postMessage() is called.</p>
+      <h3 id="syntax">
+        
+        
+          <a href="#syntax" class="anchor-heading" aria-labelledby="syntax"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Syntax
+        
+        
+      </h3>
+    
+
+<p>function(event) { });</p>
+      <h3 id="input-parameters">
+        
+        
+          <a href="#input-parameters" class="anchor-heading" aria-labelledby="input-parameters"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Input Parameters
+        
+        
+      </h3>
+    
+
+<p>String / JSON Object</p>
+
+<ul>
+  <li>“message” event handler receives an “event” object which contains the JSON or string message that is passed to postMessage() during invocation and the same message can be accessed from its “event.data” field.</li>
+  <li>The data passed to postMessage() should be a String or JSON object.</li>
+  <li>Adhering to the JSON standard, the JSON object passed to postMessage() API should be serializable JSON without opaque object handles or function object handles etc.</li>
+  <li>The data which is passed between the parent thread and worker thread using postMessage() API are copied, not shared, so the end result is that a duplicate is created on each end.</li>
+  <li>Multiple “message” event handlers can also be registered in Parent scope and in workers inner scope and all the registered event handlers will be invoked in the registered order whenever a postMessage() is called.</li>
+</ul>
+      <h3 id="example">
+        
+        
+          <a href="#example" class="anchor-heading" aria-labelledby="example"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Example
+        
+        
+      </h3>
+    
+
+<figure class="highlight">
+  <pre><code class="language-voltmx" data-lang="voltmx">​​​​​
+var evtMessageHandler\_1 = function(event) {
+//In case of JSONhcl.print ("Received message :" + event.data\["msg"\]);" 
+
+//In case of string
+hcl.print ("Received message :" + event.data); 
+};
+​</code></pre>
+</figure>
+<p>​​​​​</p>
+      <h3 id="platform-availability">
+        
+        
+          <a href="#platform-availability" class="anchor-heading" aria-labelledby="platform-availability"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Platform Availability
+        
+        
+      </h3>
+    
+
+<p>Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see <a href="#Scope2">Scope</a>.</p><hr />
+      <h2 id="error-event-handler">
+        
+        
+          <a href="#error-event-handler" class="anchor-heading" aria-labelledby="error-event-handler"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> error event handler
+        
+        
+      </h2>
+    
+
+<p>“error” event handler receives an “event” object which has the has the following three fields: message, filename, lineno. Registered ‘error’ event handler is invoked whenever an unhandled exception arises in worker’s scope. “error” event handler can be registered in parent thread scope on worker object and as well as in worker thread’s inner scope, where both event handlers will be invoked if present whenever an unhandled exception occurs in workers inner scope.</p>
+
+<p>Multiple “error” event handlers can also be registered in Parent scope and in workers inner scope and all registered event handlers will be invoked in the registered order whenever an unhandled exception arises in worker’s scope.</p>
+      <h3 id="syntax-1">
+        
+        
+          <a href="#syntax-1" class="anchor-heading" aria-labelledby="syntax-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Syntax
+        
+        
+      </h3>
+    
+
+<p>function(event) { });</p>
+      <h3 id="input-parameters-1">
+        
+        
+          <a href="#input-parameters-1" class="anchor-heading" aria-labelledby="input-parameters-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Input Parameters
+        
+        
+      </h3>
+    
+
+<p>error event object (message, filename, lineno)</p>
+      <h3 id="example-1">
+        
+        
+          <a href="#example-1" class="anchor-heading" aria-labelledby="example-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Example
+        
+        
+      </h3>
+    
+
+<figure class="highlight">
+  <pre><code class="language-voltmx" data-lang="voltmx">​​​​​
+	function(event) {
+		hcl.print ('ERROR: Line '+ event.lineno + ' in ' + event.filename + ': ' + event.message);
+  }
+​</code></pre>
+</figure>
+<p>​​​​​</p>
+      <h3 id="platform-availability-1">
+        
+        
+          <a href="#platform-availability-1" class="anchor-heading" aria-labelledby="platform-availability-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Platform Availability
+        
+        
+      </h3>
+    
+
+<p>Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see <a href="#Scope2">Scope</a>.</p><hr />
+      <h2 id="importing-scripts">
+        
+        
+          <a href="#importing-scripts" class="anchor-heading" aria-labelledby="importing-scripts"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Importing scripts
+        
+        
+      </h2>
+    
+
+<p>Worker threads can use importScripts() function to import external scripts their scope by providing the JS file name to import. This method takes one or more JavaScript file names to import.</p>
+
+<p>This API is only available in worker thread scope and not in main parent thread scope.</p>
+
+<p>In case of Functional modules based project “ hcl.modules.loadFunctionalModule()” API can be used to import a functional module into workers scope. Refer <a href="modules.htm">Functional Modules</a> specification document for usage help on loadFunctionalModule() API.</p>
+
+<p>importScripts() if invoked with .js file, looks up only in the “workerthreads” directory under “modules/js/” in VoltMX Iris IDE Project structure to import scripts into workers scope. This holds good for both functional modules based projects and non-functional modules based projects.</p>
+
+<p>In case of loading multiple files using importScripts(), if an error occurs while loading one of the script, then the remaining scripts are not loaded into context scope.</p>
+
+<p>For more information on Functional Module APIs, refer <a href="modules.htm">Functional Modules APIs</a>.</p>
+      <h3 id="syntax-2">
+        
+        
+          <a href="#syntax-2" class="anchor-heading" aria-labelledby="syntax-2"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Syntax
+        
+        
+      </h3>
+    
+
+<p>importScripts(“.js_file_name”);</p>
+
+<p>or</p>
+
+<p>importScripts(“functional_module_name”);</p>
+      <h3 id="input-parameters-2">
+        
+        
+          <a href="#input-parameters-2" class="anchor-heading" aria-labelledby="input-parameters-2"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Input Parameters
+        
+        
+      </h3>
+    
+
+<p>JSFileNames [Object]</p>
+
+<p>or</p>
+
+<p>Functional_Module_Name [Object]</p>
+
+<ul>
+  <li>One or more comma separated list of JavaScript file names.</li>
+</ul>
+      <h3 id="example-2">
+        
+        
+          <a href="#example-2" class="anchor-heading" aria-labelledby="example-2"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Example
+        
+        
+      </h3>
+    
+
+<figure class="highlight">
+  <pre><code class="language-voltmx" data-lang="voltmx">​​​​​
+importScripts("Utility.js"); // loads Util.js
+
+
+importScripts("Utility1.js", "Utility2.js", "Utility3.js"); 
+​</code></pre>
+</figure>
+<p>​​​​​</p>
+      <h3 id="return-values">
+        
+        
+          <a href="#return-values" class="anchor-heading" aria-labelledby="return-values"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Return Values
+        
+        
+      </h3>
+    
+
+<p>None</p>
+      <h3 id="exceptions">
+        
+        
+          <a href="#exceptions" class="anchor-heading" aria-labelledby="exceptions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Exceptions
+        
+        
+      </h3>
+    
+
+<blockquote>
+  <p><strong><em>Note:</em></strong> If no argument is given, no exception is raised and it does nothing.</p>
+</blockquote>
+
+<p>When an error is encountered, the HCLError JS object is thrown with the following information:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Name</th>
+      <th>Message</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3002</td>
+      <td>WorkerThreadError</td>
+      <td>importScripts: InvalidParameter. Invalid script name</td>
+      <td>This exception occurs when the argument passed is not a string.</td>
+    </tr>
+    <tr>
+      <td>3002</td>
+      <td>WorkerThreadError</td>
+      <td>importScripts: InvalidParameter. Unable to import script. <scriptname></scriptname></td>
+      <td>This exception occurs when it is unable to find and load the JS script.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p>In worker scope, if these exceptions are not handled and if an <em>error</em> event handler is registered in worker’s inner scope or/and in parent scope for this worker object, then it is invoked with an error event object and its message attribute is set as follows:</p>
+
+    <blockquote>
+      <p>Exception 1 - message: “importScripts: InvalidParameter. Invalid script name”</p>
+
+      <p>Exception 2 - message: “importScripts: InvalidParameter. Invalid script name”</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>Differences in behavior of <em>importScripts</em>() and <em><a href="hcl.modules_functions.htm#math.toi">_hcl.modules.loadFunctionalModule_()</a></em> API with respect to Functional Modules:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Without Functional Modules</th>
+      <th>With Functional Modules</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>From inside Worker context if importScripts() is used to import external JS scripts the search criteria would be : only “workerthreads” directory.</td>
+      <td>From inside Worker context if importScripts() is used to import external JS scripts the search criteria would be : only “workerthreads” directory.</td>
+    </tr>
+    <tr>
+      <td>hcl.modules.loadFunctionalModule() function cannot be used in workers scope to load any FunctionalModule.</td>
+      <td><a href="hcl.modules_functions.htm#math.toi">hcl.modules.loadFunctionalModule()</a> function can be used in workers scope to load any JavaScript script which is part of some Functional Module.</td>
+    </tr>
+  </tbody>
+</table>
+      <h3 id="platform-availability-2">
+        
+        
+          <a href="#platform-availability-2" class="anchor-heading" aria-labelledby="platform-availability-2"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Platform Availability
+        
+        
+      </h3>
+    
+
+<p>Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see <a href="#Scope2">Scope</a>.</p>
+      <h2 id="using-worker-threads-feature">
+        
+        
+          <a href="#using-worker-threads-feature" class="anchor-heading" aria-labelledby="using-worker-threads-feature"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Using Worker Threads Feature
+        
+        
+      </h2>
+    
+
+<p>The following topics helps you to use the worker thread feature:</p>
+
+<ul>
+  <li><a href="#getMonit2"></a><a href="#Communic">Communicating and Data Processing Between Threads</a></li>
+  <li><a href="#getRange"></a><a href="#Nesting">Nesting of Threads and Performing Parallel Tasks</a></li>
+  <li><a href="#Scope">Scope Rules and Supported APIs</a></li>
+  <li><a href="#FFI">FFI and Custom Widgets</a></li>
+  <li><a href="#Guidelin">Guidelines and Limitations</a></li>
+  <li><a href="#Debugger">Debugger Support</a></li>
+</ul>
+      <h3 id="communicating-and-data-processing-between-threads">
+        
+        
+          <a href="#communicating-and-data-processing-between-threads" class="anchor-heading" aria-labelledby="communicating-and-data-processing-between-threads"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Communicating and Data Processing Between Threads
+        
+        
+      </h3>
+    
+
+<p>Main.js</p>
+
+<figure class="highlight">
+  <pre><code class="language-voltmx" data-lang="voltmx">​​​​​//create new worker
+var worker = new hcl.worker.WorkerThread('1\_worker.js');
+
+//invoked when worker calls postmessage() from its inner scope
+worker.addEventListener("message", function (event) {
+    hcl.print('Parent Scope : onmessage : event.data : ' + event.data\["message"\]);
+});
+
+hcl.print('Parent Scope : Invoking worker.postmessage()');
+//will invoke worker's inner scope onmessage()
+worker.postMessage({
+    'message': 'Hello World From Parent'
+});​</code></pre>
+</figure>
+<p>​​​​​</p>
+
+<p>1_worker.js</p>
+
+<figure class="highlight">
+  <pre><code class="language-voltmx" data-lang="voltmx">​​​​​//workers inner scope
+//invoked when Parent calls worker.postmessage()
+self.addEventListener("message", function (event) {
+    hcl.print('Worker Scope : onmessage : event.data : ' + event.data\["message"\]);
+    //call func
+    do\_something\_in\_worker();
+});
+
+function do\_something\_in\_worker() {
+    hcl.print('Worker Scope : invoking postMessage()');
+    //will invoke Parent worker.onmessage()
+    postMessage({
+        'message': "Hello World From Worker "
+    });
+};​</code></pre>
+</figure>
+<p>​​​​​</p>
+
+<p>Expected Output</p>
+
+<figure class="highlight">
+  <pre><code class="language-voltmx" data-lang="voltmx">​​​​​"Parent Scope: Invoking worker.postmessage()"
+"Worker Scope: onmessage : event.data : " "Hello World From Parent"
+"Worker Scope: invoking postMessage()"
+"Parent Scope: onmessage : event.data : " "Hello World From Worker "​</code></pre>
+</figure>
+<p>​​​​​</p>
+
+<p>Explanation</p>
+
+<ol>
+  <li>In Parent Scope: Creates new worker using new <em>hcl.worker.WorkerThread</em> ()</li>
+  <li>In Parent Scope: Call to <em>worker.postMessage</em>() invokes <em>message</em> event handler registered using <em>addEventListener</em>() in worker threads inner scope.</li>
+  <li>In Worker Scope: Call to <em>postMessage</em>() invokes <em>message</em> event handler registered using <em>addEventListener</em>() in the parent thread scope.</li>
+</ol>
+      <h3 id="nesting-of-threads-and-performing-parallel-tasks">
+        
+        
+          <a href="#nesting-of-threads-and-performing-parallel-tasks" class="anchor-heading" aria-labelledby="nesting-of-threads-and-performing-parallel-tasks"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Nesting of Threads and Performing Parallel Tasks
+        
+        
+      </h3>
+    
+
+<p>Main.js</p>
+
+<figure class="highlight">
+  <pre><code class="language-voltmx" data-lang="voltmx">​​​​​try {
+    hcl.print("Parent Scope: Init test\_case\_parent\_thread()");
+    hcl.print("Parent Scope: In try block");
+
+    //create new hcl.worker.WorkerThread
+    var worker = new hcl.worker.WorkerThread('WorkerThread.js');
+
+    //invoked when worker calls postmessage() from its inner scope
+    worker.addEventListener("message", function (event) {
+        hcl.print('Parent Scope : onmessage : event.data : ' + event.data);
+    });
+
+    worker.postMessage("Hello from Parent");
+
+} catch (err) {
+    hcl.print("Parent Scope: In Catch block");
+
+}
+
+//invoke a function                
+invoke\_timer\_task();
+
+//
+function invoke\_timer\_task() {
+    hcl.print("Parent Scope :- hcl.timer.schedule - ");
+
+    var timerId = "mytimer12111";
+    var i = 0;
+
+    function timerFunc() {
+
+        i++;
+        hcl.print("Parent Scope :- hcl.timer.schedule - In timerFunc() : " + i);
+        if (i &gt; 20) {
+            hcl.print("Parent Scope :- hcl.timer.schedule - Stopping timer : ");
+            hcl.timer.cancel(timerId);
+        }
+    };
+
+    //
+    hcl.timer.schedule(timerId, timerFunc, 1, true);
+    hcl.print("Parent Scope :- hcl.timer.schedule - Done");
+};
+hcl.print("Parent Scope: Exit test\_case\_parent\_thread()");​</code></pre>
+</figure>
+<p>​​​​​</p>
+
+<p>WorkerThread.js</p>
+
+<figure class="highlight">
+  <pre><code class="language-voltmx" data-lang="voltmx">​​​​​//worker
+//workers inner scope
+
+hcl.print("Worker Scope: Init");
+
+var worker = new hcl.worker.WorkerThread('WorkerThread2.js');
+
+//invoked when Parent calls worker.postmessage()
+this.addEventListener("message", function(event) {
+	hcl.print('Worker Scope : onmessage : event.data : ' + event.data);
+});
+
+self.postMessage("Hello from Worker");
+//
+invoke\_timer\_task();
+
+//
+function invoke\_timer\_task() {
+    hcl.print("Worker Scope :- hcl.timer.schedule - ");
+    
+    var timerId = "mytimer121";
+    var i = 0;
+    
+    function timerFunc() {
+    
+        i++;
+        hcl.print("Worker Scope :- hcl.timer.schedule - In timerFunc() : " + i);
+
+        
+        if(i &gt; 20) {
+            hcl.print("Worker Scope :- hcl.timer.schedule - Stopping timer : ");
+            hcl.timer.cancel(timerId);
+        }
+    };
+    //
+    hcl.timer.schedule(timerId,timerFunc, 1, true);
+    hcl.print("Worker Scope :- hcl.timer.schedule - Done");
+};
+hcl.print("Worker Scope: Loading done");
+​</code></pre>
+</figure>
+<p>​​​​​</p>
+
+<p>WorkerThread2.js</p>
+
+<figure class="highlight">
+  <pre><code class="language-voltmx" data-lang="voltmx">​​​​​//Grand child worker2 – nested worker
+//workers inner scope
+
+hcl.print("Grand child: Worker2 Scope: Init");
+
+//invoked when Parent calls worker.postmessage()
+this.addEventListener("message", function(event) {
+	hcl.print('Grand child: Worker2 Scope : onmessage : event.data : ' + event.data);
+});
+
+self.postMessage("Hello from Worker2");
+//
+invoke\_timer\_task();
+
+//
+function invoke\_timer\_task () {
+    hcl.print("Grand child: Worker2 Scope :- hcl.timer.schedule - ");
+    
+    var timerId = "mytimer1211";
+    var i = 0;
+    
+    function timerFunc()
+    {
+        i++;
+        hcl.print("Worker2 Scope :- hcl.timer.schedule - In timerFunc() : " + i + " : Grand child ");
+        
+        if(i &gt; 20) {
+            hcl.print("Grand child: Worker2 Scope :- hcl.timer.schedule - Stopping timer : ");
+            hcl.timer.cancel(timerId);
+        }
+    };
+    
+    //
+    hcl.timer.schedule(timerId,timerFunc, 1, true);
+    hcl.print("Grand child: Worker2 Scope :- hcl.timer.schedule - Done");
+};
+hcl.print("Grand child: Worker2 Scope : Loading done");
+​</code></pre>
+</figure>
+<p>​​​​​</p>
+      <h3 id="scope-rules-and-supported-apis">
+        
+        
+          <a href="#scope-rules-and-supported-apis" class="anchor-heading" aria-labelledby="scope-rules-and-supported-apis"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Scope Rules and Supported APIs
+        
+        
+      </h3>
+    
+
+<p>Global resources in the App context will not be available in the worker thread context as it can lead to Race conditions since no locking mechanisms are provided.</p>
+
+<p>Every worker has its own context of execution, which is not shared between the parent and its worker. As a result the global variables in parent scope are not available in worker scope and vice versa.</p>
+
+<table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" /><col class="TableStyle-Basic-Column-Column1" /></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Not Supported APIs</th><td class="TableStyle-Basic-BodyD-Column1-Body1"><ul><li>HCL UI APIs and UI object handles</li><li>App Global variables</li></ul></td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyB-Column1-Body1">Supported APIs and Platform</th><td class="TableStyle-Basic-BodyA-Column1-Body1"><table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" /><col class="TableStyle-Basic-Column-Column1" /><col class="TableStyle-Basic-Column-Column1" /><col class="TableStyle-Basic-Column-Column1" /><col class="TableStyle-Basic-Column-Column1" /><col class="TableStyle-Basic-Column-Column1" /></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">String API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyE-Column1-Body1">SPA</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Desktop Web</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Math API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyE-Column1-Body1">SPA</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Desktop Web</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Table API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyE-Column1-Body1">SPA</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Desktop Web</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Standard HCL API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyD-Column1-Body1" colspan="2"><p>Limited Availability</p><p>* For SPA and Desktop Web, the following APIs are supported:</p><ul><li>hcl.convertToBase64</li><li>hcl.convertToRawBytes</li><li>hcl.type</li><li>hcl.props.getProperty</li><li>hcl.print() is not supported in Safari.</li><li>HCL.print() is supported in Mozilla from version 29.0.</li></ul></td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Network API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyD-Column1-Body1" colspan="2"><p>For SPA&nbsp;and DesktopWeb:&nbsp;</p><p>Limited Availability </p><ul><li>The following API will not be available in SPA &amp; Desktop Web. hcl.net.setNetworkCallbacks </li></ul></td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1" rowspan="2">Offline Data Access API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">Local Storage</td><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyD-Column1-Body1">&nbsp;</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Web SQL</td><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyD-Column1-Body1">SPA&nbsp;and DesktopWeb</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Operating System API</th><td class="TableStyle-Basic-BodyE-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyD-Column1-Body1" colspan="2"><p>* For SPA and Desktop Web, the following APIs are NOT supported:</p><ul><li>hcl.os.addHiddenField</li><li> hcl.os.readHiddenField</li><li>hcl.os.startSecureTransaction</li><li>hcl.os.endSecureTransaction</li><li>hcl.os.getAppContext</li><li>hcl.os.hasAccelerometerSupport</li><li>hcl.os.deviceInfo</li><li>hcl.os.deviceInfo().httpheaders</li><li>hcl.os.addMetaTag</li><li>hcl.os.removeMetaTag</li><li>hcl.os.removeAllMetaTags</li><li>hcl.os.hasGPSSupport</li><li>hcl.os.hasCameraSupport</li><li>hcl.os.hasTouchSupport</li><li>hcl.os.hasOrientationSupport</li><li> hcl.os.getDeviceCurrentOrientation</li><li>hcl.os.print</li></ul></td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td></tr><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyB-Column1-Body1">Cryptography API</th><td class="TableStyle-Basic-BodyB-Column1-Body1">iOS</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Android</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Windows</td><td class="TableStyle-Basic-BodyA-Column1-Body1" colspan="2"><p>* For SPA and Desktop Web, the following APIs are NOT supported:</p><ul><li>hcl.crypto.saveKey</li><li>hcl.crypto.deleteKey</li><li>hcl.crypto.readKey</li></ul></td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td><td>zzEmptyCellzz</td></tr></tbody></table></td></tr></tbody></table>
+      <h3 id="ffi-and-custom-widgets">
+        
+        
+          <a href="#ffi-and-custom-widgets" class="anchor-heading" aria-labelledby="ffi-and-custom-widgets"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> FFI and Custom Widgets
+        
+        
+      </h3>
+    
+
+<p>With and without Functional Module in Worker context:</p>
+      <h3 id="ffi-and-custom-widgets-1">
+        
+        
+          <a href="#ffi-and-custom-widgets-1" class="anchor-heading" aria-labelledby="ffi-and-custom-widgets-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> FFI and Custom Widgets
+        
+        
+      </h3>
+    
+
+<p>With and without Functional Module in Worker context:</p>
+      <h3 id="ffi-and-custom-widgets-2">
+        
+        
+          <a href="#ffi-and-custom-widgets-2" class="anchor-heading" aria-labelledby="ffi-and-custom-widgets-2"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> FFI and Custom Widgets
+        
+        
+      </h3>
+    
+
+<p>With and without Functional Module in Worker context:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>iOS</th>
+      <th>Android</th>
+      <th>Windows</th>
+      <th>SPA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FFI</td>
+      <td>Platform will load modules by default</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Custom Widgets</td>
+      <td>No need to load Custom Widgets in worker scope.</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+      <h3 id="guidelines-and-limitations">
+        
+        
+          <a href="#guidelines-and-limitations" class="anchor-heading" aria-labelledby="guidelines-and-limitations"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Guidelines and Limitations
+        
+        
+      </h3>
+    
+
+<p>The following guidelines are recommended before using worker thread:</p>
+
+<ol>
+  <li>The objects “this” and “self” are available in worker thread inner scope that is referred as worker thread itself.</li>
+  <li>Event propagation cannot be stopped by using <em>event.stopPropagation</em>() as in HTML specification. Where <em>event.stopPropagation</em>() stops the DOM event to be propagated further by breaking the event chain.</li>
+  <li>Data passed between the main thread and workers are copied, but not shared. Objects are serialized as they are handed to the worker, and subsequently, de-serialized on the other end. The main thread and worker do not share the same instance. So the end result is that a duplicate is created on each end. HTML5 worker threads support transferable objects that allow transferring the objects from one thread to other without making a copy.</li>
+  <li>
+    <p>As explicit thread synchronization mechanisms like locking or mutexes are not available in JS environment, you must take required care in scenarios where multiple threads concurrently or simultaneously are trying to access and write/insert data into local database or local datastore using WebSQL or Local datastore APIs, as these are shared resources across the Application context.</p>
+
+    <ul>
+      <li>The outcome of these simultaneous or concurrent accesses to database/datastore might push the database/datastore to inconsistent state and is dependent on the individual platforms WebSQL or DataStore implementations. It is always suggested to avoid such scenarios of multiple threads accessing the database/datastore simultaneously/concurrently.</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>Limitations in SPA and DesktopWeb:</strong></p>
+
+<ol>
+  <li>Nested Workers support will be available only if they are supported by the underlying browser platforms.</li>
+  <li>Error event messages in error event handler sometimes might be appended with extra prefix or suffix string messages from underlying browsers (like Uncaught, Uncaught error etc).</li>
+  <li>Even though error event handler is invoked in case of unhandled exceptions, the same event messages might also be logged on browser console.</li>
+  <li>Line number, file name populated in error event object passed to error event handler might be different from user defined files.</li>
+</ol>
+
+<blockquote>
+  <p><strong><em>Note:</em></strong> For SPA and Desktop Web, nested workers are not supported in Google Chrome.</p>
+</blockquote>
+
+<p>terminate API</p>
+
+<p>As the worker threading model is mapped to underlying native threading models in native platforms, there can be some deviations from what specification says, this is due to technical limitations in the underlying platforms which include:</p>
+
+<ol>
+  <li>If terminate() is invoked in Parent thread on worker, and if worker is currently executing a large task, it might not immediately terminate, it will continue to execute the task to completion and terminate.</li>
+  <li>If terminate() is invoked in Parent thread on worker, and if there are pending tasks waiting in the message queues for this worker to perform, some platforms might discard all the pending tasks without accepting them for execution and terminate, and on some platform all the pending tasks are executed to completion and then the worker terminates.</li>
+  <li>It is to be noted that to achieve cross platform consistency, it is always advised that terminate() be invoked on the worker once all the tasks in message queues are completed.</li>
+</ol>
+
+<p>close API</p>
+
+<ol>
+  <li>As the worker threading model is mapped to underlying native threading models in native platforms, there can be some deviations from what specification says, this is due to technical limitations in the underlying platforms which include:</li>
+  <li>When close() is invoked in worker scope, and if worker is currently executing a large task, it might not immediately terminate, it will continue to execute the task to completion and then terminate.</li>
+  <li>When close () is invoked in worker scope, and if there are pending tasks waiting in the message queues for this worker to perform, some platforms might discard all the pending tasks without accepting them for execution and terminate, and on some platform all the pending tasks are executed to completion and then the worker terminates.</li>
+  <li>Hence it is to be noted that to achieve cross platform consistency, it is always advised that close() be invoked in worker scope once all the tasks in message queues are completed.</li>
+</ol>
+      <h3 id="debugger-support">
+        
+        
+          <a href="#debugger-support" class="anchor-heading" aria-labelledby="debugger-support"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Debugger Support
+        
+        
+      </h3>
+    
+
+<p>Debugger support for worker threads is not available in 5.6.2 release.</p>
+      <h3 id="worker-life-cycle-notes">
+        
+        
+          <a href="#worker-life-cycle-notes" class="anchor-heading" aria-labelledby="worker-life-cycle-notes"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Worker Life Cycle Notes
+        
+        
+      </h3>
+    
+
+<p>Following are some worker life cycle notes: </p>
+
+<ul>
+  <li>Call to Worker constructor will create a new Worker instance and a new parallel execution environment context is created, and immediately starts execution in the new parallel thread of control in an asynchronous manner. In this new thread, first the Worker will try to load the ‘workerjs’ script.</li>
+  <li>As a result of the asynchronous parallel nature of execution in worker thread context, invocation of Worker constructor call in Parent thread will return a new Worker instance handle and Parent proceeds with execution of next instructions.</li>
+  <li>Every Worker thread will have its own event loop which takes care of the execution of all the received message tasks which are queued for this worker in that order until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked.</li>
+  <li>From the moment of successful creation of worker thread and until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked, the worker thread will be alive and can receive and process messages which are sent to this worker form its parent or from its child workers if created, as well as it can send messages using postMessage() to its parent thread and its child worker threads if created.</li>
+  <li>In worker thread scope when there is no “message” event handler registered which indicates that no tasks can be posted or queued by parent for this worker, and if no callbacks are registered in this worker scope for network, timer APIs etc, then after postMessage() call in Workers inner scope if any, worker can terminate itself without worker.terminate() being called in Parent scope or self.close() called in inner scope.</li>
+  <li>In case of orphaned threads if no tasks are queued in message handler and if the worker is not waiting for any callbacks to be returned from network, timer APIs etc then the orphaned thread can be terminated.</li>
+  <li>If Parent stops either due to unhandled exception raised in it scope, Worker threads still continues to exist and execute.</li>
+</ul><hr />
+
+<p><img src="/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/resources/prettify/onload.png" alt="" /></p>
+
+        
+
+        
+
+        
+        
+         
+            <!--<p class="text-small text-grey-dk-100 mb-0">Copyright &copy; 2017-2020 HCL Digital Solutions</p>-->
+
+
+            
+              <div class="d-flex mt-2">
+                
+                
+              </div>
+            
+          </footer>
+        
+
+      </div>
+    </div>
+
+    
+      
+
+      <div class="search-overlay"></div>
+    
+
+     <!-- footer from footer html -->
+   <footer>
+    <div>
+        <ul class="social-nav">
+            <li><a href="#" class="facebook">Facebook</a></li>
+            <li><a href="#" class="linkedin">LinkedIn</a></li>
+            <li><a href="#" class="twitter">Twitter</a></li>
+            <li><a href="#" class="youtube">Youtube</a></li>
+            <li><a href="#" class="glassdoor">Glassdoor</a></li>
+        </ul>
+    </div>
+    <p>
+        &copy; Copyright 2021 HCL Softwares. All rights reserved. Various trademarks held by their respective owners.
+    </p>
+    <p class="foot-nav">
+        <a href="#">Privacy Statement</a> | <a href="#">Terms of Use</a>
+    </p>
+</footer>
+  </div>
+
+  
+  <div class="right-menu">
+    
+<nav role="navigation" aria-label="Main" id="sub-site-nav" class="site-nav">
+      <ul class="nav-list" >
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+      
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/accelereometer_apis.html"
+            class="nav-list-link">Accelerometer APIs </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/accelerometerfunctions.html"
+            class="nav-list-link">hcl.accelerometer Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/actionitem_object.html"
+            class="nav-list-link">ActionItem Object </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/actionitem_properties.html"
+            class="nav-list-link">Action Item Properties </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/actionsheet_api.html"
+            class="nav-list-link">Action Sheet API for iOS</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/actionsheet_object.html"
+            class="nav-list-link">ActionSheet Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/actionsheet_object_methods.html"
+            class="nav-list-link">ActionSheet Objects </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/addpassesviewcontroller.html"
+            class="nav-list-link">Beacon</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/alert_api.html"
+            class="nav-list-link">Alert API </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/android_api.html"
+            class="nav-list-link">Android API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/animationapi.html"
+            class="nav-list-link">Animation API </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/animationconfiguration_object.html"
+            class="nav-list-link">AnimationConfiguration Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/animationdefinitionobject.html"
+            class="nav-list-link">AnimationConfiguration Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/app-extension-ios.html"
+            class="nav-list-link">App Extension API for iOS</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.ds_functions.html"
+            class="nav-list-link">hcl.ds Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/react_native_apis.html"
+            class="nav-list-link">React Native APIs</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/record_methods.html"
+            class="nav-list-link">record Methods</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/record_object.html"
+            class="nav-list-link">record Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/request_app_review_api.html"
+            class="nav-list-link">Request App Review API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/revisionhome.html"
+            class="nav-list-link">Revision History VoltMX IrisAPI Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/runtime_permissions.html"
+            class="nav-list-link">Runtime Permission API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/session_configuration_api.html"
+            class="nav-list-link">Session Configuration API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/sharedappgroupcontainerapi.html"
+            class="nav-list-link">Shared App Group Container API for iOS</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/sharefilesandroid.html"
+            class="nav-list-link">Sharing Files in Android with other Apps in the Device</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/speech.html"
+            class="nav-list-link">Speech (pre-packaged API)</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/sqllite.html"
+            class="nav-list-link">Appendix: SQLite</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/start_library.html"
+            class="nav-list-link">API to Start Library UI</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/string.html"
+            class="nav-list-link">String API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/sync_apis.html"
+            class="nav-list-link"> Sync API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/sync_functions.html"
+            class="nav-list-link">sync Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/sync_object_methods.html"
+            class="nav-list-link">Sync Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/themes.html"
+            class="nav-list-link">Theme API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/threading_apis.html"
+            class="nav-list-link">Threading API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/timer.html"
+            class="nav-list-link">Timer API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/toast_api.html"
+            class="nav-list-link">Toast API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/toast_properties.html"
+            class="nav-list-link">Toast Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/touch_id.html"
+            class="nav-list-link">Local Authentication API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/transform_object_methods.html"
+            class="nav-list-link">transform Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/unsupportedapis.html"
+            class="nav-list-link">Unsupported APIs</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item active"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/worker_apis.html"
+            class="nav-list-link active">Worker Thread API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/workerthreadobject_methods.html"
+            class="nav-list-link">WorkerThread Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/zipunzip_android.html"
+            class="nav-list-link">ZipUnzip</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/zipunzip_ios.html"
+            class="nav-list-link">ZipUnzip</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/appendix_general_frequently_asked_questions.html"
+            class="nav-list-link">Appendix: General FAQ</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/appendix_javascript_frequently_asked_questions.html"
+            class="nav-list-link">Appendix: JavaScript FAQ</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/appendix_preprocesor_directives.html"
+            class="nav-list-link">Appendix: Preprocessor Directives</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/apple_pay.html"
+            class="nav-list-link">Apple Pay (pre-packaged API)</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/application_api.html"
+            class="nav-list-link">Application API </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/application_settings.html"
+            class="nav-list-link">Application Settings API </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/appwindow_functions.html"
+            class="nav-list-link">Methods</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/appwindow_properties.html"
+            class="nav-list-link">AppWindow Properties</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/background_tasks_in_ios.html"
+            class="nav-list-link">Background Jobs </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/background_transfer.html"
+            class="nav-list-link">Long Running Network Tasks</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/backgroundagent_api.html"
+            class="nav-list-link">Background Agent API </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/badge.html"
+            class="nav-list-link">Badge API </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/battery_api.html"
+            class="nav-list-link">Battery API </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/beacon.html"
+            class="nav-list-link">Beacon</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/beacon_manager.html"
+            class="nav-list-link">Beacon Manager</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/beaconffi.html"
+            class="nav-list-link">Beacon API </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/beaconmanager_methods.html"
+            class="nav-list-link">com.hcl.BeaconManager</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/beaconmethods.html"
+            class="nav-list-link">com.hcl.Beacon</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/bluetooth.html"
+            class="nav-list-link">Bluetooth (pre-packaged API)</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/bluetooth_ssm.html"
+            class="nav-list-link">Bluetooth</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/bookmark_refresh_apis.html"
+            class="nav-list-link">Bookmark and Refresh API </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/caching_api.html"
+            class="nav-list-link">Caching API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/camera.html"
+            class="nav-list-link">Camera API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/charms.html"
+            class="nav-list-link">Charm Setting API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/client-authentication.html"
+            class="nav-list-link">Client Authentication</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/com.hcl.beaconregion.html"
+            class="nav-list-link">BeaconRegion Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/com.hcl.peripheralmanager.html"
+            class="nav-list-link">com.hcl.PeripheralManager. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/com.hcl_functions.html"
+            class="nav-list-link">Functions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/com.hcl_objects_addpassesviewcontroller_methods.html"
+            class="nav-list-link">AddPassesViewController Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/communication_api_for_react_native.html"
+            class="nav-list-link">Communication API for React Native App</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/constants_namespace.html"
+            class="nav-list-link">constants Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/copyright.html"
+            class="nav-list-link">Copyright</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/corehaptics.html"
+            class="nav-list-link">Core Haptics API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/cryptography.html"
+            class="nav-list-link">Cryptography API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/data_store_library.html"
+            class="nav-list-link">Offline Data Access API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/drag_and_drop_api.html"
+            class="nav-list-link">Accelerometer APIs</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/enabling_native_function_apis.html"
+            class="nav-list-link">Enabling Native Function APIs in HCL Iris Classic</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/exceptions.html"
+            class="nav-list-link">Exceptions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/forcetouch_api.html"
+            class="nav-list-link">ForceTouch API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/formdataobject_methods.html"
+            class="nav-list-link">Methods</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/generic_apis.html"
+            class="nav-list-link">Standard HCL API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/geolocation_api_watchposition.html"
+            class="nav-list-link">GeoLocation API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/gestures.html"
+            class="nav-list-link">Gesture API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/guidelines_android.html"
+            class="nav-list-link">Android Guidelines for Using Native Function APIs  in VoltMX Iris Classic</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.actionextension_functions.html"
+            class="nav-list-link">hcl.actionExtension Namespace </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.actionextension_properties.html"
+            class="nav-list-link">Properties</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.anim_constants.html"
+            class="nav-list-link">hcl.anim Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.application_appwindow.html"
+            class="nav-list-link">AppWindow Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.application_constants.html"
+            class="nav-list-link">Constants</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.application_functions.html"
+            class="nav-list-link">hcl.application Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.application_functions_badgeapi.html"
+            class="nav-list-link">hcl.application_functionsBadge API Functions </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.application_functions_bookmarkrefreshapi.html"
+            class="nav-list-link">Bookmark and Refresh API  Functions </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.application_functions_charmsapi.html"
+            class="nav-list-link">Functions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.application_functions_gestures.html"
+            class="nav-list-link">Functions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.application_functions_livetiles.html"
+            class="nav-list-link">Functions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.application_functions_requestreview.html"
+            class="nav-list-link">requestReview Function</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.application_functions_runtimepermissionsapi.html"
+            class="nav-list-link">Functions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.application_namespace.html"
+            class="nav-list-link">hcl.application Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.automation_namespace.html"
+            class="nav-list-link">hcl.automation Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.background_functions.html"
+            class="nav-list-link">hcl.backgroundtasks Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.camera_functions.html"
+            class="nav-list-link"> hcl.camera Namespace </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.contact_functions.html"
+            class="nav-list-link">hcl.contact Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.crypto_functions.html"
+            class="nav-list-link">hcl.crypto Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.db_functions.html"
+            class="nav-list-link">hcl.db Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.dragdrop_functions.html"
+            class="nav-list-link">hcl.dragDrop Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.forcetouch_functions.html"
+            class="nav-list-link">hcl.forcetouch Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.forcetouch_namespace.html"
+            class="nav-list-link">hcl.forcetouch Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.forcetouch_namespace_constants.html"
+            class="nav-list-link">hcl.forcetouch Constants</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.haptics.html"
+            class="nav-list-link">hcl.haptics Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.imessageextensionsfunctions.html"
+            class="nav-list-link">hcl.iMessageExtensions Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.intentextension_functions.html"
+            class="nav-list-link">hcl.intentExtension Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.io.file_functions.html"
+            class="nav-list-link">hcl.io.File Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.io.file_namespace.html"
+            class="nav-list-link">hcl.io.File Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.io.filelist_functions.html"
+            class="nav-list-link">hcl.io.FileList Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.io.filesystem_functions.html"
+            class="nav-list-link">hcl.io.FileSystem Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.keychain_functions.html"
+            class="nav-list-link">hcl.keychain Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.lang_functions.html"
+            class="nav-list-link">hcl.lang Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.localauthentication_functions.html"
+            class="nav-list-link">hcl.localAuthentication Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.localnotifications_functions.html"
+            class="nav-list-link">hcl.localnotifications Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.localnotifications_properties.html"
+            class="nav-list-link">Properties</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.location_deprecated.html"
+            class="nav-list-link">Deprecated Functions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.location_functions.html"
+            class="nav-list-link">hcl.location Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.math_functions.html"
+            class="nav-list-link">math Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.media_functions.html"
+            class="nav-list-link">hcl.media Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.media_namespace.html"
+            class="nav-list-link">hcl.media Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.ml_namespace_functions.html"
+            class="nav-list-link">hcl.ml Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.modules_functions.html"
+            class="nav-list-link">hcl.modules Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.net.cache_functions.html"
+            class="nav-list-link">hcl.net.cache namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.net_deprecated.html"
+            class="nav-list-link">Deprecated Functions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.net_functions.html"
+            class="nav-list-link">hcl.net Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.net_namespace.html"
+            class="nav-list-link">hcl.net Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.notificationcontentextension_functions.html"
+            class="nav-list-link">hcl.notificationContentExtension Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.notificationssettings_functions.html"
+            class="nav-list-link">hcl.notificationsettings Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.os_constants.html"
+            class="nav-list-link">hcl.os Namespace Constants</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.os_constants_batteryapi.html"
+            class="nav-list-link">hcl.os_Constants_BatteryAPI </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.os_functions.html"
+            class="nav-list-link">hcl.os Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.os_functions_batteryapi.html"
+            class="nav-list-link">hcl.os_functions_BatteryAPI </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.os_namespace.html"
+            class="nav-list-link">hcl.os Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.os_objects.html"
+            class="nav-list-link">Objects</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.os_objects_deviceinfo.html"
+            class="nav-list-link">DeviceInfo Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.payment_functions.html"
+            class="nav-list-link">hcl.payment Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.phone_functions.html"
+            class="nav-list-link">hcl.phone Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.push_functions.html"
+            class="nav-list-link">hcl.push Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.reactnative_functions.html"
+            class="nav-list-link">hcl.reactNative Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.screenrecorder.html"
+            class="nav-list-link">hcl.screenrecorder Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.shareextensionsfunctions.html"
+            class="nav-list-link">hcl.shareExtensions Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.store_functions.html"
+            class="nav-list-link">hcl.store Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.string_deprecated.html"
+            class="nav-list-link">Deprecated Functions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.string_functions.html"
+            class="nav-list-link">hcl.string Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.theme_functions.html"
+            class="nav-list-link">hcl.theme Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.timer_functions.html"
+            class="nav-list-link">hcl.timer Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.todayextension.html"
+            class="nav-list-link">hcl.todayExtension Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.todayextension_functions.html"
+            class="nav-list-link">hcl.todayExtension Functions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.types.rawbytes_namespace.html"
+            class="nav-list-link">hcl.types Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.types_objects.html"
+            class="nav-list-link">Secure Text Exchange between Native Android Code and JavaScript</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.types_objects_rawbytes.html"
+            class="nav-list-link">Properties</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.ui_functions.html"
+            class="nav-list-link">hcl.ui Namespace </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.ui_functions_actionitem.html"
+            class="nav-list-link">ActionItem Function </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.ui_functions_actionsheet.html"
+            class="nav-list-link">ActionSheet Function</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.ui_functions_alert.html"
+            class="nav-list-link">hcl.ui.Alert Function</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.ui_functions_createanimation.html"
+            class="nav-list-link">hcl.ui.createAnimation Function</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.ui_functions_makeaffinetransform.html"
+            class="nav-list-link">hcl.ui.makeAffineTransform Function</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.ui_functions_toast.html"
+            class="nav-list-link">Function</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.vocabulary_functions.html"
+            class="nav-list-link">hcl.vocabulary Functions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl.worker_functions.html"
+            class="nav-list-link">hcl.worker Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl_application__settings_functions.html"
+            class="nav-list-link">hcl.application.settings Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl_automation_api.html"
+            class="nav-list-link">Automation API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl_functions.html"
+            class="nav-list-link">hcl Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl_functions_threadingapis.html"
+            class="nav-list-link">Functions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl_map_constants.html"
+            class="nav-list-link">hcl.map Namespace Constants</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hcl_map_functions.html"
+            class="nav-list-link">hcl.map Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hclfilterconstants.html"
+            class="nav-list-link">hcl.filter Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hclfilterfilterobjmethods.html"
+            class="nav-list-link">Filter Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hclfilterfunctions.html"
+            class="nav-list-link">Functions</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hclfilternamespace.html"
+            class="nav-list-link">hcl.filter Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hclimagenamespace.html"
+            class="nav-list-link">hcl.image Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hclimagenamespaceconstants.html"
+            class="nav-list-link">Constants</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/hclimagenamespacefunctions.html"
+            class="nav-list-link">hcl.image Namespace</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/healthkit.html"
+            class="nav-list-link">HealthKit (pre-packaged API)</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/httprequestobject.html"
+            class="nav-list-link">HttpRequest Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/httprequestobject_events.html"
+            class="nav-list-link">Event</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/httprequestobject_properties.html"
+            class="nav-list-link">Properties</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/httprequestobjectmethods.html"
+            class="nav-list-link">Methods</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/image_methods.html"
+            class="nav-list-link">image Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/image_object.html"
+            class="nav-list-link">Image Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/imageapi.html"
+            class="nav-list-link">Image API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/imageclassificationapi.html"
+            class="nav-list-link">Image Classification API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/imageclassifier_object.html"
+            class="nav-list-link">imageClassifier Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/importing_ssm.html"
+            class="nav-list-link">Importing the Native Function API VoltMX Iris</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/inputoutput_api.html"
+            class="nav-list-link">Input and Output API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/internationalization.html"
+            class="nav-list-link">Internationalization API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html"
+            class="nav-list-link">VoltMX Iris API Guide - Introduction</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/ios_api.html"
+            class="nav-list-link">iOS API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/jobscheduler.html"
+            class="nav-list-link">JobScheduler (pre-packaged API)</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/js_function_semantics.html"
+            class="nav-list-link">JavaScript Function Semantics</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/js_object_semantics_new.html"
+            class="nav-list-link">JavaScript Object Semantics</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/keychain_api_for_ios.html"
+            class="nav-list-link">Keychain API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/language_apis.html"
+            class="nav-list-link">Language API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/live_tiles.html"
+            class="nav-list-link">Live Tiles API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/local_notifications.html"
+            class="nav-list-link">Local Notifications</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/localauthapi.html"
+            class="nav-list-link">Local Authentication API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/map_styling_api.html"
+            class="nav-list-link">Map Styling API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/mapapi.html"
+            class="nav-list-link">Map API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/math_library.html"
+            class="nav-list-link">Math API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/media_api.html"
+            class="nav-list-link">Media API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/media_methods.html"
+            class="nav-list-link">media Methods</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/media_object.html"
+            class="nav-list-link">media Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/media_properties.html"
+            class="nav-list-link">media Properties</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/modules.html"
+            class="nav-list-link">Functional Modules API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/native_function.html"
+            class="nav-list-link">Native Function API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/nearfieldcommunication.html"
+            class="nav-list-link">Near Field Communication (pre-packaged API)</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/network_apis.html"
+            class="nav-list-link">Network API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/networkapi_asynccalls.html"
+            class="nav-list-link">Asynchronous Network Calls</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/networkapi_httpintegritychecking.html"
+            class="nav-list-link">HTTP&#160;Integrity Checking</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/networkapi_networkcalls.html"
+            class="nav-list-link">Network Calls</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/notifications.html"
+            class="nav-list-link">Notification APIs</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/notificationsettings.html"
+            class="nav-list-link">Notification Settings</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/operating_system.html"
+            class="nav-list-link">Operating System API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/pass.html"
+            class="nav-list-link">Beacon</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/passbook.html"
+            class="nav-list-link">Passbook API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/passlibrary.html"
+            class="nav-list-link">PassLibrary Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/payment_api.html"
+            class="nav-list-link">Payment API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/phone.html"
+            class="nav-list-link">Phone API</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/push_notifications.html"
+            class="nav-list-link">Push Notifications</a></li>
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+    </ul>
+
+    </nav>
+
+    <script>
+        const subpageNav = document.getElementById('sub-site-nav');
+     const submainmenuButton = document.getElementById('sub-menu-button');
+   (function(){
+    
+    submainmenuButton.addEventListener('click', function(){ 
+      subpageNav.classList.toggle('nav-open');
+ });
+})();
+</script>
+
+</div></body>
+</html>

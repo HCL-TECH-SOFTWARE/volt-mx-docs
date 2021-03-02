@@ -1,0 +1,4369 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  
+
+  <link rel="shortcut icon" href="/volt-mx-docs/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/volt-mx-docs/assets/css/just-the-docs-default.css">
+  <link rel="stylesheet" href="/volt-mx-docs/assets/css/custom.css">
+  
+
+  
+    <script type="text/javascript" src="/volt-mx-docs/assets/js/vendor/lunr.min.js"></script>
+  
+  <script type="text/javascript" src="/volt-mx-docs/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements, | VoltMx</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements," />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform." />
+<meta property="og:description" content="Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform." />
+<link rel="canonical" href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/Objectservices_Stage3.html" />
+<meta property="og:url" content="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/Objectservices_Stage3.html" />
+<meta property="og:site_name" content="VoltMx" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements," />
+<script type="application/ld+json">
+{"url":"https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/Objectservices_Stage3.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hcl-tech-software.github.io/volt-mx-docs/Volt_Mx_logo.png"}},"headline":"Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements,","description":"Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+</head>
+
+<body>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-search" viewBox="0 0 24 24">
+    <title>Search</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+      <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+  </symbol>
+</svg>
+<style>
+  .sub-nav a[href*="/documentation/"] {
+   border-bottom: 3px #d694f9 solid;
+}
+</style>
+ 
+
+  <div class="top-header">
+    <div class="site-header">
+      <a href="https://hcl-tech-software.github.io/volt-mx-docs/" class="site-title lh-tight">
+  <div class="site-logo"></div>
+
+</a>
+      <a href="#" id="mainmenu-button"  class="site-button">
+        <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg>
+      </a>
+    </div>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="svg-link" viewBox="0 0 24 24">
+      <title>Link</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+      </svg>
+    </symbol>
+    <symbol id="svg-search" viewBox="0 0 24 24">
+      <title>Search</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-menu" viewBox="0 0 24 24">
+      <title>Menu</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+      <title>Expand</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </symbol>
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+      <title>Document</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+      </svg>
+    </symbol>
+  </svg>
+
+<div id="main-header" class="main-header">
+      
+
+    
+      <div class="search">
+        <ul class="page-nav" id="page-nav">
+          <li><a href="#">Community</a></li>
+          <li><a href="#" class="active">Learn</a></li>
+          <li><a href="#">Releases</a></li>
+          <li><a href="#">Training</a></li>
+          <li><a href="#">Ideas</a></li>
+          <li><a href="#">Marketplace</a></li>
+          <li><a href="#">Login</a></li>
+        </ul>
+        <div class="search-input-wrap">
+          <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="search resources..." aria-label="Search VoltMx" autocomplete="off">
+          <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label>
+       
+        </div>
+        <div id="search-results" class="search-results"></div>
+      </div>
+    
+    
+   
+  </div>
+  <script>
+    const pageNav = document.getElementById('page-nav');
+     const mainHeader = document.getElementById('main-header');
+     const mainmenuButton = document.getElementById('mainmenu-button');
+   (function(){
+    
+    mainmenuButton.addEventListener('click', function(){
+      pageNav.classList.toggle('nav-open');
+ });
+})();
+ </script>
+<div class="sub-nav-wrap" id="myDIV">
+    <ul class="sub-nav" >
+        <li >
+            <a href="/volt-mx-docs/docs/getting-started/"  class="sub-link">Getting Started</a>
+        </li>
+        <li>
+            <a href="/volt-mx-docs/docs/tutorials/" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="/volt-mx-docs/docs/documentation/" class="sub-link">Documentation</a>
+        </li>
+        <li>
+            <a href="/volt-mx-docs/docs/articles/" title="test" class="sub-link">Articles</a>
+        </li>
+    </ul>
+    <a href="#" id="menu-button" class="site-button">
+        <!-- <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> -->
+        select a topic <svg viewBox="0 0 24 24" class="carat-topic"><use xlink:href="#svg-arrow-right"></use></svg>
+      </a>
+</div>
+<div class="side-bar">
+  <nav role="navigation" aria-label="Main" id="site-nav" class="site-nav">
+ 
+    <ul class="nav-list"><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/" class="nav-list-link">Home</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/fundamentals.html" class="nav-list-link">Fundamentals</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/projectorg.html" class="nav-list-link">Project Organization</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/appUserInterface.html" class="nav-list-link">App User Interface</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/widgetApiReference.html" class="nav-list-link">Widgets & API Reference</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/webAppDevelopment.html" class="nav-list-link">Web App Development</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/dataBackEndIntergration.html" class="nav-list-link">Data & Back-end Integration</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/buildAndPublish.html" class="nav-list-link">Build and Publish</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/extensibility.html" class="nav-list-link">Extensibility</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/security.html" class="nav-list-link">Security</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/howTosSampleApps.html" class="nav-list-link">How Tos & Sample Apps</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/dataIntegrationServices.html" class="nav-list-link">Data Integration Services</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/offlineObjects.html" class="nav-list-link">Offline Objects</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/apiMangement.html" class="nav-list-link">API Management</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/appServicesAdminitration.html" class="nav-list-link">App Services Administration</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/advancedServerFeature.html" class="nav-list-link">Advanced Server Features</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/analyticsAndApm.html" class="nav-list-link">Analytics and APM</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/engagementServices.html" class="nav-list-link">Engagement Services</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/quantumSync.html" class="nav-list-link">VoltMX Sync (Legacy)</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/devOps.html" class="nav-list-link">DevOps</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/heradlessAndContinuousIntegration.html" class="nav-list-link">Headless and Continuous Integration Build</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/installationManagement.html" class="nav-list-link">Installation & Management</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/deployment.html" class="nav-list-link">Deployment</a></li></ul>
+  </nav>
+
+</div>
+
+  <div class="main" id="top">
+    
+    <div id="main-content-wrap" class="main-content-wrap">
+      
+        
+      
+      <div id="main-content" class="main-content" role="main">
+        
+          <p>User Guide: <a href="../Objectservices.htm">Object Services</a> &gt; Configuring Common Mapping to the Fields on the Back End</p>
+      <h2 id="mapping-operations-to-back-end-methods">
+        
+        
+          <a href="#mapping-operations-to-back-end-methods" class="anchor-heading" aria-labelledby="mapping-operations-to-back-end-methods"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Mapping Operations to Back-end Methods
+        
+        
+      </h2>
+    
+
+<p>The preferred data model is rarely in the same format or representation as the back-end data from the systems of record. The condition requires a robust mapping capability that can easily retrieve, filter, and transform the back end into the preferred representation. For example, the preferred view of the customer entity may comprise of a contact object from SAP and additional profile information from the enterprise service bus (ESB).</p>
+
+<p>The following sections detail about common mapping, methods (verbs) mapping, custom verbs, and mapper elements:</p>
+
+<ul>
+  <li><a href="#Mapping">Mapping Verbs and Methods to the Fields on the Back End</a>
+    <ul>
+      <li><a href="#Configur">Configuring <strong>Common Mapping</strong> to the Fields on the Back End</a></li>
+      <li><a href="#Configur2">Configuring <strong>Methods Mapping</strong> to Fields on the Back End</a></li>
+      <li><a href="#CustomVerbs">Adding <strong>Custom Verbs</strong> for SAP Object Service</a></li>
+      <li><a href="#MappingVerbs">Mapping <strong>verbs for Objects (for Service-driven Objects)</strong></a></li>
+      <li><a href="#TestObjServices">Testing an Object Service in VoltMX Foundry</a></li>
+    </ul>
+  </li>
+  <li><a href="ObjectservicesVisMapper.htm">Creating a Mapping by using Visual Mapper</a></li>
+  <li><a href="ObjectservicesMapper.htm">Enhancing the Mapping by using XML Mapper for advanced scenarios</a></li>
+  <li><a href="ObjectservicesMapper.htm#Mapper">Mapper Elements</a></li>
+  <li><a href="ObjectservicesMapper.htm#Identity">Identity Support in Mapper</a></li>
+</ul>
+      <h3 id="mapping-verbs-and-methods-to-the-fields-on-the-back-end">
+        
+        
+          <a href="#mapping-verbs-and-methods-to-the-fields-on-the-back-end" class="anchor-heading" aria-labelledby="mapping-verbs-and-methods-to-the-fields-on-the-back-end"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Mapping Verbs and Methods to the Fields on the Back End
+        
+        
+      </h3>
+    
+      <h4 id="configuring-common-mapping-to-the-fields-on-the-back-end">
+        
+        
+          <a href="#configuring-common-mapping-to-the-fields-on-the-back-end" class="anchor-heading" aria-labelledby="configuring-common-mapping-to-the-fields-on-the-back-end"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Configuring Common Mapping to the Fields on the Back End
+        
+        
+      </h4>
+    
+
+<p>The common mapping that you define between a data model field and a back-end object field is applied to a transform request, response, or both. VoltMX Foundry applies this mapping when it invokes any method on the back-end system.</p>
+
+<p>The common mapping contains three types of mapping icons:</p>
+
+<ul>
+  <li>A <strong>double-headed arrow</strong> icon in the indicates both request and response mapping.</li>
+  <li>The <strong>right arrow</strong> icon indicates only request mapping.</li>
+  <li>The <strong>left arrow</strong> icon indicates only response mapping.</li>
+</ul>
+
+<p>To configure the common mapping, follow these steps:</p>
+
+<ol>
+  <li>In the navigation pane, click the <strong>Mapping</strong> tab.</li>
+</ol>
+
+<p>The mapping configuration screen for the Order object appears.</p>
+
+<ol>
+  <li>Click in the first <strong>Map to</strong> field. A drop-down menu appears. Select <strong>VTI_Internal</strong>. The business object in the back end.</li>
+  <li>Click in the second <strong>Map to</strong> field. A drop-down menu appears. Click on the plus button next to <strong>VTI_SAMPLE_ORDERS</strong>, and then click on <strong>VTI_SAMPLE_ORDER</strong>.</li>
+</ol>
+
+<p>The Common Mapping tab shows that the Order object in your data model is mapped to the VTI_SAMPLE_ORDER table of the VTI_SAMPLE_ORDERS database in the back-end object VTI_Internal<strong>.</strong></p>
+
+<ol>
+  <li>Click the <strong>Add</strong> button.</li>
+  <li>Click in the first field under <strong>APP DATA MODEL FIELDS</strong>. A drop-down menu appears. Select <strong>OrderID</strong>.</li>
+  <li>Click in the first field under <strong>VTI_SAMPLE_ORDERS FIELDS</strong>. A drop-down menu appears. Select <strong>ORDER_NUMBER.</strong></li>
+  <li>Click the <strong>Add</strong> button.</li>
+  <li>Click in the second field under APP DATA MODEL FIELDS. A drop-down menu appears. Select Amount.</li>
+  <li>Click in the second field under <strong>VTI_SAMPLE_ORDERS FIELDS</strong>. A drop-down menu appears. Select <strong>TOTAL_VALUE</strong>.</li>
+  <li>Click the <strong>Add</strong> button.</li>
+  <li>Click in the third field under <strong>APP DATA MODEL FIELDS</strong>. A drop-down menu appears. Select <strong>Company</strong>.</li>
+  <li>Click in the third field under <strong>VTI_SAMPLE_ORDERS FIELDS</strong>. A drop-down menu appears. Select <strong>COMPANY</strong>.</li>
+  <li>Click the <strong>Add</strong> button.</li>
+  <li>Click in the fourth field under <strong>APP DATA MODEL FIELDS</strong>. A drop-down menu appears. Select <strong>Description</strong>.</li>
+  <li>Click in the fourth field under <strong>VTI_SAMPLE_ORDERS FIELDS</strong>. A drop-down menu appears. Select <strong>DESCRIPTION</strong>.</li>
+  <li>Click the <strong>Add</strong> button.</li>
+  <li>Click in the fifth field under <strong>APP DATA MODEL FIELDS</strong>. A drop-down menu appears. Select <strong>OrderType</strong>.</li>
+  <li>Click in the fifth field under <strong>VTI_SAMPLE_ORDERS FIELDS</strong>. A drop-down menu appears. Select <strong>ORDER_TYPE.</strong></li>
+</ol>
+
+<p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/ObjectSrvcOrderCommonMap_617x266.png" alt="" /></p>
+
+<ol>
+  <li>Under <strong>TYPE</strong>, click in the drop-down menu for OrderID and ORDER_NUMBER. Select the left-arrow to indicate response mapping of the object field.</li>
+</ol>
+
+<blockquote>
+  <p><strong><em>Note:</em></strong> You can sort fields by clicking the column name header in the Mapping tab.</p>
+</blockquote>
+
+<p>You can also map an object in your data model to additional child objects in the backend object hierarchy. To map an object to additional child objects in the backend, click <strong>Advanced</strong>, and then select the child objects in the hierarchy.</p>
+
+<p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/ObjSvcMapAdditional_639x263.png" alt="" /></p>
+      <h4 id="configuring-methods-mapping-to-fields-on-the-back-end">
+        
+        
+          <a href="#configuring-methods-mapping-to-fields-on-the-back-end" class="anchor-heading" aria-labelledby="configuring-methods-mapping-to-fields-on-the-back-end"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Configuring Methods Mapping to Fields on the Back End
+        
+        
+      </h4>
+    
+
+<p>Methods mapping is where you can configure what the system should do for all the methods the client app will use. For example, a work order will use the Get, Post (create), Put (update), and Delete methods. When you perform Get on a work order object, the mapping specifies the target object in the SAP back end and the method that you can use against that object. You can control the mapping for both the request to SAP and the response.</p>
+
+<p>To configure the methods mapping, follow these steps:</p>
+
+<ol>
+  <li>In the mapping screen, click the <strong>Methods</strong> tab.</li>
+  <li>Click the <strong>Add</strong> button.</li>
+  <li>Click in the <strong>Data Model Verb</strong> field, and then select <strong>Get</strong> from the drop-down menu.</li>
+  <li>Use the default <strong>Verb Security Level</strong>, Authenticated App User.</li>
+</ol>
+
+<p>The Verb Security Level specifies how the client must authenticate to the verb. You can restrict access to this verb to only authenticated app users that have successfully authenticated using an Identity service. An anonymous app user verb allows access from a trusted client that has the required App Key and App Secret, but the client does not need to authenticate the user through an identity service. Set the security level to Public to allow any client to access this verb without any authentication requirement.</p>
+
+<ol>
+  <li>Click in the <strong>Backend Object Verb</strong> field. Click the plus button next to VTI_SAMPLE_ORDER, and then select <strong>Get</strong>.</li>
+</ol>
+
+<p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/ObjectSrvcMethodMap_624x141.png" alt="" /></p>
+
+<blockquote>
+  <p><strong><em>Note:</em></strong>  For Integration services, Object Services provides built-in variants of the get verb. Click the get verb in the navigation page to configure the mapping of the variants of the get verb. The built-in variants of the get verb are getAll, getbypk, getupdated, getbatch, and getdeleted. These get verbs do not have an individual mapping. They have a common request mapping and a common response mapping.</p>
+</blockquote>
+
+<ol>
+  <li>Click <strong>Add Mapping</strong>.</li>
+</ol>
+
+<p>The method mapping configure screen appears.</p>
+
+<p>The Security Filters, OData Query Options, Request Mapping, Response Mapping, and Test tabs are displayed.</p>
+
+<p>The <strong>OData Query Parameters</strong> tab lists the parameters of the method that you can use for the VTI_SAMPLE_ORDER object.</p>
+
+<ol>
+  <li>Click the <strong>Request Mapping</strong> tab, and then click <strong>Edit</strong> button under Mapper area.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The common mapping of the object is applied to the verb by default.
+</code></pre></div></div>
+
+<ol>
+  <li>To override the common mapping, click <strong>Clear Mappings</strong>, and specify a custom mapping in Request Mapping and Response Mapping.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; **_Note:_** If you want to override a custom mapping with common mapping, click **Apply Common Mapping**.
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>In OData Query Options, do the following:
+    1.  Click in the <strong>Value</strong> field for the <strong>$filter</strong> parameter.</p>
+
+    <blockquote>
+      <p><strong><em>Note:</em></strong>  The <code class="language-plaintext highlighter-rouge">&amp;</code> and <code class="language-plaintext highlighter-rouge">=</code> operators are not supported in values for OData string key (<code class="language-plaintext highlighter-rouge">$filter</code>).</p>
+    </blockquote>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.  Enter the expression **orderStatus ne 'Draft'**. This will filter the orders that have an order status of Draft. 16.  Click **Request Mapping**.
+</code></pre></div></div>
+
+<p>If you do not apply common mapping of the object to the get verb, this is where you specify a custom mapping on the request to SAP. Common mapping by default maps one-to-one the data model method to the method of the target object in the back end.</p>
+
+<p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/ObjectSrvcRequestMapping_549x338.png" alt="" /></p>
+
+<ol>
+  <li>Click <strong>Response Mapping</strong>.</li>
+</ol>
+
+<p>If you do not apply common mapping of the object to the get verb, this is where you specify a custom mapping on the response to SAP.</p>
+
+<ol>
+  <li>Click <strong>Test</strong>.</li>
+</ol>
+
+<p>The Test panel appears. You can use the Test panel to test the mapping for a method. To test the mapping, enter the query parameters, select an environment, enter the headers and header values that you want to include with the test. Then, in Request Payload, enter values for the fields for which you want to test the mapping, and then click <strong>Send</strong>.</p>
+
+<p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/ObjSvcTestMapping_585x390.png" alt="" /></p>
+
+<ol>
+  <li>In the navigation pane, click the <strong>Orders</strong> object.</li>
+  <li>For the <strong>Get</strong> verb, click <strong>Advanced</strong>.</li>
+</ol>
+
+<ul>
+  <li>
+    <p>The <strong>Include Related Objects</strong> field and the <strong>Verb Security Level</strong> field appear. The Include Related Objects setting specifies which part of the data model Object’s hierarchy can be handled by the verb. This information helps in optimizing the number of calls to the back end in case the verb also deals with other objects in the hierarchy. You can multi-select multiple objects in the drop-down to specify the information.</p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/IncludeRelatedObjects_567x381.png" alt="" /></p>
+  </li>
+  <li>
+    <p><strong>Custom Code Invocation</strong> section appears. Configure the parameters for the preprocessor and postprocessor to filter the request and response objects for your business requirements. You can specify multiple preprocessors and postprocessors. This is supported for integration/Orchestration services and Object services.</p>
+
+    <blockquote>
+      <p><strong><em>Important:</em></strong> To invoke preprocessor and postprocessor, you must <strong>import a valid JAR file</strong> while creating an object service. The corresponding jars have to be uploaded to the VoltMX Foundry console under the <strong><a href="Objectservices_Stage1.htm#Custom_JAR-Objects">**Advanced** tab in the object service definition</a></strong> service definition.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Java Preprocessor and Postprocessor - The preprocessor and postprocessor are Java classes that implement ObjectServicePreProcessor and ObjectServicePostProcessor interfaces. A developer can write custom code in the execute method of the preprocessor or postprocessor class.</p>
+
+    <ul>
+      <li>Under the <strong>Custom Code Invocation</strong>, follow these steps:
+        <ol>
+          <li>Under <strong>Preprocessor</strong>, configure the following:
+            <ul>
+              <li>
+                <p>For <strong>Java</strong>, you can configure multiple Preprocessors. This is supported for Integration/Orchestration services and Object services. If you have defined your logic for multiple preprocessors in the uploaded JAR file in the service definition, you can then select the available one or other preprocessors. You can arrange the selected pre-processors to be executed in the desired order during the operation call.</p>
+
+                <p><a href="javascript:void(0);"><img src="../../Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" />Use Case<br />
+</a></p>
+
+                <p>When customers have a large amount of custom code, the maintainability of the code becomes an issue. The issue becomes much more complicated when multiple stakeholders working on custom code. In such cases, the custom code can be split into multiple pre/post processors so that stakeholders can work on their respective modules. This increases the upgradability and maintainability of the custom code.</p>
+
+                <p>Select <strong>Java</strong>, and from the <strong>Class</strong> list, select a preprocessor class. You can select one or more classes.<br />
+This step enables a developer to include any business logic on the data before sending the response to a mobile device.</p>
+              </li>
+            </ul>
+          </li>
+          <li>    Under <strong>Postprocessor</strong>, configure the following:
+            <ul>
+              <li>
+                <p>For <strong>Java</strong>, you can configure multiple Postprocessors. This is supported for Integration/Orchestration services and Object services. If you have defined your logic for multiple postprocessors in the uploaded JAR file in the service definition, you can select the available one or other post-processors. You can arrange the selected post-processors to be executed in the desired order during the operation call.</p>
+
+                <p><a href="javascript:void(0);"><img src="../../Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" />Use Case<br />
+</a></p>
+
+                <p>When customers have a large amount of custom code, the maintainability of the code becomes an issue. The issue becomes much more complicated when multiple stakeholders working on custom code. In such cases, the custom code can be split into multiple pre/post processors so that stakeholders can work on their respective modules. This increases the upgradability and maintainability of the custom code.</p>
+
+                <p>Select <strong>Java</strong>, and from the <strong>Class</strong> list, select a postprocessor class. You can select one or more classes.<br />
+This step enables a developer to include any business logic on the data before sending the response to a mobile device.You can rearrange the order of the classes to be executed, if required.</p>
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Preprocessor and Postprocessor interfaces in Object services</p>
+
+    <p><strong>ObjectServicePreProcessor</strong></p>
+
+    <p>Implement this interface and write your custom preprocessor logic by overriding execute method. You are provided with <em>FoundryRequestManager</em>, <em>FoundryResponseManager</em> and <em>FoundryRequestChain</em> as method arguments.</p>
+  </li>
+</ul>
+
+<figure class="highlight">
+  <pre><code class="language-voltmx" data-lang="voltmx">​​​​​ public interface ObjectServicePreProcessor {  
+    void execute(FoundryRequestManager foundryRequestManager,  
+    FoundryResponseManager foundryResponseManager, FoundryRequestChain foundryRequestChain)  
+    throws Exception;  
+    }​
+    </code></pre>
+</figure>
+<p>​​​​​</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Method arguments:  
+_FoundryRequestManager_ :** This argument specifies the different types of handlers to operate on request related information.**  
+**_FoundryResponseManager_ :** This argument specifies the different types of handlers to operate on response related information.  
+**_FoundryRequestChain_ :** This argument specifies a chain similar to servlet _FilterChain_ used to control the request flow.**
+
+For a sample Java class code for ObjectServicePreProcessor, refer to [Java Sample Code for Preprocessor - Object services](../Java_Pre-Post_Samples_Objects.htm#Sample).
+
+**ObjectServicePostProcessor**
+
+Implement this interface and write your custom postprocessor logic by overriding execute method. You are provided with _FoundryRequestManager and_ _FoundryResponseManager_ as method arguments.
+</code></pre></div></div>
+
+<figure class="highlight">
+  <pre><code class="language-voltmx" data-lang="voltmx">​​​​​ public interface ObjectServicePostProcessor {  
+    void execute(FoundryRequestManager foundryRequestManager,  
+    FoundryResponseManager foundryResponseManager)throws Exception;  
+    }​
+    </code></pre>
+</figure>
+<p>​​​​​</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Method arguments:  
+_FoundryRequestManager_ :** This argument specifies the different types of handlers to operate on request related information.**  
+**_FoundryResponseManager_ :** This argument specifies the different types of handlers to operate on response related information.**
+
+For a sample Java class code for ObjectServicePostProcessor, refer to [Java Sample Code for Preprocessor - Object services](../Java_Pre-Post_Samples_Objects.htm#Sample2).
+
+&gt; **_Important:_** **Limitations of custom code invocation in Object services are as follows:  
+  
+**\-  Custom code is not invoked when Bulk Sync V2 APIs are in use.\-  Custom code is not invoked when orchestration services which make use of Object services are in use.\-  Custom code is not invoked when we use VoltMX Foundry console test API.
+
+&gt; **_Note:_** **For VoltMX Cloud / For on-premises:** Runtime jars to write custom code can be downloaded from Admin console. In the **Downloads** section, you can download the middleware jars as a zip file. Here the `middleware-api.jar` will have all the classes related to custom code.
+
+&gt; **_Note:_** For details on middleware APIs for preprocessor and postprocessor,  
+contact refer to [http://docs.hcl.com/hcllibrary/integration/MiddlewareAPI/index.html](http://docs.hcl.com/hcllibrary/integration/MiddlewareAPI/index.html)
+</code></pre></div></div>
+
+<ol>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<p>You can enable the application for offline synchronization, publish the application, and then provide the code that VoltMX Foundry generates to a mobile application developer.</p>
+      <h4 id="how-to-use-actions-in-existing-objects-methods">
+        
+        
+          <a href="#how-to-use-actions-in-existing-objects-methods" class="anchor-heading" aria-labelledby="how-to-use-actions-in-existing-objects-methods"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> How to Use Actions in Existing Objects Methods
+        
+        
+      </h4>
+    
+
+<p>You can perform the following actions on a method in existing object services:</p>
+
+<ul>
+  <li>
+    <p><strong>Edit</strong>: Allows you to edit a method. After you edit a method, you have to republish all the apps that are using the service to apply the changes.</p>
+
+    <blockquote>
+      <p><strong><em>Note:</em></strong> To know more about publishing an app, refer to <a href="../Publish.htm">Publish an app</a>.</p>
+    </blockquote>
+
+    <blockquote>
+      <p><strong><em>Note:</em></strong> If a service is part of a published app, you can rename that service only after the app is unpublished.</p>
+    </blockquote>
+  </li>
+  <li><strong>Sample Code</strong>: A dynamic code is generated based on the configuration of a method. You can use this code in your SDK.</li>
+  <li>
+    <p><strong>Delete</strong>: Allows you to delete a method.</p>
+
+    <blockquote>
+      <p><strong><em>Note:</em></strong> If a service is a part of a published app, you can delete that service only after you unlink the service from all the published app.</p>
+    </blockquote>
+  </li>
+</ul>
+      <h4 id="adding-custom-verbs-for-sap-object-service">
+        
+        
+          <a href="#adding-custom-verbs-for-sap-object-service" class="anchor-heading" aria-labelledby="adding-custom-verbs-for-sap-object-service"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Adding Custom Verbs for SAP Object Service
+        
+        
+      </h4>
+    
+
+<p>SAP Object Service provides you the ability to add custom verb names and map it to an operation of a back-end object. You can now create your own custom verb in addition to the existing verbs (Create, Read, Update, Delete, and Partial Update) and map to a back-end business operation.</p>
+
+<p><strong>**To create a custom verb,</strong> follow these steps**:</p>
+
+<ol>
+  <li>In the <strong>Mapping</strong> screen. click the <strong>Methods</strong> tab.</li>
+  <li>
+    <p>Click the <strong>Add</strong> button.</p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/CustomVerb/Add_button_582x212.png" alt="" /></p>
+  </li>
+  <li>Click in the <strong>Data Model Verb</strong> field. A drop-down menu appears. Select <strong>custom</strong>.</li>
+  <li>Provide the <strong>Custom Verb</strong> name.</li>
+  <li>
+    <p>Use the default <strong>Verb Security Level</strong>, Authenticated App User.</p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/CustomVerb/Custom_Verb_628x290.png" alt="" /></p>
+  </li>
+  <li>Select the <strong>Library</strong>, it automatically populates the list of data and business object hierarchies available.</li>
+  <li>Select the <strong>Business Object</strong> from the drop-down list.</li>
+  <li>
+    <p>Select the verb name from the <strong>Verb</strong> drop-down list and click <strong>SAVE</strong>.</p>
+
+    <p>The created custom verb is successfully added to the list of existing verbs.</p>
+  </li>
+  <li>
+    <p>Select the created custom verb from the <strong>Mapping</strong> section in the left pane.</p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/CustomVerb/Test_615x250.png" alt="" /></p>
+  </li>
+  <li>Click <strong>Request Mapping</strong>.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The verb has the Common Mappings applied by default. You can click on **Clear Mappings** and specify a custom mapping on the request to SAP to map the backend object to application model object. The custom verb will be available to the end users like the other verbs in the application. The rest client can test the custom verb from the published application.
+</code></pre></div></div>
+
+<ol>
+  <li>Click <strong>Response Mapping</strong>.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>If you do not apply common mapping of the object, you should specify a custom mapping on the response to SAP.
+
+&gt; **_Note:_** In Foundry V9 and later, any V8 custom response format is ignored and the internal response formatting is enabled (only Primary Key is returned).  
+To get the V8 functionality, you need to set the following -D parameter on the JVM : `HCL_SERVER_CUSTOM_VERB_RESPONSE_FORMAT_ENABLED` to `false`.  
+  
+For a workflow object, internal response formatting is enabled by default.  
+  
+Before migrating to V9, any existing services or orchestrations that depend on a custom response format will need to be adjusted to use the standard response format.
+</code></pre></div></div>
+
+<ol>
+  <li>Click <strong>Test</strong>.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You can use the Test panel to test the mapping for a method. To test the mapping, enter the query parameters, select an environment, enter the headers and header values that you want to include with the test. Then, in Request Payload, enter the values for the fields for which you want to test the mapping, and then click **Send**.
+
+If the test is successful, the end users can invoke the created custom verb from their application post publish.
+</code></pre></div></div>
+
+<p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/CustomVerb/req_resp_mapper_628x476.png" alt="" /></p>
+      <h4 id="mapping-verbs-for-objects-for-service-driven-objects">
+        
+        
+          <a href="#mapping-verbs-for-objects-for-service-driven-objects" class="anchor-heading" aria-labelledby="mapping-verbs-for-objects-for-service-driven-objects"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Mapping verbs for Objects (for Service-driven Objects)
+        
+        
+      </h4>
+    
+
+<p>To map the verbs for the Defect object, follow these steps:</p>
+
+<ol>
+  <li>In the navigation pane, click the Mapping tab, and then click the object. For example, <strong>Defect</strong>.</li>
+  <li>Click the <strong>Add</strong> button.</li>
+</ol>
+
+<p>The verb mapping configuration screen for the Account object appears.</p>
+
+<ol>
+  <li>Click in the <strong>Data Model Verb</strong> field. A drop-down menu appears. Click <strong>Create</strong>.</li>
+  <li>Under <strong>Verb Security Level</strong>, use the default, Authenticated App User.</li>
+</ol>
+
+<p>The Verb Security Level specifies how the client must authenticate to the create verb. Authenticate App User restricts access to the create verb to users that have successfully authenticated using an Identity service. You can also set the security level to Anonymous App User and Public.</p>
+
+<ol>
+  <li>Click in the <strong>Services</strong> field. A drop-down menu appears. Select the <strong>Digite</strong> integration service.</li>
+  <li>Click in the Operations field. A drop-down menu appears. Click <strong>createAccount</strong>.</li>
+  <li>Click <strong>Save</strong>.</li>
+  <li>Repeat steps 2 through 7, and map the data model verb <strong>update</strong> to the <strong>updateDefect</strong> operation.</li>
+  <li>Repeat steps 2 through 7, and map the data model verb <strong>partialupdate</strong> to the <strong>updateDefect</strong> operation.</li>
+  <li>Repeat steps 2 through 7, and map the data model verb <strong>get</strong> to the <strong>getAllDefects</strong> operation.</li>
+</ol>
+
+<p>The mapping for the verbs is automatically generated. Mapping is auto-generated only when the dataset name of integration services and object name matches. The mapping is populated in the Request Mapping and Response Mapping tabs based on the input and output of the operations. You can click the <strong>Clear Mappings</strong> button to clear the existing mapping and then specify the custom mapping.</p>
+
+<p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/SDOdefectMapping_638x223.png" alt="" /></p>
+
+<p>You can view the mapping for a verb by clicking the verb on the Mapping tab in the navigation pane. Request mapping is the parameters that are mapped from the device side to the back end. Response mapping is the parameters that the backend sends to the object’s fields.</p>
+
+<ol>
+  <li>In the navigation pane, under the Defect object, click the <strong>get</strong> verb.</li>
+  <li>Click <strong>Get Variants</strong>.</li>
+</ol>
+
+<p>The mapping configuration for the get verb appears. Object Services provides built-in variants of the get verb. You can click <strong>Get Variants</strong> button to view the variants for methods. The built-in variants of the get verb are getAll, getbypk, getupdated, getbatch, and getdeleted. These get verbs do not have individual mapping. They have a common request mapping and a common response mapping.</p>
+
+<ol>
+  <li>Click in the <strong>Service Name</strong> field for the getbypk verb, and select <strong>Digite</strong>.</li>
+  <li>Click in the <strong>Operation</strong> field for the getbypk verb, and select <strong>getDefectDetailsById</strong>.</li>
+</ol>
+
+<p>A green check mark indicates that the operation mapping has succeeded.</p>
+
+<p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/SDOdefectGetVerbs_592x620.png" alt="" /></p>
+
+<ol>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; **_Note:_** For more information on how to configure Get Variants for SDO, refer to [Configuring SDO Get Verb for Offline Objects](SDO_Get_VariantsObjectservices_Stage3.htm).
+</code></pre></div></div>
+
+<p><strong>Support for SDO Services from Offline Objects</strong></p>
+
+<p>To support SDO services from Offline Objects, you must configure the multiple variants of a get verb from the integration services.</p>
+
+<p>The three types of get variants that support SDO services from Offline Objects are:</p>
+
+<ul>
+  <li><strong>getUpdated</strong> – Retrieves the initial records updated within the last updated time stamp.</li>
+  <li><strong>getByPK</strong> – Retrieves the records based on the ID. This variant supports the records based on a primary key ID.</li>
+  <li><strong>getBatch</strong> – Retrieves the records of a batch when a batch pointer is provided.</li>
+</ul>
+
+<p>To configure SDO services in Object Service, follow these steps:</p>
+
+<ol>
+  <li>Create a service driven object service from the integration service.</li>
+  <li>
+    <p>Go to Configure <strong>Services &gt; Objects</strong>, select the corresponding SDO object service and click <strong>Mapping</strong>, and click <strong>Get Mapping</strong>.</p>
+
+    <p>You can find the Get verb is mapped to a single Integration service.</p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/Get_variant.png" alt="" /></p>
+  </li>
+  <li>Expand Get Variants.</li>
+  <li>
+    <p>Map each get variant getByPK, getUpdated, and getBatch with the corresponding integration service.</p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/GetVariant_2.png" alt="" /></p>
+
+    <p>All the Get variants share the same mapper. So, all the parameters of the get variants must be defined with the corresponding Integration service.</p>
+
+    <p>The get variants getByPK, getUpdated and getBAtch for Offline Objects must return the following mandatory output parameters:</p>
+
+    <ul>
+      <li><strong>hasMoreRecords</strong> – Indicates if there are more records to be downloaded.</li>
+      <li><strong>batchID</strong> – If batching is applicable, the batchID value must be displayed. If batching is not supported, the parameter does not exist in the output params.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>In addition to the built-in verb options, you can also create custom verbs for an object. For example, you can create the custom verb <strong>assign</strong>, and map it to the <strong>assignDefect</strong> operation on the back end.</p>
+      <h4 id="testing-an-object-service-in-voltmx-foundry">
+        
+        
+          <a href="#testing-an-object-service-in-voltmx-foundry" class="anchor-heading" aria-labelledby="testing-an-object-service-in-voltmx-foundry"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Testing an Object Service in VoltMX Foundry
+        
+        
+      </h4>
+    
+
+<p>After you publish the service, you can test the service from VoltMX Foundry. You can only test the published state of the service. You can test the changes you make in the service designer only if you publish the app again.</p>
+
+<p>To test a published service, follow these steps:</p>
+
+<ol>
+  <li>In the <strong>Mapping</strong> tab for a Salesforce service, click a verb (for example, get).</li>
+  <li>In the <strong>Configure</strong> screen, click the <strong>Test</strong> tab.</li>
+  <li>
+    <p>In the <strong>Test</strong> tab, select the environment and click <strong>Send</strong>.</p>
+
+    <p>The result dialog displays the <strong>Response</strong> and <strong>Log</strong> tabs:</p>
+
+    <ul>
+      <li>
+        <p><strong>Response</strong> tab displays the final response of the service.</p>
+
+        <p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/ObjServ_Resp_549x227.png" alt="" /></p>
+      </li>
+      <li>
+        <p><strong>Log</strong> tab displays the following details</p>
+
+        <p><img src="/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Resources/Images/ObjServ_Test_515x220.png" alt="" /></p>
+
+        <ul>
+          <li>
+            <p><strong>Request</strong> displays the request data such as Service ID, App ID and so on.</p>
+          </li>
+          <li>
+            <p><strong>Request Mapper Input</strong> displays the mapper input in the request flow.</p>
+          </li>
+          <li>
+            <p><strong>Request Mapper Output</strong> displays the output of mapper in request flow.</p>
+          </li>
+          <li>
+            <p><strong>Backend Request</strong> displays the data sent to the backend.</p>
+          </li>
+          <li>
+            <p><strong>Backend Response</strong> displays the response received from the backend.</p>
+          </li>
+          <li>
+            <p><strong>Response Mapper Input</strong> displays the input to mapper in response flow.</p>
+          </li>
+          <li>
+            <p><strong>Response Mapper Output</strong> displays the output of mapper in response flow.</p>
+          </li>
+          <li>
+            <p><strong>Response</strong> displays the final output of service and the status showing success or failure of test call.</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>Limitations for testing an Object Service</strong></p>
+
+<ul>
+  <li>Testing of Pre-Processor and PostProcessor is not supported.</li>
+  <li>
+    <p>Testing of Storage Objects is not supported without publishing.</p>
+  </li>
+  <li>You can now <a href="ObjectservicesVisMapper.htm">Creating a Mapping by using Visual Mapper</a></li>
+</ul>
+
+        
+
+        
+
+        
+        
+         
+            <!--<p class="text-small text-grey-dk-100 mb-0">Copyright &copy; 2017-2020 HCL Digital Solutions</p>-->
+
+
+            
+              <div class="d-flex mt-2">
+                
+                
+              </div>
+            
+          </footer>
+        
+
+      </div>
+    </div>
+
+    
+      
+
+      <div class="search-overlay"></div>
+    
+
+     <!-- footer from footer html -->
+   <footer>
+    <div>
+        <ul class="social-nav">
+            <li><a href="#" class="facebook">Facebook</a></li>
+            <li><a href="#" class="linkedin">LinkedIn</a></li>
+            <li><a href="#" class="twitter">Twitter</a></li>
+            <li><a href="#" class="youtube">Youtube</a></li>
+            <li><a href="#" class="glassdoor">Glassdoor</a></li>
+        </ul>
+    </div>
+    <p>
+        &copy; Copyright 2021 HCL Softwares. All rights reserved. Various trademarks held by their respective owners.
+    </p>
+    <p class="foot-nav">
+        <a href="#">Privacy Statement</a> | <a href="#">Terms of Use</a>
+    </p>
+</footer>
+  </div>
+
+  
+  <div class="right-menu">
+    
+<nav role="navigation" aria-label="Main" id="sub-site-nav" class="site-nav">
+      <ul class="nav-list" >
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/API_Throttling_Override.html"
+            class="nav-list-link">Override API Throttling Configuration</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/API_Versioning.html"
+            class="nav-list-link">API Versioning - VoltMX Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/AWS_API_Gateway_Adapter.html"
+            class="nav-list-link">AWS API Gateway adapter/integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/AWS_S3_Adapter.html"
+            class="nav-list-link">Open API (Swagger) Adapter/integration Service - HCL Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Accessing_HCL_MBaaS_Portal.html"
+            class="nav-list-link">Accessing VoltMX Foundry Console - Cloud</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Account_Settings_User_ACLs.html"
+            class="nav-list-link">Account Settings for Default User Access Control Lists (ACLs)</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Adding_Applications.html"
+            class="nav-list-link">Add Apps</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Advanced_Configurations.html"
+            class="nav-list-link">Advanced Configurations Integration Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Advanced_Configurations_-Object_Services.html"
+            class="nav-list-link">Advanced Configurations Integration Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/Android_Studio.html"
+            class="nav-list-link">Using Android SDKs to develop apps in HCL Foundry, HCL Doc. Java Development Kit, Eclipse, hcl-sdk.jar, IDEs, hcl-sdk.doc </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/AppReconfig.html"
+            class="nav-list-link">App Reconfiguration</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/AppVersionUpgradePolicyEAS.html"
+            class="nav-list-link">Upgrade Policy to Validate Child App versions in EAS</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/App_User_Session.html"
+            class="nav-list-link">Using App Session to configure session idle timeout, maximum session duration for an app session.</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/App_Versioning.html"
+            class="nav-list-link">VoltMX Foundry Application Versioning</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Appendix_-_App_Services.html"
+            class="nav-list-link">Appendix App Servies</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Appendix_-_FAQs.html"
+            class="nav-list-link">Appendix FAQs - VoltMX Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Appendix_-_Sync_Strategy.html"
+            class="nav-list-link">Using VoltMX Foundry Appendix - App Services, VoltMX Doc.</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Application_SSO.html"
+            class="nav-list-link">Use Case Scenarios - App SSO</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Async_Publish.html"
+            class="nav-list-link">Asynchronous Publish </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Binary_APIs.html"
+            class="nav-list-link">Binary APIs</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/CI_CloudBuild.html"
+            class="nav-list-link">Continuous Integration for Cloud Build</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/CI_Foundry.html"
+            class="nav-list-link">Continuous Integration with VoltMX Foundry MFCLI</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/CI_NativeUploadPublish.html"
+            class="nav-list-link">Continuous Integration for Binary-Upload and Native-Publish</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/CI_with_Foundry_APIs.html"
+            class="nav-list-link">Using Publishing to publish and view App key and App Secret, VoltMX Doc. App Key and App Secret, Sync client code (PhoneGap), Sync client code (VoltMX Studio) </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/CLI_Analytics.html"
+            class="nav-list-link">Analytics for Third-party Client App Binaries - VoltMX Foundry User Guide MFCLI</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/CSD-LegacySerivce.html"
+            class="nav-list-link">Consolidated Services Definition (CSD) apps</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Cache_Service_Response_for_Integaration_and_Object_Services.html"
+            class="nav-list-link">Cache Service Response for Integration and Object Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Cloudian_Adapter.html"
+            class="nav-list-link">Open API (Swagger) Adapter/integration Service - HCL Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Cloudian_File_Storage.html"
+            class="nav-list-link">Open API (Swagger) Adapter/integration Service - HCL Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Collection.html"
+            class="nav-list-link">Collection Support</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ConcurrentUserLogins.html"
+            class="nav-list-link"> Configure Concurrent User Active Sessions for Apps</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ConfigureIdentiryService.html"
+            class="nav-list-link">Configure identity Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ConfigureIntegrationService.html"
+            class="nav-list-link">Configure Integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/Configure_Framework_iOS.html"
+            class="nav-list-link">Configuring the Framework</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/Configuring_HCL_SDK_Android.html"
+            class="nav-list-link">Using API Versioning to create versioning for integration services and orchestration services. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ConsoleAccessControl.html"
+            class="nav-list-link">Console Access Control</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/Creating_Cordova_App.html"
+            class="nav-list-link">Creating a Cordova App</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/CustomAuthwithEnd-Point.html"
+            class="nav-list-link">Using API Versioning to create versioning for integration services and orchestration services. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/CustomDataConfig.html"
+            class="nav-list-link">Custom Data Adapters</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Custom_Code_for_Invoking_Integration_from_pre-post-java.html"
+            class="nav-list-link">Custom Code for Invoking Integation service from Preprocessor or postprocessor</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Custom_Code_for_Invoking_ObjectService_from_pre-post-java.html"
+            class="nav-list-link">Custom Code for Invoking Integation service from Preprocessor or postprocessor</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/DataEncryptionObjects.html"
+            class="nav-list-link">Object metadata for controlling client-side logic</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Windows/DataObject_Class.html"
+            class="nav-list-link">DataObject Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsAPIReference/Data_Transfer_Objects.html"
+            class="nav-list-link">Data Transfer Objects</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/ObjectsAPIReference/Data_Transfer_Objects.html"
+            class="nav-list-link">Data Transfer Objects</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JS/Download_HCL_Plain_SDK_Files_JS.html"
+            class="nav-list-link">Downloading VoltMX Plain JS SDK Files</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/Download_HCL_SDK_Files_Android.html"
+            class="nav-list-link">Using API Versioning to create versioning for integration services and orchestration services. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/Download_HCL_SDK_Files_PhoneGap.html"
+            class="nav-list-link">Downloading VoltMX Cordova SDK Files</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/Download_HCL_SDK_iOS.html"
+            class="nav-list-link">Downloading VoltMX iOS SDK Files</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Downloading_HCL_SDK_Files_Iris.html"
+            class="nav-list-link">Downloading VoltMX IDE SDK Files</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Windows/Downloading_SDK_Files_Windows.html"
+            class="nav-list-link">Using Publishing to publish and view App key and App Secret, HCL Doc. App Key and App Secret, Sync client code (PhoneGap), Sync client code (HCL Studio) </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/EAS_NativeApp_Walk-through.html"
+            class="nav-list-link">VoltMX Enterprise App Store (EAS) Source App</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Email_Adapter.html"
+            class="nav-list-link">RAML adapter/integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/EnablingMultiFactorAuthentication.html"
+            class="nav-list-link">Enable Multi-Factor Authentication </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Engagement.html"
+            class="nav-list-link">Messaging/Engagement</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/EnterpriseAppStore.html"
+            class="nav-list-link">VoltMX Enterprise App Store (EAS)</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Environments-Cloud.html"
+            class="nav-list-link">Environments for Cloud / HCL AppFactory Cloud</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Environments.html"
+            class="nav-list-link">Environments - On-Premises</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Export-Import_Apps.html"
+            class="nav-list-link">Exporting and Importing an Application </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Export_Import_Configuration_Parameters_AppServices_MFCLI.html"
+            class="nav-list-link">Export and Import Configurable Parameters for App Services through MFCLI</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Export_Import_Custom_Reports_Dashboards_MFCLI.html"
+            class="nav-list-link">Export and Import Custom Reports and Custom Dashboards through MFCLI</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Features.html"
+            class="nav-list-link">Features</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/FileServiceAdapters.html"
+            class="nav-list-link">File Service Adapters in VoltMX Foundry</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/File_Service_Adapter_APIs.html"
+            class="nav-list-link">File Service Adapter APIs</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/File_Storage.html"
+            class="nav-list-link">Open API (Swagger) Adapter/integration Service - HCL Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/File_Storage_Adapter.html"
+            class="nav-list-link">Open API (Swagger) Adapter/integration Service - HCL Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Forgot_Password.html"
+            class="nav-list-link">Using identity tab to add services in the VoltMX  Foundry, VoltMX  Doc. Microsoft Active Directory, Salesforce, SAML, VoltMX  User Repository</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Foundry_Admin_Adapter.html"
+            class="nav-list-link">Foundry Admin Adapter/integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Foundry_SDKs.html"
+            class="nav-list-link">SDKs - VoltMX Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/FrontEndAPI.html"
+            class="nav-list-link">Preprocessor, postprocessor, JavaScript Preprocessor, and JavaScript Postprocessor</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/GroupsinIdentityServices.html"
+            class="nav-list-link">Groups Support for Identity Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/GroupsinUserRepository.html"
+            class="nav-list-link">Groups in an App</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLDevPortal.html"
+            class="nav-list-link">VoltMX Developer Portal</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLUserRepositoryUserStore.html"
+            class="nav-list-link">Using User Repository identity service, User Repositor, User Store, one User Store per-account, one user store per account</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCL_Customer_360_Adapter.html"
+            class="nav-list-link">VoltMX Customer 360 Adapter</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCL_Logger.html"
+            class="nav-list-link">VoltMX Logger</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCL_SAP_Gateway_Adapter.html"
+            class="nav-list-link">HCL SAP Gateway adapter/integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/HTTP_Message_Body_Integrity_Iris.html"
+            class="nav-list-link">HTTP Message Body Integrity</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/How_to_access_HCL_Foundry_Portal_on-Prem.html"
+            class="nav-list-link">Accessing HCL Foundry Console&#160;-&#160;On-premises</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/IBM_MQ_service.html"
+            class="nav-list-link">IBM MQ adapter/integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity.html"
+            class="nav-list-link">identity Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity10_HCL_OAuth2.html"
+            class="nav-list-link">Using identity tab to add services in the VoltMX Foundry, VoltMX Doc. Okta Microsoft Active Directory, Salesforce, SAML, VoltMX User Repository</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity11_OAuth.html"
+            class="nav-list-link">Using identity tab to add services in the VoltMX Foundry, VoltMX Doc. Microsoft Active Directory, Salesforce, SAML, VoltMX User Repository</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity12_HCLUR.html"
+            class="nav-list-link">HCL User Repository identity service, User Store</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity13_Social.html"
+            class="nav-list-link">Using identity tab to add services in the VoltMX Foundry, VoltMX Doc. Microsoft Active Directory, Salesforce, SAML, VoltMX User Repository</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity14_Manage_Existing.html"
+            class="nav-list-link">Manage identity Services, Actions for Identiy Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity2_MS_AD.html"
+            class="nav-list-link">Microsoft Active Directory Identity Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity3_Salesforce.html"
+            class="nav-list-link">Using identity tab to add services in the VoltMX  Foundry, VoltMX  Doc. Microsoft Active Directory, Salesforce, SAML, VoltMX  User Repository</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity4_LDAP.html"
+            class="nav-list-link">Open LDAP Identity Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity5_SAML.html"
+            class="nav-list-link">Security Assertion Markup Language (SAML)</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity6_SiteMinder.html"
+            class="nav-list-link">Using identity tab to add services in the VoltMX  Foundry, VoltMX  Doc. Microsoft Active Directory, Salesforce, SAML, VoltMX  User Repository</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity7_HCL_SAP.html"
+            class="nav-list-link">Using identity tab to add services in the VoltMX  Foundry, VoltMX  Doc. Microsoft Active Directory, Salesforce, SAML, VoltMX  User Repository</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity8_HCL_Custom.html"
+            class="nav-list-link">Using identity tab to add services in the VoltMX Foundry, VoltMX Doc. Microsoft Active Directory, Salesforce, SAML, VoltMX User Repository</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity9_Facebook.html"
+            class="nav-list-link">Using identity tab to add services in the VoltMX Foundry, VoltMX Doc. Microsoft Active Directory, Salesforce, SAML, VoltMX User Repository</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Identity_Filters_Integration.html"
+            class="nav-list-link">Enhanced Identity Filters</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ImportExportServices.html"
+            class="nav-list-link">Importing and Exporting Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/Initializing_Client_SDK_Android.html"
+            class="nav-list-link">Using API Versioning to create versioning for integration services and orchestration services. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JS/Initializing_Client_SDK_JS.html"
+            class="nav-list-link">Initializing the JS Client SDK</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/Initializing_Client_SDK_PhoneGap.html"
+            class="nav-list-link">Initializing the Cordova Client SDK</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Initializing_HCL_JS_Client_SDK_Iris.html"
+            class="nav-list-link">Initializing the VoltMX JS Client SDK</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Windows/Initializing_SDK_Windows.html"
+            class="nav-list-link">Using Publishing to publish and view App key and App Secret, HCL Doc. App Key and App Secret, Sync client code (PhoneGap), Sync client code (HCL Studio) </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/Initializing_SDK_iOS.html"
+            class="nav-list-link">Initializing the iOS Client SDK</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/Installing.html"
+            class="nav-list-link">Using iSO SDKs to develop apps in HCL Foundry, HCL Doc. iOS, Xcode,HCLSDK.framework, com.hcl.HCLSDK.docset  </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/Installing_Android_SDK.html"
+            class="nav-list-link">Using Android SDKs to develop apps in HCL Foundry, HCL Doc. Java Development Kit, Eclipse, hcl-sdk.jar, IDEs, hcl-sdk.doc </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Installing_HCLJS_SDK.html"
+            class="nav-list-link">Using HCL JS SDKs to develop apps in HCL Foundry, HCL Doc.</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JS/Installing_JS_SDK.html"
+            class="nav-list-link">Using JavaScript SDKs to develop apps in HCL Foundry, HCL Doc.</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/Installing_PhoneGap_SDK.html"
+            class="nav-list-link">Using PhoneGap SDKs to develop apps in HCL Foundry, HCL Doc. Cordova, Node.js, com.hcl-sdk.doc, com.hcl.sdk</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Windows/Installing_Windows_SDK.html"
+            class="nav-list-link">Using HCL .Net (Visual Studio) SDKs to download the .NET (Visual Studio) SDK files and initialize the .NET client in HCL Foundry, HCL Doc.</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Introduction.html"
+            class="nav-list-link">Introduction</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Invoking_Configuration_Service_Iris.html"
+            class="nav-list-link">Invoking a Configuration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JS/Invoking_Configuration_Service_JS.html"
+            class="nav-list-link">Invoking a Configuration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/Invoking_Configuration_Service_PhoneGap.html"
+            class="nav-list-link">Invoking a Configuration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/Invoking_Identity_Service_Android.html"
+            class="nav-list-link">Using API Versioning to create versioning for integration services and orchestration services. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Invoking_Identity_Service_Iris.html"
+            class="nav-list-link">Invoking an Identity Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JS/Invoking_Identity_Service_JS.html"
+            class="nav-list-link">Invoking an Identity Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/Invoking_Identity_Service_PhoneGap.html"
+            class="nav-list-link">Invoking an Identity Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Windows/Invoking_Identity_Service_Windows.html"
+            class="nav-list-link">Using Publishing to publish and view App key and App Secret, HCL Doc. App Key and App Secret, Sync client code (PhoneGap), Sync client code (HCL Studio) </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/Invoking_Identity_Service_iOS.html"
+            class="nav-list-link">Invoking an Identity Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/Invoking_Integration_Service_Android.html"
+            class="nav-list-link">Using API Versioning to create versioning for integration services and orchestration services. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Invoking_Integration_Service_Iris.html"
+            class="nav-list-link">Invoking an Integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JS/Invoking_Integration_Service_JS.html"
+            class="nav-list-link">Invoking an Integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Invoking_Integration_Service_Passthrough_Iris.html"
+            class="nav-list-link">Invoking an Integration Service with Response Passthrough</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/Invoking_Integration_Service_PhoneGap.html"
+            class="nav-list-link">Invoking an Integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Windows/Invoking_Integration_Service_Windows.html"
+            class="nav-list-link">Using Publishing to publish and view App key and App Secret, HCL Doc. App Key and App Secret, Sync client code (PhoneGap), Sync client code (HCL Studio) </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/Invoking_Integration_Service_iOS.html"
+            class="nav-list-link">Invoking an Integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Invoking_Logic_Service_Iris.html"
+            class="nav-list-link">Invoking a Logic Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JS/Invoking_Logic_Service_JS.html"
+            class="nav-list-link">Invoking a Logic Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/Invoking_Messaging_Service_Android.html"
+            class="nav-list-link">Using API Versioning to create versioning for integration services and orchestration services. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Invoking_Messaging_Service_Iris.html"
+            class="nav-list-link">Invoking a Messaging Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/Invoking_Messaging_Service_PhoneGap.html"
+            class="nav-list-link">Invoking a Messaging Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/Invoking_Messaging_Service_iOS.html"
+            class="nav-list-link">Invoking a Messaging Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JS/Invoking_Metrics_Object_JS.html"
+            class="nav-list-link">Invoking a Metrics Service Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/Invoking_Metrics_Service_Android.html"
+            class="nav-list-link">Using API Versioning to create versioning for integration services and orchestration services. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Invoking_Metrics_Service_Iris.html"
+            class="nav-list-link">Invoking a Metrics Service Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/Invoking_Metrics_Service_Object_PhoneGap.html"
+            class="nav-list-link">Invoking a Metrics Service Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Windows/Invoking_Metrics_Service_Windows.html"
+            class="nav-list-link">Using Publishing to publish and view App key and App Secret, HCL Doc. App Key and App Secret, Sync client code (PhoneGap), Sync client code (HCL Studio) </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/Invoking_Metrics_Service_iOS.html"
+            class="nav-list-link">Invoking a Metrics Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/Invoking_Reporting_Service_PhoneGap.html"
+            class="nav-list-link">Invoking a Reporting Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/Invoking_Sync_Service_Android.html"
+            class="nav-list-link">Using API Versioning to create versioning for integration services and orchestration services. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/Invoking_Sync_Service_PhoneGap.html"
+            class="nav-list-link">Invoking a Sync Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/Invoking_Sync_Service_iOS.html"
+            class="nav-list-link">Invoking a Sync Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/Invoking_an_Object_Service.html"
+            class="nav-list-link">Invoking an Object Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/Invoking_an_Object_Service.html"
+            class="nav-list-link">Invoking an Object Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JAR_Management.html"
+            class="nav-list-link">Managing JAR Files</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JSON.html"
+            class="nav-list-link">JSON integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JS_Pre-Post_Samples.html"
+            class="nav-list-link">JavaScript Sample Code for Preprocessor and Postprocessor</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JavaScript_Adapter.html"
+            class="nav-list-link">JavaScript integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Java_Adapter.html"
+            class="nav-list-link">Java integration Service </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Java_Pre-Post_Samples.html"
+            class="nav-list-link">Java Sample Code for Preprocessor and Postprocessor </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Java_Pre-Post_Samples_Objects.html"
+            class="nav-list-link">Preprocessor, postprocessor, JavaScript Preprocessor, and JavaScript Postprocessor</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Java_Preprocessor_Postprocessor_.html"
+            class="nav-list-link">JavaScript Preprocessor, and JavaScript Postprocessor</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/KnownIssuesEAS.html"
+            class="nav-list-link">Sending Push Notification to EAS</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Legacy_Serivces.html"
+            class="nav-list-link">Legacy Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Legacy_Sync.html"
+            class="nav-list-link">Legacy Synchronization</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Limitations.html"
+            class="nav-list-link">Limitations</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Lock_Unlock_Fields_ObjectServices_MFCLI.html"
+            class="nav-list-link">Export and Import Configurable Parameters for App Services through MFCLI</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Logging_as_a_Service.html"
+            class="nav-list-link">Log Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Logic.html"
+            class="nav-list-link">The logic services feature in VoltMX Foundry helps you import and integrate Node.js services (APIs) directly into VoltMX Foundry for developing server-side and networking applications. You can now enhance the capability of your VoltMX Foundry applications by adding custom services that are created within Node.js packages/projects. Node.js is an open-source and cross-platform runtime environment. Node.js applications are written in JavaScript, and can be run within the Node.js runtime on Mac OS, Microsoft Windows, and Linux. Node.js also provides a rich library of JavaScript modules that simplify the development of web applications using Node.js. Currently, VoltMX Foundry supports Node.js V6.2.2 or above.</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/LogicServicesinApps.html"
+            class="nav-list-link">Legacy Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Logic_Publish_API_Management.html"
+            class="nav-list-link">Using Foundry console to add apps and services, Identity, Microsoft Active Directory, Salesforce, Security Assertion Markup Language (SAML), Integration,  XML, JSON, SOAP, SAP, Salesforce, Orchestration, Composite Services, Looping Services, Synchronization, Messaging, Publish</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Logic_in_Apps.html"
+            class="nav-list-link">Using Legacy Services to create an SAP JCo service or Scraper service for a Foundry app, SAP JCO Legacy, Scraper</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/MFA_for_CLI.html"
+            class="nav-list-link">Support for Multi-Factor Authentication from MFCLI</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ManageCouldFeatures.html"
+            class="nav-list-link">VoltMX  Foundry Updates on Cloud</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Manage_Client_App_Assets.html"
+            class="nav-list-link">Manage Client App Assets -  EMM as A Service VoltMX Foundry</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Manage_Existing_Integration_Services.html"
+            class="nav-list-link">Manage Existing Integration Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Manage_Existing_Integration_Services_1.html"
+            class="nav-list-link">How to Save or Use a Version of a Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Merge_Templates_using_MFCLI.html"
+            class="nav-list-link"> MFCLI tool,  importing and merging application templates, merge template service zip package, base service zip package, VoltMX Foundry User Guide. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/MongoDB_Adapter.html"
+            class="nav-list-link">MongoDb adapter/integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Mulesoft.html"
+            class="nav-list-link">MuleSoft adapter/integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Multi-Tenant_URL.html"
+            class="nav-list-link">Support to MAP Public URLs - Reverse Proxy (on-premises) </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Windows/ObjectService_Class.html"
+            class="nav-list-link">ObjectService Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Windows/Objects_API_Reference.html"
+            class="nav-list-link">Invoking an Object Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsAPIReference/Objects_API_Reference.html"
+            class="nav-list-link">Invoking an Object Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/ObjectsAPIReference/Objects_API_Reference.html"
+            class="nav-list-link">Invoking an Object Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Objectservices.html"
+            class="nav-list-link">Object Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/ObjectservicesActions.html"
+            class="nav-list-link">Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements, </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/ObjectservicesEnhancedIdentity.html"
+            class="nav-list-link">Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements, </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/ObjectservicesMapper.html"
+            class="nav-list-link">Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements, </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/ObjectservicesVisMapper.html"
+            class="nav-list-link">Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements, </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/Objectservices_Stage1.html"
+            class="nav-list-link">Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements, </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item active"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/Objectservices_Stage3.html"
+            class="nav-list-link active">Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements, </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/Objectservices_Stage4.html"
+            class="nav-list-link">Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements, </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsAPIReference/OfflineObjectService_Class.html"
+            class="nav-list-link">OfflineObjectService Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/ObjectsAPIReference/OfflineObjectService_Class.html"
+            class="nav-list-link">OfflineObjectService Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Offline_Enable_Objectservices.html"
+            class="nav-list-link">Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements, </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/ObjectsAPIReference/OnlineObjectService_Class.html"
+            class="nav-list-link">OnlineObjectService Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsAPIReference/OnlineObjectService_Class.html"
+            class="nav-list-link">OnlineObjectService Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/OnlineObjectService_Class.html"
+            class="nav-list-link">Object metadata for controlling client-side logic</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/OnlineObjectService_Class.html"
+            class="nav-list-link">Object metadata for controlling client-side logic</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Open_API__Swagger_.html"
+            class="nav-list-link">Open API (Swagger) Adapter/integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Orchestration.html"
+            class="nav-list-link">Orchestration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Overview_AppSSO.html"
+            class="nav-list-link">Application SSO - HCL Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Preface.html"
+            class="nav-list-link">Preface</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/Prerequisites_Android.html"
+            class="nav-list-link">Using API Versioning to create versioning for integration services and orchestration services. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/JS/Prerequisites_JS.html"
+            class="nav-list-link">Prerequisites</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/Prerequisites_iOS.html"
+            class="nav-list-link">Prerequisites</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Windows/Prerequisites_windows.html"
+            class="nav-list-link">Using Publishing to publish and view App key and App Secret, HCL Doc. App Key and App Secret, Sync client code (PhoneGap), Sync client code (HCL Studio) </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Publish.html"
+            class="nav-list-link">App Publish</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Publish_LifeCycle.html"
+            class="nav-list-link">Publish App Life Cycle</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Publish_Native_Client.html"
+            class="nav-list-link">Publishing Native Client Binaries</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Publish_a_Service.html"
+            class="nav-list-link">Using API Versioning to create versioning for integration services and orchestration services. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Published_Apps-Environments.html"
+            class="nav-list-link">Viewing Applications Published to a Runtime Environment</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Publishing_Binaries_EMM.html"
+            class="nav-list-link">Publishing Binaries from EMM Console to Devices</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Publishing_Client_Binaries.html"
+            class="nav-list-link">Publishing Client Binaries</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Publishing_Service_Web_Client.html"
+            class="nav-list-link">Publishing Service-Web Client Binaries</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PushNotificationsEas.html"
+            class="nav-list-link">Sending Push Notification to EAS</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/RAML_Adapter.html"
+            class="nav-list-link">RAML adapter/integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ReconfigPublish.html"
+            class="nav-list-link">App Reconfiguration</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Relational_Database_Adapter.html"
+            class="nav-list-link">Database adapter/integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Reports.html"
+            class="nav-list-link">Reports - VoltMX Foundry</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/RevisionHistory.html"
+            class="nav-list-link">Revision History - HCL Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Rules_as_Pre_Post_Processors.html"
+            class="nav-list-link">Rules for Pre/Post Processors</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Rules_as_a_Service.html"
+            class="nav-list-link">Rules for Pre/Post Processors - VoltMX Foundry</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/S3_File_Storage.html"
+            class="nav-list-link">Open API (Swagger) Adapter/integration Service - HCL Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/SAP_JCO.html"
+            class="nav-list-link">SAP JCo Adapter/integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/SDO_Get_VariantsObjectservices_Stage3.html"
+            class="nav-list-link">Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements, </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/SOAP.html"
+            class="nav-list-link">SOAP integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Salesforce_Adapter.html"
+            class="nav-list-link">Salesforce adapter/integration Service </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Samples/Samples.html"
+            class="nav-list-link">Using HCL Foundry How to Tutorial to create apps, HCL Doc.</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/SeparateAppKey-Secret.html"
+            class="nav-list-link">Separate App Key App Secret for Web and Native Channels</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/ServerEventAPIs.html"
+            class="nav-list-link">APIs&#160;- API Management - HCL Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ServerEvents.html"
+            class="nav-list-link">Server Events</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ServiceConfig-Identiy-Apps.html"
+            class="nav-list-link">Identity Session Timeout and HTTP Message Body Integrity</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ServiceConfigProfile.html"
+            class="nav-list-link">Service Configuration Profile</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ServiceReconfig.html"
+            class="nav-list-link">Service Reconfiguration</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Services.html"
+            class="nav-list-link">Supported Endpoint Adapters/Integration Services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/Setting_UserId_PhoneGap.html"
+            class="nav-list-link">Setting UserId</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/HCLStudio/Setting_User_ID_Iris.html"
+            class="nav-list-link">Setting User ID</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Settings.html"
+            class="nav-list-link">Settings for On-Premises</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Settings_Cloud.html"
+            class="nav-list-link">Settings for Cloud</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/Stage_2.html"
+            class="nav-list-link">Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements, unique, nullable, max length, autogenerated, creatable, updatable, precision, description, and metadata. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsServices/Storage_ObjectServices.html"
+            class="nav-list-link">Using Object Services to create an object service for a Foundry app, map, generate a Data Model from a Back-end LOB System, Configure Binary Support for Objects, Mapper Elements, </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Support.html"
+            class="nav-list-link">The Support page displays the latest tutorials, articles, Developer resources from Base Camp Library, Base Camp </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Support_for_OData_Methods.html"
+            class="nav-list-link">Support for ODATA Methods (substringof and indexof)</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Sync_Publish.html"
+            class="nav-list-link">Synchronous publishe</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Telemetry.html"
+            class="nav-list-link">Telemetry</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Test_a_Service_Operation.html"
+            class="nav-list-link">Test a Service Operation</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Test_an_Orechestration_Service_Operation.html"
+            class="nav-list-link">Test Orchestration Service operation</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/URL_Provider_Support_for_XML__JSON__SOAP_and_API_Proxy.html"
+            class="nav-list-link">URL Provider Support for XML, JSON, SOAP, and API Proxy</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/UpgradeCloud.html"
+            class="nav-list-link">VoltMX Foundry Updates on Cloud</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Upgrade_Client_Binaries.html"
+            class="nav-list-link">Upgrading Client Binaries</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Upload_Client_Binaries.html"
+            class="nav-list-link">Uploading Client Binaries</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Upload_Native_Client_Binaries.html"
+            class="nav-list-link">Uploading Native Client Binaries</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Upload_WEB_Client_Binaries.html"
+            class="nav-list-link">Uploading Web Client Binaries</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/UserRepositoryIdentityService.html"
+            class="nav-list-link">User Repository identity services</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/UsingCustomServletsFiltersAndListeners.html"
+            class="nav-list-link">How to Use Custom Servlets, Filters, and Listeners</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Workflow.html"
+            class="nav-list-link">Workflow Service - Foundry User Guide</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Workflow_BestPractices.html"
+            class="nav-list-link">Workflow Best Practices</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Workflow_Implementation.html"
+            class="nav-list-link">Orchestration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/XML.html"
+            class="nav-list-link">XML integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/XPath.html"
+            class="nav-list-link">Using API Versioning to create versioning for integration services and orchestration services. </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/API_Management.html"
+            class="nav-list-link">APIs&#160;- API Management</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/API_Proxy_Adapter.html"
+            class="nav-list-link">API Proxy integration Service</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/sign-Up_User_Flow.html"
+            class="nav-list-link">Sign-Up for VoltMX User Repository</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/single_Sign-On.html"
+            class="nav-list-link">Single Sign-On</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/swagerServices.html"
+            class="nav-list-link">Using Integration to add services in the VoltMX Foundry, VoltMX Doc. XML, SOAP, JSON, SAP, Salesforce</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Android/getObjectService_Method.html"
+            class="nav-list-link">getObjectService Method </a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/iOS/getObjectService_Method.html"
+            class="nav-list-link">Syntax</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsAPIReference/getObjectService_Method.html"
+            class="nav-list-link">getObjectService Method</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/Windows/getObjectService_Method.html"
+            class="nav-list-link">Creating an ObjectService Object</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/ObjectsAPIReference/getObjectService_Method.html"
+            class="nav-list-link">getObjectService Method</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/ObjectsAPIReference/hcl.sdk.dto.Column_Class.html"
+            class="nav-list-link">hcl.sdk.dto.Column Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsAPIReference/hcl.sdk.dto.Column_Class.html"
+            class="nav-list-link">hcl.sdk.dto.Column Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/ObjectsAPIReference/hcl.sdk.dto.DataObject_Class.html"
+            class="nav-list-link">hcl.sdk.dto.DataObject Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsAPIReference/hcl.sdk.dto.DataObject_Class.html"
+            class="nav-list-link">hcl.sdk.dto.DataObject Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/ObjectsAPIReference/hcl.sdk.dto.SelectQuery_Class.html"
+            class="nav-list-link">hcl.sdk.dto.SelectQuery Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsAPIReference/hcl.sdk.dto.SelectQuery_Class.html"
+            class="nav-list-link">hcl.sdk.dto.SelectQuery Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/ObjectsAPIReference/hcl.sdk.dto.Table_Class.html"
+            class="nav-list-link">hcl.sdk.dto.Table Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/PhoneGap/ObjectsAPIReference/hcl.sdk.dto.Table_Class.html"
+            class="nav-list-link">hcl.sdk.dto.Table Class</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/js_connector.html"
+            class="nav-list-link">VoltMX Analytics &amp; Reporting FAQs, VoltMX, Cloud</a></li>
+        <li id="right-menu-item"
+        class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/hcl_foundry_user_guide/Content/offline_Sync.html"
+            class="nav-list-link">Offline Objects</a></li>
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+      
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+    </ul>
+
+    </nav>
+
+    <script>
+        const subpageNav = document.getElementById('sub-site-nav');
+     const submainmenuButton = document.getElementById('sub-menu-button');
+   (function(){
+    
+    submainmenuButton.addEventListener('click', function(){ 
+      subpageNav.classList.toggle('nav-open');
+ });
+})();
+</script>
+
+</div></body>
+</html>
