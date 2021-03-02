@@ -1,0 +1,1815 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/feed.xml" rel="self" type="application/atom+xml" /><link href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/" rel="alternate" type="text/html" /><updated>2021-03-02T12:25:15+05:30</updated><id>https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Animation</title><link href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2021/02/01/Animation.html" rel="alternate" type="text/html" title="Animation" /><published>2021-02-01T00:00:00+05:30</published><updated>2021-02-01T00:00:00+05:30</updated><id>https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2021/02/01/Animation</id><content type="html" xml:base="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2021/02/01/Animation.html">&lt;h2 id=&quot;widget-level-animation-using-flex-forms&quot;&gt;Widget Level Animation Using Flex Forms&lt;/h2&gt;
+
+&lt;p&gt;Widget Level Animation feature enables you to animate widgets placed in a container (for example, Form). This feature supports 2D and 3D animations and transformations. The 2D animations are supported on iOS, Android, Windows, and SPA platforms and the 3D animations are supported on iOS, SPA and Android (limited support) for the applications created in JavaScript language using the Quantum Platform.&lt;/p&gt;
+
+&lt;p&gt;When the transformation matrix is identity, the 3D directions are as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;x-axis is towards the right of the widget&lt;/li&gt;
+  &lt;li&gt;y-axis is towards bottom of the widget&lt;/li&gt;
+  &lt;li&gt;z-axis is coming out of the screen&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; 3D animations should be applied on widgets when they are in normal state. Otherwise it may have undefined behavior.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The animation is classified into the following sub classes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#Key&quot;&gt;Key Frame Animations&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;../../Widget User Guide_7.0/Content/Widget animatable properties.htm&quot;&gt;Animation Properties Events and Methods&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;key-frame-animations&quot;&gt;Key Frame Animations&lt;/h2&gt;
+
+&lt;p&gt;Key frame animations allows you to define animations by changing the widget level properties.&lt;/p&gt;
+
+&lt;h3 id=&quot;key-frame-animation-definition&quot;&gt;Key Frame Animation Definition&lt;/h3&gt;
+
+&lt;p&gt;Key frame definition consists of one or more properties of the widget along with changes in their values and the steps (key frame) involved in changing the value from the initial value to final value. Each step from initial value to the final value can be configured with an animation behavior.&lt;/p&gt;
+
+&lt;p&gt;Key frame animation can be defined dictionary of steps with each step configured again using a JavaScript Object (Dictionary). Step-config is optional parameter. Following is the syntax:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/strong&gt; If the animation definition does not follow the above syntax then animate API throws Invalid Animation Definition exception.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;{&lt;/p&gt;
+
+&lt;step&gt;: { 
+ 
+&amp;lt;widget\_property&amp;gt; : &lt;value&gt; , 
+
+&amp;lt;widget\_property&amp;gt; : &lt;value&gt; ,
+
+ …
+
+stepConfig : { … }
+}
+
+		,
+&lt;step&gt;: { 
+
+&amp;lt;widget\_property&amp;gt;  : &lt;value&gt; , 
+
+&amp;lt;widget\_property&amp;gt;  : &lt;value&gt; ,  
+
+…
+
+stepConfig : { … }
+
+}
+,
+       ….
+
+}
+
+References
+----------
+
+APIs does not completely adhere to the CSS3 specifications but is influenced by CSS3 animations and transformations. 
+
+The following URLs help as a reference:
+
+*   [http://dev.w3.org/csswg/css3-animations/](http://dev.w3.org/csswg/css3-animations/)
+*   [http://dev.w3.org/csswg/css3-2d-transforms/](http://dev.w3.org/csswg/css3-2d-transforms/)
+*   [http://cubic-bezier.com/](http://cubic-bezier.com/)
+*   [http://dev.w3.org/csswg/css3-2d-transforms/](http://dev.w3.org/csswg/css3-2d-transforms/)
+*   [http://dev.w3.org/csswg/css3-3d-transforms/](http://dev.w3.org/csswg/css3-3d-transforms/)
+
+Animation Properties Events and Methods
+---------------------------------------
+
+Following are the widget level properties, events, and methods that are allowed to be part of the animation definition.
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[animate](javascript:void(0);)
+
+This method applies the animation to the widget immediately, if the widget is part of the currently visible view hierarchy. If widget is not part of the currently visible view hierarchy then this API invocation is ignored. This method is asynchronous and immediately returns and do not wait for the animation to start or complete.
+
+All the animation callbacks will receive animate as a second parameter.
+
+Signature
+
+animate(  
+   animationObj,  
+  animationConfig,  
+   animationCallbacks)
+
+Input Parameters
+
+animationObj
+
+An object defined using kony.ui.createAnimation() API. Refer kony.ui.createAnimation for more details.
+
+animationConfig
+
+Optional. As defined in [Animation Configuration](../../Widget User Guide_7.0/Content/Animation_Configurations.htm) section.
+
+animationCallbacks\[JSObject\]
+
+Optional. A dictionary represents JavaScript functions that work as animation call backs. Following are the animation callbacks:
+
+&amp;gt; *   animationStart (source, animationHandle, elapsedTime): This event occurs at the start of the animation. If there is 'animation-delay' configured then this event will fire only after the delay period. This event gets called asynchronously.
+&amp;gt; *   animationEnd (source, animationHandle, elapsedTime): The animationEnd event occurs when the animation finishes. This event gets called asynchronously.
+&amp;gt; 
+&amp;gt; &amp;gt; &amp;gt; _source:_ A widget that is being animated.
+&amp;gt; &amp;gt; &amp;gt; 
+&amp;gt; &amp;gt; &amp;gt; _animationHandle:_ A handle returned by applyAnimation method.
+&amp;gt; &amp;gt; &amp;gt; 
+&amp;gt; &amp;gt; &amp;gt; _elapsedTime:_ The amount of time the animation has been running in seconds, when this event is fired.
+
+Return Values
+
+Returns a handle to the animation, that is platform-defined object. This handle is of no use for now, but is returned for the future requirements such as cancellation of animations etc.
+
+Remarks
+
+This method throws Invalid Animation Definition Exception if animation definition, does not follow the dictionary structure expected. This method is ignored if this is called on widget whose immediate parent is not FlexForm, FlexContainer or FlexScrollContainer.
+
+Example
+
+//Sample code of animation   
+  
+function AnimateBoth()
+{
+  var getFuncName = frm1.listbox18.selectedKey;
+	
+	if(getFuncName == &quot;BothLT&quot;) {
+		frm1.textbox26.animate(myAnimDefinition(), animConfiguration(), {});
+	}
+	else if(getFuncName == &quot;BothTBL&quot;){
+	frm1.textbox26.animate(myAnimDefinitionsc1(), animConfiguration(), {});
+	
+	}
+}  
+
+Availability
+
+*   iOS
+*   Android/Android Tablet
+*   Windows
+*   SPA
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[kony.ui.createAnimation](javascript:void(0);)
+
+This method creates an animation object that can be used to animate the widgets using animate API.
+
+Signature
+
+kony.ui.createAnimation (  
+   animationDef)
+
+Input Parameters
+
+animationDef \[Number\]
+
+A sample animation definition.
+
+&amp;gt; {
+&amp;gt;     &lt;step&gt;: {
+&amp;gt; 
+&amp;gt;         &amp;lt;widget\_property&amp;gt;: &lt;value&gt;,
+&amp;gt;         &amp;lt;widget\_property&amp;gt;: &lt;value&gt;,
+&amp;gt;         ---
+&amp;gt;       
+&amp;gt;     stepConfig: {…}
+&amp;gt;     }
+&amp;gt; 	&lt;step&gt;: {
+&amp;gt; 
+&amp;gt;         &amp;lt;widget\_property&amp;gt;: &lt;value&gt;,
+&amp;gt;         &amp;lt;widget\_property&amp;gt;: &lt;value&gt;,
+&amp;gt;         ---
+&amp;gt;           
+&amp;gt;     stepConfig: {…}
+&amp;gt;     },
+&amp;gt; 		---      
+&amp;gt; }
+
+Return Values
+
+None
+
+Exceptions
+
+WidgetError
+
+Remarks
+
+Values cannot be specified using pixels.
+
+Example
+
+//Sample code of animation   
+  
+function myAnimDefinition()
+{
+	var animDefinition = 
+	{
+       0 : 
+	   {
+         &quot;width&quot;:50,
+         &quot;left&quot;:0
+        },
+       100 : 
+	   {
+         &quot;width&quot;:50,
+         &quot;left&quot;:90
+        }
+      } ;
+	animDef = kony.ui.createAnimation(animDefinition);
+	return animDef;
+}  
+
+Availability
+
+*   iOS
+*   Android/Android Tablet
+*   Windows
+*   SPA
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[anchorPoint](javascript:void(0);)
+
+Specifies the anchor point of the widget bounds rectangle using the widgets coordinate space. The possible values are dictionary with x,y as possible keys with the values as numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the widget to rotate around its center.
+
+Syntax
+
+anchorPoint
+
+Type
+
+JSObject
+
+Permissions
+
+Read + Write
+
+Remarks
+
+The default value for this property is center ( {&quot;x&quot;:0.5, &quot;y&quot;:0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).
+
+Availability
+
+Not available in the IDE.
+
+*   iOS
+*   Android
+*   Windows
+*   SPA
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[transform](javascript:void(0);)
+
+This property is set to identify transform by default. Any transformations applied to the widget, occur relative to the widget anchor point. Values that can be set to this property must be created using kony.ui.makeAffineTransform.
+
+Syntax
+
+transform
+
+Type
+
+JSObject
+
+Permissions
+
+Read + Write
+
+Example
+
+//Sample code of animation 
+function animDeftranslate() {
+    var transformProp1 = kony.ui.makeAffineTransform();
+    transformProp1.translate(100, 100);
+    var transformProp2 = kony.ui.makeAffineTransform();
+    transformProp2.scale(2, 2);
+    var transformProp3 = kony.ui.makeAffineTransform();
+    transformProp3.rotate(90);
+    var animDefinitionOne = {
+        0: {
+            &quot;transform&quot;: transformProp1
+        },
+        50: {
+            
+            &quot;transform&quot;: transformProp2
+        },
+        100: {
+           
+            &quot;transform&quot;: transformProp3
+        }
+    }
+    animDef = kony.ui.createAnimation(animDefinitionOne);
+    return animDef;
+
+}
+
+Function getParent() {
+
+    Var result = this.parent;
+}  
+  
+
+Availability
+
+Not available in the IDE.
+
+*   iOS
+*   Android
+*   Windows
+*   SPA
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[kony.ui.makeAffineTransform](javascript:void(0);)
+
+This method creates a 2D transform object. A 2D transform object can be used to scale, translate, and rotate the widgets in a two-dimensional space.
+
+Signature
+
+kony.ui.makeAffineTransform( )
+
+Input Parameters
+
+None
+
+Return Values
+
+It returns the identity transform.
+
+Exceptions
+
+WidgetError
+
+Remarks
+
+Irrespective of the invocation order of operations, kony.ui.makeAffineTransform method applies the transform in the sequence of scale, translate, and rotate operations.
+
+Example
+
+//Sample code of animation 
+function animDeftranslate() {
+    var transformProp1 = kony.ui.makeAffineTransform();
+    transformProp1.translate(10, 10);
+    var transformProp2 = kony.ui.makeAffineTransform();
+    transformProp2.translate(20, 20);
+    var transformProp3 = kony.ui.makeAffineTransform();
+    transformProp3.translate(30, 30);
+    var animDefinitionOne = {
+        0: {
+            &quot;anchorPoint&quot;: {
+                &quot;x&quot;: 0.5,
+                &quot;y&quot;: 0.5
+            },
+            &quot;transform&quot;: transformProp1
+        },
+        50: {
+            &quot;anchorPoint&quot;: {
+                &quot;x&quot;: 0.5,
+                &quot;y&quot;: 0.5
+            },
+            &quot;transform&quot;: transformProp2
+        },
+        100: {
+            &quot;anchorPoint&quot;: {
+                &quot;x&quot;: 0.5,
+                &quot;y&quot;: 0.5
+            },
+            &quot;transform&quot;: transformProp3
+        }
+    }
+    animDef = kony.ui.createAnimation(animDefinitionOne);
+    return animDef;
+
+}
+
+Function getParent() {
+
+    Var result = this.parent;
+}  
+  
+
+Availability
+
+*   iOS
+*   Android/Android Tablet
+*   Windows
+*   SPA
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[rotate](javascript:void(0);)
+
+This method returns an affine transformation matrix constructed by rotating receivers affine transform. Angle is a number in degrees and always measured from x-axis as shown.
+
+Signature
+
+rotate(angle)
+
+Input Parameters
+
+angle \[Number\]
+
+A number represents the angle, in degrees, by which this matrix rotates the coordinate system axes. A positive value specifies counterclockwise rotation and a negative value specifies clockwise rotation.
+
+Return Values
+
+Returns an affine transformation matrix constructed by rotating receivers affine transform.
+
+Exceptions
+
+WidgetError
+
+Remarks
+
+Default value is 0, if transform was never applied to the widget. The rotation does not result in any layout changes to parent or peer widgets. This is also applicable for widgets placed inside horizontal or vertical flex containers.
+
+For example, if you want to rotate a widget in 360 degrees, you can follow the below sequence of steps:
+
+&amp;gt; step1: Rotate the widget from 0  -   120
+&amp;gt; 
+&amp;gt; step1: Rotate the widget from 120  -   240
+&amp;gt; 
+&amp;gt; step3: Rotate the widget from 240  -  360
+
+Any value greater than 180 degrees may lead to shortest path rotation from its current position. For cross platform values, for example 190 degrees will make the object rotate -170 (190-360) in negative direction, as 170 is shortest path compared to 190.
+
+Example
+
+//Sample code of animation 
+function animDeftranslate() {
+    var transformProp1 = kony.ui.makeAffineTransform();
+    transformProp1.translate(100, 100);
+    var transformProp2 = kony.ui.makeAffineTransform();
+    transformProp2.scale(2, 2);
+    var transformProp3 = kony.ui.makeAffineTransform();
+    transformProp3.rotate(90);
+    var animDefinitionOne = {
+        0: {
+            &quot;transform&quot;: transformProp1
+        },
+        50: {
+            
+            &quot;transform&quot;: transformProp2
+        },
+        100: {
+           
+            &quot;transform&quot;: transformProp3
+        }
+    }
+    animDef = kony.ui.createAnimation(animDefinitionOne);
+    return animDef;
+
+}
+
+Function getParent() {
+
+    var result = this.parent;
+}
+
+Availability
+
+*   iOS
+*   Android/Android Tablet
+*   Windows
+*   SPA
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)rotate3D ( )](javascript:void(0);)
+
+This method rotates the widget by angle on the unit directional vector formed by rx, ry, and rz.
+
+Syntax
+
+rotate3D(  
+    angle,  
+    rx,  
+    ry,  
+    rz)
+
+Parameters
+
+angle
+
+Specify the angle, by which a widget to be rotated around rx, ry, and rz axises.
+
+rx
+
+Specify the x-axis value on which rotation to happen.
+
+ry
+
+Specify the y-axis value on which rotation to happen.
+
+rz
+
+Specify the z-axis value on which rotation to happen.
+
+Exceptions
+
+  
+| Error Code | Description |
+| --- | --- |
+| 100 | Invalid input |
+| 101 | Incomplete input |
+
+Remarks
+
+The value of angle should be in degrees and the range should be in between 180o to -180o. Any value greater or lesser than range will result into platform-specific behavior. Positive values of angle will rotate the widget in anti-clockwise direction and vice versa.
+
+The values of rx, ry, and rz should be in the range of 0 - 1. If the (0,0,0) vector is specified, the behavior is platform-specific.
+
+In the Android platform, the values between 0 - 1 are not accepted. Only '0' or '1' is accepted.
+
+All the input parameters need to be specified. If any parameter found missing will result in an exception 101.
+
+Example
+
+var newTransform = kony.ui.makeAffineTransform();  
+newTransform.rotate3D(45, 1,0,1); //rotates by 45degrees in x and z Axis.  
+widget.transform = newTransform;
+
+Availability
+
+Available in the IDE
+
+iOS
+
+Android
+
+SPA
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[scale](javascript:void(0);)
+
+This method returns an affine transformation matrix constructed by scaling receivers affine transform. It is a JSObject with keys sx and sy and allow numbers only.
+
+Signature
+
+scale (  
+   sx,   
+   sy)
+
+Input Parameters
+
+sx \[Number\]
+
+The factor by which to scale the x-axis of the widget coordinate system.
+
+sy \[Number\]
+
+The factor by which to scale the y-axis of the widget coordinate system.
+
+Default values are {&quot;sx&quot;:1, &quot;sy&quot;:1}, if the transform was never applied to the widget.
+
+Return Values
+
+Returns an affine transformation matrix constructed by scaling receivers affine transform.
+
+Exceptions
+
+WidgetError
+
+Remarks
+
+Scaling does not result in any layout changes to parent or peer widgets. This is applicable to the widgets placed inside horizontal or vertical flex containers. Negative values for sx and sy will make the widget flip in that direction.
+
+Example
+
+//Sample code of animation 
+function animDeftranslate() {
+    var transformProp1 = kony.ui.makeAffineTransform();
+    transformProp1.translate(100, 100);
+    var transformProp2 = kony.ui.makeAffineTransform();
+    transformProp2.scale(2, 2);
+    var transformProp3 = kony.ui.makeAffineTransform();
+    transformProp3.rotate(90);
+    var animDefinitionOne = {
+        0: {
+            &quot;transform&quot;: transformProp1
+        },
+        50: {
+            
+            &quot;transform&quot;: transformProp2
+        },
+        100: {
+           
+            &quot;transform&quot;: transformProp3
+        }
+    }
+    animDef = kony.ui.createAnimation(animDefinitionOne);
+    return animDef;
+
+}
+
+Function getParent() {
+
+    Var result = this.parent;
+}
+
+Availability
+
+*   iOS
+*   Android/Android Tablet
+*   Windows
+*   SPA
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)scale3D ( )](javascript:void(0);)
+
+Scales a widget in three dimensions (x, y, z) coordinate system.
+
+Syntax
+
+scale3D(  
+    sx,  
+    sy,  
+    sz)
+
+Parameters
+
+sx
+
+Specify the value to be scaled in the x direction.
+
+sy
+
+Specify the value to be scaled in the y direction.
+
+sz
+
+Specify the value to be scaled in the z direction.
+
+Exceptions
+
+  
+| Error Code | Description |
+| --- | --- |
+| 100 | Invalid input |
+| 101 | Incomplete input |
+
+Remarks
+
+The default values of the sx, sy, and sz directions are (1, 1, 1). Any value with in the 0 - 1 range scales down the widget and the value greater than '1' scales up in the specified directions. As all the widgets are not 3D meshes, this function may not be applicable for z-axis and may have platform-specific behavior. The scale3D method should not be applied on zero dimension widgets. If applied, the behavior is undefined.
+
+All the input parameters need to be specified. If any parameter found missing will result in an exception 101.
+
+Example
+
+var newTransform = kony.ui.makeAffineTransform();  
+newTransform.scale3D(2, 0.5, 1);  
+//scales by 200% in xDirection, 50% in yDirection and no scale happening in zDirection.  
+widget.transform = newTransform;
+
+Availability
+
+Available in the IDE
+
+iOS
+
+SPA
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[translate](javascript:void(0);)
+
+This method returns an affine transformation matrix constructed by translating receivers affine transform. It is a JavaScript object with keys tx and ty and allow numbers in dp.
+
+Signature
+
+translate (  
+   tx,  
+   ty)
+
+Input Parameters
+
+tx \[Number\]
+
+The value by which to move the x-axis of the widget coordinate system.
+
+ty \[Number\]
+
+The factor by which to move the y-axis of the widget coordinate system.
+
+Default values are {&quot;tx&quot;:0, &quot;ty&quot;:0} if the transform was never applied to the widget.
+
+Return Values
+
+Returns an affine transformation matrix constructed by translating receivers affine transform.
+
+Exceptions
+
+WidgetError
+
+Remarks
+
+Translate does not result in any layout changes to parent or peer widgets. This is applicable to the widgets placed inside horizontal or vertical flex containers.
+
+&amp;gt; **_Note:_** Values cannot be specified using percentage and pixels.
+
+Example
+
+//Sample code of animation 
+function animDeftranslate() {
+    var transformProp1 = kony.ui.makeAffineTransform();
+    transformProp1.translate(100, 100);
+    var transformProp2 = kony.ui.makeAffineTransform();
+    transformProp2.scale(2, 2);
+    var transformProp3 = kony.ui.makeAffineTransform();
+    transformProp3.rotate(90);
+    var animDefinitionOne = {
+        0: {
+            &quot;transform&quot;: transformProp1
+        },
+        50: {
+            
+            &quot;transform&quot;: transformProp2
+        },
+        100: {
+           
+            &quot;transform&quot;: transformProp3
+        }
+    }
+    animDef = kony.ui.createAnimation(animDefinitionOne);
+    return animDef;
+
+}
+
+Function getParent() {
+
+    Var result = this.parent;
+}
+
+Availability
+
+*   iOS
+*   Android/Android Tablet
+*   Windows
+*   SPA
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)translate3D ( )](javascript:void(0);)
+
+Translate the widget from present location to new location by x, y, z amount.
+
+Syntax
+
+translate3D(  
+    tx,  
+    ty,  
+    tz)
+
+Parameters
+
+tx
+
+Specify the value to be moved in the x direction from present location.
+
+ty
+
+Specify the value to be moved in the y direction from present location.
+
+tz
+
+Specify the value to be moved in the z direction from present location.
+
+Exceptions
+
+  
+| Error Code | Description |
+| --- | --- |
+| 100 | Invalid input |
+| 101 | Incomplete input |
+
+Remarks
+
+The values of tx, ty, and tz should be floating numbers. If the [setPerspective](#setPersp) method is not used, the widget moving in the z direction will not have any visual effect.
+
+All the input parameters need to be specified. If any parameter found missing will result in an exception 101.
+
+Example
+
+var newTransform = kony.ui.makeAffineTransform();  
+newTransform.translate3D(223,12,56); //translates by 223 xAxis,12 in yAxis,56 in zAxis  
+widget.transform = newTransform;
+
+Availability
+
+Available in the IDE
+
+iOS
+
+SPA
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[setPerspective ()](javascript:void(0);)
+
+This method sets the perspective and sets the vanishing point at the center of the widget.
+
+Syntax
+
+setPerspective(  
+    distanceOfViewerToPlane)
+
+Parameters
+
+distanceOfViewerToPlane
+
+The distance between the viewer and object. Always the value of this parameter should be greater than zero. Otherwise results an exception 100.
+
+Exceptions
+
+  
+| Error Code | Description |
+| --- | --- |
+| 100 | Invalid input |
+| 101 | Incomplete input |
+
+Remarks
+
+The perspective has to be set in combination with other transforms. The perspective set by itself will not have any effect. If perspective is set to transform in any key frame, the perspective will be applied to that particular key frame itself in the KeyFrameAnimation.
+
+The perspective is platform dependent so that each platform has different perspective of a view for same value. The default perspective on the Android platform is 1280. Any perspective less than 1280 makes the camera perspective closer to the view and greater than 1280 makes perspective far from the view.
+
+In the Android platform, when perspective is not specified, the default perspective is applied.
+
+For the iOS platform, the value of the distanceOfViewerToPlane parameter should be greater than max (width, height) values of the widget view's frame. For example, if the value of (width, height) is (100, 50), the parameter value should be greater than 100. The effect of this parameter vary visually on different platforms for the same value. The units of the distanceOfViewerToPlane parameter is platform-specific.
+
+All the input parameters need to be specified. If any parameter found missing will result in an exception 101.
+
+Example
+
+var newTransform = kony.ui.makeAffineTransform();  
+newTransform.setPerspective(1000.0);  
+//Sets the perspective as such this will have no effect until it is combined with other transformation matrix.  
+newTransform.rotate3D(45, 1,0,1);  
+//rotates by 45degrees in x and z Axis. Now the perspective can be observed  
+widget.transform = newTransform;
+
+Availability
+
+Available in the IDE
+
+iOS
+
+SPA
+
+### Widget Skin Properties
+
+Following widget skin properties can be animated: 
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[backgroundColor](javascript:void(0);)
+
+Specifies the background color of the widget in hex format.
+
+Syntax
+
+backgroundColor
+
+Type
+
+String
+
+Permissions
+
+Read + Write
+
+Remarks
+
+There is no default value. It accepts 6 dig or 8 digit with alpha position are allowed. For example, ffffff or ffffff00.
+
+When the 4-byte color format (RGBA) string is used, an alpha (A) value of FF specifies that the color is transparent. If the value is 00, the color is opaque. For example, red complete opaque is FF000000. Red complete transparent is FF0000FF. This change is made for backward compatibility.
+
+&amp;gt; **_Note:_** This property has more priority compared to the values coming from the configured skin.The values 0x and # are not allowed in the hex format.
+
+&amp;gt; **_Note:_** Initial value of backgroundColor has to be specified explicitly. If not, platform will not deduce the values from the existing skin and will lead to undefined behavior.
+
+Availability
+
+Not available in the IDE.
+
+*   iOS
+*   Android
+*   Windows
+*   SPA
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[opacity](javascript:void(0);)
+
+Specifies the opacity of the widget. The value of this property must be in the range 0.0 (transparent) to 1.0 (opaque). Any values outside this range are fixed to the nearest minimum or maximum value.
+
+Syntax
+
+opacity
+
+Type
+
+Number
+
+Permissions
+
+Read + Write
+
+Remarks
+
+This property has more priority compared to the values coming from the configured skin.
+
+Availability
+
+Not available in the IDE.
+
+*   iOS
+*   Android
+*   Windows
+*   SPA
+
+Animation Configurations
+------------------------
+
+Animation configuration specifies the render behavior of an object during the animation. For example, you can specify how long an animation occur or the direction the animation should occur. The animation configurations are part of overall animation and not the step level configuration.
+
+Following are the components of animation configuration:
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[duration](javascript:void(0);)
+
+This property defines the time in seconds that an animation takes to complete one cycle. This is overall animation level configuration and not the step level configuration.
+
+Possible values include all the positive float numbers with a precision of three and the default value is zero, which indicates that animation is instantaneous. However, there will not be visible animation changes, technically animation occurs and all animation callbacks get triggered.
+
+&amp;gt; **_Note:_** Negative values will be treated as zero or may lead to undefined behavior.
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[iterationCount](javascript:void(0);)
+
+This property specifies the number of times an animation cycle is played. Default value is one (1), meaning the animation will play from beginning to end. A value of zero (0) will cause the animation to repeat forever until the time view is live in the current hierarchy.
+
+&amp;gt; **_Note:_** Possible values include all the positive integer numbers. Any invalid values such as negative values would be ignored or may lead to undefined behavior.
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[direction](javascript:void(0);)
+
+This property defines whether the animation must play in reverse on some or all cycles. If an animation is played in reverse, the timing functions are also reversed. For example, when played in reverse an ease-in animation would appear to be an ease-out animation.
+
+Following are the possible predefined values: 
+
+*   kony.anim.DIRECTION\_NONE (default)
+
+All iterations of the animation are played as specified.
+
+*   kony.anim.DIRECTION\_ALTERNATE
+
+The animation cycle iterations that are of odd counts are played in the normal direction, and the animation cycle iterations that are even counts are played in a reverse direction.
+
+Note that this is overall animation level configuration and not the step level configuration.
+
+&amp;gt; **_Note:_** Values will be specified as a string containing one of the above values and any other values will be ignored and default is applied or may lead to undefined behavior.
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[delay](javascript:void(0);)
+
+This property defines when the animation will start. It allows an animation to start executing after it is applied. This is specified in seconds and fractional values are allowed.
+
+Delay value of zero (0) means the animation will execute as soon as it is applied. Otherwise, the value specifies an offset from the moment the animation is applied, and the animation will delay execution by that offset. Default value is zero and any negative or invalid values will default this property to zero.
+
+&amp;gt; **_Note:_** This is overall animation level configuration and not the step level configuration.
+
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[fillMode](javascript:void(0);)
+
+This property defines what values are applied to the widget state by the animation outside the time it is executing.
+
+Following are the options:
+
+*   kony.anim.FILL\_MODE\_FORWARDS: The values configured in the last step of animation definition are the final values that are applied to the widget at the end of animation.
+
+*   kony.anim.FILL\_MODE\_BACKWARDS: The values configured in the first step of animation definition are applied to the widget at the beginning of the animation (even before the delay ends). At the end of animation, values are reset to the values, that were there before the start of the animation.
+
+*   kony.anim.FILL\_MODE\_BOTH: The animation is applied twice on the widget. First at the beginning of the animation, before the animation delay with the values configured in the first step of the animation, and second at the end of the animation, with the values configured in the last step of the animation definition.
+
+*   kony.anim.FILL\_MODE\_NONE (default): The values in animation definition are never set to the actual widget. In this case, the widget comes back to original state after the animation is completed.
+
+Following is the table showing the behavior of the animatable properties when queried during or at the end of the animation.
+
+  
+| Fill-mode | In delay state | Animation states | Final state | Model Update |
+| --- | --- | --- | --- | --- |
+| Direction: None |||   ||
+| None | Y | RGB | Y | No update |
+| Forwards | Y | RGB | B | A.E.A update with 100th step |
+| Backwards | R | RGB | Y | A.B.A update with 0th step, A.E.A update with initial value |
+| Both | R | RGB | B | A.B.A update with 0th step, A.E.A update with 100th step |
+| Direction: Alternate,   Iteration Count = even  value |||   ||
+| None | Y | RGB =&amp;gt; BGR | Y | No update |
+| Forwards | Y | RGB =&amp;gt; BGR | R | A.E.A update with 0th step |
+| Backwards | R | RGB =&amp;gt; BGR | Y | A.B.A update with 0th step, A.E.A update with initial value |
+| Both | R | RGB =&amp;gt; BGR | R | A.B.A update with 0th step, A.E.A update with 0th step |
+| Direction: : Alternate,  Iteration Count = odd value |||   ||
+| None | Y | RGB =&amp;gt; BGR =&amp;gt; RGB | Y | No update |
+| Forwards | Y | RGB =&amp;gt; BGR =&amp;gt; RGB | B | A.E.A update with 100th step |
+| Backwards | R | RGB =&amp;gt; BGR =&amp;gt; RGB | Y | A.B.A update with 0th step, A.E.A update with initial value |
+| Both | R | RGB =&amp;gt; BGR =&amp;gt; RGB | B | A.B.A update with 0th step, A.E.A update with 100th step |
+
+&amp;gt; **_Note:_** This is overall animation level configuration and not the step level configuration. Values will be specified as string containing one of the above values and any other values would be ignored or may lead to undefined behavior.
+
+Example
+
+function animConfig(){
+ var config = {
+    &quot;duration&quot;:1,
+    &quot;iterationCount&quot;:1,
+    &quot;delay&quot;:0,
+    &quot;fillMode&quot;:kony.anim.FILL\_MODE\_FORWARDS
+ };
+ return config;
+}
+
+Applying Animations
+-------------------
+
+Every widget provides animate API to animate the widgets.
+
+Following are the types of animations you can apply:
+
+1.  [Sequential and Parallel Animations](#Sequenti)
+2.  [Querying Widget Properties](#Querying)
+3.  [Layout Callbacks during Animation](#Layout)
+4.  [Flex Container and Child Widgets](#Flex)
+5.  [Multiple Parallel Animations](#Multiple)
+6.  [Interactions on the Widget during Animation](#Interact)
+
+Sequential and Parallel Animations
+----------------------------------
+
+To sequence the animations one after the other, animation events have to be used. You can start a new animation at the end of the existing animation using `animationEnd` event.
+
+All animations initiated by animate API gets executed asynchronously. Essentially calling animate API on widgets sequentially one after the other leads to parallel execution of the animations.
+
+Querying Widget Properties
+--------------------------
+
+Following is the table showing the behavior of the animatable properties when queried during or at the end of the animation. Only when the model is updated (last column) then the values are available when queried.
+
+  
+| Fill-mode | In delay state | Animation states | Final state | Model Update |
+| --- | --- | --- | --- | --- |
+| Direction: None |||   ||
+| None | Y | RGB | Y | No update |
+| Forwards | Y | RGB | B | A.E.A update with 100th step |
+| Backwards | R | RGB | Y | A.B.A update with 0th step, A.E.A update with initial value |
+| Both | R | RGB | B | A.B.A update with 0th step, A.E.A update with 100th step |
+| Direction: Alternate,   Iteration Count = even  value |||   ||
+| None | Y | RGB =&amp;gt; BGR | Y | No update |
+| Forwards | Y | RGB =&amp;gt; BGR | R | A.E.A update with 0th step |
+| Backwards | R | RGB =&amp;gt; BGR | Y | A.B.A update with 0th step, A.E.A update with initial value |
+| Both | R | RGB =&amp;gt; BGR | R | A.B.A update with 0th step, A.E.A update with 0th step |
+| Direction: : Alternate,  Iteration Count = odd value |||   ||
+| None | Y | RGB =&amp;gt; BGR =&amp;gt; RGB | Y | No update |
+| Forwards | Y | RGB =&amp;gt; BGR =&amp;gt; RGB | B | A.E.A update with 100th step |
+| Backwards | R | RGB =&amp;gt; BGR =&amp;gt; RGB | Y | A.B.A update with 0th step, A.E.A update with initial value |
+| Both | R | RGB =&amp;gt; BGR =&amp;gt; RGB | B | A.B.A update with 0th step, A.E.A update with 100th step |
+
+Layout Callbacks during Animation
+---------------------------------
+
+doLayout callbacks are not guaranteed to be called in synchronization with steps configured in animation and may not get called in any determined fashion. It is suggested to unhook any layout events during the animations.
+
+Flex Container and Child Widgets
+--------------------------------
+
+When dimensional and positional properties of the flex container are animated then all child widgets sharing percentage (%) relationship with the parent also gets animated.Percentage (%) Relationship between parent and child can be established by specifying one or positional, dimensional properties of the widgets in percentage (%) units.
+
+Actual animation that child widget goes through depends on the property that is animated on the container and the property of the child widget that shares the percentage (%) relationship with the parent.
+
+If there is no percentage (%) relationship between the parent and child then child will not go through any animation as parent gets animated.
+
+Multiple Parallel Animations
+----------------------------
+
+Parallel animations on widgets that do not have any dependencies on other widgets (for example, widgets can share dependency through parent and child widgets with percentage % relationship or the widgets inside HORIZONTAL\_FLOW, VERTICAL\_FLOW share dependency on siblings) will work across platforms consistently without any issues.
+
+*   Parallel animations on multiple widgets, that do not share any relationship, must not have any issues, and must work consistently.
+
+*   Parallel animations on widgets, that share dependency, may lead to inconsistent results and should be avoided.
+
+*   Parallel animations on the same widget, for example, calling animate method on the same widget, and then the first animation gets canceled due to the second animation.
+
+*   Parallel animations cancellation may lead to undefined behavior and animation-fill-mode property may not work as expected.
+
+&amp;gt; **_Note:_** Any implicit animations due to widget dependency are not treated as parallel animations.
+
+Interactions on the Widget during Animation
+-------------------------------------------
+
+Interacting with the widget during animation may also lead to undefined behaviors. Behavior depends on underlying platform.
+
+As a guideline, developers must avoid writing code that changes the widget properties if they are being animated.
+
+&amp;gt; **_Note:_** For example, changing properties of the widget immediately after widget.animate() may lead to undefined behaviors. Ideally, any changes on the widget must happen after animation, in animationEnd() event.
+&lt;/value&gt;&lt;/value&gt;&lt;/step&gt;&lt;/value&gt;&lt;/value&gt;&lt;/step&gt;&lt;/value&gt;&lt;/value&gt;&lt;/step&gt;&lt;/value&gt;&lt;/value&gt;&lt;/step&gt;</content><author><name></name></author><summary type="html">Widget Level Animation Using Flex Forms</summary></entry><entry><title type="html">Video Links</title><link href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2021/01/13/video-links.html" rel="alternate" type="text/html" title="Video Links" /><published>2021-01-13T00:00:00+05:30</published><updated>2021-01-13T00:00:00+05:30</updated><id>https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2021/01/13/video-links</id><content type="html" xml:base="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2021/01/13/video-links.html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=R_sdHCaNYR0&amp;amp;list=PLlmtOLtq6C-3K5JfNGnIOGWLn-7ILck8x&quot;&gt;VoltMx Setup&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">VoltMx Setup</summary></entry><entry><title type="html">Internationalization</title><link href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2021/01/13/internationalization.html" rel="alternate" type="text/html" title="Internationalization" /><published>2021-01-13T00:00:00+05:30</published><updated>2021-01-13T00:00:00+05:30</updated><id>https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2021/01/13/internationalization</id><content type="html" xml:base="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2021/01/13/internationalization.html">&lt;p&gt;&lt;a href=&quot;/mdFileCheck/myblog/Resource/i18n_Synthetic_Voice.mp4&quot;&gt;&lt;img src=&quot;/mdFileCheck/myblog/Resource/Screenshot.png&quot; alt=&quot;Internationalization&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/mdFileCheck/myblog/Resource/Intro to Voltmx javaScript_Synthetic_Voice.mp4&quot;&gt;&lt;img src=&quot;/mdFileCheck/myblog/Resource/VoltMx_introduction.png&quot; alt=&quot;VoltMx Introduction&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Push Message</title><link href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2020/12/25/Defining-Notification-Types-for-an-event-Push-Message.html" rel="alternate" type="text/html" title="Push Message" /><published>2020-12-25T00:00:00+05:30</published><updated>2020-12-25T00:00:00+05:30</updated><id>https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2020/12/25/Defining%20Notification%20Types%20for%20an%20event%20-%20Push%20Message</id><content type="html" xml:base="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2020/12/25/Defining-Notification-Types-for-an-event-Push-Message.html">&lt;p&gt;&lt;a href=&quot;../Default.htm#Defining Notification Types for an event - Push Message.htm&quot;&gt;Open topic with navigation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Engagement Services Event Management QuickStart Guide: &lt;a href=&quot;Adding an Event.htm&quot;&gt;Creating an Event&lt;/a&gt; &amp;gt; Silent Push&lt;/p&gt;
+
+&lt;h2 id=&quot;push-message&quot;&gt;Push Message&lt;/h2&gt;
+
+&lt;p&gt;To configure your event message, you can use a pre-defined template or create a new push message for an event. You can do the following tasks from the &lt;strong&gt;Add Event&lt;/strong&gt; &amp;gt; &lt;strong&gt;Define Message&lt;/strong&gt; page:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Select Message Channels&lt;/strong&gt;: Select the type of notification as &lt;strong&gt;Push Message&lt;/strong&gt;.&lt;/p&gt;
+
+    &lt;p&gt;The &lt;strong&gt;Push Message&lt;/strong&gt; grid appears. The push message grid includes a push message label and the &lt;strong&gt;Compose Message&lt;/strong&gt; button to compose push messages. If no push message is found, the system displays the message: &lt;strong&gt;No message configured&lt;/strong&gt;.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;Resources/Images/pushmsg1_593x375.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Click the &lt;strong&gt;Compose&lt;/strong&gt; &lt;strong&gt;Message&lt;/strong&gt; button to compose a new push message for an event.&lt;/p&gt;
+
+    &lt;p&gt;The &lt;strong&gt;Compose Message&lt;/strong&gt; window appears.&lt;/p&gt;
+
+    &lt;p&gt;The &lt;strong&gt;Compose Message&lt;/strong&gt; window includes the &lt;strong&gt;Message Information&lt;/strong&gt; section to add a new push message. You can define a push message with the following options:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#silent-push&quot;&gt;Silent Push&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#standard-push&quot;&gt;Standard Push&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#copy-from-template&quot;&gt;Copy from Template&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;By default, the &lt;strong&gt;Message Type&lt;/strong&gt; option is set to &lt;strong&gt;Standard Push&lt;/strong&gt;.&lt;/p&gt;
+
+    &lt;h3 id=&quot;silent-push&quot;&gt;Silent Push&lt;/h3&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;strong&gt;Silent Push&lt;/strong&gt;: Select the silent push option.&lt;/p&gt;
+
+        &lt;blockquote&gt;
+          &lt;p&gt;&lt;strong&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/strong&gt; The standard push notifies the user when a device receives a push notification. The silent push does not notifies the end-user. When a silent push notification reaches a device, the app is awakened in the background and takes some time to download the new content.&lt;/p&gt;
+        &lt;/blockquote&gt;
+
+        &lt;p&gt;The Compose Message window displays applicable fields: &lt;strong&gt;Message Name&lt;/strong&gt;, &lt;strong&gt;Application Name&lt;/strong&gt;, and the &lt;strong&gt;Platform-Specific Properties&lt;/strong&gt;.&lt;/p&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;
+            &lt;p&gt;&lt;strong&gt;Message Name&lt;/strong&gt;: Enter an appropriate name for the push message such as &lt;strong&gt;ATM Transaction Message&lt;/strong&gt;.&lt;/p&gt;
+
+            &lt;p&gt;&lt;img src=&quot;Resources/Images/pushmsg4_515x168.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+          &lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;Application Name&lt;/strong&gt;: Select the required application from the drop-down list such as &lt;strong&gt;Sample Bank&lt;/strong&gt;.&lt;img src=&quot;Resources/Images/appnamelist_513x114.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;Platform Specific Properties&lt;/strong&gt;: To add platform-specific properties, follow these steps:
+            &lt;ul&gt;
+              &lt;li&gt;
+                &lt;p&gt;Click the plus icon next to the platform specific properties label.&lt;/p&gt;
+
+                &lt;p&gt;The system displays four tabs for iOS, Android, BlackBerry, and Windows platforms. By default, the iOS platform tab is set to active.&lt;/p&gt;
+
+                &lt;p&gt;To configure platform specific properties see, &lt;a href=&quot;#Platform_Specific_Properties&quot;&gt;Platform-Specific Properties&lt;/a&gt;&lt;/p&gt;
+
+                &lt;blockquote&gt;
+                  &lt;p&gt;&lt;strong&gt;&lt;em&gt;Important:&lt;/em&gt;&lt;/strong&gt; Only iOS and Android devices are supported for silent push.&lt;/p&gt;
+                &lt;/blockquote&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;h3 id=&quot;standard-push&quot;&gt;Standard Push&lt;/h3&gt;
+
+    &lt;p&gt;By default, the &lt;strong&gt;Message Type&lt;/strong&gt; option is set to &lt;strong&gt;Standard Push&lt;/strong&gt;.&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;To compose a standard push message, follow these steps&lt;/strong&gt;:&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;Message Name&lt;/strong&gt;: Enter an appropriate name for the push message such as &lt;strong&gt;ATM Transaction Message&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Application Name&lt;/strong&gt;: Select the required application from the drop-down list such as &lt;strong&gt;Sample Bank&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;strong&gt;Personalization Attributes&lt;/strong&gt;: Select the attributes from the drop-down list to customize your event message.&lt;/p&gt;
+
+        &lt;p&gt;The system inserts the selected attributes at the cursor position in the &lt;strong&gt;Message Box&lt;/strong&gt; .You can click &lt;strong&gt;X&lt;/strong&gt; icon next to each attribute to remove the attribute from the message box.&lt;img src=&quot;Resources/Images/perlattr_550x174.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Mark as Name Value Pair&lt;/strong&gt;: To set the Name-Value pair, enter the key words in the event push message text box. Click the &lt;strong&gt;Mark as Name Value Pair&lt;/strong&gt; button. The marked text is highlighted to indicate that the text is converted as a variable.&lt;img src=&quot;Resources/Images/namvalpair_551x121.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Message Title&lt;/strong&gt;: Enter an appropriate title to the push message such as &lt;strong&gt;Sample Bank ATM Alert&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;strong&gt;Message&lt;/strong&gt;: Based on your requirement, place the cursor in the message box to insert the push message.&lt;/p&gt;
+
+        &lt;p&gt;&lt;img src=&quot;Resources/Images/pushmsg2_557x299.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;h3 id=&quot;copy-from-template&quot;&gt;Copy from Template&lt;/h3&gt;
+
+    &lt;p&gt;&lt;strong&gt;To copy from a template, follow these steps&lt;/strong&gt;:&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;Message Name&lt;/strong&gt;: Enter an appropriate name for the push message.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Application Name&lt;/strong&gt;: Select the application from the drop-down list to associate with the push message.&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;strong&gt;Copy from Template&lt;/strong&gt;: Select the template from the drop-down list.&lt;/p&gt;
+
+        &lt;p&gt;&lt;img src=&quot;Resources/Images/copyfrtembas_540x139.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+        &lt;p&gt;The associated attributes and any message with the selected template appear in the message box.&lt;/p&gt;
+
+        &lt;p&gt;&lt;img src=&quot;Resources/Images/basicmsgbox_555x121.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Message Title&lt;/strong&gt;: Enter an appropriate title to the push message.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Personalization Attributes&lt;/strong&gt;: Select the personalization-attributes from the drop-down list to customize the push message. The selected attributes are appended in the message box.&lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;h3 id=&quot;enable-rich-push&quot;&gt;&lt;strong&gt;Enable Rich Push&lt;/strong&gt;&lt;/h3&gt;
+
+    &lt;p&gt;&lt;strong&gt;To associate rich push content follow these steps&lt;/strong&gt;:&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;strong&gt;Enable Rich Push&lt;/strong&gt;: Select the check box if you want to associate the rich push.&lt;/p&gt;
+
+        &lt;p&gt;The system displays the &lt;strong&gt;Compose from Template&lt;/strong&gt; drop-down list, &lt;strong&gt;Personalization Attributes&lt;/strong&gt; drop-down list and the &lt;strong&gt;Rich Content&lt;/strong&gt; text box.&lt;/p&gt;
+
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;p&gt;&lt;strong&gt;Compose from Template&lt;/strong&gt;: Select the required template from the drop-down list.&lt;/p&gt;
+
+            &lt;p&gt;&lt;img src=&quot;Resources/Images/richmsgddlist_515x114.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+            &lt;p&gt;The selected template with rich content appears in the rich content text box.&lt;/p&gt;
+
+            &lt;p&gt;&lt;img src=&quot;Resources/Images/richmsgbox_514x280.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+          &lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;Personalization Attributes&lt;/strong&gt;: Select the personalization-attributes from the drop-down list to customize the push message. The selected attributes are appended in the message box.&lt;/li&gt;
+          &lt;li&gt; &lt;strong&gt;Rich Content&lt;/strong&gt;: Enter your content. Use the text tool bar to customize the content.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;h3 id=&quot;platform-specific-properties&quot;&gt;Platform Specific Properties&lt;/h3&gt;
+
+    &lt;p&gt;To add platform- specific properties follow these steps:&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;Click the plus icon next to the &lt;strong&gt;Platform -Specific Properties&lt;/strong&gt; label.&lt;/p&gt;
+
+        &lt;p&gt;The system displays the four tabs for iOS, Android, BlackBerry and Windows platforms. By default, the iOS tab is set to active.&lt;/p&gt;
+
+        &lt;p&gt;&lt;img src=&quot;Resources/Images/plspprop.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+        &lt;p&gt;For more details about how to add platform- specific properties, refer to:&lt;/p&gt;
+
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;- [iOS](http://docs.hcl.com/hcllibrary/messaging/kms_console_user_guide/Default.htm#Campaigns/camppushios.htm?TocPath=Engagement&lt;/td&gt;
+              &lt;td&gt;Events&lt;/td&gt;
+              &lt;td&gt;Adding%2520%2520Events&lt;/td&gt;
+              &lt;td&gt;Push%2520Message&lt;/td&gt;
+              &lt;td&gt;_____1)&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td&gt;- [Android](http://docs.hcl.com/hcllibrary/messaging/kms_console_user_guide/Default.htm#Campaigns/camp_push_android.htm?TocPath=Engagement&lt;/td&gt;
+              &lt;td&gt;Events&lt;/td&gt;
+              &lt;td&gt;Adding%2520%2520Events&lt;/td&gt;
+              &lt;td&gt;Push%2520Message&lt;/td&gt;
+              &lt;td&gt;_____2)&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td&gt;- [BlackBerry](http://docs.hcl.com/hcllibrary/messaging/kms_console_user_guide/Default.htm#Campaigns/camp_push_blackberry.htm?TocPath=Engagement&lt;/td&gt;
+              &lt;td&gt;Events&lt;/td&gt;
+              &lt;td&gt;Adding%2520%2520Events&lt;/td&gt;
+              &lt;td&gt;Push%2520Message&lt;/td&gt;
+              &lt;td&gt;_____3)&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td&gt;- [Windows](http://docs.hcl.com/hcllibrary/messaging/kms_console_user_guide/Default.htm#Campaigns/camp_push_window7and8.htm?TocPath=Engagement&lt;/td&gt;
+              &lt;td&gt;Events&lt;/td&gt;
+              &lt;td&gt;Adding%2520%2520Events&lt;/td&gt;
+              &lt;td&gt;Push%2520Message&lt;/td&gt;
+              &lt;td&gt;_____4)&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Click the &lt;strong&gt;Cancel&lt;/strong&gt; button, if you do not want to save the composed message. The system displays the &lt;strong&gt;Add Event&lt;/strong&gt; screen.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Click &lt;strong&gt;Save&lt;/strong&gt; to save the composed message. The saved push message appears in the push message list view under the &lt;strong&gt;Define Message&lt;/strong&gt; tab on the &lt;strong&gt;Add Event&lt;/strong&gt; home page.&lt;/p&gt;
+
+    &lt;p&gt;The push message list view displays the following details:&lt;img src=&quot;Resources/Images/pushlistview_596x133.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Push Message Element&lt;/th&gt;
+          &lt;th&gt;Description&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Message&lt;/td&gt;
+          &lt;td&gt;- &lt;strong&gt;Event Push Message ID&lt;/strong&gt;: Displays the unique ID assigned to an event push message&lt;br /&gt;- Displays the push message name&lt;br /&gt;- Displays the push message text&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Open / Sent&lt;/td&gt;
+          &lt;td&gt;Displays the total number of push messages sent and opened by users&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Delete button&lt;/td&gt;
+          &lt;td&gt;The button helps you delete a push message&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;strong&gt;&lt;em&gt;Important:&lt;/em&gt;&lt;/strong&gt; You can enter unlimited number of characters for the event message. However, when the push message is sent to any cloud, the number of characters accepted by the cloud depends on the platform:&lt;br /&gt;
+- Apple: 1999 bytes&lt;br /&gt;
+- Android: 4044 characters&lt;br /&gt;
+- BlackBerry: 8192 characters&lt;br /&gt;
+- Windows: 859 characters&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Click the &lt;strong&gt;Cancel&lt;/strong&gt; button, if you do not want to save the new event. The system displays the &lt;strong&gt;Events&lt;/strong&gt; home screen.&lt;/li&gt;
+  &lt;li&gt;Click &lt;strong&gt;Save&lt;/strong&gt; to save the event. The saved event appears in the &lt;strong&gt;Events&lt;/strong&gt; list view with the confirmation message that the event is saved successfully.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;../Default.htm#Defining Notification Types for an event - Push Message.htm&quot;&gt;Open topic with navigation&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Open topic with navigation</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/jekyll/update/2020/12/24/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2020-12-24T15:28:24+05:30</published><updated>2020-12-24T15:28:24+05:30</updated><id>https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/jekyll/update/2020/12/24/welcome-to-jekyll</id><content type="html" xml:base="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/jekyll/update/2020/12/24/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Offlineobjectsetup</title><link href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/25/OfflineObjectSetup.html" rel="alternate" type="text/html" title="Offlineobjectsetup" /><published>2016-05-25T00:00:00+05:30</published><updated>2016-05-25T00:00:00+05:30</updated><id>https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/25/OfflineObjectSetup</id><content type="html" xml:base="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/25/OfflineObjectSetup.html">&lt;p&gt;&lt;a href=&quot;../Default.htm#OfflineObjectSetup.htm&quot;&gt;Open topic with navigation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;Resources/prettify/onLoad.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Quantum Fabric console User Guide: &lt;a href=&quot;Application_Level_APIs.htm&quot;&gt;Application-level APIs&lt;/a&gt; &amp;gt; KNYMobileFabric.OfflineObjects.setup&lt;/p&gt;
+
+&lt;h1 id=&quot;knymobilefabricofflineobjectssetup&quot;&gt;KNYMobileFabric.OfflineObjects.setup&lt;/h1&gt;
+
+&lt;p&gt;Offline Objects setup function initializes the creation of device database and sync environment. After the setup is successful, the database structure is created without any data in the device database. After the client database is created, subsequent calls to KNYMobileFabric.OfflineObjects setup initializes the sync environment.&lt;/p&gt;
+
+&lt;p&gt;Before performing any offline operation other than drop or reset, invoke either &lt;strong&gt;setup()&lt;/strong&gt; or &lt;strong&gt;incrementalSetup()&lt;/strong&gt; API.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/strong&gt; Initial setup (launching after first time installation (after drop or reset)) requires network connection. Subsequent setups can initialize offline environment without network connectivity.&lt;/p&gt;
+
+&lt;h2 id=&quot;quantum-visualizer-javascript&quot;&gt;Quantum Visualizer (JavaScript)&lt;/h2&gt;
+
+&lt;h3 id=&quot;signature&quot;&gt;Signature&lt;/h3&gt;
+
+&lt;p&gt;KNYMobileFabric.OfflineObjects.setup(options, successCallback, failureCallback)&lt;/p&gt;
+
+&lt;h3 id=&quot;input-parameters&quot;&gt;Input Parameters&lt;/h3&gt;
+
+&lt;table style=&quot;mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;&quot; class=&quot;TableStyle-Basic&quot; cellspacing=&quot;0&quot;&gt;&lt;colgroup&gt;&lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; style=&quot;width: 64px;&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td style=&quot;font-weight: bold;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Parameter&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot; style=&quot;font-weight: bold;&quot;&gt;Type&lt;/td&gt;&lt;td style=&quot;font-weight: bold;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Description&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot; style=&quot;font-weight: bold;&quot;&gt;Required&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td style=&quot;font-weight: normal;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;options&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot; style=&quot;font-weight: normal;&quot;&gt;JSON&lt;/td&gt;&lt;td style=&quot;font-weight: normal;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Setup options such as device database, encryption passphrase and so on.&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot; style=&quot;font-weight: normal;&quot;&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;successCallback&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Function&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;The function is invoked on successful setup.&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;failureCallback&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;Function&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;The function is invoked on setup failure with the cause of failure as an argument.&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyA-Column1-Body1&quot; style=&quot;font-weight: normal;&quot;&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h4 id=&quot;setup-options&quot;&gt;Setup Options&lt;/h4&gt;
+
+&lt;p&gt;| Option | Type | Description | Required |
+| — | — | — | — |
+| deviceDbEncryptionKey | String | 
+Encryption passphrase must be a string with at least six characters long. For more information, refer to &lt;a href=&quot;http://docs.kony.com/konylibrary/konyfabric/offline_objects_gettingstarted/Default.htm&quot;&gt;Offline Objects Getting Started Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/strong&gt; Not applicable for Mobile Web and Desktop Web channels.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;deviceDbPath&lt;/td&gt;
+      &lt;td&gt;String&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Device database is created at the given deviceDbPath location.&lt;/p&gt;
+
+&lt;p&gt;The default Offline Objects database path for Windows Kiosk applications is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C:\Users\User\AppData\Local&lt;/code&gt;. You can use the deviceDbPath option to override the default path. This options helps you to install more than one Offline enabled application by using the Offline Objects database at desired location.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/strong&gt; This parameter is supported only for Windows Kiosk applications from V8 SP4 Fix Pack 44 onwards.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Important:&lt;/em&gt;&lt;/strong&gt; The default Offline Objects database location for Windows Kiosk has been changed from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C:\Users\User\AppData\Local&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C:\Users\User\AppData\Local\AppID\Database&lt;/code&gt; from V8 SP4 Fix Pack 44. This impacts application upgrades that were built with the earlier versions of plugin&lt;/p&gt;
+
+&lt;p&gt;To retain the existing Offline Objects database, rebuild the Kiosk application with the deviceDbPath option and pass the &lt;strong&gt;C:\Users\User\AppData\Local&lt;/strong&gt; location as an input to the setup, reset, and drop APIs.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;No&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;return-type&quot;&gt;Return Type&lt;/h3&gt;
+
+&lt;p&gt;void&lt;/p&gt;
+
+&lt;h3 id=&quot;error-codes&quot;&gt;Error Codes&lt;/h3&gt;
+
+&lt;table style=&quot;mc-table-style: url('Resources/TableStyles/Basic.css');border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-left-style: solid;border-left-width: 2px;border-left-color: #a9a9a9;border-right-style: solid;border-right-width: 2px;border-right-color: #a9a9a9;border-top-style: solid;border-top-width: 2px;border-top-color: #a9a9a9;border-bottom-style: solid;border-bottom-width: 2px;border-bottom-color: #a9a9a9;margin-left: 0;margin-right: auto;&quot; class=&quot;TableStyle-Basic&quot; cellspacing=&quot;0&quot;&gt;&lt;colgroup&gt;&lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td style=&quot;font-weight: bold;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Error Code&lt;/td&gt;&lt;td style=&quot;font-weight: bold;&quot; class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;Error Text&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;106&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyA-Column1-Body1&quot;&gt;Claims token is unavailable.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h3 id=&quot;example&quot;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;function successCallback(status) {
+    kony.print(“Application setup successful”);
+}&lt;/p&gt;
+
+&lt;p&gt;function failureCallback(error) {
+    kony.print(“Application setup failed with error:” + error.code);
+}
+//Encrypt the device database using a passphrase
+var options = {
+    “deviceDbEncryptionKey”: “myencryptionpa$$phrase1”
+};
+KNYMobileFabric.OfflineObjects.setup(options, successCallback, failureCallback);&lt;/p&gt;
+
+&lt;h2 id=&quot;android-java&quot;&gt;Android (Java)&lt;/h2&gt;
+
+&lt;h3 id=&quot;signature-1&quot;&gt;Signature&lt;/h3&gt;
+
+&lt;p&gt;void &lt;OfflineObjects&gt;.setup(final HashMap&amp;lt;String, object&amp;gt; options, final KNYCallback callback)&lt;/OfflineObjects&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;parameters&quot;&gt;Parameters&lt;/h3&gt;
+
+&lt;table style=&quot;mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;&quot; class=&quot;TableStyle-Basic&quot; cellspacing=&quot;0&quot;&gt;&lt;colgroup&gt;&lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; style=&quot;width: 62px;&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; style=&quot;width: 270px;&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td style=&quot;font-weight: bold;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Parameter&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;&lt;b&gt;Type&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;font-weight: bold;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Description&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot; style=&quot;font-weight: bold;&quot;&gt;Required&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td style=&quot;font-weight: normal;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;options&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot; style=&quot;font-weight: normal;&quot;&gt;HashMap&amp;lt;String, Object&amp;gt;&lt;/td&gt;&lt;td style=&quot;font-weight: normal;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Setup options such as device database, encryption passphrase and so on.&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot; style=&quot;font-weight: normal;&quot;&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;callback&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;KNYCallback&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;The application must implement onSuccess and onFailure methods of KNYCallback interface.&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyA-Column1-Body1&quot;&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h4 id=&quot;setup-options-1&quot;&gt;Setup Options&lt;/h4&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Option&lt;/th&gt;
+      &lt;th&gt;Type&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+      &lt;th&gt;Required&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;deviceDbEncryptionKey&lt;/td&gt;
+      &lt;td&gt;String&lt;/td&gt;
+      &lt;td&gt;Encryption passphrase must be a string with at least six characters long. For more information, refer to &lt;a href=&quot;http://docs.kony.com/konylibrary/konyfabric/offline_objects_gettingstarted/Default.htm&quot;&gt;Offline Objects Getting Started Guide&lt;/a&gt;.&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;return-type-1&quot;&gt;Return Type&lt;/h3&gt;
+
+&lt;p&gt;void&lt;/p&gt;
+
+&lt;h3 id=&quot;error-codes-1&quot;&gt;Error Codes&lt;/h3&gt;
+
+&lt;table style=&quot;mc-table-style: url('Resources/TableStyles/Basic.css');border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-left-style: solid;border-left-width: 2px;border-left-color: #a9a9a9;border-right-style: solid;border-right-width: 2px;border-right-color: #a9a9a9;border-top-style: solid;border-top-width: 2px;border-top-color: #a9a9a9;border-bottom-style: solid;border-bottom-width: 2px;border-bottom-color: #a9a9a9;margin-left: 0;margin-right: auto;&quot; class=&quot;TableStyle-Basic&quot; cellspacing=&quot;0&quot;&gt;&lt;colgroup&gt;&lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td style=&quot;font-weight: bold;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Error Code&lt;/td&gt;&lt;td style=&quot;font-weight: bold;&quot; class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;Error Text&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;106&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyA-Column1-Body1&quot;&gt;Claims token is unavailable.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h3 id=&quot;example-1&quot;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;KonyClient sdk = new KonyClient();&lt;/p&gt;
+
+&lt;p&gt;IKonyApplicationSync appSync = sdk.getOfflineObjects();
+//Encrypt the device database using a passphrase
+HashMap &amp;lt; String, object &amp;gt; options = new HashMap &amp;lt; String, object &amp;gt; ();
+options.put(“deviceDbEncryptionKey”, “myencryptionpa$$phrase1”);
+appSync.setup(options, new KNYCallback() {
+    @Override
+    public void onSuccess(Object object) {
+        Log.d(“Application Setup”, “Application setup successful”);
+    }
+    @Override
+    public void onFailure(Object error) {
+        OfflineObjectsException e = (OfflineObjectsException) error;
+        Log.e(“Application Setup”, “Application setup failed with error:” + e.getMessage() + “callstack: “ + e.getStackTrace());
+    }
+});&lt;/p&gt;
+
+&lt;h2 id=&quot;ios-objective-c&quot;&gt;iOS (Objective C)&lt;/h2&gt;
+
+&lt;h3 id=&quot;signature-2&quot;&gt;Signature&lt;/h3&gt;
+
+&lt;p&gt;void &lt;OfflineObjects&gt; setup:(NSDictionary \*) options  
+onSuccess:(KNYSuccessCompletionHandler)onSuccess  
+onFailure:(KNYFailureCompletionHandler)onFailure;&lt;/OfflineObjects&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;parameters-1&quot;&gt;Parameters&lt;/h3&gt;
+
+&lt;table style=&quot;mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;&quot; class=&quot;TableStyle-Basic&quot; cellspacing=&quot;0&quot;&gt;&lt;colgroup&gt;&lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; style=&quot;width: 132px;&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; style=&quot;width: 208px;&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; style=&quot;width: 324px;&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; style=&quot;width: 103px;&quot; /&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td style=&quot;font-weight: bold;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Parameter&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot; style=&quot;font-weight: bold;&quot;&gt;Type&lt;/td&gt;&lt;td style=&quot;font-weight: bold;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Description&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot; style=&quot;font-weight: bold;&quot;&gt;Required&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td style=&quot;font-weight: normal;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;options&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot; style=&quot;font-weight: normal;&quot;&gt;NSDictionary&amp;lt;NSString*, id&amp;gt;&lt;/td&gt;&lt;td style=&quot;font-weight: normal;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Setup options such as device database, encryption passphrase and so on.&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot; style=&quot;font-weight: normal;&quot;&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;onSuccess&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;KNYSuccessCompletionHandler&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;The function is invoked on successful setup.&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;onFailure&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;KNYFailureCompletionHandler&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;The function is invoked on setup failure with the cause of failure as an argument.&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyA-Column1-Body1&quot;&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h4 id=&quot;setup-options-2&quot;&gt;Setup Options&lt;/h4&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Option&lt;/th&gt;
+      &lt;th&gt;Type&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+      &lt;th&gt;Required&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;deviceDbEncryptionKey&lt;/td&gt;
+      &lt;td&gt;NSString&lt;/td&gt;
+      &lt;td&gt;Encryption passphrase must be a string with at least six characters long. Refer &lt;a href=&quot;http://docs.kony.com/konylibrary/konyfabric/offline_objects_gettingstarted/Default.htm&quot;&gt;Offline Objects Getting started Guide&lt;/a&gt; for more details.&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;return-type-2&quot;&gt;Return Type&lt;/h3&gt;
+
+&lt;p&gt;void&lt;/p&gt;
+
+&lt;h3 id=&quot;error-codes-2&quot;&gt;Error Codes&lt;/h3&gt;
+
+&lt;table style=&quot;mc-table-style: url('Resources/TableStyles/Basic.css');border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-left-style: solid;border-left-width: 2px;border-left-color: #a9a9a9;border-right-style: solid;border-right-width: 2px;border-right-color: #a9a9a9;border-top-style: solid;border-top-width: 2px;border-top-color: #a9a9a9;border-bottom-style: solid;border-bottom-width: 2px;border-bottom-color: #a9a9a9;margin-left: 0;margin-right: auto;&quot; class=&quot;TableStyle-Basic&quot; cellspacing=&quot;0&quot;&gt;&lt;colgroup&gt;&lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td style=&quot;font-weight: bold;&quot; class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Error Code&lt;/td&gt;&lt;td style=&quot;font-weight: bold;&quot; class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;Error Text&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;106&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyA-Column1-Body1&quot;&gt;Claims token is unavailable.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h3 id=&quot;example-2&quot;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;KNYClient * sdk = [KNYClient sharedClient];
+OfflineObjects * applicationSync = [sdk getOfflineObjects];
+//Encrypt the device database using a passphrase
+NSMutableDictionary &amp;lt; NSString * , id &amp;gt; * options = [NSMutableDictionary new];
+[options setobject: @”myencryptionpa$$phrase1”
+    forKey: @”deviceDbEncryptionKey”
+];
+KNYSuccessCompletionHandler onSuccess = ^ void(id object) {
+    NSLog(@”Application setup successful”);
+};&lt;/p&gt;
+
+&lt;p&gt;KNYFailureCompletionHandler onFailure = ^ void(id object) {
+    NSLog(@”Application setup failed”);
+};
+[applicationSync setup: options onSuccess: onSuccess
+    onFailure: onFailure
+];&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;../Default.htm#OfflineObjectSetup.htm&quot;&gt;Open topic with navigation&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Open topic with navigation</summary></entry><entry><title type="html">Authentication_service</title><link href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/24/Authentication_Service.html" rel="alternate" type="text/html" title="Authentication_service" /><published>2016-05-24T00:00:00+05:30</published><updated>2016-05-24T00:00:00+05:30</updated><id>https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/24/Authentication_Service</id><content type="html" xml:base="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/24/Authentication_Service.html">&lt;p&gt;&lt;a href=&quot;../Default.htm#Authentication_Service.htm&quot;&gt;Open topic with navigation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Kony Fabric&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://docs.kony.com/8_x_PDFs/sync/kony_sync_getting_started_guide.pdf&quot; title=&quot;Kony Fabric Sync Services Framework Getting Started Guide&quot;&gt;&lt;img src=&quot;Resources/Images/pdf.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;authentication-service&quot;&gt;Authentication Service&lt;/h1&gt;
+
+&lt;p&gt;You can perform the following modes of authentication on sync from client side.&lt;/p&gt;
+
+&lt;h2 id=&quot;authenticate-the-user&quot;&gt;Authenticate the User&lt;/h2&gt;
+
+&lt;p&gt;In this mode we authenticate the userid with the given password. Call the service at the following url.&lt;/p&gt;
+
+&lt;p&gt;http://&lt;Host-Name&gt;:&lt;PORT&gt;/syncservice/resources/authenticateUser&lt;/PORT&gt;&lt;/Host-Name&gt;&lt;/p&gt;
+
+&lt;p&gt;The Content-Type should be set to “application/json” and pass the following parameters to the service&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;userid&lt;/li&gt;
+  &lt;li&gt;password&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;authenticate-the-application&quot;&gt;Authenticate the Application&lt;/h2&gt;
+
+&lt;p&gt;In this mode we check whether the userid and password is valid and the user is authorized to access the specified application.&lt;/p&gt;
+
+&lt;p&gt;Call the service at the following url:&lt;/p&gt;
+
+&lt;p&gt;http://&lt;Host-Name&gt;:&lt;PORT&gt;/syncservice/resources/authenticateUser&lt;/PORT&gt;&lt;/Host-Name&gt;&lt;/p&gt;
+
+&lt;p&gt;The Content-Type should be set to “application/json” and pass the following parameters to the service&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;userid&lt;/li&gt;
+  &lt;li&gt;password&lt;/li&gt;
+  &lt;li&gt;appid&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;authenticate-the-device&quot;&gt;Authenticate the Device&lt;/h2&gt;
+
+&lt;p&gt;In this mode we check whether the userid and password is valid and the user is authorized to specified device and application.&lt;/p&gt;
+
+&lt;p&gt;Call the service at the following url:&lt;/p&gt;
+
+&lt;p&gt;http://&lt;Host-Name&gt;:&lt;PORT&gt;/syncservice/resources/authenticateUser&lt;/PORT&gt;&lt;/Host-Name&gt;&lt;/p&gt;
+
+&lt;p&gt;Content-Type should be set to “application/json” and pass the following parameters to the service&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;userid&lt;/li&gt;
+  &lt;li&gt;password&lt;/li&gt;
+  &lt;li&gt;appid&lt;/li&gt;
+  &lt;li&gt;deviceid&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;javascript-example&quot;&gt;JavaScript Example&lt;/h3&gt;
+
+&lt;p&gt;The following sample in js calls the Authenticate Service based on the inputs provided.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function onLogIn(){
+	var gblUserId = frmLogin.txtUserId.text;	
+	var gblPassword= frmLogin.txtPwd.text;
+	var httpheaders = \[\]
+	httpheaders\[ kony.decrement(&quot;Content-Type&quot;) \] = &quot;application/json&quot;; 	
+	if(gblUserId != &quot;&quot; &amp;amp;&amp;amp; gblPassword != &quot;&quot;){
+		var params = {userid:gblUserId, password:gblPassword, appId : 
+		gblAppId};
+		params\[ kony.decrement(&quot;httpheaders&quot;) \] = httpheaders; 
+		var res;
+		var url =
+		**http://127.0.0.1:8081/syncservice/resources/authenticateUser&quot;**;
+		res = kony.net.invokeService(url, params, true);
+		var basicConf = 
+		{message: res\[“msg”\],alertType: constants.ALERT\_TYPE\_INFO 
+		,alertTitle: &quot;&quot;,yesLabel:”Ok”,noLabel: &quot;&quot;, alertHandler: null};
+		var pspConf = {};
+		kony.ui.Alert(basicConf,pspConf); 
+	}else{
+		var basicConf = {message: “User Name and Password is 
+		manadatory”,alertType: 
+		constants.ALERT\_TYPE\_ ERROR ,alertTitle: &quot;&quot;,
+		yesLabel:”Ok”,noLabel: &quot;&quot;, alertHandler: 
+		null};
+		var pspConf = {};
+		kony.ui.Alert(basicConf,pspConf);
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;../Default.htm#Authentication_Service.htm&quot;&gt;Open topic with navigation&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Open topic with navigation</summary></entry><entry><title type="html">Kms_console_user_guide</title><link href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/23/kms_console_user_guide.html" rel="alternate" type="text/html" title="Kms_console_user_guide" /><published>2016-05-23T00:00:00+05:30</published><updated>2016-05-23T00:00:00+05:30</updated><id>https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/23/kms_console_user_guide</id><content type="html" xml:base="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/23/kms_console_user_guide.html">&lt;p&gt;&lt;a href=&quot;../Default.htm#kms_console_user_guide.htm&quot;&gt;Open topic with navigation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Quantum Fabric&lt;/p&gt;
+
+&lt;p&gt;Quantum Fabric Engagement Services Console User Guide&lt;/p&gt;
+
+&lt;p&gt;Using Quantum Fabric Engagement Services, you can send push notifications, emails, SMSes, and passes to subscribed applications.&lt;/p&gt;
+
+&lt;p&gt;Revision History&lt;/p&gt;
+
+&lt;table style=&quot;width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;&quot; class=&quot;TableStyle-Basic&quot; cellspacing=&quot;0&quot;&gt;&lt;colgroup&gt;&lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; style=&quot;width: 99px;&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr class=&quot;TableStyle-Basic-Head-Header1&quot;&gt;&lt;th valign=&quot;middle&quot; class=&quot;TableStyle-Basic-HeadE-Column1-Header1&quot;&gt;&lt;b&gt;Date&lt;/b&gt;&lt;/th&gt;&lt;th valign=&quot;middle&quot; class=&quot;TableStyle-Basic-HeadE-Column1-Header1&quot;&gt;&lt;b&gt;Document Version&lt;/b&gt;&lt;/th&gt;&lt;th valign=&quot;middle&quot; class=&quot;TableStyle-Basic-HeadD-Column1-Header1&quot;&gt;&lt;b&gt;Description of Modifications/Release&lt;/b&gt;&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot; style=&quot;text-align: center;&quot;&gt;08/24/2020&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot; style=&quot;text-align: center;&quot;&gt;2.0&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;&lt;p&gt;Document published for Quantum Fabric V9 SP1.&lt;/p&gt;&lt;ul&gt;&lt;li value=&quot;1&quot;&gt;Removed support for BlackBerry.&lt;/li&gt;&lt;li value=&quot;2&quot;&gt;Added support for &lt;a href=&quot;API_Versioning.htm&quot;&gt;Fabric App Versioning&lt;/a&gt;.&lt;/li&gt;&lt;li value=&quot;3&quot;&gt;Added support for sending &lt;a href=&quot;Administration/SMS_Configuration.htm#Voice&quot;&gt;Voice SMS&lt;/a&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot; data-mc-conditions=&quot;&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;04/06/2020&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot; style=&quot;text-align: center;&quot;&gt;1.0&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyA-Column1-Body1&quot;&gt;&lt;p&gt;Document Release for Quantum Fabric Engagement Services Console V9&lt;/p&gt;&lt;ul&gt;&lt;li value=&quot;1&quot;&gt;Modified Settings &amp;gt; Configurations &amp;gt; &lt;a href=&quot;Administration/Email_Configuration.htm&quot;&gt;Email Configuration&lt;/a&gt; to add Attachments configurations.&lt;/li&gt;&lt;li value=&quot;2&quot;&gt;Added Overview &amp;gt; Apps &amp;gt; Adding an Application &amp;gt; &lt;a href=&quot;Apps/AppAPIKey.htm#Archival&quot;&gt;App API&amp;nbsp;Key&lt;/a&gt;&lt;/li&gt;&lt;li value=&quot;3&quot;&gt;Added Settings &amp;gt;&amp;nbsp;Configuration&amp;nbsp;&amp;gt; SMS&amp;nbsp;Configuration &amp;gt;&amp;nbsp;Outbound &amp;gt;&amp;nbsp;&lt;a href=&quot;Administration/SMS_Configuration.htm#SALESFORCE&quot;&gt;Salesforce&lt;/a&gt;&lt;/li&gt;&lt;li value=&quot;4&quot;&gt;Silent Push on Web:&lt;ul&gt;&lt;li value=&quot;1&quot;&gt;Engagement &amp;gt;&amp;nbsp;Adhoc &amp;gt;&amp;nbsp;Push Message &amp;gt;&amp;nbsp;&lt;a href=&quot;Adhoc/General_Channel_Type_Push_Message.htm#NA&quot;&gt;Define Message&lt;/a&gt;&lt;/li&gt;&lt;li value=&quot;2&quot;&gt;Added a new &lt;a href=&quot;Status/Message_Queue_tab.htm#NA&quot;&gt;Status&lt;/a&gt; in Message Queue&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;a href=&quot;../Default.htm#kms_console_user_guide.htm&quot;&gt;Open topic with navigation&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Open topic with navigation</summary></entry><entry><title type="html">Getting_started</title><link href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/23/Getting_Started.html" rel="alternate" type="text/html" title="Getting_started" /><published>2016-05-23T00:00:00+05:30</published><updated>2016-05-23T00:00:00+05:30</updated><id>https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/23/Getting_Started</id><content type="html" xml:base="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/23/Getting_Started.html">&lt;p&gt;&lt;a href=&quot;../Default.htm#Getting_Started.htm&quot;&gt;Open topic with navigation&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;getting-started&quot;&gt;Getting Started&lt;/h1&gt;
+
+&lt;p&gt;Install and Configure Quantum Fabric Engagement Service&lt;/p&gt;
+
+&lt;p&gt;This section of the document provides you with the instructions for installing and configuring the Quantum Fabric Engagement Service. Please make sure that you have the required hardware and access to the supporting software mentioned in the Prerequisites section.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/strong&gt; Important: The configurations and examples in this document are provided for a better understanding of the concepts. We encourage you not to copy-paste them for your installation execution as they may not match your settings. For example, user names, passwords, IP addresses, port numbers, directory locations etc.&lt;/p&gt;
+
+&lt;h2 id=&quot;installation-tasks&quot;&gt;Installation Tasks&lt;/h2&gt;
+
+&lt;p&gt;You need to perform the following tasks to install Quantum Fabric Engagement Service successfully.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Setup Quantum Fabric Engagement Service&lt;/li&gt;
+  &lt;li&gt;Database Setup&lt;/li&gt;
+  &lt;li&gt;Configure WebLogic or Configure JBoss Server or Configure WebSphere&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;Read this information to understand the System requirements and necessary Software before installing Quantum Fabric Engagement Service.&lt;/p&gt;
+
+&lt;h3 id=&quot;hardware-requirements-per-physical-instance&quot;&gt;Hardware Requirements (per physical instance)&lt;/h3&gt;
+
+&lt;table style=&quot;width: 616px;caption-side: top;mc-table-style: url('Resources/TableStyles/Basic.css');&quot; class=&quot;TableStyle-Basic&quot; cellspacing=&quot;0&quot;&gt;&lt;colgroup&gt;&lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr class=&quot;TableStyle-Basic-Head-Header1&quot;&gt;&lt;th class=&quot;TableStyle-Basic-HeadE-Column1-Header1&quot;&gt;Component&lt;/th&gt;&lt;th class=&quot;TableStyle-Basic-HeadD-Column1-Header1&quot;&gt;Requirement&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Processor&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;Quadra Core 2.2 MHz&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;memory&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;16 GB&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Internal Storage 1&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;46 GB (15K RPM) with 2 Drives (Raid 1)&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Network&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;2 Gigabit Ethernet Ports&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;IP Configuration&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;Statically assigned IP addressing&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;Operating System&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyA-Column1-Body1&quot;&gt;Windows, Linux/Sun Solaris, IBM AIX&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h3 id=&quot;software-system-requirements-per-physical-instance&quot;&gt;Software System Requirements (per physical instance)&lt;/h3&gt;
+
+&lt;table style=&quot;width: 616px;caption-side: top;mc-table-style: url('Resources/TableStyles/Basic.css');&quot; class=&quot;TableStyle-Basic&quot; cellspacing=&quot;0&quot;&gt;&lt;colgroup&gt;&lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr class=&quot;TableStyle-Basic-Head-Header1&quot;&gt;&lt;th class=&quot;TableStyle-Basic-HeadE-Column1-Header1&quot;&gt;Purpose&lt;/th&gt;&lt;th class=&quot;TableStyle-Basic-HeadD-Column1-Header1&quot;&gt;Server Name&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;J2EE Web Container&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;Tomcat 6.x or 7.x/WebLogic 10.3 /JBoss 5.1/WebSphere 6.1 onwards&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Java Runtime Environment&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;jdk1.6.0_12&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;Database (Metrics / Device Database) *Database is shared across instances.&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyA-Column1-Body1&quot;&gt;MySQL 5.1 / Oracle 10g , 11g / MSSQL/ DB2&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h3 id=&quot;database-system-requirements-per-physical-instance&quot;&gt;Database System Requirements (per physical instance)&lt;/h3&gt;
+
+&lt;table style=&quot;width: 616px;caption-side: top;mc-table-style: url('Resources/TableStyles/Basic.css');&quot; class=&quot;TableStyle-Basic&quot; cellspacing=&quot;0&quot;&gt;&lt;colgroup&gt;&lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt; &lt;col class=&quot;TableStyle-Basic-Column-Column1&quot; /&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr class=&quot;TableStyle-Basic-Head-Header1&quot;&gt;&lt;th class=&quot;TableStyle-Basic-HeadE-Column1-Header1&quot;&gt;Component&lt;/th&gt;&lt;th class=&quot;TableStyle-Basic-HeadD-Column1-Header1&quot;&gt;Requirement&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Processor&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;Dual Core Processor&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;memory&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;16 GB&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Internal Storage&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;73 GB (15K RPM) with 4 Drives (Raid 5)&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;External Storage&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;200 GB (RAID5 + HS) SAN Storage with HA Fiber HBA Connection&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyE-Column1-Body1&quot;&gt;Network&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyD-Column1-Body1&quot;&gt;2 Gigabit Ethernet Ports&lt;/td&gt;&lt;/tr&gt;&lt;tr class=&quot;TableStyle-Basic-Body-Body1&quot;&gt;&lt;td class=&quot;TableStyle-Basic-BodyB-Column1-Body1&quot;&gt;Operating System&lt;/td&gt;&lt;td class=&quot;TableStyle-Basic-BodyA-Column1-Body1&quot;&gt;Linux/Sun Solaris, IBM AIX&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;a href=&quot;../Default.htm#Getting_Started.htm&quot;&gt;Open topic with navigation&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Open topic with navigation</summary></entry><entry><title type="html">Configuring_connectors_and_batch_files_ _tomcat</title><link href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/21/Configuring_Connectors_and_Batch_Files_-_Tomcat.html" rel="alternate" type="text/html" title="Configuring_connectors_and_batch_files_ _tomcat" /><published>2016-05-21T00:00:00+05:30</published><updated>2016-05-21T00:00:00+05:30</updated><id>https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/21/Configuring_Connectors_and_Batch_Files_-_Tomcat</id><content type="html" xml:base="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/21/Configuring_Connectors_and_Batch_Files_-_Tomcat.html">&lt;p&gt;&lt;a href=&quot;../Default.htm#Configuring_Connectors_and_Batch_Files_-_Tomcat.htm&quot;&gt;Open topic with navigation&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;configure-connectors---tomcat&quot;&gt;Configure Connectors - Tomcat&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;From the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;User_Install_Directory&amp;gt;\apache-tomcat-9.0.33\conf&lt;/code&gt;, open the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;server.xml&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;server.xml&lt;/code&gt;, under the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;Service name=&quot;Catalina&quot;&amp;gt;&lt;/code&gt; tag, add the connector tag:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;For HTTP&lt;/strong&gt;
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;Connector server=&quot;Kony&quot; port=&quot;$HTTP\_PORT$&quot; protocol=&quot;HTTP/1.1&quot; maxHttpHeaderSize=&quot;8192&quot; maxThreads=&quot;150&quot; 
+enableLookups=&quot;false&quot;acceptCount=&quot;25&quot; disableUploadTimeout=&quot;true&quot; tcpNoDelay=&quot;true&quot; compression=&quot;on&quot; compressionMinSize=&quot;512000&quot; 
+compressableMimeType=&quot;text/html,text/xml,text/css,text/plain,text/javascript,application/x-javascript,application/ 
+javascript,application/json,application/xml&quot; connectionTimeout=&quot;20000&quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;For HTTPS&lt;/strong&gt;
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;Connector server=&quot;Kony&quot; port=&quot;$HTTP\_PORT$&quot; protocol=&quot;HTTP/1.1&quot; maxHttpHeaderSize=&quot;8192&quot; maxThreads=&quot;150&quot; enableLookups=&quot;false&quot; 
+acceptCount=&quot;25&quot; disableUploadTimeout=&quot;true&quot; tcpNoDelay=&quot;true&quot; compression=&quot;on&quot; compressableMimeType=&quot;text/css,text/javascript,
+text/html&quot; connectionTimeout=&quot;20000&quot; redirectPort=&quot;$HTTPS\_PORT$&quot;/&amp;gt; &amp;lt;Connector port=&quot;$HTTPS\_PORT$&quot; protocol=&quot;HTTP/1.1&quot; 
+SSLEnabled=&quot;true&quot; maxThreads=&quot;150&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;150&quot; maxHttpHeaderSize=&quot;8192&quot; connectionTimeout=&quot;20000&quot;
+scheme=&quot;https&quot; secure=&quot;true&quot; clientAuth=&quot;false&quot; enableLookups=&quot;false&quot; acceptCount=&quot;25&quot; disableUploadTimeout=&quot;true&quot; server=&quot;Kony&quot;
+tcpNoDelay=&quot;true&quot; compression=&quot;on&quot; compressionMinSize=&quot;512000&quot; compressableMimeType=&quot;text/html,text/xml,text/css,text/plain,
+text/javascript,application/x-javascript,application/javascript,application/json,application/xml&quot; sslProtocol=&quot;TLS&quot; keystoreFile=
+&quot;$APPSERVER\_KEYSTORE\_FILE$&quot; keystorePass=&quot;$APPSERVER\_KEYSTORE\_PASS$&quot; keystoreType=&quot;$APPSERVER\_KEYSTORE\_TYPE$&quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;how-to-configure-batch-files&quot;&gt;How to Configure Batch Files&lt;/h2&gt;
+
+&lt;h3 id=&quot;catalinabat&quot;&gt;catalina.bat&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Catalin.bat&lt;/code&gt; files are required to be configured in Tomcat server to work properly.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;From the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;User_Install_Directory&amp;gt;\apache-tomcat-9.0.33\bin&lt;/code&gt;, open the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;catalina.bat&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Before the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@echo off&lt;/code&gt; command, add the following JVM memory configuration.
+    &lt;ul&gt;
+      &lt;li&gt;For Windows:
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;set JAVA\_OPTS= -server -Xms&amp;lt;bytes&amp;gt; -Xmx&amp;lt;bytes&amp;gt; -XX:NewSize=256m -XX:MaxNewSize=512m -XX:PermSize=512m -XX:MaxPermSize=1024m 
+-XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=
+$LOG\_LOCATION$/heapdumps -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dnet.spy.log.LoggerImpl=net.spy.memcached.
+compat.log.Log4JLogger -Dfile.encoding=UTF8 -Dhttps.protocols=TLSv1.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+        &lt;p&gt;&lt;strong&gt;&lt;em&gt;Important:&lt;/em&gt;&lt;/strong&gt;  While installing Quantum Fabric Components without Integration services (Quantum Fabric Console, Identity Services, and Engagement Services), set the heap settings to: Min -Xms1024m / Max - Xmx1024m.&lt;/p&gt;
+
+        &lt;p&gt;&lt;strong&gt;&lt;em&gt;Important:&lt;/em&gt;&lt;/strong&gt; While installing Quantum Fabric Components including Integration services, set the heap settings to: Min -Xms2048m / Max - Xmx2048m.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;For Linux:
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;JAVA\_OPTS=&quot;-Dhttps.protocols=TLSv1.2 -server -Xms&amp;lt;bytes&amp;gt; -Xmx&amp;lt;bytes&amp;gt; -XX:NewSize=256m -XX:MaxNewSize=512m -XX:PermSize=512m 
+-XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+HeapDumpOnOutOfMemoryError 
+-XX:HeapDumpPath=$LOG\_LOCATION$/heapdumps -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dnet.spy.log.LoggerImpl=net.spy.
+memcached.compat.log.Log4JLogger -Dfile.encoding=UTF8&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Set JRE home if it is not set. For example, use the following command:&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;set &quot;JRE_HOME=&amp;lt;User_Install_Directory&amp;gt;\jre&quot;&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Save the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;catalina.bat&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;servicebat---only-for-windows&quot;&gt;service.bat - (Only for Windows)&lt;/h3&gt;
+
+&lt;p&gt;If you wish to configure a Windows service for this server, follow these steps&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;From the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;User_Install_Directory&amp;gt;\apache-tomcat-9.0.33\bin&lt;/code&gt;, open the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;service.bat&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Set JRE home if it is not set. For example, use the following command:&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;set &quot;JRE_HOME=&amp;lt;User_Install_Directory&amp;gt;\jre&quot;&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Set catalina home if it is not set. For example, use the following command:&lt;/p&gt;
+
+    &lt;p&gt;set “CATALINA_HOME=&amp;lt;User_Install_Directory&amp;gt;\tomcat”&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To configure the service name for the service you install, use the following commands:&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;
+set SERVICE\_NAME=&amp;lt;Service\_Name&amp;gt;\_SVC  
+set PR\_DISPLAYNAME=&amp;lt;Service\_Name&amp;gt;&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Save the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;service.bat&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;heap-and-permgen-settings---tomcat&quot;&gt;Heap and PermGen Settings - Tomcat&lt;/h2&gt;
+
+&lt;p&gt;For Oracle Java 7 and Java 8, configure the heap settings for your application servers. In the case of Oracle Java 7, you also need to configure PermGen settings.&lt;/p&gt;
+
+&lt;h3 id=&quot;configuring-heap-and-permgen-size-for-tomcat&quot;&gt;Configuring Heap and PermGen Size for Tomcat&lt;/h3&gt;
+
+&lt;p&gt;By default, the heap settings for Tomcat allocated are Min -&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Xms1024m&lt;/code&gt; / Max - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Xmx2048m&lt;/code&gt;, and default permgen settings are: -XX:PermSize=&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1024m&lt;/code&gt; -XX:MaxPermSize=&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1024&lt;/code&gt;m&lt;/p&gt;
+
+&lt;p&gt;For better performance in case of several publishes, update the following heap and permgen settings  in the file: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{Installation directory}/tomcat/bin/catalina.bat&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;heap settings: Min -&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Xms1024m&lt;/code&gt; / Max - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Xmx1024m&lt;/code&gt;.&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Important:&lt;/em&gt;&lt;/strong&gt;  While installing Quantum Fabric Components including Integration services, set the heap settings to: Min -Xms2048m / Max - Xmx2048m&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;permgen settings : -XX:PermSize=&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1024m&lt;/code&gt; -XX:MaxPermSize=&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2048m&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;how-to-disable-weak-ciphers-in-tomcat&quot;&gt;How to Disable Weak Ciphers in Tomcat&lt;/h2&gt;
+
+&lt;p&gt;To disable weak ciphers, modify the SSL Connector container attribute inside the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;server.xml&lt;/code&gt; with the required https connector tag details. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;server.xml&lt;/code&gt; is located in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;Install_Drive&amp;gt;\tomcat\conf&lt;/code&gt; folder.&lt;/p&gt;
+
+&lt;p&gt;Add the following is a sample details to SSL connector tag:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SSLEnabled=&quot;true&quot; sslEnabledProtocols=&quot;TLSv1.2&quot; ciphers=&quot;TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA256, TLS\_ECDHE\_RSA\_WITH\_AES
+\_128\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA384,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_RC4\
+_128\_SHA, TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA256,TLS\_RSA
+\_WITH\_AES\_256\_CBC\_SHA,SSL\_RSA\_WITH\_RC4\_128\_SHA&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;For example, the following is a sample modified https connector tag:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;connector port=&quot;443&quot; maxhttpheadersize=&quot;8192&quot; address=&quot;127.0.0.1&quot; enablelookups=&quot;false&quot; disableuploadtimeout=&quot;true&quot; acceptCount=
+&quot;100&quot; scheme=&quot;https&quot; secure=&quot;true&quot; clientAuth=&quot;false&quot; SSLEnabled=&quot;true&quot; sslEnabledProtocols=&quot;TLSv1.2&quot; ciphers=&quot;TLS\_ECDHE\_RSA\_WITH
+\_AES\_128\_CBC\_SHA256,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA384, TLS\_ECDHE\_RSA\_WITH\
+_AES\_256\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_RC4\_128\_SHA, TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA,
+TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA256,TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA,SSL\_RSA\_WITH\_RC4\_128\_SHA&quot; keystoreFile=&quot;mydomain.key&quot;
+ keystorePass=&quot;password&quot; truststoreFile=&quot;mytruststore.truststore&quot; truststorePass=&quot;password&quot;/&amp;gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/strong&gt; Upgrade the SSL Cipher list to the latest available versions.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;../Default.htm#Configuring_Connectors_and_Batch_Files_-_Tomcat.htm&quot;&gt;Open topic with navigation&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Open topic with navigation</summary></entry></feed>

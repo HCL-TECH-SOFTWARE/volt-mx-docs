@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Pre Installation_tasks_jboss | Your awesome title</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Pre Installation_tasks_jboss" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Open topic with navigation" />
+<meta property="og:description" content="Open topic with navigation" />
+<link rel="canonical" href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/21/Pre-installation_Tasks_JBoss.html" />
+<meta property="og:url" content="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/21/Pre-installation_Tasks_JBoss.html" />
+<meta property="og:site_name" content="Your awesome title" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-05-21T00:00:00+05:30" />
+<script type="application/ld+json">
+{"url":"https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/21/Pre-installation_Tasks_JBoss.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/21/Pre-installation_Tasks_JBoss.html"},"headline":"Pre Installation_tasks_jboss","dateModified":"2016-05-21T00:00:00+05:30","datePublished":"2016-05-21T00:00:00+05:30","description":"Open topic with navigation","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/pages/HCL-TECH-SOFTWARE/volt-mx-docs/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://github.com/pages/HCL-TECH-SOFTWARE/volt-mx-docs/feed.xml" title="Your awesome title" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/pages/HCL-TECH-SOFTWARE/volt-mx-docs/">Your awesome title</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2021-02-01-Animation.html">Widget Level Animation Using Flex Forms</a><a class="page-link" href="/pages/HCL-TECH-SOFTWARE/volt-mx-docs/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Pre Installation_tasks_jboss</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2016-05-21T00:00:00+05:30" itemprop="datePublished">May 21, 2016
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="../Default.htm#Pre-installation_Tasks_JBoss.htm">Open topic with navigation</a></p>
+
+<h2 id="update-listen-interfaces-in-hostxml-for-jboss-cluster">Update Listen Interfaces in host.xml for JBoss Cluster</h2>
+
+<p>For JBoss domain mode installation, configure the following interface address.</p>
+
+<ol>
+  <li>Go to <code class="language-plaintext highlighter-rouge">&lt;JBOSS EAP dir&gt;/domain/configuration/host.xml</code></li>
+  <li>In place of existing  <code class="language-plaintext highlighter-rouge">interfaces</code> xml tag, replace the default content with below details:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;interfaces\&gt;
+    &lt;interface name="management"&gt;
+        &lt;any-ipv4-address/&gt;
+        &lt;/interface&gt;
+        &lt;interface name="public"&gt;
+            &lt;any-ipv4-address/&gt;
+        &lt;/interface&gt;
+        &lt;interface name="unsecure"&gt;
+            &lt;!-- Used for IIOP sockets in the standard configuration.
+                 To secure JacORB, you need to set up SSL --&gt;
+            &lt;any-ipv4-address/&gt;
+        &lt;/interface&gt;
+		&lt;interface name="any"&gt;  
+             &lt;any-ipv4-address/&gt;  
+    &lt;/interface&gt; 
+&lt;/interfaces&gt;
+</code></pre></div></div>
+<p><img src="Resources/Images/ListenInterfaces_615x386.png" alt="" /></p>
+
+<h2 id="comment-the-javax-persistence-module-for-quantum-engagement-services-on-jboss-cluster">Comment the javax-persistence-module for Quantum Engagement Services on JBoss Cluster</h2>
+
+<p>If you are installing Quantum Engagement Services on JBoss domain mode installation, comment the below persistence module in the <code class="language-plaintext highlighter-rouge">domain.xml</code> file.</p>
+
+<ol>
+  <li>Go to <code class="language-plaintext highlighter-rouge">&lt;JBOSS EAP dir&gt;/domain/configuration/domain.xml</code></li>
+  <li>Comment the below <code class="language-plaintext highlighter-rouge">xml</code> tag. Comment the persistence module at four places in the <code class="language-plaintext highlighter-rouge">domain.xml</code> file.</li>
+</ol>
+
+<!-- <subsystem xmlns="urn:jboss:domain:jpa:1.1">
+                <jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/>
+            </subsystem> \-->
+
+<h2 id="create-locator-component-for-oracle-database">Create Locator Component for Oracle Database</h2>
+
+<p>By default when an Oracle database is created using DBCA or Oracle Installer Enterprise Edition with create database option, the SDO_Geometry object type will be default created as part of locator component.</p>
+
+<p>If the database is created using scripts by following the manual process, then the Locator component will not be created. You need to create the locator component for your Oracle database separately.</p>
+
+<p>Verify if the locator component is already installed</p>
+
+<p>Run the below queries in the Oracle database used for Installer:</p>
+
+<p>Select comp_name, version, status from dba_registry where upper(comp_name) like ‘%MEDIA’;</p>
+
+<p>Select username from dba_users where username = ‘MDSYS’</p>
+
+<p>If the above statements return zero records and MDSYS schema is not created, then follow these steps to create the MDSYS schema and install the locator component manually.</p>
+
+<p>The following steps need to be executed by a SYSDBA only.</p>
+
+<p>To create Locator or MDSYS schema, follow these steps in option #1 or option #2:</p>
+
+<ul>
+  <li><strong>Option #1</strong>. Follow DBCA or Oracle Installer enterprise edition with the create database option to create Oracle database. Use the same database during Quantum Fabric Installation.</li>
+  <li>
+    <p><strong>Option #2</strong>. Run the following scripts on the database to be used for Quantum Fabric, where Oracle locator is not installed.</p>
+
+    <ol>
+      <li>
+        <p>Connect as SYSDBA</p>
+
+        <p>sqlplus “/as sysdba”</p>
+      </li>
+      <li>
+        <p>Create MDSYS User if not exists:</p>
+
+        <p>Create user mdsys identified by secret default tablespace sysaux</p>
+
+        <p>A secret is a dummy password. Provide the password that is used during MDSYS user creation.</p>
+      </li>
+      <li>
+        <p>Run the below SQL to grant the privileges:</p>
+
+        <p>SQL&gt;@?/md/admin/mdprivs.sql</p>
+      </li>
+      <li>
+        <p>Connect to MDSYS user:</p>
+
+        <p>Conn mdsys/secret</p>
+
+        <p>A secret is dummy password. Provide the password that is used during MDSYS user creation.</p>
+      </li>
+      <li>
+        <p>Run the below SQL to create the locator objects:</p>
+
+        <p>SQL&gt;@?/md/admin/catmdloc.sql</p>
+      </li>
+    </ol>
+
+    <p>All the above <code class="language-plaintext highlighter-rouge">.sql</code> files executed will be available as part of database software <code class="language-plaintext highlighter-rouge">md</code> folder.</p>
+
+    <p>After executing the above steps, execute the following query to check if everything is fine:</p>
+
+    <p>Select * from dba_objects where owner=’MDSYS’ and object_name like ‘SDO%’;</p>
+
+    <p>Once the Oracle locator is installed, run the Installer to set up Quantum Fabric. The system should not throw the error: <code class="language-plaintext highlighter-rouge">Invalid Data Type SDO_GEOMENTRY</code></p>
+
+    <p><strong><em>Note:</em></strong> As per Oracle 12c Release 1 (12.1) documentation, Oracle Locator is available with the following editions:</p>
+
+    <ul>
+      <li>Oracle Database Standard Edition One</li>
+      <li>Oracle Database Standard Edition</li>
+      <li>Oracle Database Enterprise Edition</li>
+      <li>Oracle Database Express Edition (Oracle Database XE)</li>
+    </ul>
+
+    <p>  For more information regarding Oracle licensing, refer to Oracle Database documentation.</p>
+  </li>
+</ul>
+
+<h2 id="configure-load-balancer-as-proxy-in-jboss-multinode-setup-optional-if-ssl-offloading-at-load-balancer">Configure Load Balancer as Proxy in JBoss Multinode Setup (Optional if SSL Offloading at Load Balancer)</h2>
+
+<ol>
+  <li>
+    <p>Go to your Quantum Fabric install directory and open the <code class="language-plaintext highlighter-rouge">domain.xml</code> file.</p>
+  </li>
+  <li>
+    <p>In the <code class="language-plaintext highlighter-rouge">domain.xml</code>, update all the <code class="language-plaintext highlighter-rouge">http connector tags</code> to include the scheme and proxy-port details.</p>
+
+    <p>For example,`</p>
+    <connector name="http" protocol="HTTP/1.1" scheme="https" socket-binding="http" proxy-port="443" />
+    <p>`</p>
+  </li>
+</ol>
+
+<h2 id="configure-load-balancers-for-sending-host-information-in-multi-node">Configure Load Balancers for Sending Host Information in Multi-node</h2>
+
+<p>When the user is installing Quantum Fabric on multinode environment, the user should check whether the parameter: <code class="language-plaintext highlighter-rouge">ProxyPreserveHost</code>  is set to  <code class="language-plaintext highlighter-rouge">On</code>  in the Load balancer configuration file to send host in the headers.</p>
+
+<ul>
+  <li>
+    <p><strong>For JBoss</strong>, To deploy metrics in domain mode, follow these steps:</p>
+
+    <p>If the <code class="language-plaintext highlighter-rouge">ProxyPreserveHost</code> is not configured, the load balancer will not send host in the headers. Users cannot launch Quantum Fabric Console.</p>
+
+    <p>The above configuration is based on the load balancer.</p>
+
+    <p>For example:</p>
+
+    <ul>
+      <li>For <strong>Apache</strong>: <code class="language-plaintext highlighter-rouge">ProxyPreserveHost</code>  On</li>
+      <li>For <strong>HAProxy</strong>: preserve host flag is not required.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="how-to-configure-heap-and-permgen-size---jboss">How to Configure Heap and PermGen Size - JBoss</h2>
+
+<p>For Oracle Java 7 and Java 8, configure the heap settings for your application servers. In the case of Oracle Java 7, you also need to configure PermGen settings.</p>
+
+<p><strong><em>Note:</em></strong> From V8 SP4 FP1 HF1 onwards, Java 11 is supported for bundled Tomcat and JBoss servers.</p>
+
+<h3 id="configuring-heap-and-permgen-size-for-jboss">Configuring Heap and PermGen Size for JBoss</h3>
+
+<p>In case of multinode, do the following:</p>
+
+<ul>
+  <li>Configure the Min -<code class="language-plaintext highlighter-rouge">Xms2048m</code> / Max - <code class="language-plaintext highlighter-rouge">Xmx4096m</code> heap settings in the file: <code class="language-plaintext highlighter-rouge">{ Server directory }/domain/configuration/host.xml</code></li>
+  <li>Configure the Min -<code class="language-plaintext highlighter-rouge">Xms2048m</code> / Max - <code class="language-plaintext highlighter-rouge">Xmx4096m</code> heap settings in the file: <code class="language-plaintext highlighter-rouge">{ Server directory }/domain/configuration/domain.xml</code></li>
+  <li>permgen settings : -XX:PermSize=<code class="language-plaintext highlighter-rouge">1024m</code> -XX:MaxPermSize=<code class="language-plaintext highlighter-rouge">2048m</code></li>
+</ul>
+
+<p>In case of single node, configure the settings in <code class="language-plaintext highlighter-rouge">{ Install directory }/jboss/standalone/configuration/standalone.xml</code></p>
+
+<h2 id="how-to-disable-weak-ciphers-in-jboss">How to Disable Weak Ciphers in JBoss</h2>
+
+<p>To disable weak ciphers, replace the <code class="language-plaintext highlighter-rouge">https-listener</code> under JBoss <code class="language-plaintext highlighter-rouge">subsystem/undertow</code>, for example, <code class="language-plaintext highlighter-rouge">&lt;subsystem xmlns="urn:jboss:domain:undertow:3.1"&gt;</code></p>
+
+<p>For example, the following is a sample for https connector tag:</p>
+
+<https-listener name="https" socket-binding="connect" security-realm="ApplicationRealm" verify-client="REQUIRED" />
+
+<p>For example, the following is a sample modified https connector tag:</p>
+
+<https-listener name="https" enabled-protocols="TLSv1,TLSv1.1,TLSv1.2" enabled-cipher-suites="SSL\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA,SSL\_DHE\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA, TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_DHE\_DSS\_WITH\_AES\_128\_CBC\_SHA, TLS\_DHE\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA, TLS\_DHE\_DSS\_WITH\_AES\_256\_CBC\_SHA,TLS\_DHE\_RSA\_WITH\_AES\_256\_CBC\_SHA, TLS\_ECDH\_ECDSA\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_ECDH\_ECDSA\_WITH\_AES\_128\_CBC\_SHA, TLS\_ECDH\_ECDSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_ECDSA\_WITH\_3DES\_EDE\_CBC\_SHA, TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_CBC\_SHA, TLS\_ECDH\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_ECDH\_RSA\_WITH\_AES\_128\_CBC\_SHA, TLS\_ECDH\_RSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA, TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA, TLS\_ECDH\_anon\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_ECDH\_anon\_WITH\_AES\_128\_CBC\_SHA, TLS\_ECDH\_anon\_WITH\_AES\_256\_CBC\_SHA" verify-client="REQUIRED" security-realm="ApplicationRealm" socket-binding="connect" />
+
+<h2 id="how-to-increase-timeout-and-maximum-heap-size-settings---jboss">How to Increase Timeout and Maximum Heap Size Settings - JBoss</h2>
+
+<p>Restarting JBoss can cause deployment failures. To avoid these failures, you must increase the JBoss timeout and maximum heap size settings for cluster.</p>
+
+<p>To increase memory and timeout settings in JBoss (pre-configured JBoss), follow these steps:</p>
+
+<ol>
+  <li>
+    <p>In the <code class="language-plaintext highlighter-rouge">standalone.bat</code> or <code class="language-plaintext highlighter-rouge">.sh</code> file, add the following properties to <code class="language-plaintext highlighter-rouge">Java_opts</code>:</p>
+
+    <p>-Djboss.as.management.blocking.timeout=8400<br />
+-Xms2048m<br />
+-Xmx4096m</p>
+  </li>
+  <li>
+    <p>In the <code class="language-plaintext highlighter-rouge">&lt;JBoss_Home&gt;/standalone/configuration/standalone.xml</code> file, add <code class="language-plaintext highlighter-rouge">config deployment-timeout=”8400”</code> in the <code class="language-plaintext highlighter-rouge">deployment-scanner subsystem</code>, shown below:</p>
+
+    <subsystem xmlns="urn:jboss:domain:deployment-scanner:2.0">  
+      
+&lt;deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" deployment-timeout=”8400” runtime-failure-causes-rollback="${jboss.deployment.scanner.rollback.on.failure:false}"/&gt;  
+      
+</subsystem>
+  </li>
+</ol>
+
+<p>To increase memory and timeout settings in JBoss Multinode, follow these steps:</p>
+
+<ol>
+  <li>
+    <p>In the <code class="language-plaintext highlighter-rouge">domain.bat</code> or <code class="language-plaintext highlighter-rouge">.sh</code> file, add the following properties to <code class="language-plaintext highlighter-rouge">Java_opts</code>:</p>
+
+    <p>-Djboss.as.management.blocking.timeout=8400</p>
+  </li>
+  <li>
+    <p>Set the heap size for the selected server groups as below in the <code class="language-plaintext highlighter-rouge">&lt;JBoss_Home&gt;/domain/configuration/domain.xml</code>.</p>
+    <ul>
+      <li>
+        <p>Search for <code class="language-plaintext highlighter-rouge">&lt;server-groups&gt;</code> tag in the domain.xml and set the heap size in the JVM settings.</p>
+
+        <heap size="2048m" max-size="4096m" />
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="configure-the-standalone-existing-jboss">Configure the Standalone Existing JBoss</h2>
+
+<p>To install Quantum Fabric on an existing standalone JBoss, follow the steps to configure the standalone JBoss:</p>
+
+<ol>
+  <li>Open the <code class="language-plaintext highlighter-rouge">standalone.xml</code> from the <code class="language-plaintext highlighter-rouge">&lt;JBoss_Home&gt;/standalone/configuration</code>.</li>
+  <li>
+    <p>Configure Hostname/IP in the <code class="language-plaintext highlighter-rouge">standalone.xml</code> file for JBoss, as below:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;interfaces&gt;
+	&lt;interface name="management"&gt;
+		&lt;inet-address value="127.0.0.1"/&gt;
+	&lt;/interface&gt;
+	&lt;interface name="public"&gt;
+		&lt;inet-address value="&lt;myHostName&gt;"/&gt;
+	&lt;/interface&gt;
+&lt;/interfaces&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>Configure JBoss to listen for remote management requests as below:
+    <ul>
+      <li>Add <code class="language-plaintext highlighter-rouge">&lt;socket-binding name="management-native" interface="management" port="${jboss.management.native.port:9999}"/&gt;</code> under the <code class="language-plaintext highlighter-rouge">&lt;socket-binding-group&gt;</code></li>
+      <li>
+        <p>Add following section under the <code class="language-plaintext highlighter-rouge">&lt;management-interfaces&gt;</code></p>
+
+        <native-interface security-realm="ManagementRealm">  
+<socket-binding native="management-native" />  
+</native-interface>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>For Engagement Services to work, remove the following subsystem:</p>
+
+    <subsystem xmlns="urn:jboss:domain:jpa:1.1">
+<jpa default-datasource="" default-extended-persistence-inheritance="DEEP" />|
+</subsystem>
+  </li>
+</ol>
+
+<h3 id="configure-the-standalone-existing-jboss-with-self-signed-certificate-jboss-7">Configure the Standalone Existing JBoss with Self-Signed Certificate (JBoss 7)</h3>
+
+<p>If you need to use existing JBoss with self-signed certificate, follow these steps:</p>
+
+<ol>
+  <li>Add an Existing SSL Certificate to Cacerts. For more details, click <a href="http://docs.kony.com/konylibrary/konyfabric/kony_fabric_windows_install_guide/Content/Post-Installation_Tasks.htm#ExistingSelf-signedcertificate">How to Add an Existing Secure Sockets Layer (SSL) Certificate</a>.</li>
+  <li>
+    <p>Copy the keystore file to <code class="language-plaintext highlighter-rouge">&lt;JBoss_Home&gt;/standalone/configuration</code> folder.</p>
+  </li>
+  <li>
+    <p>Modify the <code class="language-plaintext highlighter-rouge">standalone.xml</code> by adding the following <code class="language-plaintext highlighter-rouge">security-realm</code> in the <code class="language-plaintext highlighter-rouge">security-realms</code> section.</p>
+
+    <security-realm name="WebSocketRealm">
+                 <server-identities>
+                        <ssl>
+                             <keystore path="&lt;Keystore\_file\_name&gt;" relative-to="jboss.server.config.dir" keystore="" password="&lt;Keystore\_password&gt;" />
+                     </ssl>
+                 </server-identities>
+            </security-realm>
+
+    <p>Here <code class="language-plaintext highlighter-rouge">&lt;Keystore_file_name&gt;</code> = Name of the keystore file. (for example, <code class="language-plaintext highlighter-rouge">keystore.jks</code>)`</p>
+    <Keystore_password>` = Password of keystore file.
+    
+
+</Keystore_password>
+  </li>
+  <li>
+    <p>In the standalone.xml, add the following <code class="language-plaintext highlighter-rouge">https-listener</code> tag for <code class="language-plaintext highlighter-rouge">default-server</code> in the Subsystem <code class="language-plaintext highlighter-rouge">urn:jboss:domain:undertow:3.1</code> .</p>
+
+    <https-listener name="https" max-post-size="262144000" security-realm="WebSocketRealm" socket-binding="https" />
+  </li>
+</ol>
+
+<p><a href="../Default.htm#Pre-installation_Tasks_JBoss.htm">Open topic with navigation</a></p>
+
+  </div><a class="u-url" href="/pages/HCL-TECH-SOFTWARE/volt-mx-docs/2016/05/21/Pre-installation_Tasks_JBoss.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/pages/HCL-TECH-SOFTWARE/volt-mx-docs/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Your awesome title</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Your awesome title</li><li><a class="u-email" href="mailto:your-email@example.com">your-email@example.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/pages/HCL-TECH-SOFTWARE/volt-mx-docs/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/pages/HCL-TECH-SOFTWARE/volt-mx-docs/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
