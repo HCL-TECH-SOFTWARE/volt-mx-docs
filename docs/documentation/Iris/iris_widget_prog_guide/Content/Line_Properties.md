@@ -1,7 +1,3 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 Line Properties
 ---------------
 
@@ -15,7 +11,7 @@ The properties for Line widget are:
 
 Enables you to control accessibility behavior and alternative text for the widget.
 
-For more information on using accessibility features in your app, see the [Accessibility](https://docs.hcl.com/hcllibrary/iris/iris_user_guide/Default.htm#Accessibility_Overview.htm) appendix in the VoltMX IrisUser Guide.
+For more information on using accessibility features in your app, see the [Accessibility](https://{{site.baseurl}}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the VoltMX IrisUser Guide.
 
 Syntax
 
@@ -62,7 +58,7 @@ Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /\*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.\*/
 
@@ -70,24 +66,24 @@ Form1.myButton.accessibilityConfig = {
     "a11yLabel": "Label",
     "a11yValue": "Value",
     "a11yHint": "Hint"    
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}​​​​​/\*Sample code to implement internationalization in accessibilityConfig property in Native platform.\*/
+{% highlight voltMx %}/\*Sample code to implement internationalization in accessibilityConfig property in Native platform.\*/
 
 Form1.myButton.accessibilityConfig = {
-    "a11yLabel": hcl.i18n.getLocalizedString("key1")     
+    "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
 };  
 /\*Sample code to implement internationalization in accessibilityConfig property in Desktop Web platform.\*/
 
 Form1.myButton.accessibilityConfig = {
-    "a11yLabel": "hcl.i18n.getLocalizedString(\\"key3\\")"
-};​
-{% endhighlight %}​​​​​
+    "a11yLabel": "voltmx.i18n.getLocalizedString(\\"key3\\")"
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -122,8 +118,8 @@ The default value for this property is true.
 
 Example
 
-{% highlight voltMx %}​​​​​Form1.widgetID.enableCache = true;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% endhighlight %}
 
 Platform Availability
 
@@ -152,7 +148,7 @@ Read only
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining the properties for a Line with id:"line".
+{% highlight voltMx %}//Defining the properties for a Line with id:"line".
 var lineBasicConf = {
     id: "line1",
     skin: "gradlblskin",
@@ -166,11 +162,11 @@ var lineLayoutConf = {
 var linePSPConf = {};
 
 //Creating the Line.
-var line1 = new hcl.ui.Line(lineBasicConf, lineLayoutConf, linePSPConf);
+var line1 = new voltmx.ui.Line(lineBasicConf, lineLayoutConf, linePSPConf);
 
 //Reading the id property of Line widget.
-alert("Line id ::" + line1.id);​
-{% endhighlight %}​​​​​
+alert("Line id ::" + line1.id);
+{% endhighlight %}
 
 Platform Availability
 
@@ -202,18 +198,18 @@ This is a **non-constructor** property. You cannot set this property through wid
 
 Info property holds any JSObject. Post assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}​​​​​var inf = {
+{% highlight voltMx %}var inf = {
     a: 'hello'
 };
 widget.info = inf; //works
 widget.info.a = 'hello world';
 //This will not update the widget info a property to Hello world. 
-//widget.info.a will have old value as hello.​
-{% endhighlight %}​​​​​
+//widget.info.a will have old value as hello.
+{% endhighlight %}
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining the properties for a Line with info property.
+{% highlight voltMx %}//Defining the properties for a Line with info property.
 var lineBasicConf = {
     id: "line1",
     skin: "gradlblskin",
@@ -229,13 +225,13 @@ var lineLayoutConf = {
 var linePSPConf = {};
 
 //Creating the Line.
-var line1 = new hcl.ui.Line(lineBasicConf, lineLayoutConf, linePSPConf);
+var line1 = new voltmx.ui.Line(lineBasicConf, lineLayoutConf, linePSPConf);
 line1.info = {
     key: "Line"
 };
 //Reading the info property of Line widget.
-alert("Line info is ::" + line1.info);​
-{% endhighlight %}​​​​​
+alert("Line info is ::" + line1.info);
+{% endhighlight %}
 
 Platform Availability
 
@@ -268,13 +264,13 @@ The default value for the property is true.
 *   If set to _false,_ the widget is not displayed.
 *   If set to _true,_ the widget is displayed.
 
-This property is not applicable if the widget is placed in a [Segment](Segment.htm). When the widget is placed in a Segment, the _Visibility_ of the widget is controlled by the data property of the segment.
+This property is not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the _Visibility_ of the widget is controlled by the data property of the segment.
 
 Example
 
 > **_Note:_** In addition, the visibility of the widget can be controlled using the setVisibility method.
 
-{% highlight voltMx %}​​​​​//Creating the Line with isVisible:true.
+{% highlight voltMx %}//Creating the Line with isVisible:true.
 var lineBasicConf = {
     id: "line",
     skin: "gradlblskin",
@@ -290,11 +286,11 @@ var lineLayoutConf = {
 var linePSPConf = {};
 
 //Creating the Line.
-var line = new hcl.ui.Line(lineBasicConf, lineLayoutConf, linePSPConf);
+var line = new voltmx.ui.Line(lineBasicConf, lineLayoutConf, linePSPConf);
 
 //Reading the isVisible property of Line widget.
-alert("Line isVisible ::" + line.id);​
-{% endhighlight %}​​​​​
+alert("Line isVisible ::" + line.id);
+{% endhighlight %}
 
 Platform Availability
 
@@ -313,13 +309,13 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}​​​​​function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig\[defaultLocale\]
     \["mirrorFlexPositionalProperties"\] == true &&
     !widgetRetainFlexPositionPropertiesValue);
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
@@ -350,11 +346,11 @@ No (only during widget-construction time)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /\*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.\*/
-var btn = new hcl.ui.Button({
+var btn = new voltmx.ui.Button({
     "focusSkin": "defBtnFocus",
     "height": "50dp",
     "id": "myButton",
@@ -372,8 +368,8 @@ var btn = new hcl.ui.Button({
     "paddingInPixel": false,
     "retainFlexPositionProperties": false,
     "retainContentAlignment": true
-}, {});​
-{% endhighlight %}​​​​​
+}, {});
+{% endhighlight %}
 
 Platform Availability
 
@@ -392,13 +388,13 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}​​​​​function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig\[defaultLocale\]
     \["mirrorFlexPositionalProperties"\] == true &&
     !widgetRetainFlexPositionPropertiesValue);
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
@@ -429,11 +425,11 @@ No (only during widget-construction time)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /\*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.\*/
-var btn = new hcl.ui.Button({
+var btn = new voltmx.ui.Button({
     "focusSkin": "defBtnFocus",
     "height": "50dp",
     "id": "myButton",
@@ -451,8 +447,8 @@ var btn = new hcl.ui.Button({
     "paddingInPixel": false,
     "retainFlexPositionProperties": true,
     "retainContentAlignment": false
-}, {});​
-{% endhighlight %}​​​​​
+}, {});
+{% endhighlight %}
 
 Platform Availability
 
@@ -471,13 +467,13 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}​​​​​function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig\[defaultLocale\]
     \["mirrorFlexPositionalProperties"\] == true &&
     !widgetRetainFlexPositionPropertiesValue);
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
@@ -508,11 +504,11 @@ No (only during widget-construction time)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /\*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. \*/
-var btn = new hcl.ui.Button({
+var btn = new voltmx.ui.Button({
  "focusSkin": "defBtnFocus",
  "height": "50dp",
  "id": "myButton",
@@ -531,8 +527,8 @@ var btn = new hcl.ui.Button({
  "retainFlexPositionProperties": true,
  "retainContentAlignment": false,
  "retainFlowHorizontalAlignment ": false
-}, {});​
-{% endhighlight %}​​​​​
+}, {});
+{% endhighlight %}
 
 Platform Availability
 
@@ -561,7 +557,7 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​//Creating the Line with skin:"gradlblskin"
+{% highlight voltMx %}//Creating the Line with skin:"gradlblskin"
 var lineBasicConf = {
     id: "line",
     skin: "gradlblskin",
@@ -577,11 +573,11 @@ var lineLayoutConf = {
 var linePSPConf = {};
 
 //Creating the Line.
-var line = new hcl.ui.Line(lineBasicConf, lineLayoutConf, linePSPConf);
+var line = new voltmx.ui.Line(lineBasicConf, lineLayoutConf, linePSPConf);
 
 //Reading the skin property of Line widget
-alert("Line skin ::" + line.skin);​
-{% endhighlight %}​​​​​
+alert("Line skin ::" + line.skin);
+{% endhighlight %}
 
 Platform Availability
 
@@ -610,7 +606,7 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining the properties of Line with toolTip:sample text
+{% highlight voltMx %}//Defining the properties of Line with toolTip:sample text
 var lineBasicConf = {
     id: "line1",
     isVisible: true,
@@ -633,8 +629,8 @@ var linePSPConf = {
 };
 
 //Creating a Line.
-var line1 = new hcl.ui.Line(lineBasicConf, lineLayoutConf, linePSPConf);​
-{% endhighlight %}​​​​​
+var line1 = new voltmx.ui.Line(lineBasicConf, lineLayoutConf, linePSPConf);
+{% endhighlight %}
 
 Platform Availability
 

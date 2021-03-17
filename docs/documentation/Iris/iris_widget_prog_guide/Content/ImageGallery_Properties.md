@@ -1,7 +1,3 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 ImageGallery - Basic Properties
 -------------------------------
 
@@ -15,7 +11,7 @@ The basic properties for ImageGallery widget are:
 
 Enables you to control accessibility behavior and alternative text for the widget.
 
-For more information on using accessibility features in your app, see the [Accessibility](https://docs.hcl.com/hcllibrary/iris/iris_user_guide/Default.htm#Accessibility_Overview.htm) appendix in the VoltMX IrisUser Guide.
+For more information on using accessibility features in your app, see the [Accessibility](https://{{site.baseurl}}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the VoltMX IrisUser Guide.
 
 Syntax
 
@@ -62,7 +58,7 @@ Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /\*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.\*/
 
@@ -70,24 +66,24 @@ Form1.myButton.accessibilityConfig = {
     "a11yLabel": "Label",
     "a11yValue": "Value",
     "a11yHint": "Hint"    
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}​​​​​/\*Sample code to implement internationalization in accessibilityConfig property in Native platform.\*/
+{% highlight voltMx %}/\*Sample code to implement internationalization in accessibilityConfig property in Native platform.\*/
 
 Form1.myButton.accessibilityConfig = {
-    "a11yLabel": hcl.i18n.getLocalizedString("key1")     
+    "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
 };  
 /\*Sample code to implement internationalization in accessibilityConfig property in Desktop Web platform.\*/
 
 Form1.myButton.accessibilityConfig = {
-    "a11yLabel": "hcl.i18n.getLocalizedString(\\"key3\\")"
-};​
-{% endhighlight %}​​​​​
+    "a11yLabel": "voltmx.i18n.getLocalizedString(\\"key3\\")"
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -122,11 +118,11 @@ The default value for this property is center ( {"x":0.5, "y":0.5} ), that repre
 
 Example
 
-{% highlight voltMx %}​​​​​Form1.widget1.anchorPoint = {
+{% highlight voltMx %}Form1.widget1.anchorPoint = {
     "x": 0.5,
     "y": 0.5
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -145,13 +141,13 @@ Represents the JSObject to represent the images to be rendered in ImageGallery. 
 
 Example
 
-{% highlight voltMx %}​​​​​formname.widgetname.data=
+{% highlight voltMx %}formname.widgetname.data=
   \[
   \[{"imagekey":"image1.png"},
    {"imagekey":"image2.png"},
    {"imagekey":"imagen.png"}\]
-\];​
-{% endhighlight %}​​​​​
+\];
+{% endhighlight %}
 
 Syntax
 
@@ -199,8 +195,8 @@ The default value for this property is true.
 
 Example
 
-{% highlight voltMx %}​​​​​Form1.widgetID.enableCache = true;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% endhighlight %}
 
 Platform Availability
 
@@ -235,7 +231,7 @@ Mobile Web does not support this property, instead browser specific focus will b
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with focusSkin: "gradroundfocusbtn"
 var imgGalBasic = { id: "imgGallery",
 	isVisible: true,
@@ -245,11 +241,11 @@ var imgGalBasic = { id: "imgGallery",
 var imgGalLayout = {containerWeight:100};
 
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
 
 //Reading the focusSkin of ImageGallery
-alert("ImageGallery focusSkin is ::"+imgGallery.focusSkin);​
-{% endhighlight %}​​​​​
+alert("ImageGallery focusSkin is ::"+imgGallery.focusSkin);
+{% endhighlight %}
 
 Platform Availability
 
@@ -279,7 +275,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with hoverSkin:"hskin"
 var imgGalBasic = { id: "imgGallery",
 	isVisible: true, 
@@ -292,8 +288,8 @@ var imgGalLayout = {containerWeight:100};
 var imgGalPSP = {**hoverSkin:"hskin"**};
 
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);​
-{% endhighlight %}​​​​​
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -323,18 +319,18 @@ Yes - (Read only)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with ID:"imgGallery"
 var imgGalBasic = { **id: "imgGallery"**, isVisible: true};
 
 var imgGalLayout = {containerWeight:100};
 	
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
 	
 //Reading the ID of ImageGallery
-alert("ImageGallery id is ::"+imgGallery.id);​
-{% endhighlight %}​​​​​
+alert("ImageGallery id is ::"+imgGallery.id);
+{% endhighlight %}
 
 Platform Availability
 
@@ -364,7 +360,7 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining the properties for ImageGallery with imageWhenFailed: "AppIcon.png".
+{% highlight voltMx %}//Defining the properties for ImageGallery with imageWhenFailed: "AppIcon.png".
 //Image with the same name should be in resources folder.
 var imgGalBasic = { id: "imgGallery",
 	isVisible: true, 
@@ -376,8 +372,8 @@ var imgGalBasic = { id: "imgGallery",
 var imgGalLayout = {containerWeight:100};
 	
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});​
-{% endhighlight %}​​​​​
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
+{% endhighlight %}
 
 Platform Availability
 
@@ -407,7 +403,7 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining the properties for ImageGallery with imageWhileDownloading: "ApplicationIcon.png". 
+{% highlight voltMx %}//Defining the properties for ImageGallery with imageWhileDownloading: "ApplicationIcon.png". 
 //Image with the same name should be in resources folder.
 var imgGalBasic = { id: "imgGallery",
 	isVisible: true, 
@@ -417,8 +413,8 @@ var imgGalBasic = { id: "imgGallery",
 	var imgGalLayout = {containerWeight:100};
 	
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});​
-{% endhighlight %}​​​​​
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
+{% endhighlight %}
 
 Platform Availability
 
@@ -452,28 +448,28 @@ This is a **non-Constructor** property. You cannot set this property through wid
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}​​​​​var inf = {a: 'hello'};
+{% highlight voltMx %}var inf = {a: 'hello'};
 	widget.info = inf; //works
 	widget.info.a = 'hello world'; 
 /\*This will not update the widget info a property to Hello world. 
-widget.info.a will have old value as hello.\*/​
-{% endhighlight %}​​​​​
+widget.info.a will have old value as hello.\*/
+{% endhighlight %}
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with info property.
 var imgGalBasic = { id: "imgGallery",isVisible: true};
 
 var imgGalLayout = {containerWeight:100};
 	
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
 **imgGallery.info = {key:"ImageGal"};**
 	
 //Reading the info of ImageGallery
-alert("ImageGallery info is ::"+imgGallery.info);​
-{% endhighlight %}​​​​​
+alert("ImageGallery info is ::"+imgGallery.info);
+{% endhighlight %}
 
 Platform Availability
 
@@ -509,18 +505,18 @@ You can set the visibility of a widget dynamically from code using the setVisibi
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with isVisible: true
 var imgGalBasic = { id: "imgGallery", **isVisible: true**};
 
 var imgGalLayout = {containerWeight:100};
 
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
 
 //Reading the Visibility of ImageGallery
-alert("ImageGallery Visibility is ::"+imgGallery.isVisible);​
-{% endhighlight %}​​​​​
+alert("ImageGallery Visibility is ::"+imgGallery.isVisible);
+{% endhighlight %}
 
 Platform Availability
 
@@ -550,7 +546,7 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with sitemsPerRow:3
 var imgGalBasic = { id: "imgGallery",
 	isVisible: true, 
@@ -561,8 +557,8 @@ var imgGalBasic = { id: "imgGallery",
 	var imgGalPSP = {**itemsPerRow:3**};
 	
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);​
-{% endhighlight %}​​​​​
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -592,7 +588,7 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with navigationBarPosition:"Bottom"
 var imgGalBasic = { id: "imgGallery", 
 	isVisible: true, 
@@ -605,8 +601,8 @@ var imgGalLayout = {containerWeight:100};
 var imgGalPSP = {itemsPerRow:3, **navigationBarPosition:"Bottom"**};
 	
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);​
-{% endhighlight %}​​​​​
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -640,7 +636,7 @@ This property is displayed only when [viewType](#viewType) is set to _IMAGE\_GAL
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with noofRowsPerPage:4.
 var imgGalBasic={id:"imagegallery1",
 	isVisible:true, 
@@ -658,8 +654,8 @@ var imgGalBasic={id:"imagegallery1",
 var imgGalPSP={viewType: constants.IMAGE\_GALLERY\_VIEW\_TYPE\_PAGEVIEW, **viewConfig: {noofRowsPerPage:4**}};
 
 //Creating the ImageGallery.
-var imagegallery1 = new hcl.ui.ImageGallery(imgGalBasic,imgGalLayout,imgGalPSP);​
-{% endhighlight %}​​​​​
+var imagegallery1 = new voltmx.ui.ImageGallery(imgGalBasic,imgGalLayout,imgGalPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -679,13 +675,13 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}​​​​​function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig\[defaultLocale\]
     \["mirrorFlexPositionalProperties"\] == true &&
     !widgetRetainFlexPositionPropertiesValue);
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
@@ -716,11 +712,11 @@ No (only during widget-construction time)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /\*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.\*/
-var btn = new hcl.ui.Button({
+var btn = new voltmx.ui.Button({
     "focusSkin": "defBtnFocus",
     "height": "50dp",
     "id": "myButton",
@@ -738,8 +734,8 @@ var btn = new hcl.ui.Button({
     "paddingInPixel": false,
     "retainFlexPositionProperties": false,
     "retainContentAlignment": true
-}, {});​
-{% endhighlight %}​​​​​
+}, {});
+{% endhighlight %}
 
 Platform Availability
 
@@ -758,13 +754,13 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}​​​​​function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig\[defaultLocale\]
     \["mirrorFlexPositionalProperties"\] == true &&
     !widgetRetainFlexPositionPropertiesValue);
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
@@ -795,11 +791,11 @@ No (only during widget-construction time)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /\*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.\*/
-var btn = new hcl.ui.Button({
+var btn = new voltmx.ui.Button({
     "focusSkin": "defBtnFocus",
     "height": "50dp",
     "id": "myButton",
@@ -817,8 +813,8 @@ var btn = new hcl.ui.Button({
     "paddingInPixel": false,
     "retainFlexPositionProperties": true,
     "retainContentAlignment": false
-}, {});​
-{% endhighlight %}​​​​​
+}, {});
+{% endhighlight %}
 
 Platform Availability
 
@@ -837,13 +833,13 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}​​​​​function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig\[defaultLocale\]
     \["mirrorFlexPositionalProperties"\] == true &&
     !widgetRetainFlexPositionPropertiesValue);
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
@@ -874,11 +870,11 @@ No (only during widget-construction time)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /\*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. \*/
-var btn = new hcl.ui.Button({
+var btn = new voltmx.ui.Button({
  "focusSkin": "defBtnFocus",
  "height": "50dp",
  "id": "myButton",
@@ -897,8 +893,8 @@ var btn = new hcl.ui.Button({
  "retainFlexPositionProperties": true,
  "retainContentAlignment": false,
  "retainFlowHorizontalAlignment ": false
-}, {});​
-{% endhighlight %}​​​​​
+}, {});
+{% endhighlight %}
 
 Platform Availability
 
@@ -933,7 +929,7 @@ If data contains the sections then the _selectedIndex_ indicates the selected ro
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with selectedIndex:3 (setSelectedIndex)
 var imgGalBasic = { id: "imgGallery",
 	isVisible: true, 
@@ -946,11 +942,11 @@ var imgGalBasic = { id: "imgGallery",
 var imgGalLayout = {containerWeight:100};
 
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
 
 //getSelectedIndex
-alert("Selected Index:"+imgGallery.selectedIndex);​
-{% endhighlight %}​​​​​
+alert("Selected Index:"+imgGallery.selectedIndex);
+{% endhighlight %}
 
 Platform Availability
 
@@ -980,7 +976,7 @@ Read only
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with selectedIndex:3 (setSelectedIndex)
 var imgGalBasic = { id: "imgGallery",
 	isVisible: true, 
@@ -993,11 +989,11 @@ var imgGalBasic = { id: "imgGallery",
 var imgGalLayout = {containerWeight:100};
 
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
 
 //getSelectedItem
-**alert("selected Item:"+imgGallery.selectedItem);** ​
-{% endhighlight %}​​​​​
+**alert("selected Item:"+imgGallery.selectedItem);** 
+{% endhighlight %}
 
 Platform Availability
 
@@ -1027,7 +1023,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with skin: "gradroundfocusbtn"
 var imgGalBasic = { id: "imgGallery",
 	isVisible: true, 
@@ -1036,11 +1032,11 @@ var imgGalBasic = { id: "imgGallery",
 var imgGalLayout = {containerWeight:100};
 
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
 	
 //Reading the skin of ImageGallery
-alert("ImageGallery skin is ::"+imgGallery.skin);​
-{% endhighlight %}​​​​​
+alert("ImageGallery skin is ::"+imgGallery.skin);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1068,7 +1064,7 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with spaceBetweenImages: 50
 var imgGalBasic = { id: "imgGallery",
 	isVisible: true, 
@@ -1081,8 +1077,8 @@ var imgGalBasic = { id: "imgGallery",
 var imgGalLayout = {containerWeight:100};
 
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});​
-{% endhighlight %}​​​​​
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,{});
+{% endhighlight %}
 
 Platform Availability
 
@@ -1112,19 +1108,19 @@ Read + Write
 
 Remarks
 
-This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [hcl.ui.makeAffineTransform](http://docs.hcl.com/hcllibrary/iris/iris_api_dev_guide/Default.htm#hcl.ui_functions.htm%23makeAffi?TocPath=References|hcl.ui%2520Namespace|Functions|_____6) function.
+This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [voltmx.ui.makeAffineTransform](https://{{site.baseurl}}/docs/documentation/Iris/iris_api_dev_guide/Content/voltmx.ui_functions.html%23makeAffi?TocPath=References|voltmx.ui%2520Namespace|Functions|_____6) function.
 
 Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have a transform property.
 
-{% highlight voltMx %}​​​​​//Animation sample
-var newTransform = hcl.ui.makeAffineTransform();
+{% highlight voltMx %}//Animation sample
+var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
 //translates by 223 xAxis,12 in yAxis,56 in zAxis
-widget.transform = newTransform;​
-{% endhighlight %}​​​​​
+widget.transform = newTransform;
+{% endhighlight %}
 
 Platform Availability
 
@@ -1161,7 +1157,7 @@ You can select one of the following available views:
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with viewType:IMAGE\_GALLERY\_VIEW\_TYPE\_DEFAULT.
 var imgGalBasic={id:"imagegallery1",
 	isVisible:true, 
@@ -1180,8 +1176,8 @@ var imgGalLayout={containerWeight:100,
 var imgGalPSP={**viewType: constants.IMAGE\_GALLERY\_VIEW\_TYPE\_DEFAULT** };
 	
 //Creating the ImageGallery.
-var imagegallery1 = new hcl.ui.ImageGallery(imgGalBasic,imgGalLayout,imgGalPSP);​
-{% endhighlight %}​​​​​
+var imagegallery1 = new voltmx.ui.ImageGallery(imgGalBasic,imgGalLayout,imgGalPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1211,7 +1207,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for ImageGallery with viewConfig:noofRowsPerPage.
 var imgGalBasic={id:"imagegallery1",
 	isVisible:true, 
@@ -1231,8 +1227,8 @@ var imgGalPSP={viewType: constants.IMAGE\_GALLERY\_VIEW\_TYPE\_PAGEVIEW,
  **viewConfig: {noofRowsPerPage: 5**} };
 
 //Creating the ImageGallery.
-var imagegallery1 = new hcl.ui.ImageGallery(imgGalBasic,imgGalLayout,imgGalPSP);​
-{% endhighlight %}​​​​​
+var imagegallery1 = new voltmx.ui.ImageGallery(imgGalBasic,imgGalLayout,imgGalPSP);
+{% endhighlight %}
 
 Platform Availability
 

@@ -1,11 +1,7 @@
-layout: documentation---
-category: iris_api_dev_guide
----
-
 Sync Object
 ===========
 
-The Sync object implements the [Sync API](sync_apis.htm) at the object level.
+The Sync object implements the [Sync API](sync_apis.html) at the object level.
 
 Methods
 -------
@@ -34,7 +30,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}​​​​​function CreateProduct()
+{% highlight voltMx %}function CreateProduct()
 <syncObject>.create(objectProduct, successCallback, errorFailCallback)
 end
 
@@ -45,8 +41,8 @@ end
 function errorFailCallback(err)
 window.Alert("Get All Failed", nil, "error", "Ok", "", "Error", nil)
 end
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -73,7 +69,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}​​​​​function DeleteProductByPK()
+{% highlight voltMx %}function DeleteProductByPK()
 <syncObject>.deleteByPK(123, successCallback, errorFailCallback)
 end
 
@@ -84,8 +80,8 @@ end
 function errorFailCallback(err)
 window.Alert("Delete By Primary Key Failed", nil, "error", "Ok", "", "Error", nil)
 end
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -111,7 +107,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}​​​​​function SyncGetAll()
+{% highlight voltMx %}function SyncGetAll()
 sync.getAll(successCallback, errorFailCallback)
 end
 
@@ -122,8 +118,8 @@ end
 function errorFailCallback(err)
 window.Alert("Get All Failed", nil, "error", "Ok", "", "Error", nil)
 end
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -150,7 +146,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}​​​​​function SyncGetAllDetailsByPK()
+{% highlight voltMx %}function SyncGetAllDetailsByPK()
 <syncObject>.getAllDetailsByPK(ProductId="123", successCallback, errorFailCallback)
 end
 
@@ -161,8 +157,8 @@ end
 function errorFailCallback(err)
 window.Alert("Get All Details By Primary Key Failed", nil, "error", "Ok", "", "Error", nil)
 end
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -188,7 +184,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}​​​​​function GetPendingAcknowledgement()
+{% highlight voltMx %}function GetPendingAcknowledgement()
 <syncObject>.getPendingAcknowledgement(successCallback, errorFailCallback)
 end
 
@@ -199,8 +195,8 @@ end
 function errorFailCallback(err)
 window.Alert("Get Pending Acknowledgement Failed", nil, "error", "Ok", "", "Error", nil)
 end
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -226,7 +222,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}​​​​​function GetPendingUpload()
+{% highlight voltMx %}function GetPendingUpload()
 <syncObject>.getPendingUpload(successCallback, errorFailCallback)
 end
 
@@ -237,8 +233,8 @@ end
 function errorFailCallback(err)
 window.Alert("Get Pending Upload Failed", nil, "error", "Ok", "", "Error", nil)
 end
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -265,7 +261,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}​​​​​E.g.: If there is a relationship from Order to OrderDetails the below function will retrieve all the OrderDetails corresponding to that order.
+{% highlight voltMx %}E.g.: If there is a relationship from Order to OrderDetails the below function will retrieve all the OrderDetails corresponding to that order.
 
 function GetOrderDetails()
 <syncObject>.getOrderDetails(123, successCallback, errorFailCallback)
@@ -278,8 +274,8 @@ end
 function errorFailCallback(err)
 window.Alert("Get Order Details Failed", nil, "error", "Ok", "", "Error", nil)
 end
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -306,7 +302,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}​​​​​function DeleteProduct()
+{% highlight voltMx %}function DeleteProduct()
 <syncObject>.remove(ProductId="123", successCallback, errorFailCallback)
 end
 
@@ -317,8 +313,8 @@ end
 function errorFailCallback(err)
 window.Alert("Delete Failed", nil, "error", "Ok", "", "Error", nil)
 end
-  ​
-{% endhighlight %}​​​​​
+  
+{% endhighlight %}
 
 Platform Availability
 
@@ -342,7 +338,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}​​​​​function RollbackPendingLocalChanges()
+{% highlight voltMx %}function RollbackPendingLocalChanges()
 <syncObject>.rollbackPendingLocalChanges(successCallback, errorFailCallback)
 end
 
@@ -353,8 +349,8 @@ end
 function errorFailCallback(err)
 window.Alert("Rollback Pending Local Changes Failed", nil, "error", "Ok", "", "Error", nil)
 end
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -381,7 +377,7 @@ Input Parameters
 
 Example
 
-{% highlight voltMx %}​​​​​function <syncObject>.RollbackPendingLocalChangesByPK()
+{% highlight voltMx %}function <syncObject>.RollbackPendingLocalChangesByPK()
 <syncObject>.rollbackPendingLocalChangesByPK(123, successCallback, errorFailCallback)
 end
 
@@ -392,8 +388,8 @@ end
 function errorFailCallback(err)
 window.Alert("Rollback Pending Local Changes Failed", nil, "error", "Ok", "", "Error", nil)
 end
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -420,7 +416,7 @@ Input   Parameters
 
 Example
 
-{% highlight voltMx %}​​​​​function UpdateProduct()
+{% highlight voltMx %}function UpdateProduct()
 <syncObject>.update(ProductId="123", successCallback, errorFailCallback)
 end
 
@@ -431,8 +427,8 @@ end
 function errorFailCallback(err)
 window.Alert("Update Product Failed", nil, "error", "Ok", "", "Error", nil)
 end
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -459,7 +455,7 @@ Input  Parameters
 
 Example
 
-{% highlight voltMx %}​​​​​function UpdateProductByPK()
+{% highlight voltMx %}function UpdateProductByPK()
 <syncObject>.updateByPK("123", successCallback, errorFailCallback)
 end
 
@@ -470,8 +466,8 @@ end
 function errorFailCallback(err)
 window.Alert("Get Product by Primary Key Failed", nil, "error", "Ok", "", "Error", nil)
 end
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 

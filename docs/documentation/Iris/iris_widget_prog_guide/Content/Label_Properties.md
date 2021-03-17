@@ -1,7 +1,3 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 Label Properties
 ================
 
@@ -15,7 +11,7 @@ The basic properties for Label widget are:
 
 Enables you to control accessibility behavior and alternative text for the widget.
 
-For more information on using accessibility features in your app, see the [Accessibility](https://docs.hcl.com/hcllibrary/iris/iris_user_guide/Default.htm#Accessibility_Overview.htm) appendix in the VoltMX IrisUser Guide.
+For more information on using accessibility features in your app, see the [Accessibility](https://{{site.baseurl}}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the VoltMX IrisUser Guide.
 
 Syntax
 
@@ -62,7 +58,7 @@ Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /\*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.\*/
 
@@ -70,24 +66,24 @@ Form1.myButton.accessibilityConfig = {
     "a11yLabel": "Label",
     "a11yValue": "Value",
     "a11yHint": "Hint"    
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}​​​​​/\*Sample code to implement internationalization in accessibilityConfig property in Native platform.\*/
+{% highlight voltMx %}/\*Sample code to implement internationalization in accessibilityConfig property in Native platform.\*/
 
 Form1.myButton.accessibilityConfig = {
-    "a11yLabel": hcl.i18n.getLocalizedString("key1")     
+    "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
 };  
 /\*Sample code to implement internationalization in accessibilityConfig property in Desktop Web platform.\*/
 
 Form1.myButton.accessibilityConfig = {
-    "a11yLabel": "hcl.i18n.getLocalizedString(\\"key3\\")"
-};​
-{% endhighlight %}​​​​​
+    "a11yLabel": "voltmx.i18n.getLocalizedString(\\"key3\\")"
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -122,11 +118,11 @@ The default value for this property is center ( {"x":0.5, "y":0.5} ), that repre
 
 Example
 
-{% highlight voltMx %}​​​​​Form1.widget1.anchorPoint = {
+{% highlight voltMx %}Form1.widget1.anchorPoint = {
     "x": 0.5,
     "y": 0.5
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -167,9 +163,9 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColor property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.backgroundColor = "ea5075";
-​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.btn1.backgroundColor = "ea5075";
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -201,11 +197,11 @@ Input Parameters
 
 *   **gradientType** \[Constant\]: Specifies the configuration type of the gradient. This parameter can have the following constant values:
     
-    *   `hcl.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`: Constant for the gradient type toTop.
-    *   `hcl.skin.MULTI_STEP_GRADIENT_TYPE_TO_RIGHT`: Constant for the gradient type toRight.
-    *   `hcl.skin.MULTI_STEP_GRADIENT_TYPE_TO_BOTTOM`: Constant for the gradient type toBottom.
-    *   `hcl.skin.MULTI_STEP_GRADIENT_TYPE_TO_LEFT`: Constant for the gradient type toLeft.
-    *   `hcl.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM`: Constant for the gradient type custom.  
+    *   `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`: Constant for the gradient type toTop.
+    *   `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_RIGHT`: Constant for the gradient type toRight.
+    *   `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_BOTTOM`: Constant for the gradient type toBottom.
+    *   `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_LEFT`: Constant for the gradient type toLeft.
+    *   `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM`: Constant for the gradient type custom.  
         For the custom gradient type, you must specify the angle by using the [angle](#angle) property.
 *   **angle** \[Number\]: Specifies the angle for the gradient in degrees, counted counter-clockwise. This property is only applicable for the custom gradient type.
 *   **colors** \[Array\]: Specifies the colors for the multi-step gradient. Colors is an array of color hex values that indicate the reference color values of the gradient. This parameter contains an array of hexadecimal numbers that represent the colors or constants defined at the theme level.
@@ -213,7 +209,7 @@ Input Parameters
 
 Remarks
 
-*   The default value of the gradientType key is `hcl.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`.
+*   The default value of the gradientType key is `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`.
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
 *   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
     For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.
@@ -226,13 +222,13 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColorMultiStepGradient property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.backgroundColorMultiStepGradient = {
-    "gradientType": hcl.skin.MULTI\_STEP\_GRADIENT\_TYPE\_CUSTOM  
+{% highlight voltMx %}Form1.btn1.backgroundColorMultiStepGradient = {
+    "gradientType": voltmx.skin.MULTI\_STEP\_GRADIENT\_TYPE\_CUSTOM  
     "angle": 45,
     "colors": \["ea5075", "f1fa70", "eefd04"\],
     "colorStops": \[0, 90, 100\]
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -268,14 +264,14 @@ Input Parameters
     
 *   **style** \[Constant\]: Specifies the configuration style of the two-step gradient. This parameter can have the following constant values:
     
-    *   `hcl.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT`: Constant for the vertical gradient style.
-    *   `hcl.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_SPLIT`: Constant for the vertical split style.
-    *   `hcl.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_GRADIENT`: Constant for the horizontal gradient style.
-    *   `hcl.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_SPLIT`: Constant for the horizontal split style.
+    *   `voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT`: Constant for the vertical gradient style.
+    *   `voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_SPLIT`: Constant for the vertical split style.
+    *   `voltmx.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_GRADIENT`: Constant for the horizontal gradient style.
+    *   `voltmx.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_SPLIT`: Constant for the horizontal split style.
 
 Remarks
 
-*   The default value of the style key is `hcl.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT`.
+*   The default value of the style key is `voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT`.
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
 *   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
     For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.
@@ -288,12 +284,12 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColorTwoStepGradient property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.backgroundColorTwoStepGradient = {  
+{% highlight voltMx %}Form1.btn1.backgroundColorTwoStepGradient = {  
      "topColor": "ea5075",  
     "bottomColor": "eefd04",  
-    "style": hcl.skin.TWO\_STEP\_GRADIENT\_STYLE\_VERTICAL\_GRADIENT  
-};​
-{% endhighlight %}​​​​​
+    "style": voltmx.skin.TWO\_STEP\_GRADIENT\_STYLE\_VERTICAL\_GRADIENT  
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -331,8 +327,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the backgroundImage property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.backgroundImage = "bgImg.png";​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.btn1.backgroundImage = "bgImg.png";
+{% endhighlight %}
 
 Platform Availability
 
@@ -395,7 +391,7 @@ Example 1
 
 To dynamically set the blur-effect for any widget, such as a FlexContainer, use the following code.
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the blur property for FlexContainer widget.
 /\*You need to make a corresponding use of the 
 blur property for other applicable widgets.\*/
@@ -404,19 +400,19 @@ Form1.myFlexContainer.blur = {
     "enabled": true,
     "value": 60
 };
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Example 2
 
 To dynamically set the blur-effect for any widget, such as a FlexContainer in iOS, use the following code.
 
-{% highlight voltMx %}​​​​​Form1.widget1.blur = {
+{% highlight voltMx %}Form1.widget1.blur = {
     "enabled": true,
     "value": 60,
     "style": constants.BLUR\_EFFECT\_DARK
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -457,8 +453,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the borderColor property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.borderColor = "ea5075";​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.btn1.borderColor = "ea5075";
+{% endhighlight %}
 
 Platform Availability
 
@@ -490,11 +486,11 @@ Input Parameters
 
 *   **gradientType** \[Constant\]: Specifies the configuration type of the gradient. This parameter can have the following constant values:
     
-    *   `hcl.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`: Constant for the gradient type toTop.
-    *   `hcl.skin.MULTI_STEP_GRADIENT_TYPE_TO_RIGHT`: Constant for the gradient type toRight.
-    *   `hcl.skin.MULTI_STEP_GRADIENT_TYPE_TO_BOTTOM`: Constant for the gradient type toBottom.
-    *   `hcl.skin.MULTI_STEP_GRADIENT_TYPE_TO_LEFT`: Constant for the gradient type toLeft.
-    *   `hcl.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM`: Constant for the gradient type custom.  
+    *   `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`: Constant for the gradient type toTop.
+    *   `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_RIGHT`: Constant for the gradient type toRight.
+    *   `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_BOTTOM`: Constant for the gradient type toBottom.
+    *   `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_LEFT`: Constant for the gradient type toLeft.
+    *   `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM`: Constant for the gradient type custom.  
         For the custom gradient type, you must specify the angle by using the [angle](#angle) property.
 *   **angle** \[Number\]: Specifies the angle for the gradient in degrees, counted counter-clockwise. This property is only applicable for the custom gradient type.
 *   **colors** \[Array\]: Specifies the colors for the multi-step gradient. Colors is an array of color hex values that indicate the reference color values of the gradient. This parameter contains an array of hexadecimal numbers that represent the colors or constants defined at the theme level.
@@ -502,7 +498,7 @@ Input Parameters
 
 Remarks
 
-*   The default value of the gradientType key is `hcl.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`.
+*   The default value of the gradientType key is `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`.
 *   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
 *   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).  
     For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.
@@ -514,13 +510,13 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the borderColorGradient property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.borderColorGradient = {
-    "gradientType": hcl.skin.MULTI\_STEP\_GRADIENT\_TYPE\_CUSTOM  
+{% highlight voltMx %}Form1.btn1.borderColorGradient = {
+    "gradientType": voltmx.skin.MULTI\_STEP\_GRADIENT\_TYPE\_CUSTOM  
     "angle": 45,
     "colors": \["ea5075", "f1fa70", "eefd04"\],
     "colorStops": \[0, 90, 100\]
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -551,11 +547,11 @@ Remarks
 
 *   This property can have the following constant values:
     
-    *   **hcl.skin.BORDER\_STYLE\_PLAIN**: Constant for the plain border style.
-    *   **hcl.skin.BORDER\_STYLE\_ROUNDED\_CORNER**: Constant for the rounded corner style.
-    *   **hcl.skin.BORDER\_STYLE\_COMPLETE\_ROUNDED\_CORNER**: Constant for the complete rounded corner style.
-    *   **hcl.skin.BORDER\_STYLE\_CUSTOM**: Constant for the custom border style.
-*   The cornerRadius property is only applicable when the borderStyle is hcl.skin.BORDER\_STYLE\_CUSTOM.
+    *   **voltmx.skin.BORDER\_STYLE\_PLAIN**: Constant for the plain border style.
+    *   **voltmx.skin.BORDER\_STYLE\_ROUNDED\_CORNER**: Constant for the rounded corner style.
+    *   **voltmx.skin.BORDER\_STYLE\_COMPLETE\_ROUNDED\_CORNER**: Constant for the complete rounded corner style.
+    *   **voltmx.skin.BORDER\_STYLE\_CUSTOM**: Constant for the custom border style.
+*   The cornerRadius property is only applicable when the borderStyle is voltmx.skin.BORDER\_STYLE\_CUSTOM.
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
@@ -563,8 +559,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the borderStyle property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.borderStyle = hcl.skin.BORDER\_STYLE\_PLAIN;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.btn1.borderStyle = voltmx.skin.BORDER\_STYLE\_PLAIN;
+{% endhighlight %}
 
 Platform Availability
 
@@ -602,8 +598,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the borderWidth property.
 
-{% highlight voltMx %}​​​​​ Form1.btn1.borderWidth = 2;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %} Form1.btn1.borderWidth = 2;
+{% endhighlight %}
 
 Platform Availability
 
@@ -641,17 +637,17 @@ Remarks
 
 The property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.
 
-If the layoutType is set as hcl.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
+If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+{% highlight voltMx %}//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.bottom = "50dp";
 
 frmHome.widgetID.bottom = "10%";
 
-frmHome.widgetID.bottom = "10px";​
-{% endhighlight %}​​​​​
+frmHome.widgetID.bottom = "10px";
+{% endhighlight %}
 
 Platform Availability
 
@@ -693,9 +689,9 @@ You can specify any of the following values to this property.
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the breakStrategy property for a Label widget.
-frmLabel.myLabel.breakStrategy=constants.TEXT\_BREAK\_STRATEGY\_SIMPLE HIGH\_QUALITY;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}//Sample code to set the breakStrategy property for a Label widget.
+frmLabel.myLabel.breakStrategy=constants.TEXT\_BREAK\_STRATEGY\_SIMPLE HIGH\_QUALITY;
+{% endhighlight %}
 
 Platform Availability
 
@@ -725,17 +721,17 @@ Read + Write
 
 Remarks
 
-If the layoutType is set as hcl.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
+If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+{% highlight voltMx %}//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerX = "50dp";
 
 frmHome.widgetID.centerX = "10%";
 
-frmHome.widgetID.centerX = "10px";​
-{% endhighlight %}​​​​​
+frmHome.widgetID.centerX = "10px";
+{% endhighlight %}
 
 Platform Availability
 
@@ -766,17 +762,17 @@ Read + Write
 
 Remarks
 
-If the layoutType is set as hcl.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
+If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
+{% highlight voltMx %}//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.centerY = "50dp";
 
 frmHome.widgetID.centerY = "10%";
 
-frmHome.widgetID.centerY = "10px";​
-{% endhighlight %}​​​​​
+frmHome.widgetID.centerY = "10px";
+{% endhighlight %}
 
 Platform Availability
 
@@ -839,14 +835,14 @@ The clipView property is applicable only for the widgets added in the Flex Forms
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the clipView property of a Label widget.  
+{% highlight voltMx %}//Sample code to set the clipView property of a Label widget.  
   
 frmLabel.MyLabel.clipView = {
     shape: constants.VIEW\_CLIP\_SHAPE\_CIRCLE,
     bounds: \[5, 5, 5, 5\],
     radius: 10
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -894,11 +890,11 @@ Desktop Web/ SPA platforms do not support _contentAlignment_ property in Camera 
 
 Example
 
-{% highlight voltMx %}​​​​​/\*Sample code to set the contentAlignment property of the widgetID Button widget in frmHome Form.\*/  
+{% highlight voltMx %}/\*Sample code to set the contentAlignment property of the widgetID Button widget in frmHome Form.\*/  
   
 frmHome.widgetID.contentAlignment=constants.CONTENT\_ALIGN\_TOP\_LEFT;  
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -927,7 +923,7 @@ Read + Write
 
 Remarks
 
-*   The cornerRadius property is only applicable when the borderStyle is hcl.skin.BORDER\_STYLE\_CUSTOM.
+*   The cornerRadius property is only applicable when the borderStyle is voltmx.skin.BORDER\_STYLE\_CUSTOM.
 *   For a Responsive Web app, a corner radius of value zero applies a plain border, and a corner radius value greater than zero applies a rounded border.
 *   The Android and Desktop Web platforms support both Number and JSON Object (with the top, bottom, right, and left keys) values for the cornerRadius parameter. The iOS platform supports only Number values for the cornerRadius parameter.
 *   The default unit for the value of this property is pixels.
@@ -938,8 +934,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the cornerRadius property.
 
-{% highlight voltMx %}​​​​​ Form1.btn1.cornerRadius = 60;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %} Form1.btn1.cornerRadius = 60;
+{% endhighlight %}
 
 Platform Availability
 
@@ -990,13 +986,13 @@ To add the `cursorType` property using VoltMX Iris in a Desktop Web application,
 
 Example
 
-{% highlight voltMx %}​​​​​ //This is a generic property and is applicable for many widgets.  
+{% highlight voltMx %} //This is a generic property and is applicable for many widgets.  
   
 /\*The example provided is for the Button widget. Make the required changes in the example while using other widgets.\*/
   
 frmButton.myButton.cursorType = "wait";
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -1032,27 +1028,27 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the disabledStateSkinProperties property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.disabledStateSkinProperties= {  
+{% highlight voltMx %}Form1.btn1.disabledStateSkinProperties= {  
      background: {  
-        backgroundType: hcl.skin.BACKGROUND\_TYPE\_MULTI\_STEP\_GRADIENT,  
+        backgroundType: voltmx.skin.BACKGROUND\_TYPE\_MULTI\_STEP\_GRADIENT,  
         backgroundColorMultiStepGradient : {  
-            gradientType: hcl.skin.MULTI\_STEP\_GRADIENT\_TYPE\_TO\_TOP,  
+            gradientType: voltmx.skin.MULTI\_STEP\_GRADIENT\_TYPE\_TO\_TOP,  
             colors: \["ea5075", "f1fa70", "eefd04"\],  
             colorStops: \[0, 90, 100\]  
         },  
     },  
     border: {  
-        borderType: hcl.skin.BORDER\_TYPE\_SINGLE\_COLOR,  
+        borderType: voltmx.skin.BORDER\_TYPE\_SINGLE\_COLOR,  
         borderColor: "ea5075",  
-        borderStyle: hcl.skin.BORDER\_STYLE\_PLAIN,  
+        borderStyle: voltmx.skin.BORDER\_STYLE\_PLAIN,  
         borderWidth: 50  
     },  
     fonts: {  
         fontColor: "ea5075",  
         fontFamily: "Serif",  
         fontSize: '100',  
-        fontStyle: hcl.skin.FONT\_STYLE\_NONE,  
-        fontWeight: hcl.skin.FONT\_WEIGHT\_NORMAL  
+        fontStyle: voltmx.skin.FONT\_STYLE\_NONE,  
+        fontWeight: voltmx.skin.FONT\_WEIGHT\_NORMAL  
     },  
     textShadow: {  
         textShadowRadius: 5,  
@@ -1061,8 +1057,8 @@ This example uses the button widget, but the principle remains the same for all 
             x: 20,  
             y: 4  
         }  
-    }​
-{% endhighlight %}​​​​​
+    }
+{% endhighlight %}
 
 Platform Availability
 
@@ -1102,12 +1098,12 @@ When `enable` property is configured to false, the action associated with a widg
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property and is applicable for many widgets.  
+{% highlight voltMx %}//This is a generic property and is applicable for many widgets.  
   
 /\*The example provided is for the Button widget. Make the changes required in the example while using other widgets.\*/
   
-frmButton.myBtn.enable= true;​
-{% endhighlight %}​​​​​
+frmButton.myBtn.enable= true;
+{% endhighlight %}
 
 Platform Availability
 
@@ -1143,8 +1139,8 @@ The default value for this property is true.
 
 Example
 
-{% highlight voltMx %}​​​​​Form1.widgetID.enableCache = true;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% endhighlight %}
 
 Platform Availability
 
@@ -1180,27 +1176,27 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the focusStateSkinProperties property.
 
-{% highlight voltMx %}​​​​​ Form1.btn1.focusStateSkinProperties = {  
+{% highlight voltMx %} Form1.btn1.focusStateSkinProperties = {  
      background: {  
-        backgroundType: hcl.skin.BACKGROUND\_TYPE\_MULTI\_STEP\_GRADIENT,  
+        backgroundType: voltmx.skin.BACKGROUND\_TYPE\_MULTI\_STEP\_GRADIENT,  
         backgroundColorMultiStepGradient : {  
-            gradientType: hcl.skin.MULTI\_STEP\_GRADIENT\_TYPE\_TO\_TOP,  
+            gradientType: voltmx.skin.MULTI\_STEP\_GRADIENT\_TYPE\_TO\_TOP,  
             colors: \["ea5075", "f1fa70", "eefd04"\],  
             colorStops: \[0, 90, 100\]  
         }  
     },  
     border: {  
-        borderType: hcl.skin.BORDER\_TYPE\_SINGLE\_COLOR,  
+        borderType: voltmx.skin.BORDER\_TYPE\_SINGLE\_COLOR,  
         borderColor: "ea5075",  
-        borderStyle: hcl.skin.BORDER\_STYLE\_PLAIN,  
+        borderStyle: voltmx.skin.BORDER\_STYLE\_PLAIN,  
         borderWidth: 5  
     },  
     fonts: {  
         fontColor: "ea5075",  
         fontFamily: "Serif",  
         fontSize: '100',  
-        fontStyle: hcl.skin.FONT\_STYLE\_NONE,  
-        fontWeight: hcl.skin.FONT\_WEIGHT\_NORMAL  
+        fontStyle: voltmx.skin.FONT\_STYLE\_NONE,  
+        fontWeight: voltmx.skin.FONT\_WEIGHT\_NORMAL  
     },  
     textShadow: {  
         textShadowRadius: 5,  
@@ -1209,8 +1205,8 @@ This example uses the button widget, but the principle remains the same for all 
             x: 20,  
             y: 4  
         }  
-    }​
-{% endhighlight %}​​​​​
+    }
+{% endhighlight %}
 
 Platform Availability
 
@@ -1253,8 +1249,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontColor property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.fontColor = "ea5075";​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.btn1.fontColor = "ea5075";
+{% endhighlight %}
 
 Platform Availability
 
@@ -1291,8 +1287,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontFamily property.
 
-{% highlight voltMx %}​​​​​ Form1.btn1.fontFamily = "Serif";​
-{% endhighlight %}​​​​​
+{% highlight voltMx %} Form1.btn1.fontFamily = "Serif";
+{% endhighlight %}
 
 Platform Availability
 
@@ -1340,10 +1336,10 @@ The object contained by this property provides the app with the following inform
 
 Example
 
-{% highlight voltMx %}​​​​​var fontMatricesObject = form.label.fontMetrics;
-hcl.print("ascent :" + fontMatricesObject.ascent);
-hcl.print("descent:" + fontMatricesObject.descent);​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}var fontMatricesObject = form.label.fontMetrics;
+voltmx.print("ascent :" + fontMatricesObject.ascent);
+voltmx.print("descent:" + fontMatricesObject.descent);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1379,8 +1375,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontSize property.
 
-{% highlight voltMx %}​​​​​ Form1.btn1.fontSize = 150;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %} Form1.btn1.fontSize = 150;
+{% endhighlight %}
 
 Platform Availability
 
@@ -1414,9 +1410,9 @@ Remarks
 
 *   This property can have the following constant values:
     
-    *   **hcl.skin.FONT\_STYLE\_NONE**: Constant for the normal font style.
-    *   **hcl.skin.FONT\_STYLE\_ITALIC**: Constant for the italic font style.
-    *   **hcl.skin.FONT\_STYLE\_UNDERLINE**: Constant for the underline font style.
+    *   **voltmx.skin.FONT\_STYLE\_NONE**: Constant for the normal font style.
+    *   **voltmx.skin.FONT\_STYLE\_ITALIC**: Constant for the italic font style.
+    *   **voltmx.skin.FONT\_STYLE\_UNDERLINE**: Constant for the underline font style.
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
@@ -1424,15 +1420,15 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontStyle property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.fontStyle = hcl.skin.FONT\_STYLE\_NONE;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.btn1.fontStyle = voltmx.skin.FONT\_STYLE\_NONE;
+{% endhighlight %}
 
 Platform Availability
 
 *   Android
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
 
-> **_Note:_** On the Desktop Web channel, if the value of the fontStyle property is hcl.skin.FONT\_STYLE\_UNDRELINE, and the value of the [textStyle](#textSyle) property is Strikethrough, the textStyle property is given higher priority.
+> **_Note:_** On the Desktop Web channel, if the value of the fontStyle property is voltmx.skin.FONT\_STYLE\_UNDRELINE, and the value of the [textStyle](#textSyle) property is Strikethrough, the textStyle property is given higher priority.
 
 * * *
 
@@ -1458,8 +1454,8 @@ Remarks
 
 *   This property can have the following constant values:
     
-    *   **hcl.skin.FONT\_WEIGHT\_NORMAL**: Constant for the normal font weight.
-    *   **hcl.skin.FONT\_WEIGHT\_BOLD**: Constant for the bold font weight.
+    *   **voltmx.skin.FONT\_WEIGHT\_NORMAL**: Constant for the normal font weight.
+    *   **voltmx.skin.FONT\_WEIGHT\_BOLD**: Constant for the bold font weight.
 *   This property does not have a default value.
 *   This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
 
@@ -1467,8 +1463,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the fontWeight property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.fontWeight = hcl.skin.FONT\_WEIGHT\_NORMAL;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.btn1.fontWeight = voltmx.skin.FONT\_WEIGHT\_NORMAL;
+{% endhighlight %}
 
 Platform Availability
 
@@ -1505,18 +1501,18 @@ Following are the available measurement options:
 *   px: Specifies the values in terms of device hardware pixels.
 *   dp: Specifies the values in terms of device independent pixels.
 *   default: Specifies the default value of the widget.
-*   hcl.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height and preferred size of the widget is determined by the widget and may varies between platforms.
+*   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred height of the widget as height and preferred size of the widget is determined by the widget and may varies between platforms.
 
 **Example**
 
-{% highlight voltMx %}​​​​​/\*Sample code to set the height property for a Label widget by using DP, Percentage and Pixels.\*/
+{% highlight voltMx %}/\*Sample code to set the height property for a Label widget by using DP, Percentage and Pixels.\*/
 frmLabel.myLabel.height="50dp";
 
 frmLabel.myLabel.height="10%";
 
 frmLabel.myLabel.height="10px";
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -1548,9 +1544,9 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the hoverSkin property for a Label widget.
-frmLabel.myLabel.hoverSkin="hSkin";​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}//Sample code to set the hoverSkin property for a Label widget.
+frmLabel.myLabel.hoverSkin="hSkin";
+{% endhighlight %}
 
 Platform Availability
 
@@ -1587,27 +1583,27 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the hoverStateSkinProperties property.
 
-{% highlight voltMx %}​​​​​ Form1.btn1.hoverStateSkinProperties = {  
+{% highlight voltMx %} Form1.btn1.hoverStateSkinProperties = {  
      background: {  
-        backgroundType: hcl.skin.BACKGROUND\_TYPE\_MULTI\_STEP\_GRADIENT,  
+        backgroundType: voltmx.skin.BACKGROUND\_TYPE\_MULTI\_STEP\_GRADIENT,  
         backgroundColorMultiStepGradient : {  
-            gradientType: hcl.skin.MULTI\_STEP\_GRADIENT\_TYPE\_TO\_TOP,  
+            gradientType: voltmx.skin.MULTI\_STEP\_GRADIENT\_TYPE\_TO\_TOP,  
             colors: \["ea5075", "f1fa70", "eefd04"\],  
             colorStops: \[0, 90, 100\]  
         }  
     },  
     border: {  
-        borderType: hcl.skin.BORDER\_TYPE\_SINGLE\_COLOR,  
+        borderType: voltmx.skin.BORDER\_TYPE\_SINGLE\_COLOR,  
         borderColor: "ea5075",  
-        borderStyle: hcl.skin.BORDER\_STYLE\_PLAIN,  
+        borderStyle: voltmx.skin.BORDER\_STYLE\_PLAIN,  
         borderWidth: 5  
     },  
     fonts: {  
         fontColor: "ea5075",  
         fontFamily: "Serif",  
         fontSize: '100',  
-        fontStyle: hcl.skin.FONT\_STYLE\_NONE,  
-        fontWeight: hcl.skin.FONT\_WEIGHT\_NORMAL  
+        fontStyle: voltmx.skin.FONT\_STYLE\_NONE,  
+        fontWeight: voltmx.skin.FONT\_WEIGHT\_NORMAL  
     },  
     textShadow: {  
         textShadowRadius: 5,  
@@ -1616,8 +1612,8 @@ This example uses the button widget, but the principle remains the same for all 
             x: 20,  
             y: 4  
         }  
-    }​
-{% endhighlight %}​​​​​
+    }
+{% endhighlight %}
 
 Platform Availability
 
@@ -1659,9 +1655,9 @@ You can specify any of the following values to this property.
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the hyphenationFrequency property for a Label widget.
-frmLabel.myLabel.hyphenationFrequency=constants.TEXT\_HYPHENATION\_FREQUENCY\_NONE;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}//Sample code to set the hyphenationFrequency property for a Label widget.
+frmLabel.myLabel.hyphenationFrequency=constants.TEXT\_HYPHENATION\_FREQUENCY\_NONE;
+{% endhighlight %}
 
 Platform Availability
 
@@ -1689,7 +1685,7 @@ Yes - (Read only)
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining the properties for a label with id:"label1"
+{% highlight voltMx %}//Defining the properties for a label with id:"label1"
 var lblBasic = {
     id: "label1",
     skin: "labelSkin",
@@ -1706,11 +1702,11 @@ var lblLayout = {
 var lblPSP = {};
 
 //Creating the label.
-var label1 = new hcl.ui.Label(lblBasic, lblLayout, lblPSP);
+var label1 = new voltmx.ui.Label(lblBasic, lblLayout, lblPSP);
 
 //Reading the id of the label
-alert("Label id::" + label1.id);​
-{% endhighlight %}​​​​​
+alert("Label id::" + label1.id);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1744,27 +1740,27 @@ Remarks
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}​​​​​var inf = {
+{% highlight voltMx %}var inf = {
     a: 'hello'
 };
 widget.info = inf; //works
 widget.info.a = 'hello world';
 /\*This will not update the widget info a property to Hello world. 
-widget.info.a will have old value as hello\*/​
-{% endhighlight %}​​​​​
+widget.info.a will have old value as hello\*/
+{% endhighlight %}
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set info property for a Label widget.
+{% highlight voltMx %}//Sample code to set info property for a Label widget.
 
 frmLabel.myLabel.info = {
     key: "LABEL"
 };
 
 //Reading the info of the Label widget.
-hcl.print("Label widget info:" +frmLabel.myLabel.info);
-​
-{% endhighlight %}​​​​​
+voltmx.print("Label widget info:" +frmLabel.myLabel.info);
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -1796,14 +1792,14 @@ Remarks
 
 The default value for this property is true. If set to _false_, the label is not displayed on the Form. If set to _true_, the label is displayed on the Form.
 
-> **_Note:_** This property is not applicable if the widget is placed in a [Segment](Segment.htm). When the widget is placed in a Segment, the visibility of the widget is controlled by the [data](Segment_Properties.htm#data) property of the segment.
+> **_Note:_** This property is not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the visibility of the widget is controlled by the [data](Segment_Properties.html#data) property of the segment.
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the isVisible property of a Label widget.  
+{% highlight voltMx %}//Sample code to set the isVisible property of a Label widget.  
   
-frmLabel.myLabel.isVisible=true;​
-{% endhighlight %}​​​​​
+frmLabel.myLabel.isVisible=true;
+{% endhighlight %}
 
 Platform Availability
 
@@ -1835,17 +1831,17 @@ Read + Write
 
 Remarks
 
-If the layoutType is set as hcl.flex.FLOW\_HORIZONTAL, the left property is measured from right edge of the left sibling widget.
+If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the left property is measured from right edge of the left sibling widget.
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
+{% highlight voltMx %}//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.left = "50dp";
 
 frmHome.widgetID.left = "10%";
 
-frmHome.widgetID.left = "10px";​
-{% endhighlight %}​​​​​
+frmHome.widgetID.left = "10px";
+{% endhighlight %}
 
 Platform Availability
 
@@ -1876,13 +1872,13 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight voltMx %}//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxHeight = "50dp";
 
 frmHome.widgetID.maxHeight = "10%";
 
-frmHome.widgetID.maxHeight = "10px";​
-{% endhighlight %}​​​​​
+frmHome.widgetID.maxHeight = "10px";
+{% endhighlight %}
 
 Platform Availability
 
@@ -1931,10 +1927,10 @@ The height calculated by label's Flex parameters permits five lines of text to f
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the maxNumberOfLines property of a Label widget.   
+{% highlight voltMx %}//Sample code to set the maxNumberOfLines property of a Label widget.   
   
-frmLabel.myLabel.maxNumberOfLines = 4;​
-{% endhighlight %}​​​​​
+frmLabel.myLabel.maxNumberOfLines = 4;
+{% endhighlight %}
 
 Platform Availability
 
@@ -1966,13 +1962,13 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight voltMx %}//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.maxWidth = "50dp";
 
 frmHome.widgetID.maxWidth = "10%";
 
-frmHome.widgetID.maxWidth = "10px";​
-{% endhighlight %}​​​​​
+frmHome.widgetID.maxWidth = "10px";
+{% endhighlight %}
 
 Platform Availability
 
@@ -2003,13 +1999,13 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+{% highlight voltMx %}//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minHeight = "50dp";
 
 frmHome.widgetID.minHeight = "10%";
 
-frmHome.widgetID.minHeight = "10px";​
-{% endhighlight %}​​​​​
+frmHome.widgetID.minHeight = "10px";
+{% endhighlight %}
 
 Platform Availability
 
@@ -2040,13 +2036,13 @@ Read only
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+{% highlight voltMx %}//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.minWidth = "50dp";
 
 frmHome.widgetID.minWidth = "10%";
 
-frmHome.widgetID.minWidth = "10px";​
-{% endhighlight %}​​​​​
+frmHome.widgetID.minWidth = "10px";
+{% endhighlight %}
 
 Platform Availability
 
@@ -2077,10 +2073,10 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to enable the newUnderlineBehaviour property of a Label widget.   
+{% highlight voltMx %}//Sample code to enable the newUnderlineBehaviour property of a Label widget.   
   
-frmLabel.myLabel.newUnderlineBehaviour= true;​
-{% endhighlight %}​​​​​
+frmLabel.myLabel.newUnderlineBehaviour= true;
+{% endhighlight %}
 
 Platform Availability
 
@@ -2114,12 +2110,12 @@ Remarks
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to make the widget transparent by using the opacity property.
+{% highlight voltMx %}//Sample code to make the widget transparent by using the opacity property.
 frmHome.widgetID.opacity = 0;
 
 //Sample code to make the widget opaque by using the opacity property.
-frmHome.widgetID.opacity = 1;​
-{% endhighlight %}​​​​​
+frmHome.widgetID.opacity = 1;
+{% endhighlight %}
 
 Platform Availability
 
@@ -2160,9 +2156,9 @@ Limitations
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the padding property for widgetID Button widget in frmHome Form.
-frmHome.widgetID.padding= \[2,2,2,2\];​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}//Sample code to set the padding property for widgetID Button widget in frmHome Form.
+frmHome.widgetID.padding= \[2,2,2,2\];
+{% endhighlight %}
 
 Platform Availability
 
@@ -2203,10 +2199,10 @@ Desktop Web/ SPA platforms do not support _paddingInPixel_ property in Image wid
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to read paddingInPixel property for widgetID Button widget in frmHome form.
+{% highlight voltMx %}//Sample code to read paddingInPixel property for widgetID Button widget in frmHome form.
 
-hcl.print("PaddingInPixel property value is:"+fromHome.widgetID.paddingInPixel);​
-{% endhighlight %}​​​​​
+voltmx.print("PaddingInPixel property value is:"+fromHome.widgetID.paddingInPixel);
+{% endhighlight %}
 
 Platform Availability
 
@@ -2234,12 +2230,12 @@ Remarks
 
 Example
 
-{% highlight voltMx %}​​​​​function func() {
+{% highlight voltMx %}function func() {
 
-    hcl.print("The parent of the widget" + JSON.stringify(Form1.widgetID.parent));
+    voltmx.print("The parent of the widget" + JSON.stringify(Form1.widgetID.parent));
 
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 
@@ -2277,10 +2273,10 @@ The different pasteboard types are:
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the pasteboardType property of a Label widget.  
+{% highlight voltMx %}//Sample code to set the pasteboardType property of a Label widget.  
   
-frmLabel.myLabel.pasteboardType=constants.PASTE\_BOARD\_TYPE\_SYSTEM\_LEVEL;​
-{% endhighlight %}​​​​​
+frmLabel.myLabel.pasteboardType=constants.PASTE\_BOARD\_TYPE\_SYSTEM\_LEVEL;
+{% endhighlight %}
 
 Platform Availability
 
@@ -2318,27 +2314,27 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the pressedStateSkinProperties property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.pressedStateSkinProperties = {  
+{% highlight voltMx %}Form1.btn1.pressedStateSkinProperties = {  
      background: {  
-        backgroundType: hcl.skin.BACKGROUND\_TYPE\_MULTI\_STEP\_GRADIENT,  
+        backgroundType: voltmx.skin.BACKGROUND\_TYPE\_MULTI\_STEP\_GRADIENT,  
         backgroundColorMultiStepGradient : {  
-            gradientType: hcl.skin.MULTI\_STEP\_GRADIENT\_TYPE\_TO\_TOP,  
+            gradientType: voltmx.skin.MULTI\_STEP\_GRADIENT\_TYPE\_TO\_TOP,  
             colors: \["ea5075", "f1fa70", "eefd04"\],  
             colorStops: \[0, 90, 100\]  
         }  
     },  
     border: {  
-        borderType: hcl.skin.BORDER\_TYPE\_SINGLE\_COLOR,  
+        borderType: voltmx.skin.BORDER\_TYPE\_SINGLE\_COLOR,  
         borderColor: "ea5075",  
-        borderStyle: hcl.skin.BORDER\_STYLE\_PLAIN,  
+        borderStyle: voltmx.skin.BORDER\_STYLE\_PLAIN,  
         borderWidth: 5  
     },  
     fonts: {  
         fontColor: "ea5075",  
         fontFamily: "Serif",  
         fontSize: '100',  
-        fontStyle: hcl.skin.FONT\_STYLE\_NONE,  
-        fontWeight: hcl.skin.FONT\_WEIGHT\_NORMAL  
+        fontStyle: voltmx.skin.FONT\_STYLE\_NONE,  
+        fontWeight: voltmx.skin.FONT\_WEIGHT\_NORMAL  
     },  
     textShadow: {  
         textShadowRadius: 5,  
@@ -2347,8 +2343,8 @@ This example uses the button widget, but the principle remains the same for all 
             x: 20,  
             y: 4  
         }  
-    }​
-{% endhighlight %}​​​​​
+    }
+{% endhighlight %}
 
 Platform Availability
 
@@ -2386,10 +2382,10 @@ If set to _true,_ the Label is made a clickable element in the Segment. If set t
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the renderAsAnchor property of a Label widget.
+{% highlight voltMx %}//Sample code to set the renderAsAnchor property of a Label widget.
 frmLabel.myLabel.renderAsAnchor=true;
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -2410,13 +2406,13 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}​​​​​function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig\[defaultLocale\]
     \["mirrorFlexPositionalProperties"\] == true &&
     !widgetRetainFlexPositionPropertiesValue);
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
@@ -2447,11 +2443,11 @@ No (only during widget-construction time)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /\*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.\*/
-var btn = new hcl.ui.Button({
+var btn = new voltmx.ui.Button({
     "focusSkin": "defBtnFocus",
     "height": "50dp",
     "id": "myButton",
@@ -2469,8 +2465,8 @@ var btn = new hcl.ui.Button({
     "paddingInPixel": false,
     "retainFlexPositionProperties": false,
     "retainContentAlignment": true
-}, {});​
-{% endhighlight %}​​​​​
+}, {});
+{% endhighlight %}
 
 Platform Availability
 
@@ -2489,13 +2485,13 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}​​​​​function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig\[defaultLocale\]
     \["mirrorFlexPositionalProperties"\] == true &&
     !widgetRetainFlexPositionPropertiesValue);
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
@@ -2526,11 +2522,11 @@ No (only during widget-construction time)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /\*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.\*/
-var btn = new hcl.ui.Button({
+var btn = new voltmx.ui.Button({
     "focusSkin": "defBtnFocus",
     "height": "50dp",
     "id": "myButton",
@@ -2548,8 +2544,8 @@ var btn = new hcl.ui.Button({
     "paddingInPixel": false,
     "retainFlexPositionProperties": true,
     "retainContentAlignment": false
-}, {});​
-{% endhighlight %}​​​​​
+}, {});
+{% endhighlight %}
 
 Platform Availability
 
@@ -2568,13 +2564,13 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}​​​​​function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig\[defaultLocale\]
     \["mirrorFlexPositionalProperties"\] == true &&
     !widgetRetainFlexPositionPropertiesValue);
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
@@ -2605,11 +2601,11 @@ No (only during widget-construction time)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /\*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. \*/
-var btn = new hcl.ui.Button({
+var btn = new voltmx.ui.Button({
  "focusSkin": "defBtnFocus",
  "height": "50dp",
  "id": "myButton",
@@ -2628,8 +2624,8 @@ var btn = new hcl.ui.Button({
  "retainFlexPositionProperties": true,
  "retainContentAlignment": false,
  "retainFlowHorizontalAlignment ": false
-}, {});​
-{% endhighlight %}​​​​​
+}, {});
+{% endhighlight %}
 
 Platform Availability
 
@@ -2662,17 +2658,17 @@ Read + Write
 
 Remarks
 
-If the layoutType is set as hcl.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
+If the layoutType is set as voltmx.flex.FLOW\_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+{% highlight voltMx %}//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.right = "50dp";
 
 frmHome.widgetID.right = "10%";
 
-frmHome.widgetID.right = "10px";​
-{% endhighlight %}​​​​​
+frmHome.widgetID.right = "10px";
+{% endhighlight %}
 
 Platform Availability
 
@@ -2712,8 +2708,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the shadowColor property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.shadowColor = "ea5075";​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.btn1.shadowColor = "ea5075";
+{% endhighlight %}
 
 Platform Availability
 
@@ -2746,11 +2742,11 @@ The depth of the shadow should be specified in DP (Device Independent Pixels) un
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the shadowDepth property of a Label widget.
+{% highlight voltMx %}//Sample code to set the shadowDepth property of a Label widget.
 
 frmLabel.myLabel.shadowDepth = 10;
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -2790,11 +2786,11 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the shadowOffset property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.shadowOffset= {
+{% highlight voltMx %}Form1.btn1.shadowOffset= {
     "x": "3",
     "y": "27"
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -2832,8 +2828,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the shadowRadius property.
 
-{% highlight voltMx %}​​​​​ Form1.btn1.shadowRadius = 6;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %} Form1.btn1.shadowRadius = 6;
+{% endhighlight %}
 
 Platform Availability
 
@@ -2874,10 +2870,10 @@ _BACKGROUND\_SHADOW_: Shadow matches the widget's background. This is the defaul
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the shadowType property of a Label widget.
+{% highlight voltMx %}//Sample code to set the shadowType property of a Label widget.
 frmLabel.myLabel.shadowType = constants.VIEW\_BOUNDS\_SHADOW;
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -2905,10 +2901,10 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the skin property of a Label widget.  
+{% highlight voltMx %}//Sample code to set the skin property of a Label widget.  
   
-frmLabel.myLabel.skin="lblSkin";​
-{% endhighlight %}​​​​​
+frmLabel.myLabel.skin="lblSkin";
+{% endhighlight %}
 
 Platform Availability
 
@@ -2938,10 +2934,10 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the text property of a Label widget.  
+{% highlight voltMx %}//Sample code to set the text property of a Label widget.  
   
-frmLabel.myLabel.text="Hello world";​
-{% endhighlight %}​​​​​
+frmLabel.myLabel.text="Hello world";
+{% endhighlight %}
 
 Platform Availability
 
@@ -2983,10 +2979,10 @@ The default value for this property is false. If set to _true,_ the text of Labe
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the textCopyable property of a Label widget.  
+{% highlight voltMx %}//Sample code to set the textCopyable property of a Label widget.  
   
-frmLabel.myLabel.textCopyable=true;​
-{% endhighlight %}​​​​​
+frmLabel.myLabel.textCopyable=true;
+{% endhighlight %}
 
 Platform Availability
 
@@ -3029,8 +3025,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the textShadowColor property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.textShadowColor = "ea5075";​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.btn1.textShadowColor = "ea5075";
+{% endhighlight %}
 
 Platform Availability
 
@@ -3072,11 +3068,11 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the textShadowOffset property.
 
-{% highlight voltMx %}​​​​​Form1.btn1.textShadowOffset = {
+{% highlight voltMx %}Form1.btn1.textShadowOffset = {
     "x": "2",
     "y": "24"
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -3115,8 +3111,8 @@ Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have the textShadowRadius property.
 
-{% highlight voltMx %}​​​​​ Form1.btn1.textShadowRadius = 6;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %} Form1.btn1.textShadowRadius = 6;
+{% endhighlight %}
 
 Platform Availability
 
@@ -3178,7 +3174,7 @@ In iOS apps, if the strikeThrough property is true, then your app should specif
 
 Example
 
-{% highlight voltMx %}​​​​​//Writing values to the textStyle property.
+{% highlight voltMx %}//Writing values to the textStyle property.
 form.label.textStyle = {
     "lineSpacing": 10,
     "letterSpacing": 10,
@@ -3188,8 +3184,8 @@ form.label.textStyle = {
 };
 
 //Reading values from the textStyle property.
-var textStyleInfo = form.label.textStyle;​
-{% endhighlight %}​​​​​
+var textStyleInfo = form.label.textStyle;
+{% endhighlight %}
 
 Platform Availability
 
@@ -3255,10 +3251,10 @@ When you place a Label Widget in a FlexForm, and the label's height is determine
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the textTruncatePosition property of a Label widget.   
+{% highlight voltMx %}//Sample code to set the textTruncatePosition property of a Label widget.   
   
-frmlabel.myLabel.textTruncatePosition = constants.TEXT\_TRUNCATE\_END;​
-{% endhighlight %}​​​​​
+frmlabel.myLabel.textTruncatePosition = constants.TEXT\_TRUNCATE\_END;
+{% endhighlight %}
 
 Platform Availability
 
@@ -3290,17 +3286,17 @@ Read + Write
 
 Remarks
 
-If the layoutType is set as hcl.flex.FLOW\_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
+If the layoutType is set as voltmx.flex.FLOW\_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+{% highlight voltMx %}//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.top = "50dp";
 
 frmHome.widgetID.top = "10%";
 
-frmHome.widgetID.top = "10px";​
-{% endhighlight %}​​​​​
+frmHome.widgetID.top = "10px";
+{% endhighlight %}
 
 Platform Availability
 
@@ -3329,10 +3325,10 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​ //Sample code to set the toolTip property of a Label widget.  
+{% highlight voltMx %} //Sample code to set the toolTip property of a Label widget.  
   
-frmLabel.myLabel.toolTip="sample text";​
-{% endhighlight %}​​​​​
+frmLabel.myLabel.toolTip="sample text";
+{% endhighlight %}
 
 Platform Availability
 
@@ -3362,19 +3358,19 @@ Read + Write
 
 Remarks
 
-This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [hcl.ui.makeAffineTransform](http://docs.hcl.com/hcllibrary/iris/iris_api_dev_guide/Default.htm#hcl.ui_functions.htm%23makeAffi?TocPath=References|hcl.ui%2520Namespace|Functions|_____6) function.
+This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [voltmx.ui.makeAffineTransform](https://{{site.baseurl}}/docs/documentation/Iris/iris_api_dev_guide/Content/voltmx.ui_functions.html%23makeAffi?TocPath=References|voltmx.ui%2520Namespace|Functions|_____6) function.
 
 Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have a transform property.
 
-{% highlight voltMx %}​​​​​//Animation sample
-var newTransform = hcl.ui.makeAffineTransform();
+{% highlight voltMx %}//Animation sample
+var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
 //translates by 223 xAxis,12 in yAxis,56 in zAxis
-widget.transform = newTransform;​
-{% endhighlight %}​​​​​
+widget.transform = newTransform;
+{% endhighlight %}
 
 Platform Availability
 
@@ -3427,7 +3423,7 @@ Example
 
 Following is a code snippet for a mail app. Here we have used a Segment for listing the mail and the _widgetSwipeMove_ Property has been configured for the _SwipeFlex_ FlexContainer.
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.  
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.  
 //Here, we have shown how to use the widetSwipeMove property for Button widget.
 /\*You need to make a corresponding use of the 
 widgetSwipeMove property for other applicable widgets.\*/  
@@ -3460,8 +3456,8 @@ var swipeMoveConfig = {
 };  
   
 this.view.myButton.widgetSwipeMove=swipeMoveConfig;  
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -3497,17 +3493,17 @@ Following are the options that can be used as units of width:
 *   px: Specifies the values in terms of device hardware pixels.
 *   dp: Specifies the values in terms of device independent pixels.
 *   default: Specifies the default value of the widget.
-*   hcl.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.
+*   voltmx.flex.USE\_PREFERED\_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
+{% highlight voltMx %}//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
 frmHome.widgetID.width = "50dp";
 
 frmHome.widgetID.width = "10%";
 
-frmHome.widgetID.width = "10px";​
-{% endhighlight %}​​​​​
+frmHome.widgetID.width = "10px";
+{% endhighlight %}
 
 Platform Availability
 
@@ -3554,10 +3550,10 @@ The following image illustrates the character wrapping property:
 
 Example
 
-{% highlight voltMx %}​​​​​ //Sample code to set the wrapping property of a Label widget.  
+{% highlight voltMx %} //Sample code to set the wrapping property of a Label widget.  
   
-frmLabel.myLabel.wrapping=constants.WIDGET\_TEXT\_WORD\_WRAP;​
-{% endhighlight %}​​​​​
+frmLabel.myLabel.wrapping=constants.WIDGET\_TEXT\_WORD\_WRAP;
+{% endhighlight %}
 
 Platform Availability
 
@@ -3606,24 +3602,24 @@ For new components, the value of the Z Index is configured as **1** for the Nati
 
 > **_Note:_** If ModalContainer property is set to true in any of the FlexContainer widget, the Z Index value of that container and all of its parent containers should be set to **Custom**.
 
-**hcl.flex.ZINDEX\_AUTO** : Constant to configure the Z Index value as **auto** programmatically.
+**voltmx.flex.ZINDEX\_AUTO** : Constant to configure the Z Index value as **auto** programmatically.
 
-{% highlight voltMx %}​​​​​//Sample code to set the ZIndex value to Auto  
- var flx = new hcl.ui.FlexContainer({ 
+{% highlight voltMx %}//Sample code to set the ZIndex value to Auto  
+ var flx = new voltmx.ui.FlexContainer({ 
   "id": "flx"
-  "zIndex": hcl.flex.ZINDEX\_AUTO
+  "zIndex": voltmx.flex.ZINDEX\_AUTO
 });
-​
-{% endhighlight %}​​​​​{% highlight voltMx %}​​​​​//Sample code to set the ZIndex value to Auto
-flx.zIndex = hcl.flex.ZINDEX\_AUTO;
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}{% highlight voltMx %}//Sample code to set the ZIndex value to Auto
+flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
+
+{% endhighlight %}
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the zIndex property for widgets.  
-frmHome.widgetID.zIndex = 300;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}//Sample code to set the zIndex property for widgets.  
+frmHome.widgetID.zIndex = 300;
+{% endhighlight %}
 
 Platform Availability
 

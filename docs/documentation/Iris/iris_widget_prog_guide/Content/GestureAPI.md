@@ -1,7 +1,3 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 Gesture Methods and 3D Touch
 ============================
 
@@ -18,7 +14,7 @@ The gesture methods are documented as part of each widget:
 *   addGestureRecognizer
 *   removeGestureRecognizer
 
-In addition, the Gesture API provides the following functions in the hcl.application namespace. These are documented in the [API Programming Guide.](http://docs.hcl.com/hcllibrary/iris/iris_api_dev_guide/Default.htm)
+In addition, the Gesture API provides the following functions in the voltmx.application namespace. These are documented in the [API Programming Guide.](https://{{site.baseurl}}/docs/documentation/Iris/iris_api_dev_guide/Content/introduction.html)
 
 *   setGestureRecognizerForAllForms
 *   removeGestureRecognizerForAllForms
@@ -34,7 +30,7 @@ Devices that support 3D Touch can sense how much pressure the user applies to th
 
 On devices that support 3D Touch, developers can take advantage of the pressure sensing capability to provide creative functionality to their apps. Widget events **onTouchEnd**, **onTouchMove**, and **onTouchStart** include the parameter contextInfo that specifies the force of the touch. Developers can use this information in their apps to respond to force pressure.
 
-For more information about using these events, see the [reference section](WidgetReferences.htm) of this guide for each widget. For more information about pressure sensitivity touch, see the [Apple documentation](http://www.apple.com/in/iphone-6s/3d-touch/).
+For more information about using these events, see the [reference section](WidgetReferences.html) of this guide for each widget. For more information about pressure sensitivity touch, see the [Apple documentation](http://www.apple.com/in/iphone-6s/3d-touch/).
 
 ### Peek and Pop
 
@@ -54,11 +50,11 @@ The following methods are provided to enable Peek and Pop on widgets and carry o
 *   widget.setOnPop(onPopCallback)
 *   formWidget.setPreviewActionItems(previewActions)
 
-For information about using these methods see the [reference section](WidgetReferences.htm) of this guide for each widget.
+For information about using these methods see the [reference section](WidgetReferences.html) of this guide for each widget.
 
 For more information about the Peek and Pop features and how to use them, see the [Apple documentation](http://www.apple.com/in/iphone-6s/3d-touch/).
 
-Additional APIs that support the 3D Touch features are documented in the hcl.forcetouch namespace in the [API Programming Guide.](http://docs.hcl.com/hcllibrary/iris/iris_api_dev_guide/Default.htm)
+Additional APIs that support the 3D Touch features are documented in the voltmx.forcetouch namespace in the [API Programming Guide.](https://{{site.baseurl}}/docs/documentation/Iris/iris_api_dev_guide/Content/introduction.html)
 
 Important Considerations
 ------------------------

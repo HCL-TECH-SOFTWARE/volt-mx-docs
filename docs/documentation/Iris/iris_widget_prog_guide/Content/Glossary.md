@@ -1,6 +1,4 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
+You are here: Glossary
 
 Glossary
 ========
@@ -27,7 +25,7 @@ Glossary
     
 *   containerWeight
     
-    Specifies percentage of width to be allocated by its parent widget. The parent widget space is distributed to its child widgets based on this weight factor. All its child widgets should sum up to 100% of weight except when placed in hcl.ui.ScrollBox.
+    Specifies percentage of width to be allocated by its parent widget. The parent widget space is distributed to its child widgets based on this weight factor. All its child widgets should sum up to 100% of weight except when placed in voltmx.ui.ScrollBox.
     
 *   DataGrid
     

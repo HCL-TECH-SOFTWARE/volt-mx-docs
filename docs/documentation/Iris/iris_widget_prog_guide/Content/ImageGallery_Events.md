@@ -1,7 +1,3 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 ImageGallery Events
 -------------------
 
@@ -25,7 +21,7 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback for onSelection event
 function onSelCallBck(imgGal)
 {
@@ -48,8 +44,8 @@ var imgGalLayout = {containerWeight:100}
 var imgGalPSP = {itemsPerRow:3};
 
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);​
-{% endhighlight %}​​​​​
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -75,11 +71,11 @@ Read + Write
 
 Remarks
 
-In for the events preOnclickJS and postOnclickJS you cannot access application model or APIs, as these functions are executed in browser whereas the remaining JavaScript modules are executed in server. For these events you can access browser objects ( window, document etc..) to change UI or perform some validation before server event. If the event preOnclickJS returns true, only then the request is sent to server for subsequent action. You have to specify the modules to be loaded in browser using import JavaScript tab, only then these files get included in html script tag otherwise you will not be able to access the objects defined in those modules.
+In for the events preOnclickJS and postOnclickJS you cannot access application model or APIs, as these functions are executed in browser whereas the remaining JavaScript modules are executed in server. For these events you can access browser objects ( window, document etc..) to change UI or perform some validation before server event. If the event preOnclickJS returns true, only then the request is sent to server for subsequent action. You have to specify the modules to be loaded in browser using import JavaScript tab, only then these files get included in.html script tag otherwise you will not be able to access the objects defined in those modules.
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback for postOnclickJS event.
 function postOnclickCallBck(imgGal)
 {
@@ -100,8 +96,8 @@ var imgGalLayout = {containerWeight:100}
 var imgGalPSP = {itemsPerRow:3, **postOnclickJS:postOnclickCallBck**};
 	
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);​
-{% endhighlight %}​​​​​
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -127,11 +123,11 @@ Read + Write
 
 Remarks
 
-In for the events preOnclickJS and postOnclickJS you cannot access application model or APIs, as these functions are executed in browser whereas the remaining JavaScript modules are executed in server. For these events you can access browser objects ( window, document etc..) to change UI or perform some validation before server event. If the event preOnclickJS returns true, only then the request is sent to server for subsequent action. You have to specify the modules to be loaded in browser using import JavaScript tab, only then these files get included in html script tag otherwise you will not be able to access the objects defined in those modules.
+In for the events preOnclickJS and postOnclickJS you cannot access application model or APIs, as these functions are executed in browser whereas the remaining JavaScript modules are executed in server. For these events you can access browser objects ( window, document etc..) to change UI or perform some validation before server event. If the event preOnclickJS returns true, only then the request is sent to server for subsequent action. You have to specify the modules to be loaded in browser using import JavaScript tab, only then these files get included in.html script tag otherwise you will not be able to access the objects defined in those modules.
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback for preOnclickJS event
 function preOnclickCallBck(imgGal)
 {
@@ -153,8 +149,8 @@ var imgGalLayout = {containerWeight:100}
 var imgGalPSP = {itemsPerRow:3, **preOnclickJS:preOnclickCallBck**};
 
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);​
-{% endhighlight %}​​​​​
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
+{% endhighlight %}
 
 Platform Availability
 

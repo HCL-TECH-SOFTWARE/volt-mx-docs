@@ -1,28 +1,24 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 Form Events
 -----------
 
-This widget has been deprecated. Older applications that use it will still function, but new applications should use the [FlexForm](FlexForm.htm) widget.
+This widget has been deprecated. Older applications that use it will still function, but new applications should use the [FlexForm](FlexForm.html) widget.
 
 Form widget has the following events associated:
 
 > **_Note:_** In Server side Mobile Web platform, only the last event _form.show_ or an alert will be displayed. For example, If there are 3 alert statements and an event form.show in the end, then form is displayed. Alert will not be displayed. Similarly you call a form.show and in subsequent statements or in form pre/post events you call alert then that alert will be displayed but not the form.
 
-*   [addWidgets](#addWidge)
-*   [init](#init())
-*   [onActionBarBack](#onAction)
-*   [onHide](#onHide())
-*   [onOrientationChange](#onOrient)
-*   [onDeviceBack](#onDevice)
-*   [onDeviceMenu](#onDevice2)
-*   [onDestroy](#onDestro)
-*   [preShow](#preShow()
-*   [postShow](#postShow)
-*   [onLoadJS](#onLoadJS)
-*   [unLoadJS](#unLoadJS)
+*   [addWidgets](#addwidgets-event)
+*   [init](#init-event)
+*   [onActionBarBack](#onactionbarback-event)
+*   [onHide](#onhide)
+*   [onOrientationChange](#onorientationchange)
+*   [onDeviceBack](#ondeviceback)
+*   [onDeviceMenu](#ondevicemenu)
+*   [onDestroy](#ondestroy)
+*   [preShow](#preshow)
+*   [postShow](#postshow)
+*   [onLoadJS](#onloadjs)
+*   [unLoadJS](#unloadjs)
 
 ### addWidgets Event
 
@@ -38,7 +34,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for addWidgets event of the form.
 function addWidgetsCalBck(form)
 {
@@ -53,10 +49,10 @@ var frmLayout ={displayOrientation:constants.FORM\_DISPLAY\_ORIENTATION\_BOTH, p
 var frmPSP ={};
 
 //Creating a form.
-var frm =new hcl.ui.Form2(frmBasic, frmLayout, frmPSP);  
+var frm =new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);  
   
- ​
-{% endhighlight %}​​​​​
+ 
+{% endhighlight %}
 
 Platform Availability
 
@@ -78,7 +74,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for init event of the form
 function initCalBck(form)
 {
@@ -93,8 +89,8 @@ var frmLayout ={displayOrientation:constants.FORM\_DISPLAY\_ORIENTATION\_BOTH, p
 var frmPSP ={};
 
 //Creating a form.
-var frm =new hcl.ui.Form2(frmBasic, frmLayout, frmPSP);​
-{% endhighlight %}​​​​​
+var frm =new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -116,7 +112,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for onActionBarBack event of the form
 function onActionBarBackCalBck(form)
 {
@@ -131,8 +127,8 @@ var frmLayout ={displayOrientation:constants.FORM\_DISPLAY\_ORIENTATION\_BOTH, p
 var frmPSP ={};
 
 //Creating a form.
-var frm =new hcl.ui.Form2(frmBasic, frmLayout, frmPSP);​
-{% endhighlight %}​​​​​
+var frm =new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -144,7 +140,7 @@ Specifies an _Event_ which is triggered when a form goes completely out of view.
 
 This event is triggered in the following scenarios:
 
-*   [form.show](Form_Methods.htm#form.sho) (another form) is called
+*   [form.show](Form_Methods.html#form.sho) (another form) is called
 *   User hits the device back button or key
 
 This event is _not_ triggered in the following scenarios:
@@ -162,7 +158,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for onHide event of the form.
 function onHideCalBck(form)
 {
@@ -177,8 +173,8 @@ var frmLayout ={displayOrientation:constants.FORM\_DISPLAY\_ORIENTATION\_BOTH, p
 var frmPSP ={};
 
 //Creating a form.
-var frm =new hcl.ui.Form2(frmBasic, frmLayout, frmPSP);​
-{% endhighlight %}​​​​​
+var frm =new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -188,7 +184,7 @@ Available on all platforms
 
 Specifies an _Event_ which is triggered when there is a change in orientation of the form from portrait to landscape or vice versa.
 
-> **_Note:_** Blackberry devices will raise these event only if the [displayOrientation](Form_Basic_Properties.htm#displayO) mode of the form is set to FORM\_ DISPLAY\_ORIENTATION\_BOTH.
+> **_Note:_** Blackberry devices will raise these event only if the [displayOrientation](Form_Basic_Properties.html#displayO) mode of the form is set to FORM\_ DISPLAY\_ORIENTATION\_BOTH.
 
 For more information about defining an action sequence for this event, see _Event Editor_ in the _VoltMX Iris User Guide_.
 
@@ -202,7 +198,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for onOrientationChange event of the form.
 function onOrChngCalBck(form)
 {
@@ -217,8 +213,8 @@ var frmLayout ={displayOrientation:constants.FORM\_DISPLAY\_ORIENTATION\_BOTH, p
 var frmPSP ={};
 
 //Creating a form.
-var frm =new hcl.ui.Form2(frmBasic, frmLayout, frmPSP);​
-{% endhighlight %}​​​​​
+var frm =new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -240,7 +236,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for onDeviceBack event of the form.
 function onDevBckCal(form)
 {
@@ -255,11 +251,11 @@ var frmLayout ={displayOrientation:constants.FORM\_DISPLAY\_ORIENTATION\_BOTH, p
 var frmPSP ={**onDeviceBack:onDevBckCal**};
 
 //Creating a form.
-var frm =new hcl.ui.Form2(frmBasic, frmLayout, frmPSP);
+var frm =new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
 
 //Reading the the onDeviceBack event of the form.
-alert("onDeviceBack is ::"+frm.onDeviceBack);​
-{% endhighlight %}​​​​​
+alert("onDeviceBack is ::"+frm.onDeviceBack);
+{% endhighlight %}
 
 Platform Availability
 
@@ -284,7 +280,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for onDeviceMenu event of the form.
 function onDevMenCalBck(form)
 {
@@ -299,11 +295,11 @@ var frmLayout ={displayOrientation:constants.FORM\_DISPLAY\_ORIENTATION\_BOTH, p
 var frmPSP ={**onDeviceMenu:onDevMenCalBck**};
 
 //Creating a form.
-var frm =new hcl.ui.Form2(frmBasic, frmLayout, frmPSP);
+var frm =new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
 
 //Reading the the onDeviceMenu event of the form
-alert("onDeviceMenu is ::"+frm.onDeviceMenu);​
-{% endhighlight %}​​​​​
+alert("onDeviceMenu is ::"+frm.onDeviceMenu);
+{% endhighlight %}
 
 Platform Availability
 
@@ -326,7 +322,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for onDestroy event of the form.
 function onDestroycalBck(form)
 {
@@ -341,11 +337,11 @@ var frmLayout ={displayOrientation:constants.FORM\_DISPLAY\_ORIENTATION\_BOTH, p
 var frmPSP ={**onDestroy:onDestroycalBck**};
 
 //Creating a form.
-var frm =new hcl.ui.Form2(frmBasic, frmLayout, frmPSP);
+var frm =new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
 
 //Reading the the onDestroy event of the form
-alert("onDestroy is ::"+frm.onDestroy);​
-{% endhighlight %}​​​​​
+alert("onDestroy is ::"+frm.onDestroy);
+{% endhighlight %}
 
 Platform Availability
 
@@ -367,7 +363,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for preShow event of the form.
 function preShowCalBck(form)
 {
@@ -382,8 +378,8 @@ var frmLayout ={displayOrientation:constants.FORM\_DISPLAY\_ORIENTATION\_BOTH, p
 var frmPSP ={};
 
 //Creating a form.
-var frm =new hcl.ui.Form2(frmBasic, frmLayout, frmPSP);​
-{% endhighlight %}​​​​​
+var frm =new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -407,7 +403,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for postShow event of the form.
 function postShowCalBck(form)
 {
@@ -422,8 +418,8 @@ var frmLayout ={displayOrientation:constants.FORM\_DISPLAY\_ORIENTATION\_BOTH, p
 var frmPSP ={};
 
 //Creating a form.
-var frm =new hcl.ui.Form2(frmBasic, frmLayout, frmPSP);​
-{% endhighlight %}​​​​​
+var frm =new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -443,7 +439,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for onLoadJS event of the form.
 function onLoadJSCalBck(form)
 {
@@ -458,11 +454,11 @@ var frmLayout ={displayOrientation:constants.FORM\_DISPLAY\_ORIENTATION\_BOTH, p
 var frmPSP ={**onLoadJS:onLoadJSCalBck**};
 
 //Creating a form.
-var frm =new hcl.ui.Form2(frmBasic, frmLayout, frmPSP);
+var frm =new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
 
 //Reading the the onLoadJS event of the form.
-alert("onLoadJS is ::"+frm.onLoadJS);​
-{% endhighlight %}​​​​​
+alert("onLoadJS is ::"+frm.onLoadJS);
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -489,7 +485,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for unLoadJS event of the form.
 function unLoadJSCalBck(form)
 {
@@ -504,11 +500,11 @@ var frmLayout ={displayOrientation:constants.FORM\_DISPLAY\_ORIENTATION\_BOTH, p
 var frmPSP ={**unLoadJS:unLoadJSCalBck**};
 
 //Creating a form.
-var frm =new hcl.ui.Form2(frmBasic, frmLayout, frmPSP);
+var frm =new voltmx.ui.Form2(frmBasic, frmLayout, frmPSP);
 
 //Reading the the unLoadJS event of the form.
-alert("unLoadJS is ::"+frm.unLoadJS);​
-{% endhighlight %}​​​​​
+alert("unLoadJS is ::"+frm.unLoadJS);
+{% endhighlight %}
 
 Accessible from IDE
 

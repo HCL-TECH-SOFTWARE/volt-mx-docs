@@ -1,7 +1,3 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 HorizontalImageStrip Events
 ---------------------------
 
@@ -25,7 +21,7 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 function onSelectionCallBack(hIS)
 {
 	//Write your logic here.
@@ -52,11 +48,11 @@ function onSelectionCallBack(hIS)
 	var hISPSP={};
 					
 	//Creating the Horizontal Image strip.
-	var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+	var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading onSelection of Horizontal Image strip.
-alert("Horizontal Image strip onSelection::"+hIS.onSelection);​
-{% endhighlight %}​​​​​
+alert("Horizontal Image strip onSelection::"+hIS.onSelection);
+{% endhighlight %}
 
 Platform Availability
 
@@ -84,11 +80,11 @@ Remarks
 
 In for the events preOnclickJS and postOnclickJS you cannot access application model or APIs, as these functions are executed in browser whereas the remaining JavaScript modules are executed in server. For these events you can access browser objects ( window, document etc.) to change UI or perform some validation before server event. If the event preOnclickJS returns true, only then the request is sent to server for subsequent action.  
   
-You have to specify the modules to be loaded in browser using import JavaScript tab, only then these files get included in html script tag otherwise you will not be able to access the objects defined in those modules.
+You have to specify the modules to be loaded in browser using import JavaScript tab, only then these files get included in.html script tag otherwise you will not be able to access the objects defined in those modules.
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for postOnclickJS event of Horizontal Image strip.
 function postOnclickJSCalBck(hIS)
 {
@@ -121,12 +117,12 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={postOnclickJS:postOnclickJSCalBck};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading postOnclickJS of Horizontal Image strip
 alert("Horizontal Image strip postOnclickJS::"+hIS.postOnclickJS);
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -154,11 +150,11 @@ Remarks
 
 In for the events preOnclickJS and postOnclickJS you cannot access application model or APIs, as these functions are executed in browser whereas the remaining JavaScript modules are executed in server. For these events you can access browser objects ( window, document etc..) to change UI or perform some validation before server event. If the event preOnclickJS returns true, only then the request is sent to server for subsequent action.  
   
-You have to specify the modules to be loaded in browser using import JavaScript tab, only then these files get included in html script tag otherwise you will not be able to access the objects defined in those modules.
+You have to specify the modules to be loaded in browser using import JavaScript tab, only then these files get included in.html script tag otherwise you will not be able to access the objects defined in those modules.
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //The below function is the callback function for preOnclickJS event of Horizontal Image strip.
 function preOnclickJSCalBck(hIS)
 {
@@ -190,12 +186,12 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={preOnclickJS:preOnclickJSCalBck};
 					
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading preOnclickJS of Horizontal Image strip.
 alert("Horizontal Image strip preOnclickJS::"+hIS.preOnclickJS);
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 

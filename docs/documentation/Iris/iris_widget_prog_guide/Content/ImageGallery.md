@@ -1,7 +1,3 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 ImageGallery Widget
 -------------------
 
@@ -11,31 +7,31 @@ You can add the ImageGallery Widget only to the VBox form. This widget will be a
 
 This section provides the following documentation on this Widget.
 
-##### [Overviews](#Overviews)
+##### [Overviews](#imagegallery-overviews)
 
-##### [Events](ImageGallery_Events.htm)
+##### [Events](ImageGallery_Events.html)
 
-##### [Methods](ImageGallery_Methods.htm)
+##### [Methods](ImageGallery_Methods.html)
 
-##### [Properties](ImageGallery_Properties.htm)
+##### [Properties](ImageGallery_Properties.html)
 
 The ImageGallery widget capabilities can be broadly categorized into the following:
 
-*   [Layout](#Layout)
-*   [Animations](#Animations)
-*   [Data Management](#Data)
-*   [User Input Handling](#Gestures)
-*   [3D Touch](#3D)
-*   [UI Appearance](#UI)
-*   [Miscellaneous](#Miscellaneous)
-*   [Configurations Common To All Widgets](#Configurations)
+*   [Layout](#layout)
+*   [Animations](#animations)
+*   [Data Management](#data-management)
+*   [User Input Handling](#user-input-handling)
+*   [3D Touch](#3d-touch)
+*   [UI Appearance](#ui-appearance)
+*   [Miscellaneous](#miscellaneous)
+*   [Configurations Common To All Widgets](#configurations-common-to-all-widgets)
 
 #### Layout
 
   
 | Properties | Description |
 | --- | --- |
-| [anchorPoint](ImageGallery_Properties.htm#anchorPo) | Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space. |
+| [anchorPoint](ImageGallery_Properties.html#anchorPo) | Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space. |
 
   
 
@@ -43,13 +39,13 @@ The ImageGallery widget capabilities can be broadly categorized into the followi
 
 | Methods | Description |
 | --- | --- |
-| [animate](ImageGallery_Methods.htm#animate) | Applies an animation to the widget. |
+| [animate](ImageGallery_Methods.html#animate) | Applies an animation to the widget. |
 
  
 
 | Properties | Description |
 | --- | --- |
-| [transform](ImageGallery_Properties.htm#transfor) | Contains an animation transformation that can be used to animate the widget. |
+| [transform](ImageGallery_Properties.html#transfor) | Contains an animation transformation that can be used to animate the widget. |
 
  
 
@@ -57,18 +53,18 @@ The ImageGallery widget capabilities can be broadly categorized into the followi
 
 | Methods | Description |
 | --- | --- |
-| [addAll](ImageGallery_Methods.htm#addAll) | Allows you to add new images to the ImageGallery. |
-| [addDataAt](ImageGallery_Methods.htm#addDataA) | Allows you to add/insert a new image at a given index. |
-| [removeAll](ImageGallery_Methods.htm#removeAll) | Removes all the images in the HorizontalImageStrip. |
-| [removeAt](ImageGallery_Methods.htm#removeAt) | Removes the image at the given index in the ImageGallery. |
-| [setData](ImageGallery_Methods.htm#setData) | Allows you to set new images to the ImageGallery. |
-| [setDataAt](ImageGallery_Methods.htm#setDataAt) | Allows you to set a new image at a given index. |
+| [addAll](ImageGallery_Methods.html#addAll) | Allows you to add new images to the ImageGallery. |
+| [addDataAt](ImageGallery_Methods.html#addDataA) | Allows you to add/insert a new image at a given index. |
+| [removeAll](ImageGallery_Methods.html#removeAll) | Removes all the images in the HorizontalImageStrip. |
+| [removeAt](ImageGallery_Methods.html#removeAt) | Removes the image at the given index in the ImageGallery. |
+| [setData](ImageGallery_Methods.html#setData) | Allows you to set new images to the ImageGallery. |
+| [setDataAt](ImageGallery_Methods.html#setDataAt) | Allows you to set a new image at a given index. |
 
  
 
 | Properties | Description |
 | --- | --- |
-| [data](ImageGallery_Properties.htm#data) | Represents the JSObject to represent the images to be rendered in ImageGallery. |
+| [data](ImageGallery_Properties.html#data) | Represents the JSObject to represent the images to be rendered in ImageGallery. |
 
  
 
@@ -76,10 +72,10 @@ The ImageGallery widget capabilities can be broadly categorized into the followi
 
 | Methods | Description |
 | --- | --- |
-| [registerForPeekandPop](ImageGallery_Methods.htm#register) | Registers a widget to enable 3D Touch peek and pop gestures. |
-| [setOnPeek](ImageGallery_Methods.htm#setOnPek) | Sets and overrides the existing onPeekCallback for the widget. |
-| [setOnPop](ImageGallery_Methods.htm#setOnPop) | Overrides the existing onPopCallback for the widget. |
-| [unregisterForPeekandPop](ImageGallery_Methods.htm#unregist) | Unregisters a widget from 3D Touch peek and pop gestures. |
+| [registerForPeekandPop](ImageGallery_Methods.html#register) | Registers a widget to enable 3D Touch peek and pop gestures. |
+| [setOnPeek](ImageGallery_Methods.html#setOnPek) | Sets and overrides the existing onPeekCallback for the widget. |
+| [setOnPop](ImageGallery_Methods.html#setOnPop) | Overrides the existing onPopCallback for the widget. |
+| [unregisterForPeekandPop](ImageGallery_Methods.html#unregist) | Unregisters a widget from 3D Touch peek and pop gestures. |
 
  
 
@@ -89,9 +85,9 @@ The ImageGallery widget capabilities can be broadly categorized into the followi
 
 | Methods | Description |
 | --- | --- |
-| [addGestureRecognizer](ImageGallery_Methods.htm#addGestureRecognizer) | Allows you to set a gesture recognizer for a specified gesture for a specified widget. |
-| [removeGestureRecognizer](ImageGallery_Methods.htm#removeGestureRecognizer) | Allows you to remove the specified gesture recognizer for the specified widget. |
-| [setGestureRecognizer](ImageGallery_Methods.htm#setGestureRecognizer) | Allows you to set a gesture recognizer for a specified gesture for a specified widget. |
+| [addGestureRecognizer](ImageGallery_Methods.html#addGestureRecognizer) | Allows you to set a gesture recognizer for a specified gesture for a specified widget. |
+| [removeGestureRecognizer](ImageGallery_Methods.html#removeGestureRecognizer) | Allows you to remove the specified gesture recognizer for the specified widget. |
+| [setGestureRecognizer](ImageGallery_Methods.html#setGestureRecognizer) | Allows you to set a gesture recognizer for a specified gesture for a specified widget. |
 
  
 
@@ -99,75 +95,75 @@ The ImageGallery widget capabilities can be broadly categorized into the followi
 
 | Properties | Description |
 | --- | --- |
-| [focusSkin](ImageGallery_Properties.htm#focusSkin) | Specifies the look and feel of the widget when in focus. |
-| [hoverSkin](ImageGallery_Properties.htm#hoverSki) | Specifies the look and feel of a widget when the cursor hovers on the widget. |
-| [navigationBarPosition](ImageGallery_Properties.htm#navigationBarPosition) | Specifies the position of the navigation bar for the ImageGallery. |
-| [selectedIndex](ImageGallery_Properties.htm#selectedIndex) | Indicates the currently selected image in the ImageGallery. |
-| [selectedItem](ImageGallery_Properties.htm#selectedItem) | Returns the selected data object (input array) corresponding to the selected image of the ImageGallery. |
-| [skin](ImageGallery_Properties.htm#skin) | Specifies the look and feel of the ImageGallery when not in focus. |
-| [spaceBetweenImages](ImageGallery_Properties.htm#spaceBetweenImages) | Specifies the space between the images in the ImageGallery. |
-| [viewType](ImageGallery_Properties.htm#viewType) | Specifies the appearance of the Image Gallery as Default view or Page view. |
-| [viewConfig](ImageGallery_Properties.htm#viewConf) | Specifies the view configuration parameters when the viewType is set as IMAGE\_GALLERY\_VIEW\_TYPE\_PAGEVIEW for Desktop Web platform. |
+| [focusSkin](ImageGallery_Properties.html#focusSkin) | Specifies the look and feel of the widget when in focus. |
+| [hoverSkin](ImageGallery_Properties.html#hoverSki) | Specifies the look and feel of a widget when the cursor hovers on the widget. |
+| [navigationBarPosition](ImageGallery_Properties.html#navigationBarPosition) | Specifies the position of the navigation bar for the ImageGallery. |
+| [selectedIndex](ImageGallery_Properties.html#selectedIndex) | Indicates the currently selected image in the ImageGallery. |
+| [selectedItem](ImageGallery_Properties.html#selectedItem) | Returns the selected data object (input array) corresponding to the selected image of the ImageGallery. |
+| [skin](ImageGallery_Properties.html#skin) | Specifies the look and feel of the ImageGallery when not in focus. |
+| [spaceBetweenImages](ImageGallery_Properties.html#spaceBetweenImages) | Specifies the space between the images in the ImageGallery. |
+| [viewType](ImageGallery_Properties.html#viewType) | Specifies the appearance of the Image Gallery as Default view or Page view. |
+| [viewConfig](ImageGallery_Properties.html#viewConf) | Specifies the view configuration parameters when the viewType is set as IMAGE\_GALLERY\_VIEW\_TYPE\_PAGEVIEW for Desktop Web platform. |
 
 #### Miscellaneous
 
 | Properties | Description |
 | --- | --- |
-| [imageWhenFailed](ImageGallery_Properties.htm#imageWhenFailed) | Specifies the image to be displayed when the remote resource is not available. |
-| [imageWhileDownloading](ImageGallery_Properties.htm#imageWhileDownloading) | Specifies the image to be displayed when the remote source is still being downloaded. |
-| [itemsPerRow](ImageGallery_Properties.htm#itemsPerRow) | Specifies the number of images to be displayed per row in an ImageGallery at a time. |
-| [noofRowsPerPage](ImageGallery_Properties.htm#noofRows) | Specifies the number of rows to be displayed in each page. |
+| [imageWhenFailed](ImageGallery_Properties.html#imageWhenFailed) | Specifies the image to be displayed when the remote resource is not available. |
+| [imageWhileDownloading](ImageGallery_Properties.html#imageWhileDownloading) | Specifies the image to be displayed when the remote source is still being downloaded. |
+| [itemsPerRow](ImageGallery_Properties.html#itemsPerRow) | Specifies the number of images to be displayed per row in an ImageGallery at a time. |
+| [noofRowsPerPage](ImageGallery_Properties.html#noofRows) | Specifies the number of rows to be displayed in each page. |
 
  
 
 | Methods | Description |
 | --- | --- |
-| [getBadge](ImageGallery_Methods.htm#getBadge) | Enables you to read the badge value (if any) attached to the specified widget. |
-| [setBadge](ImageGallery_Methods.htm#setBadge) | Enables you to set the badge value to the given widget at the upper, right corner of the widget. |
+| [getBadge](ImageGallery_Methods.html#getBadge) | Enables you to read the badge value (if any) attached to the specified widget. |
+| [setBadge](ImageGallery_Methods.html#setBadge) | Enables you to set the badge value to the given widget at the upper, right corner of the widget. |
 
  
 
 | Events | Description |
 | --- | --- |
-| [onSelection](ImageGallery_Events.htm#onSelection) | An event callback that is invoked by the platform when an Image is selected in ImageGallery. |
+| [onSelection](ImageGallery_Events.html#onSelection) | An event callback that is invoked by the platform when an Image is selected in ImageGallery. |
 
 #### Configurations Common To All Widgets
 
 | Methods | Description |
 | --- | --- |
-| [convertPointFromWidget](ImageGallery_Methods.htm#convertPointFromWidget) | Allows you to convert the coordinate system from a widget to a point (receiver's coordinate system). |
-| [convertPointToWidget](ImageGallery_Methods.htm#convertPointToWidget) | Allows you to convert the coordinate system from a point (receiver's coordinate system) to a widget. |
-| [removeFromParent](ImageGallery_Methods.htm#removeFromParent) | Allows you to remove a child widget from a parent widget. |
-| [setEnabled](ImageGallery_Methods.htm#setEnabled) | Specifies the widget that must be enabled or disabled. |
-| [setFocus](ImageGallery_Methods.htm#setFocus) | Specifies the widget on which there must be focus. |
-| [setVisibility](ImageGallery_Methods.htm#setVisibility) | Sets the visibility of the widget. |
+| [convertPointFromWidget](ImageGallery_Methods.html#convertPointFromWidget) | Allows you to convert the coordinate system from a widget to a point (receiver's coordinate system). |
+| [convertPointToWidget](ImageGallery_Methods.html#convertPointToWidget) | Allows you to convert the coordinate system from a point (receiver's coordinate system) to a widget. |
+| [removeFromParent](ImageGallery_Methods.html#removeFromParent) | Allows you to remove a child widget from a parent widget. |
+| [setEnabled](ImageGallery_Methods.html#setEnabled) | Specifies the widget that must be enabled or disabled. |
+| [setFocus](ImageGallery_Methods.html#setFocus) | Specifies the widget on which there must be focus. |
+| [setVisibility](ImageGallery_Methods.html#setVisibility) | Sets the visibility of the widget. |
 
  
 
 | Properties | Description |
 | --- | --- |
-| [accessibilityConfig](ImageGallery_Properties.htm#accessibilityConfig) | Enables you to control accessibility behavior and alternative text for the widget. |
-| [enableCache](ImageGallery_Properties.htm#enableCa) | Enables you to improve the performance of Positional Dimension Animations. |
-| [id](ImageGallery_Properties.htm#id) | id is a unique identifier of ImageGallery consisting of alpha numeric characters. |
-| [info](ImageGallery_Properties.htm#info) | A custom JSObject with the key value pairs that a developer can use to store the context with the widget. |
-| [isVisible](ImageGallery_Properties.htm#isVisible) | controls the visibility of a widget on the form. |
+| [accessibilityConfig](ImageGallery_Properties.html#accessibilityConfig) | Enables you to control accessibility behavior and alternative text for the widget. |
+| [enableCache](ImageGallery_Properties.html#enableCa) | Enables you to improve the performance of Positional Dimension Animations. |
+| [id](ImageGallery_Properties.html#id) | id is a unique identifier of ImageGallery consisting of alpha numeric characters. |
+| [info](ImageGallery_Properties.html#info) | A custom JSObject with the key value pairs that a developer can use to store the context with the widget. |
+| [isVisible](ImageGallery_Properties.html#isVisible) | controls the visibility of a widget on the form. |
 
  
 
 | Events | Description |
 | --- | --- |
-| [postOnclickJS](ImageGallery_Events.htm#postOncl) | Allows the developer to execute custom javascript function after the onClick callback of the ImageGallery is invoked. |
-| [preOnclickJS](ImageGallery_Events.htm#preOncli) | Allows the developer to execute custom javascript function when the ImageGallery is invoked. |
+| [postOnclickJS](ImageGallery_Events.html#postOncl) | Allows the developer to execute custom javascript function after the onClick callback of the ImageGallery is invoked. |
+| [preOnclickJS](ImageGallery_Events.html#preOncli) | Allows the developer to execute custom javascript function when the ImageGallery is invoked. |
 
 ### ImageGallery Overviews
 
 > **_Note:_** ImageGallery widget is not supported in BlackBerry 10 platform.
 
-#### Creating an Image Gallery using a constructor: hcl.ui.ImageGallery
+#### Creating an Image Gallery using a constructor: voltmx.ui.ImageGallery
 
-{% highlight voltMx %}​​​​​
-var imagegallery1 = new hcl.ui.ImageGallery2 (basicConf, layoutConf, pspConf)​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}
+var imagegallery1 = new voltmx.ui.ImageGallery2 (basicConf, layoutConf, pspConf)
+{% endhighlight %}
 
 *   **basicConf** is an object with basic properties.
 *   **layoutConf** is an object with layout properties.
@@ -177,7 +173,7 @@ var imagegallery1 = new hcl.ui.ImageGallery2 (basicConf, layoutConf, pspConf)​
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining properties for ImageGallery.
+{% highlight voltMx %}//Defining properties for ImageGallery.
 var imgGalBasic = 
     { 
       id: "imgGallery",
@@ -190,16 +186,16 @@ var imgGalBasic =
 var imgGalLayout = {containerWeight:50};
 var imgGalPSP = {itemsPerRow:3, navigationBarPosition:"Bottom"};
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery(imgGalBasic,imgGalLayout,imgGalPSP );
+var imgGallery = new voltmx.ui.ImageGallery(imgGalBasic,imgGalLayout,imgGalPSP );
 //Reading the containerWeight of ImageGallery.
-alert("ImageGallery containerWeight is ::"+imgGallery.containerWeight); ​
-{% endhighlight %}​​​​​
+alert("ImageGallery containerWeight is ::"+imgGallery.containerWeight); 
+{% endhighlight %}
 
-For backward compatibility with support for all deprecated properties and behaviors, use the constructor **hcl.ui.ImageGallery**.
+For backward compatibility with support for all deprecated properties and behaviors, use the constructor **voltmx.ui.ImageGallery**.
 
-{% highlight voltMx %}​​​​​
-var imageGal1= new hcl.ui.ImageGallery (basicConf, layoutConf, pspConf)​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}
+var imageGal1= new voltmx.ui.ImageGallery (basicConf, layoutConf, pspConf)
+{% endhighlight %}
 
 #### Customizing Appearance
 
@@ -209,8 +205,8 @@ You can customize the appearance of the Image Gallery using the following proper
 *   referenceHeight: Specifies the reference height of the ImageGallery in pixels.
 *   referenceWidth: Specifies the reference width of the ImageGallery in pixels.
 *   margin: Defines the space around a widget.
-*   [skin](ImageGallery_Properties.htm#skin): Specify the skin to be applied to the images in the Image Gallery.
-*   [focusSkin](ImageGallery_Properties.htm#focusSkin): Specify the skin to be applied to the individual image in the ImageGallery when in focus.
+*   [skin](ImageGallery_Properties.html#skin): Specify the skin to be applied to the images in the Image Gallery.
+*   [focusSkin](ImageGallery_Properties.html#focusSkin): Specify the skin to be applied to the individual image in the ImageGallery when in focus.
 
 #### Important Considerations:
 
@@ -218,6 +214,6 @@ You can customize the appearance of the Image Gallery using the following proper
 *   On devices which have a navigation key, you can use the up or down keys to navigate through the images.
 *   Form cycling is supported (i.e, if you reach the end of the gallery and if it is the last widget, you are taken to the first control of the form).
 *   For Symbian, Image gallery always uses an image size of 64x64 pixels.
-*   For Windows Desktop, Image Gallery widget behaves like a screen-level widget,hence [HorizontalImageStrip](Horizontal_Image_Strip.htm) is preferred while using images.
+*   For Windows Desktop, Image Gallery widget behaves like a screen-level widget,hence [HorizontalImageStrip](Horizontal_Image_Strip.html) is preferred while using images.
 
 ![](Resources/prettify/onLoad.png)

@@ -1,7 +1,3 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 Link Events
 -----------
 
@@ -39,15 +35,15 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the onClick event callback to a Link widget.
+{% highlight voltMx %}//Sample code to set the onClick event callback to a Link widget.
 
 frmLink.myLink.onClick=onClickCallback;
 
 
 function onClickCallback(link){
    //Write your logic here.
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 
@@ -71,7 +67,7 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​var LabelWdg = new hcl.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -82,8 +78,8 @@ the screen's X - coordinates (after downsizing the navigation bar and status bar
 coordinates (after downsizing the navigation bar and status bar).\*/
     //frameX : Position of widget with respect to parent container's X- coordinates.
     //frameY : Position of widget with respect to parent container's Y- coordinates.
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 
@@ -110,18 +106,18 @@ Remarks
 
 In for the events preOnclickJS and postOnclickJS you will not be able to access application model or APIs, as these functions are executed in browser whereas the remaining JS modules are executed in server. For these events you can access browser objects ( window, document etc..) to change UI or perform some validation before server event. If the event preOnclickJS returns true, only then the request is sent to server for subsequent action.
 
-You have to specify the modules to be loaded in browser using import JS tab, only then these files get included in html script tag otherwise you will not be able to access the objects defined in those modules.
+You have to specify the modules to be loaded in browser using import JS tab, only then these files get included in.html script tag otherwise you will not be able to access the objects defined in those modules.
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the preOnclickJS event callback to a Link widget.
+{% highlight voltMx %}//Sample code to set the preOnclickJS event callback to a Link widget.
 
 frmLink.myLink.preOnclickJS=preclickJSCallBack;
 
 function preclickJSCallBack(link) {
     //Write your logic here.
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 
@@ -146,14 +142,14 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set the postOnclickJS event callback to a Link widget.
+{% highlight voltMx %}//Sample code to set the postOnclickJS event callback to a Link widget.
 
 frmLink.myLink.postOnclickJS=postclickJSCallBack;
 
 function postclickJSCallBack(link) {
     //Write your logic here.
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 

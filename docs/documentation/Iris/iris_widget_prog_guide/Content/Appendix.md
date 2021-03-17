@@ -1,7 +1,3 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 Platform Specific Limitations
 =============================
 
@@ -96,10 +92,10 @@ This section lists the properties that are not supported by the Desktop Web plat
 16.  On Internet Explorer browsers, focusSkin applied to the widgets CheckBox and RadioButton will work on click of text, but not on icon.
 17.  For Browser widget, Desktop Web platform supports BROWSER\_REQUEST\_METHOD\_GET option only.
 18.  Video widget in print API is not supported in Firefox browser.
-19.  To apply focusSkin for dynamically created widgets or cloned widgets, assign focusSkin dynamically after adding the widget to the form hierarchy.{% highlight voltMx %}​​​​​formid.widgetid.focusSkin = "skinname";​
-    {% endhighlight %}​​​​​
-20.  To apply hoverSkin for dynamically created widgets or cloned widgets, assign hoverSkin dynamically after adding the widget to the form hierarchy.{% highlight voltMx %}​​​​​formid.widgetid.hoverSkin = "skinname";​
-    {% endhighlight %}​​​​​
+19.  To apply focusSkin for dynamically created widgets or cloned widgets, assign focusSkin dynamically after adding the widget to the form hierarchy.{% highlight voltMx %}formid.widgetid.focusSkin = "skinname";
+    {% endhighlight %}
+20.  To apply hoverSkin for dynamically created widgets or cloned widgets, assign hoverSkin dynamically after adding the widget to the form hierarchy.{% highlight voltMx %}formid.widgetid.hoverSkin = "skinname";
+    {% endhighlight %}
 21.  In Desktop Web platform, only left, right, and center alignment options can be applied to the content. This limitation is applicable for all widgets.
     
 22.  For Browser widget, resetting of URL does not work.
@@ -121,8 +117,8 @@ This section lists the properties that are not supported by the SPA platform.
 *   On Windows device browsers, focusSkin applied to the widgets CheckBox and RadioButton will work on click of text, but not on icon.
 *   For Browser widget, SPA platform supports BROWSER\_REQUEST\_METHOD\_GET option only.
 *   On SPA platform, <script> tag is not supported.
-*   To apply focusSkin for dynamically created or cloned widgets, assign focusSkin dynamically after adding the widget to the form hierarchy.{% highlight voltMx %}​​​​​formid.widgetid.focusSkin = "skinname";​
-    {% endhighlight %}​​​​​
+*   To apply focusSkin for dynamically created or cloned widgets, assign focusSkin dynamically after adding the widget to the form hierarchy.{% highlight voltMx %}formid.widgetid.focusSkin = "skinname";
+    {% endhighlight %}
 *   On SPA (iOS devices) platform, when accessibility is set for FlexContainer, the FlexContainer's child widgets will not be focused. Only the FlexContainer Widget will be focused.
 *   In SPA platform, only left, right, and center alignment options can be applied to the content. This limitation is applicable for all widgets.
     

@@ -1,39 +1,35 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 Properties
 ==========
 
 The HBox Widget supports the following properties.
 
-*   [a11yIndex](#a11yIndex)
-*   [a11yNavigationMode](#a11yNavigationMode)
-*   [blockedUISkin](#blockedU)
-*   [borderCollapse](#borderCo)
-*   [containerWeight](#containe)
-*   [contextMenu](#contextM)
-*   [enableCache](#enableCa)
-*   [focusSkin](#focusSki)
-*   [gridCell](#gridCell)
-*   [hoverSkin](#hoverSkin)
+*   [a11yIndex](#a11yindex)
+*   [a11yNavigationMode](#a11ynavigationmode)
+*   [blockedUISkin](#blockeduiskin)
+*   [borderCollapse](#bordercollapse)
+*   [containerWeight](#containerweight)
+*   [contextMenu](#contextmenu)
+*   [enableCache](#enablecache)
+*   [focusSkin](#focusskin)
+*   [gridCell](#gridcell)
+*   [hoverSkin](#hoverskin)
 *   [id](#id)
 *   [info](#info)
-*   [isVisible](#isVisibl)
-*   [layoutAlignment](#layoutAl)
-*   [layoutMeta](#layoutMe)
-*   [layoutType](#layoutType)
+*   [isVisible](#isvisible)
+*   [layoutAlignment](#layoutalignment)
+*   [layoutMeta](#layoutmeta)
+*   [layoutType](#layouttype)
 *   [margin](#margin)
-*   [marginInPixel](#marginIn)
-*   [orientation](#orientat)
+*   [marginInPixel](#margininpixel)
+*   [orientation](#orientation)
 *   [padding](#padding)
-*   [paddingInPixel](#paddingI)
+*   [paddingInPixel](#paddinginpixel)
 *   [percent](#percent)
 *   [position](#position)
 *   [skin](#skin)
-*   [vExpand](#vExpand)
-*   [viewConfig](#viewConfig)
-*   [widgetAlignment](#widgetAl)
+*   [vExpand](#vexpand)
+*   [viewConfig](#viewconfig)
+*   [widgetAlignment](#widgetalignment)
 
 ### a11yIndex
 
@@ -57,18 +53,18 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for a box with a11yIndex: 1
 var basicConfBox = {id:"boxFocusSkinTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL, kin:"boxGray", "accessibilityConfig": { 		"a11yNavigationMode": constants.ACCESSIBILITY\_NAVIGATION\_PARENT,     **"a11yIndex": 1**}};
 
 var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, containerWeight:100, vExpand:true};
 
 //Creating the box.
-boxFocusSkinTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxFocusSkinTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 //Reading the focusSkin property of the box.
-alert("box focusSkin is ::"+boxFocusSkinTest.focusSkin);​
-{% endhighlight %}​​​​​
+alert("box focusSkin is ::"+boxFocusSkinTest.focusSkin);
+{% endhighlight %}
 
 Platform Availability
 
@@ -98,7 +94,7 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining the properties for a box with 
+{% highlight voltMx %}//Defining the properties for a box with 
 a11yNavigationMode: constants.ACCESSIBILITY\_NAVIGATION\_MODE\_PARENT
 var basicConfBox = 
 {
@@ -118,11 +114,11 @@ var layoutConfBox =
 	};
 
 //Creating the box.
-boxFocusSkinTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxFocusSkinTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 //Reading the focusSkin property of the box.
-alert("box focusSkin is :"+boxFocusSkinTest.focusSkin);​
-{% endhighlight %}​​​​​
+alert("box focusSkin is :"+boxFocusSkinTest.focusSkin);
+{% endhighlight %}
 
 Platform Availability
 
@@ -152,7 +148,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Call back for box onClick event
 function boxblockedUISkinTCSPAPlayClick(box){  
 	//Call the service here to observe blockedUI skin  
@@ -164,7 +160,7 @@ var basicConf = {id:"lblblockedUISkin", text:"Click this Box to see blockedUI sk
 var layoutConf = {contentAlignment :constants.CONTENT\_ALIGN\_CENTER, containerWeight:100, widgetAlignment:constants.WIDGET\_ALIGN\_CENTER,hExpand: true,vExpand:true};
 
 //Creating the Label.
-var lblblockedUISkin = new hcl.ui.Label(basicConf, layoutConf, {});
+var lblblockedUISkin = new voltmx.ui.Label(basicConf, layoutConf, {});
 
 //onClick event is triggered when user clicks on the box. In this case we are calling the service inside the callback to observe the blockedUI skin.
 var basicConfBox = {id:"boxblockedUISkin", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL,onClick:boxblockedUISkinTCSPAPlayClick};
@@ -172,11 +168,11 @@ var basicConfBox = {id:"boxblockedUISkin", isVisible:true, orientation:constants
 var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, containerWeight:100, vExpand:true};
 
 //Creating the Box
-var boxblockedUISkin = new hcl.ui.Box(basicConfBox, layoutConfBox, {blockedUISkin:"blockUISkin"});
+var boxblockedUISkin = new voltmx.ui.Box(basicConfBox, layoutConfBox, {blockedUISkin:"blockUISkin"});
 
 //Adding label to box.  
-boxblockedUISkin.add(lblblockedUISkin);​
-{% endhighlight %}​​​​​
+boxblockedUISkin.add(lblblockedUISkin);
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -212,7 +208,7 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the box with borderCollapse:true .(If you set the Border-Collapse value to true, the default space between the parent and the child widget reduces else not.)
 var basicConfBox = {id:"boxBorderCollapse", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL};
 
@@ -221,8 +217,8 @@ var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, con
 var PSPConfBox = {**borderCollapse:true**}
 
 //Creating the box.
-var boxBorderCollapse = new hcl.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );​
-{% endhighlight %}​​​​​
+var boxBorderCollapse = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -235,7 +231,7 @@ Platform Availability
 
 ### containerWeight
 
-Specifies percentage of width to be allocated by its parent widget. The parent widget space is distributed to its child widgets based on this weight factor. All its child widgets should sum up to 100% of weight except when placed in **hcl.ui.ScrollBox**.
+Specifies percentage of width to be allocated by its parent widget. The parent widget space is distributed to its child widgets based on this weight factor. All its child widgets should sum up to 100% of weight except when placed in **voltmx.ui.ScrollBox**.
 
 For example, a Form has Label1, Button1, and Button2 and the container weight could be 30 each for Label1 and Button1 and 40 for Button2, so that the sum of the container weight is 100.
 
@@ -253,15 +249,15 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for a box with containerWeight:50 (box will occupy half of its parent widget).
 var basicConfBox = {id:"boxContainerWeightTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL, skin:"gradroundbox"};
 
 var layoutConfBox = {**containerWeight:50,margin:\[0,5,0,5\]**};
 
 //Creating the box.
-boxContainerWeightTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});​
-{% endhighlight %}​​​​​
+boxContainerWeightTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -275,7 +271,7 @@ Available on all platforms
 
 Shows the list of actions (appropriate to the widget in focus) as menu items.
 
-> **_Note:_** Due to BlackBerry platform limitation, to display a context menu for an Box, you must define an [onclick event](Box_Events.htm#onClick() for the Box.
+> **_Note:_** Due to BlackBerry platform limitation, to display a context menu for an Box, you must define an [onclick event](Box_Events.html#onClick() for the Box.
 
 The following are the characteristics of a context menu on _BlackBerry_ platform:
 
@@ -327,7 +323,7 @@ contextMenu
 
 Type
 
-Array (hcl.ui.Menuitem)
+Array (voltmx.ui.Menuitem)
 
 Read/Write
 
@@ -335,7 +331,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining contextMenu items for Windows platform.
 var appMenu1 = {id:"appmenuitemid1", text:"Add", image:"tc.png", onclick:callbackMenuItem1 };
 
@@ -373,15 +369,15 @@ var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, con
 var PSPConfBox = {**contextMenu:\[appMenu1,appMenu2,appMenu3,appMenu4\]**};
 
 //Creating the box.
-var boxBorderCollapse = new hcl.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );​
-{% endhighlight %}​​​​​
+var boxBorderCollapse = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );
+{% endhighlight %}
 
 The below example is applicable to Desktop Web platform only.  
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining contextMenu template.  
 function initializeaddtoabc() {
-	menucontainer12068 = new hcl.ui.MenuContainer({
+	menucontainer12068 = new voltmx.ui.MenuContainer({
 		"id": "menucontainer12068", "isVisible": true,
 		"data": \[{template: hbox12068, "label12068": {"text": "India"},
 				children: \[{template: hbox12068, "label12068": {"text": "Mumbai"},
@@ -407,8 +403,8 @@ var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, con
 var PSPConfBox = {**contextMenu:menucontainer12068**};
 
 //Creating the box.
-var boxBorderCollapse = new hcl.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );​
-{% endhighlight %}​​​​​
+var boxBorderCollapse = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -472,18 +468,18 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for a box with focusSkin:"boxGrayFocus"
 var basicConfBox = {id:"boxFocusSkinTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL, kin:"boxGray", **focusSkin:"boxGrayFocus"**};
 
 var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, containerWeight:100, vExpand:true};
 
 //Creating the box.
-boxFocusSkinTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxFocusSkinTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 //Reading the focusSkin property of the box.
-alert("box focusSkin is ::"+boxFocusSkinTest.focusSkin); ​
-{% endhighlight %}​​​​​
+alert("box focusSkin is ::"+boxFocusSkinTest.focusSkin); 
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -520,7 +516,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining properties for a box with gridCell.
 var basicConfBox = {id:"boxLayoutAlignmentLeftTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL,skin:"gradroundbox"};
 
@@ -531,8 +527,8 @@ var layoutConfBox = {containerWeight:100, percent:false, layoutType: constants.C
 			"rows": 4
 		},**gridCell: {"colSpan":1, "rowSpan":1, "rowNo":1, "colNo":1}** };  
 //Creating the box.
-boxLayoutAlignmentLeftTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});​
-{% endhighlight %}​​​​​
+boxLayoutAlignmentLeftTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -560,7 +556,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the box with hoverSkin:"hskin"
 var basicConfBox = {id:"boxBorderCollapse", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL};
 
@@ -569,8 +565,8 @@ var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, con
 var PSPConfBox = {**hoverSkin:"hskin"**}
 
 //Creating the box.
-var boxBorderCollapse = new hcl.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );​
-{% endhighlight %}​​​​​
+var boxBorderCollapse = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -598,20 +594,20 @@ Yes - (Read only)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Creating the box with the ID :"boxIdTest".
 var basicConfBox = {**id:"boxIdTest"**, isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL};
 
 var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, containerWeight:100, vExpand:true};
 
 //Creating the box.
-boxIdTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxIdTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 //Reading the id of the box.
 alert("box id is ::"+boxIdTest.id);	
   
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
   
 Accessible from IDE
@@ -630,13 +626,13 @@ A custom JSObject with the key value pairs that a developer can use to store the
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 var inf = {a: 'hello'};  
 widget.info = inf; //works  
   
 widget.info.a = 'hello world'; //This will not update the widget info a property to Hello world. widget.info.a will have old value as hello.  
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Syntax
 
@@ -652,18 +648,18 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Creating the box with the info property.
 var basicConfBox = {id:"boxIdTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL};
 
 var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, containerWeight:100, vExpand:true};
 
 //Creating the box.
-boxIdTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});  
+boxIdTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});  
 **boxIdTest.info = {key:"Boxnumber"};**  
 //Reading the info of the box.
-alert("box info is ::"+boxIdTest.info);​
-{% endhighlight %}​​​​​
+alert("box info is ::"+boxIdTest.info);
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -683,7 +679,7 @@ If set to _false,_ the widget is not displayed.
 
 If set to _true,_ the widget is displayed.
 
-> **_Note:_** This property is not applicable if the widget is placed in a [Segment](Segment.htm). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so using the [Segment Methods](Segment_Methods_new.htm).  
+> **_Note:_** This property is not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so using the [Segment Methods](Segment_Methods_new.html).  
 
 Syntax
 
@@ -699,20 +695,20 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for a box with isVisible:true.
 var basicConfBox = {id:"boxisVisibleTest", **isVisible:true**, orientation:constants.BOX\_LAYOUT\_HORIZONTAL};
 
 var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, containerWeight:100, vExpand:true};
 
 //Creating the box.
-boxisVisibleTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxisVisibleTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 //Defining the properties for a box with isVisible:false.
 basicConfBox = {id:"boxisVisibleTestFalse", isVisible:false, orientation:constants.BOX\_LAYOUT\_HORIZONTAL}; layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, containerWeight:100, vExpand:true};
 
 //Creating the box.
-boxisVisibleTestFalse = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxisVisibleTestFalse = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 //Reading the isVisible property of the box
 alert("Box visibility is ::"+boxisVisibleTestFalse.isVisible); 
@@ -720,8 +716,8 @@ alert("Box visibility is ::"+boxisVisibleTestFalse.isVisible);
 alert("Second box visibility is ::"+boxisVisibleTest.isVisible); 
 
   
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 > **_Note:_** You can set the visibility of a widget dynamically from code using the setVisibility method.
 
@@ -761,15 +757,15 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining properties for a box with layoutAlignment:BOX\_LAYOUT\_ALIGN\_FROM\_LEFT(If percent property is false then this property is considered).
 var basicConfBox = {id:"boxLayoutAlignmentLeftTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL,skin:"gradroundbox"};
 
 var layoutConfBox = {containerWeight:100, percent:false, **layoutAlignment:constants.BOX\_LAYOUT\_ALIGN\_FROM\_LEFT**};
 
 //Creating the box.
-boxLayoutAlignmentLeftTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});​
-{% endhighlight %}​​​​​
+boxLayoutAlignmentLeftTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -807,7 +803,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining properties for a box with layoutMeta.
 var basicConfBox = {id:"boxLayoutAlignmentLeftTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL,skin:"gradroundbox"};
 
@@ -818,8 +814,8 @@ var layoutConfBox = {containerWeight:100, percent:false, layoutType: constants.C
 			"rows": 4
 		}}**;  
 //Creating the box.
-boxLayoutAlignmentLeftTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});​
-{% endhighlight %}​​​​​
+boxLayoutAlignmentLeftTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -852,7 +848,7 @@ Yes - (Read only)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining properties for a box with layoutType:CONTAINER\_LAYOUT\_GRID.
 var basicConfBox = {id:"boxLayoutAlignmentLeftTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL,skin:"gradroundbox"};
 
@@ -864,8 +860,8 @@ var layoutConfBox = {containerWeight:100, percent:false, **layoutType: constants
 		}};
 
 //Creating the box.
-boxLayoutAlignmentLeftTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});​
-{% endhighlight %}​​​​​
+boxLayoutAlignmentLeftTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -905,15 +901,15 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties of a box with margin:\[0,5,0,5\], Directions :left,top,right,bottom respectively.
 var basicConfBox = {id:"boxMarginTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL};
 
 var layoutConfBox = { containerWeight:100, **margin:\[0,5,0,5\]**};
 
 //Creating the box
-boxMarginTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});​
-{% endhighlight %}​​​​​
+boxMarginTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -947,15 +943,15 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for a box with margin in pixels.
 var basicConfBox = {id:"boxMarginTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL};
 
 var layoutConfBox = { containerWeight:100, margin:\[0,5,0,5\], **marginInPixel:true**};
 
 //Creating the box
-boxMarginTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});​
-{% endhighlight %}​​​​​
+boxMarginTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -990,20 +986,20 @@ Yes - (Read only)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Creating the box with the orientation:constants.BOX\_LAYOUT\_HORIZONTAL.
 var basicConfBox = {id:"boxIdTest", isVisible:true, **orientation:constants.BOX\_LAYOUT\_HORIZONTAL**};
 
 var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, containerWeight:100, vExpand:true};
 
 //Creating the box.
-boxIdTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxIdTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 //Reading the orientation of the box.
 alert("box orientation is ::"+boxIdTest.orientation);	
   
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -1045,15 +1041,15 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties of a box with padding:\[10,10,10,10\], Directions :left,top,right,bottom respectively.
 var basicConfBox = {id:"boxPaddingTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL};
 
 var layoutConfBox = { containerWeight:100, **padding:\[10,10,10,10\]**};
 
 //Creating the box.
-boxPaddingTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});​
-{% endhighlight %}​​​​​
+boxPaddingTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -1098,15 +1094,15 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties of a box with padding in pixels.
 var basicConfBox = {id:"boxPaddingTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL};
 
 var layoutConfBox = { containerWeight:100, padding:\[10,10,10,10\], **paddingInPixel:true**};
 
 //Creating the box.
-boxPaddingTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});​
-{% endhighlight %}​​​​​
+boxPaddingTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -1123,7 +1119,7 @@ Platform Availability
 
 Specifies if the child widgets weight factor must be considered during layout. When the widgets do not have enough space to accommodate inside non-percentage HBox, then the behavior of these widgets inside an HBox is undefined.
 
-> **_Note:_** In _hcl.application.setApplicationBehaviors_ API the parameter _retainSpaceOnHide_ is only applicable when percent property is set to True for HBox.
+> **_Note:_** In _voltmx.application.setApplicationBehaviors_ API the parameter _retainSpaceOnHide_ is only applicable when percent property is set to True for HBox.
 
 > **_Note:_** On SPA, and Desktop Web platforms, when you place multiple VBoxes inside a non percentage HBox, VBoxes are adjusted automatically.
 
@@ -1133,9 +1129,9 @@ Specifies if the child widgets weight factor must be considered during layout. W
 
 **Default:**_true_
 
-If set to _false,_ the [layoutAlignment](#layoutAl) is considered.
+If set to _false,_ the [layoutAlignment](#layoutalignment) is considered.
 
-If set to _true,_ the [containerWeight](#containe) is considered.
+If set to _true,_ the [containerWeight](#containerweight) is considered.
 
 Syntax
 
@@ -1151,22 +1147,22 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties of a box with Percent:false(child widgets weight factor (containerWeight property) is not considered).
 var basicConfBox = {id:"boxPercentTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL};
 
 var layoutConfBox = {containerWeight:100, **percent:false**, margin:\[0,5,0,5\]};
 
 //Creating the box
-boxPercentTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxPercentTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 //Defining the properties of a box with Percent:true(child widgets weight factor (containerweight property) is to be considered).
 basicConfBox = {id:"boxPercentTestTrue", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL};
 layoutConfBox = { ontainerWeight:100, **percent:true**, margin:\[0,5,0,5\]};
 
 //Creating the box.
-boxPercentTestTrue = new hcl.ui.Box(basicConfBox, layoutConfBox, {});​
-{% endhighlight %}​​​​​
+boxPercentTestTrue = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -1208,23 +1204,23 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for a box with position:BOX\_POSITION\_AS\_HEADER
 var basicConfBox = {id:"boxPositionTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL, **position:constants.BOX\_POSITION\_AS\_HEADER**};
 
 var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, containerWeight:100, vExpand:true};
 
 //Creating the box.
-boxPositionTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxPositionTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 //Defining the properties for a box with position:BOX\_POSITION\_AS\_FOOTER
 basicConfBox = {id:"boxPositionTestFooter", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL, position:constants.BOX\_POSITION\_AS\_FOOTER};
 layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, containerWeight:100, vExpand:true};
 
 //Creating the box.
-boxPositionTestFooter = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
-​
-{% endhighlight %}​​​​​
+boxPositionTestFooter = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
+
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -1254,18 +1250,18 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for a box with skin:"boxGray"
 var basicConfBox = {id:"boxSkinTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL, **skin:"boxGray"**};
 
 var layoutConfBox = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, containerWeight:100, vExpand:true};
 
 //Creating the box.
-boxSkinTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxSkinTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 //Reading the skin property of the box.
-alert("box skin is ::"+boxSkinTest.skin); ​
-{% endhighlight %}​​​​​
+alert("box skin is ::"+boxSkinTest.skin); 
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -1301,14 +1297,14 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties of a box with vExpand:true.
 var basicConfBox = {id:"boxvExpandTrueTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_VERTICAL, skin:"gradroundbox"};
 
 var layoutConfBox = {containerWeight:99, **vExpand:true**};
 
 //Creating the box.
-boxvExpandTrueTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxvExpandTrueTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 //Defining the properties of a box with vExpand:false.
 var basicConfBox = {id:"boxvExpandTrueTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_VERTICAL, skin:"gradroundbox"};
@@ -1316,11 +1312,11 @@ var basicConfBox = {id:"boxvExpandTrueTest", isVisible:true, orientation:constan
 var layoutConfBox = {containerWeight:99, **vExpand:false**};
 
 //Creating the box.
-boxvExpandFalseTest = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxvExpandFalseTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
   
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -1442,7 +1438,7 @@ Yes
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for a Box
 var basicConfBox = {id:"boxIdTest", isVisible:true, orientation:constants.BOX\_LAYOUT\_HORIZONTAL};
 
@@ -1455,8 +1451,8 @@ var PSPConfBox = { viewConfig: {
 };  
   
 //Creating the box.
-boxIdTest = new hcl.ui.Box(basicConfBox, layoutConfBox, PSPConfBox ); ​
-{% endhighlight %}​​​​​
+boxIdTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBox ); 
+{% endhighlight %}
 
 Accessible from IDE
 
@@ -1498,17 +1494,17 @@ Yes - (Read only)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties of a box with widgetAlignment:constants.WIDGET\_ALIGN\_TOP\_LEFT.
 var basicConfBox = {id:"boxwidgetAlignment", isVisible:true, orientation:constants.BOX\_LAYOUT\_VERTICAL, skin:"gradroundbox"};
 
 var layoutConfBox = {containerWeight:99, hExpand:true, **widgetAlignment:constants.WIDGET\_ALIGN\_TOP\_LEFT**};
 
 //Creating the box.
-boxwidgetAlignment = new hcl.ui.Box(basicConfBox, layoutConfBox, {});
+boxwidgetAlignment = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
   
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Accessible from IDE
 

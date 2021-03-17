@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  
+
+  <link rel="shortcut icon" href="/volt-mx-docs/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/volt-mx-docs/assets/css/just-the-docs-default.css">
+  <link rel="stylesheet" href="/volt-mx-docs/assets/css/custom.css">
+  
+
+  
+    <script type="text/javascript" src="/volt-mx-docs/assets/js/vendor/lunr.min.js"></script>
+  
+  <script type="text/javascript" src="/volt-mx-docs/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>VoltMx | Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="VoltMx" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform." />
+<meta property="og:description" content="Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform." />
+<link rel="canonical" href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/API_Proxy_Adapter.html" />
+<meta property="og:url" content="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/API_Proxy_Adapter.html" />
+<meta property="og:site_name" content="VoltMx" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="VoltMx" />
+<script type="application/ld+json">
+{"url":"https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/API_Proxy_Adapter.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hcl-tech-software.github.io/volt-mx-docs/Volt_Mx_logo.png"}},"headline":"VoltMx","description":"Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+</head>
+
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-search" viewBox="0 0 24 24">
+    <title>Search</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+      <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+  </symbol>
+</svg>
+
+<div class="header-wrap">
+  
+  <div class="top-header">
+    <div class="site-header">
+      <a href="https://hcl-tech-software.github.io/volt-mx-docs/" class="site-title lh-tight">
+  <div class="site-logo"></div>
+
+</a>
+      <a href="#" id="mainmenu-button"  class="site-button">
+        <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg>
+      </a>
+    </div>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="svg-link" viewBox="0 0 24 24">
+      <title>Link</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+      </svg>
+    </symbol>
+    <symbol id="svg-search" viewBox="0 0 24 24">
+      <title>Search</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-menu" viewBox="0 0 24 24">
+      <title>Menu</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+      <title>Expand</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </symbol>
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+      <title>Document</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+      </svg>
+    </symbol>
+  </svg>
+
+  <div id="main-header" class="main-header">
+  
+   
+   <!-- <div class="search-prepare" id="search-prepare">
+    <p><img src=" /volt-mx-docs/assets/images/preload.gif" style="height: 24px; width: 24px; margin-right: 5px;" /> Preparing your search results...</p>
+  </div>  -->
+     <div class="search">
+    
+       <div class="search-input-wrap">
+         <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="search resources..." aria-label="Search VoltMx" autocomplete="off">
+         <label for="search-input" class="search-label" id="searchButton"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label>
+                 </div>
+                        
+       <div id="search-results" class="search-results"></div>
+
+       
+     </div>
+   
+   <ul class="page-nav" id="page-nav">
+    <li><a href="#">Community</a></li>
+    <li><a href="#" class="active">Learn</a></li>
+    <li><a href="#">Releases</a></li>
+    <li><a href="#">Training</a></li>
+    <li><a href="#">Ideas</a></li>
+    <li><a href="#">Marketplace</a></li>
+    <li><a href="#">Login</a></li>
+  </ul>
+  
+
+  
+ </div>
+ <script>
+   const pageNav = document.getElementById('page-nav');
+    const mainHeader = document.getElementById('main-header');
+    const mainmenuButton = document.getElementById('mainmenu-button');
+  (function(){
+   
+   mainmenuButton.addEventListener('click', function(){
+     pageNav.classList.toggle('nav-open');
+});
+})();
+
+</script>
+  <div class="sub-nav-wrap" id="myDIV">
+    <ul class="sub-nav" >
+        <li >
+            <a href="/volt-mx-docs/docs/getting-started/"  class="sub-link">Getting Started</a>
+        </li>
+        <li>
+            <a href="/volt-mx-docs/docs/tutorials/" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="/volt-mx-docs/docs/documentation/" class="sub-link">Documentation</a>
+        </li>
+        <li>
+            <a href="/volt-mx-docs/docs/articles/" title="test" class="sub-link">Articles</a>
+        </li>
+    </ul>
+    <a href="#" id="menu-button" class="site-button">
+        <!-- <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> -->
+        select a topic <svg viewBox="0 0 24 24" class="carat-topic"><use xlink:href="#svg-arrow-right"></use></svg>
+      </a>
+</div>
+</div> 
+
+<style>
+  .sub-nav a[href*="/documentation/"] {
+   border-bottom: 3px #d694f9 solid;
+}
+</style>
+
+<div class="content-wrap">
+  <div class="side-bar scrollable-container">
+    <nav role="navigation" aria-label="Main" id="site-nav" class="site-nav scrollable">
+      <ul class="nav-list"><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_rel_notes/Content/Common/copyright.html" class="nav-list-link">copyright</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_release_notes/Content/Common/copyrightOld.html" class="nav-list-link">copyrightOld</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_rel_notes/Content/Common/glossary.html" class="nav-list-link">Glossary</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/" class="nav-list-link">Home</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_rel_notes/Content/Common/home.html" class="nav-list-link">home</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/Known_Issues.html" class="nav-list-link">Known Issues in HCL App Factory</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_Foundry_deployment_guide/Content/FAQs.html" class="nav-list-link">This topic describes how to control access to VoltMX Foundry applications and services. This topic is part of the VoltMX Foundry Console User Guide.</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_starter_install_mac/Content/Getting%20Started.html" class="nav-list-link">Getting Started</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/fundamentals.html" class="nav-list-link">Fundamentals</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/projectorg.html" class="nav-list-link">Project Organization</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/appUserInterface.html" class="nav-list-link">App User Interface</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/widgetApiReference.html" class="nav-list-link">Widgets & API Reference</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/webAppDevelopment.html" class="nav-list-link">Web App Development</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/dataBackEndIntergration.html" class="nav-list-link">Data & Back-end Integration</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/buildAndPublish.html" class="nav-list-link">Build and Publish</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/extensibility.html" class="nav-list-link">Extensibility</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/security.html" class="nav-list-link">Security</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/howTosSampleApps.html" class="nav-list-link">How Tos & Sample Apps</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/dataIntegrationServices.html" class="nav-list-link">Data Integration Services</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/offlineObjects.html" class="nav-list-link">Offline Objects</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/apiMangement.html" class="nav-list-link">API Management</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/appServicesAdminitration.html" class="nav-list-link">App Services Administration</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/advancedServerFeature.html" class="nav-list-link">Advanced Server Features</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/analyticsAndApm.html" class="nav-list-link">Analytics and APM</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/engagementServices.html" class="nav-list-link">Engagement Services</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/quantumSync.html" class="nav-list-link">VoltMX Sync (Legacy)</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/devOps.html" class="nav-list-link">DevOps</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/heradlessAndContinuousIntegration.html" class="nav-list-link">Headless and Continuous Integration Build</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/installationManagement.html" class="nav-list-link">Installation & Management</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/deployment.html" class="nav-list-link">Deployment</a></li></ul>
+    </nav>
+  
+  </div>
+  
+    <div class="main scrollable-container" id="top">
+      
+      <div id="main-content-wrap" class="main-content-wrap scrollable">
+        
+          
+        
+        <div id="main-content" class="main-content" role="main">
+          
+            <p>User Guide: <a href="Services.html#top">Integration</a> &gt; <a href="ConfigureIntegrationService.html">Configure the Integration Service</a> &gt; API Proxy Adapter</p>
+      <h2 id="api-proxy-adapter">
+        
+        
+          <a href="#api-proxy-adapter" class="anchor-heading" aria-labelledby="api-proxy-adapter"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> API Proxy Adapter
+        
+        
+      </h2>
+    
+
+<p>With VoltMX Foundry API Proxy (pass-through proxy) integration service, you can forward the request and response without intermediate transformation (without affecting the actual request and response.)</p>
+
+<p><strong>For example</strong>:</p>
+
+<p>If an organization has an existing set of APIs already exposed and wants to secure and throttle the APIs, it can use the API Proxy adapter. By enabling API Proxy, the input (body and headers) of a client’s input request is forwarded to the back end and the output response from the back end is forwarded to the device with no changes in the input request and output response.</p>
+
+<p>If your APIs are documented using an Open API Specification file (Swagger file), you can create a new API Proxy service and import the OAS(Swagger) file to automatically create VoltMX Foundry Operations.</p>
+
+<p>You can configure API Proxy integration service for the following endpoints:</p>
+
+<ul>
+  <li>
+    <p>XML</p>
+  </li>
+  <li>
+    <p>JSON</p>
+  </li>
+</ul>
+      <h3 id="configure-apiproxy-endpoint-adapter">
+        
+        
+          <a href="#configure-apiproxy-endpoint-adapter" class="anchor-heading" aria-labelledby="configure-apiproxy-endpoint-adapter"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Configure API Proxy Endpoint Adapter
+        
+        
+      </h3>
+    
+
+<p>To configure API Proxy service in the <strong><a href="ConfigureIntegrationService.html">Integration Service Definition</a></strong> tab, follow these steps:</p>
+
+<ol>
+  <li>In the <strong>Name</strong> field, provide a unique name for your service.</li>
+  <li>
+    <p>From the <strong>Service Type</strong> list, select <strong>API Proxy</strong>.</p>
+  </li>
+  <li>Provide the following details in the API Proxy service definition:</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Base URL Configuration</td>
+      <td>&lt;ul&gt; &lt;li&gt;<strong>Base URL</strong> - Type the URL (provide the format and explain the URL parameters) &lt;/li&gt; &lt;li&gt;<strong>Upload Open API file</strong> - Click Upload File, the system allows you to upload an OAS (Swagger) file. Navigate to the swagger file from your local system, and click Open. The system uploads the selected swagger file. The operations for your API proxy service are created based on the resources defined in OAS (Swagger) file. &lt;/li&gt; &lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td>Web Service Authentication</td>
+      <td>&lt;p&gt;Web Service Authentication Select one of the following modes:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;<strong>None</strong>- Select this option if you do not want to provide any authentication for the service. &lt;/li&gt; &lt;li&gt;<strong>Basic</strong>- Provide User ID and Password if the external Web service requires a form or basic authentication. &lt;/li&gt; &lt;li&gt;<strong>NTLM</strong>- Your service follows the NT LAN Manager authentication process. You are required to provide the User ID, Password, NTLM Host, and NTLM Domain.&lt;/li&gt; &lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td>Identity Service for Backend Token</td>
+      <td>Select the Identity service associated with your app if this service needs backend token like access_token from that Identity service to access the backend server.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>
+    <p><a href="javascript:void(0);"><img src="../Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" />For additional configuration of your service definition, provide the following details in the <strong>Advanced</strong> section:</a></p>
+
+    <p>| Field | Description |
+| — | — |
+| Custom Code | &lt;p&gt;Custom Code enables you to specify dependent JAR. <br />To specify dependent JAR, select the JAR containing preprocessor or postprocessor libraries from the drop-down list, or click <strong>Upload New</strong> to browse the JAR file from your local system. This step allows you to further filter the data sent to the back end.<br />&lt;p&gt;&gt; <strong><em>Important:</em></strong> Make sure that you upload a custom JAR file that is built on the same JDK version used for installing VoltMX Foundry Integration. <br /><br />For example, if the JDK version on the machine where VoltMX Foundry Integration is installed is 1.6, you must use the same JDK version to build your custom jar files. If the JDK version is different, an unsupported class version error will appear when a service is used from a device.&lt;/p&gt;&lt;/p&gt; |
+| Throttling | &lt;p&gt;API throttling enables you to limit the number of request calls within a minute. If an API exceeds the throttling limit, it will not return the service response. &lt;/p&gt; &lt;ul&gt; &lt;li&gt;<strong>To specify throttling in VoltMX Foundry Console, follow these steps:</strong> <br /></p>
+    <li>
+      <p>In the <strong>Total Rate Limit</strong> text box, enter a required value. With this value, you can limit the number of requests configured in your VoltMX Foundry console in terms of Total Rate Limit.</p>
+    </li>
+    <li>
+      <p>In the <strong>Rate Limit Per IP</strong> text box, enter a required value. With this value, you can limit the number of IP address requests configured in your VoltMX Foundry console in terms of Per IP Rate Limit.&lt;/li&gt;</p>
+
+    </li>
+    <li>
+      <table>
+        <tbody>
+          <tr>
+            <td><strong>To override throttling in App Services Console, refer to</strong> <a href="API_Throttling_Override.html#OverrideAPIThrottling">Override API Throttling Configuration</a>.&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;&gt; <strong><em>Note:</em></strong> In case of On-premises, the number of nodes in a clustered environment is set by configuring the <code class="language-plaintext highlighter-rouge">VOLTMX_SERVER_NUMBER_OF_NODES</code> property in the Admin Console. This property indicates the number of nodes configured in the cluster. The default value is 1.<br />Refer to <a href="https:///volt-mx-docs/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Runtime_Configuration.html">The Runtime Configuration tab on the Settings screen of App Services</a>.<br /><br />The total limit set in the VoltMX Foundry Console will be divided by the number of configured nodes. For example, a throttling limit of 600 requests/minute with three nodes will be calculated to be 200 requests/minute per node.<br />This is applicable for Cloud and On-premises.<br />&lt;/p&gt;</td>
+            <td> </td>
+            <td> </td>
+          </tr>
+          <tr>
+            <td> </td>
+            <td>URL Provider Class</td>
+            <td>Enter the qualified name of the URL Provider Class. For more information, refer <a href="URL_Provider_Support_for_XML__JSON__SOAP_and_API_Proxy.html">URL Provider Support for XML, JSON, SOAP, and API Proxy</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <blockquote>
+        <p><strong><em>Note:</em></strong> All options in the Advanced section are optional.</p>
+      </blockquote>
+
+    </li>
+  </li>
+  <li>In the <strong>Description</strong> field, provide a suitable description for the service.</li>
+  <li>
+    <p>To enable the proxy, select the <strong>Use proxy from settings</strong> check box. By default, the check box is cleared. The Use proxy from settings check box dims when no proxy is configured under the <strong><a href="Settings.html#Proxy">Settings &gt; Proxy</a></strong>.</p>
+  </li>
+  <li>Click <strong>Save</strong> to save your service definition.</li>
+</ol>
+      <h3 id="create-operations-for-apiproxy">
+        
+        
+          <a href="#create-operations-for-apiproxy" class="anchor-heading" aria-labelledby="create-operations-for-apiproxy"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Create Operations for API Proxy
+        
+        
+      </h3>
+    
+
+<p>The <strong>Operations List</strong> tab appears only after the service definition is saved.</p>
+
+<blockquote>
+  <p><strong><em>Note:</em></strong> Click <strong>Operations List</strong> tab &gt; <strong>Configure Operation</strong>. The <strong>Configured Operations</strong> list appears.</p>
+</blockquote>
+
+<blockquote>
+  <p><strong><em>Important:</em></strong> If you have imported an OAS (Swagger) file, the operations for your API proxy service are created automatically from that OAS (Swagger) file. The endpoint URL is also auto-generated based on the Swagger file. The auto-generated operations for a proxy service will not have request/response parameters.</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p>Click <strong>SAVE &amp; ADD OPERATION</strong> in your service definition page to save your service definition and display the <strong>NewOperation</strong> tab for adding operations.<br />
+                    OR<br />
+Click <strong>Add Operation</strong> to add a new operation or from the tree in the left pane, click <strong>Add &gt; Add New Operation</strong>.</p>
+
+    <p><a href="javascript:void(0);"><img src="../Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" />Click to View image</a></p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/MuleSoftAddOps_549x351.png" alt="" /></p>
+
+    <blockquote>
+      <p><strong><em>Note:</em></strong> To use an existing integration service, refer to <a href="Manage_Existing_Integration_Services_1.html#Use_existing_Inte">How to Use an Existing Integration Service</a>.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>To create an operation, provide the following details:</p>
+  </li>
+</ol>
+
+<p>| Field | Description |
+| — | — |
+| Name | Enter a unique name for your operation. |
+| Operation Security Level | &lt;p&gt;It specifies how a client must authenticate to invoke this operation.&lt;/p&gt;
+<a href="javascript:void(0);"><img src="../Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" />Select one of the following security operations in the <strong>Operation Security Level</strong> field. <br /></a></p>
+
+<ul> <li>**Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.</li> <li>**Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required.</li> <li>**Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.</li> <li>**Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.</li> </ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Front End HTTP Method</td>
+      <td>&lt;p&gt;Select a HTTP method that you want to invoke on the integration server. By default, the field is set to <strong>Post</strong> method.&lt;/p&gt; &lt;p&gt;&gt; <strong><em>Note:</em></strong> The front-end HTTP methods are used for all non-SDK clients such as API Management users. <br />Invoking a service from an SDK will continue to use the POST method for operations.&lt;/p&gt; &lt;p&gt;&gt; <strong><em>Note:</em></strong> From SP3 onwards, the <strong>Front End HTTP Method</strong> is called as <strong>Resource Method</strong>. You can configure the <strong>Resource Method</strong> in the <a href="FrontEndAPI.html"><strong>Advanced</strong>&gt; <strong>Front End API</strong> section</a>.&lt;/p&gt;</td>
+    </tr>
+    <tr>
+      <td>Target HTTP Method</td>
+      <td>Select a HTTP method that you want to invoke on the back-end service from integration server.</td>
+    </tr>
+    <tr>
+      <td>Operation Path</td>
+      <td>&lt;p&gt;Modify the path if required.&lt;/p&gt; &lt;p&gt;&gt; <strong><em>Note:</em></strong> If you provide incorrect Salesforce endpoint details, the <strong>Object</strong> list will contain only <em>_Login</em> object.&lt;/p&gt;</td>
+    </tr>
+    <tr>
+      <td>Base URL and Target URL</td>
+      <td>&lt;p&gt;The <strong>Target URL</strong> field is prepopulated with the URL that you provided at the <strong>Base URL</strong> field. You can add the suffix, if required.&lt;/p&gt; &lt;p&gt;For example, to the base URL, you can add suffix such as <code class="language-plaintext highlighter-rouge">/latest</code>  or <code class="language-plaintext highlighter-rouge">/sports</code> to get latest news or sports news:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;<code class="language-plaintext highlighter-rouge">http://feeds.foxnews.com/foxnews`/latest`</code> &lt;/li&gt; &lt;li&gt;<code class="language-plaintext highlighter-rouge">http://feeds.foxnews.com/foxnews`/sports`</code> &lt;/li&gt; &lt;/ul&gt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>
+    <p><a href="javascript:void(0);"><img src="../Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" />For additional configurations of request (or) response operations, provide the following details in the <strong>Advanced</strong> section:</a></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Custom Code Invocation</td>
+          <td>You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging. All options in the Advanced section are optional. For more details, refer to <a href="Java_Preprocessor_Postprocessor_.html">Preprocessor and Postprocessor</a>.</td>
+        </tr>
+        <tr>
+          <td>Properties</td>
+          <td>&lt;p&gt;<a href="Java_Preprocessor_Postprocessor_.html#timeout_cachable">Additional configuration properties (timeout, cachable, unescape embedded xml in response, response encoding, number of connection retries</a> allows you to configure service call time out cache response&lt;/p&gt;</td>
+        </tr>
+        <tr>
+          <td>Front End API</td>
+          <td>It allows you map your endpoint/back-end URL of an operation to a <a href="FrontEndAPI.html">front-end URL</a>.</td>
+        </tr>
+        <tr>
+          <td>Server Events</td>
+          <td>Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer <a href="ServerEvents.html">Server Events</a>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p><strong><em>Note:</em></strong> All options in the Advanced section are optional.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Click <strong>Save</strong> to save the operation.</p>
+  </li>
+</ol>
+      <h3 id="limitations-for-api-proxy-adapter">
+        
+        
+          <a href="#limitations-for-api-proxy-adapter" class="anchor-heading" aria-labelledby="limitations-for-api-proxy-adapter"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Limitations for API Proxy Adapter
+        
+        
+      </h3>
+    
+
+<ul>
+  <li>API Proxy service operations and operations for which pass-through (inputs, headers, and outputs) is enabled cannot be used in orchestration services.<br />
+For example, when you create an integration service with an API Proxy type or the operations of XML, SOAP, or JSON endpoints with pass-through enabled, the system does not show the services and operations while configuring orchestration operations.</li>
+  <li>Using the MBaaS Client SDK with API Proxy integration service is not supported.</li>
+</ul>
+      <h3 id="how-to-enable-pass-through-proxy-for-operations">
+        
+        
+          <a href="#how-to-enable-pass-through-proxy-for-operations" class="anchor-heading" aria-labelledby="how-to-enable-pass-through-proxy-for-operations"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> How to Enable Pass-through Proxy for Operations
+        
+        
+      </h3>
+    
+
+<p>You can also configure the following pass-through proxy flags in operations for adapters such as <a href="XML.html#Adding">XML</a>, <a href="SOAP.html#Adding2">SOAP</a>, and <a href="JSON.html#Adding3">JSON</a>:</p>
+
+<ul>
+  <li>Under the <strong>Request Input&gt; Body</strong> tab, select the <strong>Enable pass-through input body</strong> check box to forward the body of a client’s request to the back end.</li>
+  <li>Under the <strong>Request Input</strong><strong>&gt;</strong><strong>Header</strong> tab, select the <strong>Enable pass-through input header</strong> check box to forward headers of a client’s request to the backend.</li>
+  <li>Under the <strong>Response Output</strong> tab, select the <strong>Enable pass-through output body</strong> check box to forward the response from the backend to a client.</li>
+</ul>
+
+          
+  
+          
+  
+          
+          
+           
+              <!--<p class="text-small text-grey-dk-100 mb-0">Copyright &copy; 2017-2020 HCL Digital Solutions</p>-->
+
+  
+              
+                <div class="d-flex mt-2">
+                  
+                  
+                </div>
+              
+            </footer>
+          
+  
+        </div>
+      </div>
+  
+      
+        
+  
+        <div class="search-overlay"></div>
+      
+  
+      
+    </div>
+  
+    
+    <div class="right-menu scrollable-container" >
+      <div class="scrollable">
+        
+<nav role="navigation" aria-label="Main" id="sub-site-nav" class="site-nav" >
+<ul class="nav-list">
+  
+</ul>
+
+</nav>
+
+    <script>
+     const subpageNav = document.getElementById('sub-site-nav');
+     const submainmenuButton = document.getElementById('sub-menu-button');
+    
+   (function(){
+    submainmenuButton.addEventListener('click', function(){ 
+      document.getElementById('site-nav').classList.remove('nav-open');
+      subpageNav.classList.toggle('nav-open');
+ });
+})();
+</script>
+
+      </div>
+  </div></div>
+
+
+ <!-- footer from footer html -->
+ <footer>
+
+    <!-- The Modal -->
+<div id="copyright-modal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>
+        Copyright © 2021 HCL - August, 2020 - All rights reserved.
+      </p>
+      <p>This document contains information proprietary to HCL., is bound by the HCL license agreements, and may not be used except in the context of understanding the use and methods of HCL., software without prior, express, written permission. HCL, Empowering Everywhere, HCL Foundry, HCL Flare, and HCL Iris are trademarks of HCL. MobileFoundry is a registered trademark of HCL. Microsoft, the Microsoft logo, Internet Explorer, Windows, and Windows Vista are registered trademarks of Microsoft Corporation. Apple, the Apple logo, iTunes, iPhone, iPad, OS X, Objective-C, Safari, Apple Pay, Apple Watch, and Xcode are trademarks or registered trademarks of Apple, Inc. Google, the Google logo, Android, and the Android logo are registered trademarks of Google, Inc. Chrome is a trademark of Google, Inc. BlackBerry, PlayBook, Research in Motion, and RIM are registered trademarks of BlackBerry. SAP® and SAP® Business Suite® are registered trademarks of SAP SE in Germany and in several other countries. All other terms, trademarks, or service marks mentioned in this document have been capitalized and are to be considered the property of their respective owners.</p>
+    </div>
+  
+  </div>
+    <div class="foot-wrap">
+        <div class="foot-nav">
+            &copy; <a href="#" id="copyrightBtn">Copyright</a> 2021 HCL Technologies Limited. 
+            <a href="https://hcltechsw.com/wps/portal/legal/privacy" style="margin-left: 10px;">Privacy Statement</a> | <a href="#">Terms of Use</a>
+        </div>
+        <ul class="social-nav">
+            <li><a href="#" class="facebook">Facebook</a></li>
+            <li><a href="#" class="linkedin">LinkedIn</a></li>
+            <li><a href="#" class="twitter">Twitter</a></li>
+            <li><a href="#" class="youtube">Youtube</a></li>
+            <li><a href="#" class="glassdoor">Glassdoor</a></li>
+        </ul>
+    </div>
+
+    
+</footer>
+<script>
+    var modal = document.getElementById("copyright-modal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("copyrightBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function(e) {
+    e.preventDefault();
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+  document.querySelector("span.close").onclick = function() {
+  modal.style.display = "none";
+}
+document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode == 27) {
+      modal.style.display = "none";
+    }
+};
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+</script>
+</body>
+</html>

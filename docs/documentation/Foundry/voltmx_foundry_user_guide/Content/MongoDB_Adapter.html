@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  
+
+  <link rel="shortcut icon" href="/volt-mx-docs/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="/volt-mx-docs/assets/css/just-the-docs-default.css">
+  <link rel="stylesheet" href="/volt-mx-docs/assets/css/custom.css">
+  
+
+  
+    <script type="text/javascript" src="/volt-mx-docs/assets/js/vendor/lunr.min.js"></script>
+  
+  <script type="text/javascript" src="/volt-mx-docs/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>VoltMx | Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="VoltMx" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform." />
+<meta property="og:description" content="Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform." />
+<link rel="canonical" href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/MongoDB_Adapter.html" />
+<meta property="og:url" content="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/MongoDB_Adapter.html" />
+<meta property="og:site_name" content="VoltMx" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="VoltMx" />
+<script type="application/ld+json">
+{"url":"https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/MongoDB_Adapter.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hcl-tech-software.github.io/volt-mx-docs/Volt_Mx_logo.png"}},"headline":"VoltMx","description":"Industry-leading low-code application development platform for delivering beautiful apps across multiple digital touch points with one platform.","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+</head>
+
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-search" viewBox="0 0 24 24">
+    <title>Search</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+      <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+  </symbol>
+</svg>
+
+<div class="header-wrap">
+  
+  <div class="top-header">
+    <div class="site-header">
+      <a href="https://hcl-tech-software.github.io/volt-mx-docs/" class="site-title lh-tight">
+  <div class="site-logo"></div>
+
+</a>
+      <a href="#" id="mainmenu-button"  class="site-button">
+        <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg>
+      </a>
+    </div>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="svg-link" viewBox="0 0 24 24">
+      <title>Link</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+      </svg>
+    </symbol>
+    <symbol id="svg-search" viewBox="0 0 24 24">
+      <title>Search</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-menu" viewBox="0 0 24 24">
+      <title>Menu</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+      <title>Expand</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </symbol>
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+      <title>Document</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+      </svg>
+    </symbol>
+  </svg>
+
+  <div id="main-header" class="main-header">
+  
+   
+   <!-- <div class="search-prepare" id="search-prepare">
+    <p><img src=" /volt-mx-docs/assets/images/preload.gif" style="height: 24px; width: 24px; margin-right: 5px;" /> Preparing your search results...</p>
+  </div>  -->
+     <div class="search">
+    
+       <div class="search-input-wrap">
+         <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="search resources..." aria-label="Search VoltMx" autocomplete="off">
+         <label for="search-input" class="search-label" id="searchButton"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label>
+                 </div>
+                        
+       <div id="search-results" class="search-results"></div>
+
+       
+     </div>
+   
+   <ul class="page-nav" id="page-nav">
+    <li><a href="#">Community</a></li>
+    <li><a href="#" class="active">Learn</a></li>
+    <li><a href="#">Releases</a></li>
+    <li><a href="#">Training</a></li>
+    <li><a href="#">Ideas</a></li>
+    <li><a href="#">Marketplace</a></li>
+    <li><a href="#">Login</a></li>
+  </ul>
+  
+
+  
+ </div>
+ <script>
+   const pageNav = document.getElementById('page-nav');
+    const mainHeader = document.getElementById('main-header');
+    const mainmenuButton = document.getElementById('mainmenu-button');
+  (function(){
+   
+   mainmenuButton.addEventListener('click', function(){
+     pageNav.classList.toggle('nav-open');
+});
+})();
+
+</script>
+  <div class="sub-nav-wrap" id="myDIV">
+    <ul class="sub-nav" >
+        <li >
+            <a href="/volt-mx-docs/docs/getting-started/"  class="sub-link">Getting Started</a>
+        </li>
+        <li>
+            <a href="/volt-mx-docs/docs/tutorials/" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="/volt-mx-docs/docs/documentation/" class="sub-link">Documentation</a>
+        </li>
+        <li>
+            <a href="/volt-mx-docs/docs/articles/" title="test" class="sub-link">Articles</a>
+        </li>
+    </ul>
+    <a href="#" id="menu-button" class="site-button">
+        <!-- <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> -->
+        select a topic <svg viewBox="0 0 24 24" class="carat-topic"><use xlink:href="#svg-arrow-right"></use></svg>
+      </a>
+</div>
+</div> 
+
+<style>
+  .sub-nav a[href*="/documentation/"] {
+   border-bottom: 3px #d694f9 solid;
+}
+</style>
+
+<div class="content-wrap">
+  <div class="side-bar scrollable-container">
+    <nav role="navigation" aria-label="Main" id="site-nav" class="site-nav scrollable">
+      <ul class="nav-list"><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_rel_notes/Content/Common/copyright.html" class="nav-list-link">copyright</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_release_notes/Content/Common/copyrightOld.html" class="nav-list-link">copyrightOld</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_rel_notes/Content/Common/glossary.html" class="nav-list-link">Glossary</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/" class="nav-list-link">Home</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_rel_notes/Content/Common/home.html" class="nav-list-link">home</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/Known_Issues.html" class="nav-list-link">Known Issues in HCL App Factory</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/voltmx_Foundry_deployment_guide/Content/FAQs.html" class="nav-list-link">This topic describes how to control access to VoltMX Foundry applications and services. This topic is part of the VoltMX Foundry Console User Guide.</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_starter_install_mac/Content/Getting%20Started.html" class="nav-list-link">Getting Started</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/fundamentals.html" class="nav-list-link">Fundamentals</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/projectorg.html" class="nav-list-link">Project Organization</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/appUserInterface.html" class="nav-list-link">App User Interface</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/widgetApiReference.html" class="nav-list-link">Widgets & API Reference</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/webAppDevelopment.html" class="nav-list-link">Web App Development</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/dataBackEndIntergration.html" class="nav-list-link">Data & Back-end Integration</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/buildAndPublish.html" class="nav-list-link">Build and Publish</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/extensibility.html" class="nav-list-link">Extensibility</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/security.html" class="nav-list-link">Security</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/howTosSampleApps.html" class="nav-list-link">How Tos & Sample Apps</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/dataIntegrationServices.html" class="nav-list-link">Data Integration Services</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/offlineObjects.html" class="nav-list-link">Offline Objects</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/apiMangement.html" class="nav-list-link">API Management</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/appServicesAdminitration.html" class="nav-list-link">App Services Administration</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/advancedServerFeature.html" class="nav-list-link">Advanced Server Features</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/analyticsAndApm.html" class="nav-list-link">Analytics and APM</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/engagementServices.html" class="nav-list-link">Engagement Services</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/quantumSync.html" class="nav-list-link">VoltMX Sync (Legacy)</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/devOps.html" class="nav-list-link">DevOps</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/heradlessAndContinuousIntegration.html" class="nav-list-link">Headless and Continuous Integration Build</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/installationManagement.html" class="nav-list-link">Installation & Management</a></li><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/deployment.html" class="nav-list-link">Deployment</a></li></ul>
+    </nav>
+  
+  </div>
+  
+    <div class="main scrollable-container" id="top">
+      
+      <div id="main-content-wrap" class="main-content-wrap scrollable">
+        
+          
+        
+        <div id="main-content" class="main-content" role="main">
+          
+            <p>User Guide: <a href="Services.html#top">Integration</a> &gt; <a href="ConfigureIntegrationService.html">Configure the Integration Service</a> &gt; MongoDB Adapter</p>
+      <h2 id="mongodb-data-adapter">
+        
+        
+          <a href="#mongodb-data-adapter" class="anchor-heading" aria-labelledby="mongodb-data-adapter"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> MongoDB Data Adapter
+        
+        
+      </h2>
+    
+
+<p>MongoDB is an open-source document database that provides high performance, high availability, and automatic scaling.</p>
+
+<p>With VoltMX Foundry MongoDB database adapter, you can connect to your own MongoDB database as an endpoint. For example, you can use MongoDB data adapter to implement a data store that provides high performance, high availability, and automatic scaling such as e-commerce product catalog, blogs and content management, and mobile and social networking sites.</p>
+
+<p>After you configure the MongoDB document database adapter in VoltMX Foundry Console, you can create, read, update and delete (CRUD operations) on MongoDB collections and documents.</p>
+
+<p>Perform the following steps to configure the MongoDB database adapter with VoltMX Foundry:</p>
+
+<ul>
+  <li><a href="#configure-mongodb-end-point-adapter">Configure a Service Definition for the MongoDB Adapter</a></li>
+  <li><a href="#create-and-configure-operations-for-mongodb-adapter">Create and Configure Operations for the MongoDB Adapter</a></li>
+</ul>
+      <h3 id="configure-mongodb-end-point-adapter">
+        
+        
+          <a href="#configure-mongodb-end-point-adapter" class="anchor-heading" aria-labelledby="configure-mongodb-end-point-adapter"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Configure MongoDB End-point Adapter
+        
+        
+      </h3>
+    
+
+<p>To configure the MongoDB Adapter in the <strong><a href="ConfigureIntegrationService.html">Integration service definition</a></strong> tab, follow these steps:</p>
+
+<ol>
+  <li>In the <strong>Name</strong> field, provide a unique name for your service.</li>
+  <li>
+    <p>From the <strong>Service Type</strong> list, select <em>MongoDB</em>. The following sections are displayed:</p>
+
+    <ul>
+      <li>Connection Parameters</li>
+      <li>
+        <p>Authentication</p>
+      </li>
+      <li>Advanced</li>
+    </ul>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/MongoDB_744x1174.png" alt="" /></p>
+  </li>
+  <li>In <strong>Connection Parameters</strong>, you can either provide <strong>Connection URI</strong> or provide <strong>Connection Properties</strong>.
+    <ul>
+      <li>
+        <p><strong>Connection URI</strong>: If you want to provide Connection URI, you must construct the URI and create a MongoDB client instance to connect to the database server.<br />
+<strong>Connection URI format:</strong></p>
+
+        <p>mongodb://[username:password@]host1[:port1][,host2[:port2],…[,hostN[:portN]]][/[database][?options]].</p>
+
+        <p>The elements required to construct a Connection URI are as follows:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Element</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>mongodb://</td>
+              <td>&lt;p&gt;This is a mandatory prefix required to identify that this string is in standard connection format. Use a connection string prefix of mongodb+srv: rather than the standard mongodb: to leverage the DNS seedlist. The +srv is added as an indicator to the client that the hostname that follows it corresponds to a DNS SRV record. The driver or mongo shell will query the DNS for the record to determine the hosts that are running the MongoDB instances.&lt;/p&gt;</td>
+            </tr>
+            <tr>
+              <td>username:password@</td>
+              <td>This field is optional. Use this to add authentication to access the MongoDB database.</td>
+            </tr>
+            <tr>
+              <td>&lt;p&gt;<strong>host[:port]</strong>&lt;/p&gt;</td>
+              <td>Hostname, and port number. The port number is optional</td>
+            </tr>
+            <tr>
+              <td>&lt;p&gt;/database&lt;/p&gt;</td>
+              <td>Name of the database. This is optional.</td>
+            </tr>
+            <tr>
+              <td>&lt;p&gt;?<options>&lt;/p&gt;</options></td>
+              <td>String that specifies the connection specific options as <name>=<value> pairs.</value></name></td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <p><strong>Connection Properties</strong>: If you want to provide Connection Properties, provide the following details:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hostname</td>
+              <td>&lt;p&gt;Database connection URL.&lt;/p&gt;</td>
+            </tr>
+            <tr>
+              <td>Port</td>
+              <td>The port number of the MongoDb server to which you want to connect.</td>
+            </tr>
+            <tr>
+              <td>&lt;p&gt;Database Name&lt;/p&gt;</td>
+              <td>Name of the database name.</td>
+            </tr>
+            <tr>
+              <td>&lt;p&gt;User Name&lt;/p&gt;</td>
+              <td>User ID for the connection URL</td>
+            </tr>
+            <tr>
+              <td>&lt;p&gt;Password &lt;/p&gt;</td>
+              <td>User Password</td>
+            </tr>
+            <tr>
+              <td>&lt;p&gt;Connections per host&lt;/p&gt;</td>
+              <td>Maximum number of connections allowed per host.</td>
+            </tr>
+            <tr>
+              <td>&lt;p&gt;Maximum Wait time&lt;/p&gt;</td>
+              <td>Number in milliseconds that a thread may wait for a connection to become available.</td>
+            </tr>
+            <tr>
+              <td>&lt;p&gt;Connection Timeout&lt;/p&gt;</td>
+              <td>Number of milliseconds the driver will wait before a new connection attempt is aborted.</td>
+            </tr>
+            <tr>
+              <td>Socket Timeout</td>
+              <td>Number of milliseconds a send or receive on a socket can take before timeout.</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>To test the database connection, click <strong>Test Connection</strong>.</p>
+
+    <p>If the entered details are correct, the system displays the message: Valid Database connection details.</p>
+
+    <blockquote>
+      <p><strong><em>Important:</em></strong> If your database is configured with a proxy server, you must select an <strong>environment</strong> and then click <strong>Test Connection</strong> to test the database connectivity. The environment should be <code class="language-plaintext highlighter-rouge">=&gt; V8.3</code>.</p>
+    </blockquote>
+
+    <p>For example, you have the VoltMX Foundry Console installed on one machine, and the Runtime and Database servers installed on another machine. When you create an integration service of type MongoDB Database, the Console must be established with a VPN connection to the MongoDB Database server. So that, when you test the Database connection, the test case will be successful. You can do this by selecting the correct environment for your Runtime Server which will ensure a VPN connection between the Console and the Runtime Server and test the database. If the entered details are correct, the system displays the message: Valid Database connection details.</p>
+  </li>
+  <li>In the <strong>Authentication</strong> section, you can select an identity provider from <strong>Use Existing Identity Provider</strong>. This drop-down lists the identity providers created for MongoDB data adapter in the Identity page. If you select any identity provider, you have to enter valid login credentials to access the database. Click <strong>Test Login</strong> and enter the credentials to verify the authentication service.</li>
+</ol>
+
+<blockquote>
+  <p><strong><em>Note:</em></strong> The Authentication section is optional.</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p><a href="javascript:void(0);"><img src="../Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" />For additional configuration of your service definition, provide the following details in the <strong>Advanced</strong> section.</a></p>
+
+    <p>| Field | Description |
+| — | — |
+| Custom Code | To specify a JAR associated to the service, select one from the <strong>Select Existing JAR</strong> drop-down menu or click <strong>Upload New</strong> to add a new JAR file. Make sure that you upload a custom JAR file that is built on the same JDK version used for installing VoltMX Foundry Integration. |
+| API Throttling | &lt;ul&gt; &lt;li&gt;If you want to use <strong>API throttling</strong> in VoltMX Foundry Console, to limit the number of request calls within a minute. do the following:<br /></p>
+    <li>
+      <p>In the <strong>Total Rate Limit</strong> text box, enter a required value. This will limit the total number of requests processed by this API.</p>
+    </li>
+    <li>
+      <p>In the <strong>Rate Limit Per IP</strong> field, enter a required value. With this value, you can limit the number of IP address requests configured in your VoltMX Foundry console in terms of Per IP Rate Limit.</p>
+    </li>
+
+    <table>
+      <tbody>
+        <tr>
+          <td>&lt;/li&gt; &lt;li&gt;To override throttling from VoltMX Foundry App Services Console, refer to <a href="API_Throttling_Override.html#OverrideAPIThrottling">Override API Throttling Configuration</a>.&lt;/li&gt; &lt;/ul&gt;</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p><strong><em>Note:</em></strong> The Advanced section is optional.</p>
+    </blockquote>
+  </li>
+  <li>Enter the <strong>Description</strong> for the service.</li>
+  <li>Click <strong>SAVE</strong> or <strong>SAVE &amp; ADD OPERATION</strong> to save your service definition.</li>
+</ol>
+      <h3 id="create-and-configure-operations-for-mongodb-adapter">
+        
+        
+          <a href="#create-and-configure-operations-for-mongodb-adapter" class="anchor-heading" aria-labelledby="create-and-configure-operations-for-mongodb-adapter"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Create and Configure Operations for MongoDB Adapter
+        
+        
+      </h3>
+    
+
+<p>The <strong>Operations List</strong> tab appears only after you save the service definition. Alternatively, you can also click <strong>Add &gt; Add New Operation</strong> to create or configure operations.</p>
+      <h4 id="create">
+        
+        
+          <a href="#create" class="anchor-heading" aria-labelledby="create"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Create
+        
+        
+      </h4>
+    
+
+<p><strong>To create an operation, follow these steps:</strong></p>
+
+<ol>
+  <li>Select the check boxes for operations available for the <strong>MongoCollection</strong> and <strong>MongoDocument</strong> entities.</li>
+  <li>Click <strong>Add Operation</strong>. The selected operation is added to the <strong>Configured Operations</strong> list. The default name format of a database operation is<br />
+<code class="language-plaintext highlighter-rouge">&lt;MongoCollection/MongoDocument&gt;_&lt;operation_name&gt; and these names are auto-generated.</code><br />
+For example, <code class="language-plaintext highlighter-rouge">MongoCollection_create</code>  and  <code class="language-plaintext highlighter-rouge">MongoDocument_create</code>.</li>
+</ol>
+
+<p><a href="javascript:void(0);"><img src="../Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" />Click to View image</a></p>
+
+<p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/MongoDBcollectionsdocs.png" alt="" /></p>
+
+<p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/MongoDBoperations.png" alt="" /></p>
+      <h4 id="configure">
+        
+        
+          <a href="#configure" class="anchor-heading" aria-labelledby="configure"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Configure
+        
+        
+      </h4>
+    
+
+<p>After you create operations, they are configured with request and response parameters by default.</p>
+
+<p>The following table details pre-configured parameters for request and response operations :</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>MongoDB Operations</th>
+      <th>Request Parameters</th>
+      <th>Response Parameters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MongoCollection_Create</td>
+      <td>&lt;ul&gt; &lt;li&gt;CollectionName&lt;/li&gt; &lt;/ul&gt;</td>
+      <td>&lt;ul&gt; &lt;li&gt;Collection name&lt;/li&gt; &lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td>MongoCollection_Read</td>
+      <td>&lt;p&gt;NA&lt;/p&gt;</td>
+      <td>&lt;ul&gt; &lt;li&gt;Collection names&lt;/li&gt; &lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td>MongoCollection_Delete</td>
+      <td>&lt;p&gt;NA&lt;/p&gt;</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <td>MongoDocument_Create</td>
+      <td>&lt;ul&gt; &lt;li&gt;Record&lt;/li&gt; &lt;li&gt;CollectionName&lt;/li&gt; &lt;/ul&gt;</td>
+      <td>&lt;ul&gt; &lt;li&gt;MongoDocument&lt;/li&gt; &lt;li&gt;DocumentID&lt;/li&gt; &lt;li&gt;Record &lt;/li&gt; &lt;li&gt;Collection name&lt;/li&gt; &lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td>MongoDocument_Update</td>
+      <td>&lt;ul&gt; &lt;li&gt;DocumentID&lt;/li&gt; &lt;li&gt;Record &lt;/li&gt; &lt;li&gt;Collection name&lt;/li&gt; &lt;/ul&gt;</td>
+      <td>&lt;ul&gt; &lt;li&gt;MongoDocument&lt;/li&gt; &lt;li&gt;DocumentID&lt;/li&gt; &lt;li&gt;Record &lt;/li&gt; &lt;li&gt;Collection name&lt;/li&gt; &lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td>MongoDocument_Get</td>
+      <td>&lt;ul&gt; &lt;li&gt;OData Query&lt;/li&gt; &lt;/ul&gt;</td>
+      <td>&lt;ul&gt; &lt;li&gt;MongoDocument&lt;/li&gt; &lt;li&gt;DocumentID&lt;/li&gt; &lt;li&gt;Record &lt;/li&gt; &lt;li&gt;Collection name&lt;/li&gt; &lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td>MongoDocument_Delete</td>
+      <td>&lt;ul&gt; &lt;li&gt;DocumentID&lt;/li&gt; &lt;li&gt;Collection name&lt;/li&gt; &lt;/ul&gt;</td>
+      <td>NA</td>
+    </tr>
+  </tbody>
+</table>
+      <h3 id="key-terminology-and-concepts-of-mongodb">
+        
+        
+          <a href="#key-terminology-and-concepts-of-mongodb" class="anchor-heading" aria-labelledby="key-terminology-and-concepts-of-mongodb"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Key Terminology and Concepts of MongoDB
+        
+        
+      </h3>
+    
+
+<p>MongoDB stores BSON documents, for example, data records in collections; the collections in databases.</p>
+
+<p>Refer the following table for key terminology.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Terminology</th>
+      <th>Concept</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Database</td>
+      <td>In MongoDB, a database holds collections of documents.</td>
+    </tr>
+    <tr>
+      <td>Collection</td>
+      <td>A collection is analogous to a <strong>table</strong> of an RDBMS. A collection may store any number of documents.</td>
+    </tr>
+    <tr>
+      <td>Document/Object</td>
+      <td>&lt;p&gt;A document in MongoDB is analogous to a record in RDBMS and it is a data structure composed of field and value pairs have the following structure:&lt;/p&gt;&lt;p&gt; { field1: value1, field2: value2, … fieldN: valueN } &lt;p&gt;MongoDB documents are similar to JSON objects. The values of fields may include other documents, arrays, and arrays of documents.&lt;/p&gt;</td>
+    </tr>
+    <tr>
+      <td>Field</td>
+      <td>A name-value pair in a document. A document has zero or more fields. Fields are analogous to <strong>columns</strong> in relational databases.</td>
+    </tr>
+  </tbody>
+</table>
+      <h3 id="advantages-of-mongodb-data-adapter">
+        
+        
+          <a href="#advantages-of-mongodb-data-adapter" class="anchor-heading" aria-labelledby="advantages-of-mongodb-data-adapter"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Advantages of MongoDB Data adapter
+        
+        
+      </h3>
+    
+
+<p><strong>Following are the advantages of using MongoDB Adapter:</strong></p>
+
+<ul>
+  <li>Admins can connect to the given database.</li>
+  <li>Admins can manage the databases using CRUD operations.</li>
+  <li>Data types: All major data types are supported.</li>
+  <li>VoltMX supports three ODATA parameters for the read operation on MongoDB documents such as <code class="language-plaintext highlighter-rouge">$filter, $top,</code> and <code class="language-plaintext highlighter-rouge">$skip</code>.</li>
+</ul>
+      <h3 id="limitations">
+        
+        
+          <a href="#limitations" class="anchor-heading" aria-labelledby="limitations"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Limitations
+        
+        
+      </h3>
+    
+
+<p><strong>Following are the limitations to use the VoltMX Foundry MongoDB Adapter:</strong></p>
+
+<ul>
+  <li>Any CRUD operation which involves bulk activity using multiple Document IDs cannot be performed through this adapter.</li>
+</ul>
+
+          
+  
+          
+  
+          
+          
+           
+              <!--<p class="text-small text-grey-dk-100 mb-0">Copyright &copy; 2017-2020 HCL Digital Solutions</p>-->
+
+  
+              
+                <div class="d-flex mt-2">
+                  
+                  
+                </div>
+              
+            </footer>
+          
+  
+        </div>
+      </div>
+  
+      
+        
+  
+        <div class="search-overlay"></div>
+      
+  
+      
+    </div>
+  
+    
+    <div class="right-menu scrollable-container" >
+      <div class="scrollable">
+        
+<nav role="navigation" aria-label="Main" id="sub-site-nav" class="site-nav" >
+<ul class="nav-list">
+  
+</ul>
+
+</nav>
+
+    <script>
+     const subpageNav = document.getElementById('sub-site-nav');
+     const submainmenuButton = document.getElementById('sub-menu-button');
+    
+   (function(){
+    submainmenuButton.addEventListener('click', function(){ 
+      document.getElementById('site-nav').classList.remove('nav-open');
+      subpageNav.classList.toggle('nav-open');
+ });
+})();
+</script>
+
+      </div>
+  </div></div>
+
+
+ <!-- footer from footer html -->
+ <footer>
+
+    <!-- The Modal -->
+<div id="copyright-modal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>
+        Copyright © 2021 HCL - August, 2020 - All rights reserved.
+      </p>
+      <p>This document contains information proprietary to HCL., is bound by the HCL license agreements, and may not be used except in the context of understanding the use and methods of HCL., software without prior, express, written permission. HCL, Empowering Everywhere, HCL Foundry, HCL Flare, and HCL Iris are trademarks of HCL. MobileFoundry is a registered trademark of HCL. Microsoft, the Microsoft logo, Internet Explorer, Windows, and Windows Vista are registered trademarks of Microsoft Corporation. Apple, the Apple logo, iTunes, iPhone, iPad, OS X, Objective-C, Safari, Apple Pay, Apple Watch, and Xcode are trademarks or registered trademarks of Apple, Inc. Google, the Google logo, Android, and the Android logo are registered trademarks of Google, Inc. Chrome is a trademark of Google, Inc. BlackBerry, PlayBook, Research in Motion, and RIM are registered trademarks of BlackBerry. SAP® and SAP® Business Suite® are registered trademarks of SAP SE in Germany and in several other countries. All other terms, trademarks, or service marks mentioned in this document have been capitalized and are to be considered the property of their respective owners.</p>
+    </div>
+  
+  </div>
+    <div class="foot-wrap">
+        <div class="foot-nav">
+            &copy; <a href="#" id="copyrightBtn">Copyright</a> 2021 HCL Technologies Limited. 
+            <a href="https://hcltechsw.com/wps/portal/legal/privacy" style="margin-left: 10px;">Privacy Statement</a> | <a href="#">Terms of Use</a>
+        </div>
+        <ul class="social-nav">
+            <li><a href="#" class="facebook">Facebook</a></li>
+            <li><a href="#" class="linkedin">LinkedIn</a></li>
+            <li><a href="#" class="twitter">Twitter</a></li>
+            <li><a href="#" class="youtube">Youtube</a></li>
+            <li><a href="#" class="glassdoor">Glassdoor</a></li>
+        </ul>
+    </div>
+
+    
+</footer>
+<script>
+    var modal = document.getElementById("copyright-modal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("copyrightBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function(e) {
+    e.preventDefault();
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+  document.querySelector("span.close").onclick = function() {
+  modal.style.display = "none";
+}
+document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode == 27) {
+      modal.style.display = "none";
+    }
+};
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+</script>
+</body>
+</html>

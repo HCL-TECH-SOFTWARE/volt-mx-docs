@@ -1,11 +1,7 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 Form Widget
 -----------
 
-This widget is deprecated. Older applications that use it will still function, but new applications should use the [FlexForm](FlexForm.htm) widget.
+This widget is deprecated. Older applications that use it will still function, but new applications should use the [FlexForm](FlexForm.html) widget.
 
 A form is a visual area (basic application screen) that holds other widgets. You can use a form to set a title and scroll content (similar to a web browser). The entire contents of the form except the headers and footers scroll together. A form is the top most container widget. A form can contain any number of widgets but cannot contain another form.
 
@@ -63,69 +59,69 @@ A form provides you with an option to set Basic Properties, Layout Properties, P
   
 | Basic Properties | Layout Properties | Platform Specific Properties |
 | --- | --- | --- |
-| [enabledForIdleTimeout](Form_Basic_Properties.htm#enabledF) | [displayOrientation](Form_Basic_Properties.htm#displayO) | [actionBarIcon](Form_Basic_Properties.htm#actionBa) |
-| [footers](Form_Basic_Properties.htm#footers) | [gridCell](Form_Basic_Properties.htm#gridCell) | [animateHeaderFooter](Form_Basic_Properties.htm#animateH) |
-| [headers](Form_Basic_Properties.htm#headers) | [layoutMeta](Form_Basic_Properties.htm#layoutMe) | [bounces](Form_Basic_Properties.htm#bounces) |
-| [id](Form_Basic_Properties.htm#id) | [layoutType](Form_Basic_Properties.htm#layoutTy) | [captureGPS](Form_Basic_Properties.htm#captureG) |
-| [info](Form_Basic_Properties.htm#info) |  | [contextPath](Form_Basic_Properties.htm#contextP) |
-| [menuFocusSkin](Form_Basic_Properties.htm#menuFocu) |  | [configureExtendTop](Form_Basic_Properties.htm#configur) |
-| [menuItems](Form_Basic_Properties.htm#menuItem) |   | [configureExtendBottom](Form_Basic_Properties.htm#configur2) |
-| [menuNormalSkin](Form_Basic_Properties.htm#menuNorm) |   | [configureStatusBarStyle](Form_Basic_Properties.htm#configur3) |
-| [needAppMenu](Form_Basic_Properties.htm#needAppM) |   | [defaultIndicatorColor](Form_Basic_Properties.htm#defaultI) |
-| [skin](Form_Basic_Properties.htm#skin) |   | [enablePeekGesture](Form_Basic_Properties.htm#enablePe) |
-|   |   | [extendTop](Form_Basic_Properties.htm#extendTo) |
-| [title](Form_Basic_Properties.htm#title) |   | [extendBottom](Form_Basic_Properties.htm#extendBo) |
-| [type](Form_Basic_Properties.htm#type) |   | [statusBarStyle](Form_Basic_Properties.htm#statusBa) |
-|   |   | [footerOverlap](Form_Basic_Properties.htm#footerOv) |
-|   |   | [formTransperencyDuringPostShow](Form_Basic_Properties.htm#formTran) |
-|   |  | [headerOverlap](Form_Basic_Properties.htm#headerOv) |
-|   |  | [inputAccessoryViewType](Form_Basic_Properties.htm#inputAcc) |
-|   |  | [inTransitionConfig](Form_Basic_Properties.htm#inTransi) |
-|   |  | [layout](Form_Basic_Properties.htm#layout) |
-|   |  | [maxAppMenuButtons](Form_Basic_Properties.htm#maxAppMe) |
-|   |  | [menuPosition](Form_Basic_Properties.htm#menuPosi) |
-|  |  | [needsIndicatorDuringPostShow](Form_Basic_Properties.htm#needsInd) |
-|  |  | [noCache](Form_Basic_Properties.htm#noCache) |
-|  |  | [outTransitionConfig](Form_Basic_Properties.htm#outTrans) |
-|   |   | [retainScrollPosition](Form_Basic_Properties.htm#retainSc) |
-|   |   | [scrollDirection](Form_Basic_Properties.htm#scrollDi) |
-|   |   | [scrollsToTop](Form_Basic_Properties.htm#scrollsT) |
-|   |   | [secureData](Form_Basic_Properties.htm#secureDa) |
-|  |  | [showBottomActionBar](Form_Basic_Properties.htm#showBott) |
-|  |  | [showActionBar](Form_Basic_Properties.htm#showActi) |
-|  |  | [showActionBarIcon](Form_Basic_Properties.htm#showActi2) |
-|  |  | [showMiniAppMenu](Form_Basic_Properties.htm#showMini) |
-|  |  | [submitSecure](Form_Basic_Properties.htm#submitSe) |
-|  |  | [titleBar](Form_Basic_Properties.htm#titleBar) |
-|   |   | [titleBarConfig](Form_Basic_Properties.htm#titleBar2) |
-|   |   | [titleBarSkin](Form_Basic_Properties.htm#titleBar3) |
-|   |   | [windowSoftInputMode](Form_Basic_Properties.htm#windowSo) |
+| [enabledForIdleTimeout](Form_Basic_Properties.html#enabledF) | [displayOrientation](Form_Basic_Properties.html#displayO) | [actionBarIcon](Form_Basic_Properties.html#actionBa) |
+| [footers](Form_Basic_Properties.html#footers) | [gridCell](Form_Basic_Properties.html#gridCell) | [animateHeaderFooter](Form_Basic_Properties.html#animateH) |
+| [headers](Form_Basic_Properties.html#headers) | [layoutMeta](Form_Basic_Properties.html#layoutMe) | [bounces](Form_Basic_Properties.html#bounces) |
+| [id](Form_Basic_Properties.html#id) | [layoutType](Form_Basic_Properties.html#layoutTy) | [captureGPS](Form_Basic_Properties.html#captureG) |
+| [info](Form_Basic_Properties.html#info) |  | [contextPath](Form_Basic_Properties.html#contextP) |
+| [menuFocusSkin](Form_Basic_Properties.html#menuFocu) |  | [configureExtendTop](Form_Basic_Properties.html#configur) |
+| [menuItems](Form_Basic_Properties.html#menuItem) |   | [configureExtendBottom](Form_Basic_Properties.html#configur2) |
+| [menuNormalSkin](Form_Basic_Properties.html#menuNorm) |   | [configureStatusBarStyle](Form_Basic_Properties.html#configur3) |
+| [needAppMenu](Form_Basic_Properties.html#needAppM) |   | [defaultIndicatorColor](Form_Basic_Properties.html#defaultI) |
+| [skin](Form_Basic_Properties.html#skin) |   | [enablePeekGesture](Form_Basic_Properties.html#enablePe) |
+|   |   | [extendTop](Form_Basic_Properties.html#extendTo) |
+| [title](Form_Basic_Properties.html#title) |   | [extendBottom](Form_Basic_Properties.html#extendBo) |
+| [type](Form_Basic_Properties.html#type) |   | [statusBarStyle](Form_Basic_Properties.html#statusBa) |
+|   |   | [footerOverlap](Form_Basic_Properties.html#footerOv) |
+|   |   | [formTransperencyDuringPostShow](Form_Basic_Properties.html#formTran) |
+|   |  | [headerOverlap](Form_Basic_Properties.html#headerOv) |
+|   |  | [inputAccessoryViewType](Form_Basic_Properties.html#inputAcc) |
+|   |  | [inTransitionConfig](Form_Basic_Properties.html#inTransi) |
+|   |  | [layout](Form_Basic_Properties.html#layout) |
+|   |  | [maxAppMenuButtons](Form_Basic_Properties.html#maxAppMe) |
+|   |  | [menuPosition](Form_Basic_Properties.html#menuPosi) |
+|  |  | [needsIndicatorDuringPostShow](Form_Basic_Properties.html#needsInd) |
+|  |  | [noCache](Form_Basic_Properties.html#noCache) |
+|  |  | [outTransitionConfig](Form_Basic_Properties.html#outTrans) |
+|   |   | [retainScrollPosition](Form_Basic_Properties.html#retainSc) |
+|   |   | [scrollDirection](Form_Basic_Properties.html#scrollDi) |
+|   |   | [scrollsToTop](Form_Basic_Properties.html#scrollsT) |
+|   |   | [secureData](Form_Basic_Properties.html#secureDa) |
+|  |  | [showBottomActionBar](Form_Basic_Properties.html#showBott) |
+|  |  | [showActionBar](Form_Basic_Properties.html#showActi) |
+|  |  | [showActionBarIcon](Form_Basic_Properties.html#showActi2) |
+|  |  | [showMiniAppMenu](Form_Basic_Properties.html#showMini) |
+|  |  | [submitSecure](Form_Basic_Properties.html#submitSe) |
+|  |  | [titleBar](Form_Basic_Properties.html#titleBar) |
+|   |   | [titleBarConfig](Form_Basic_Properties.html#titleBar2) |
+|   |   | [titleBarSkin](Form_Basic_Properties.html#titleBar3) |
+|   |   | [windowSoftInputMode](Form_Basic_Properties.html#windowSo) |
 
   
 | Events | Methods |
 | --- | --- |
-| [addWidgets](Form_Events.htm#addWidge) | [add](Form_Methods.htm#add(widg) |
-| [init](Form_Events.htm#init()) | [addAt](Form_Methods.htm#addAt(wi) |
-| [onActionBarBack](Form_Events.htm#onAction) | [show](Form_Methods.htm#show) |
-| [onHide](Form_Events.htm#onHide()) | [destroy](Form_Methods.htm#form.des) |
-| [onOrientationChange](Form_Events.htm#onOrient) | [remove](Form_Methods.htm#form.get2) |
-| [onDeviceBack](Form_Events.htm#onDevice) | [removeAt](Form_Methods.htm#removeAt) |
-| [onDeviceMenu](Form_Events.htm#onDevice2) | [replaceAt](Form_Methods.htm#replaceA) |
-| [onDestroy](Form_Events.htm#onDestro) | [widgets](Form_Methods.htm#widgets() |
-| [preShow](Form_Events.htm#preShow() | [setTitleBarLeftSideButtonSkin](Form_Methods.htm#setTitle) |
-| [postShow](Form_Events.htm#postShow) | [setTitleBarRightSideButtonSkin](Form_Methods.htm#setTitle2) |
-| [onLoadJS](Form_Events.htm#onLoadJS) | [setTitleBarSkin](Form_Methods.htm#setTitle3) |
-| [unLoadJS](Form_Events.htm#unLoadJS) | [showTitleBar](Form_Methods.htm#showTitl) |
-|  | [hideTitleBar](Form_Methods.htm#hideTitl) |
-|  | [scrollToWidget](Form_Methods.htm#scrollTo) |
-|  | [scrollToBeginning](Form_Methods.htm#scrollTo2) |
-|   | [scrollToEnd](Form_Methods.htm#scrollTo3) |
+| [addWidgets](Form_Events.html#addWidge) | [add](Form_Methods.html#add(widg) |
+| [init](Form_Events.html#init()) | [addAt](Form_Methods.html#addAt(wi) |
+| [onActionBarBack](Form_Events.html#onAction) | [show](Form_Methods.html#show) |
+| [onHide](Form_Events.html#onHide()) | [destroy](Form_Methods.html#form.des) |
+| [onOrientationChange](Form_Events.html#onOrient) | [remove](Form_Methods.html#form.get2) |
+| [onDeviceBack](Form_Events.html#onDevice) | [removeAt](Form_Methods.html#removeAt) |
+| [onDeviceMenu](Form_Events.html#onDevice2) | [replaceAt](Form_Methods.html#replaceA) |
+| [onDestroy](Form_Events.html#onDestro) | [widgets](Form_Methods.html#widgets() |
+| [preShow](Form_Events.html#preShow() | [setTitleBarLeftSideButtonSkin](Form_Methods.html#setTitle) |
+| [postShow](Form_Events.html#postShow) | [setTitleBarRightSideButtonSkin](Form_Methods.html#setTitle2) |
+| [onLoadJS](Form_Events.html#onLoadJS) | [setTitleBarSkin](Form_Methods.html#setTitle3) |
+| [unLoadJS](Form_Events.html#unLoadJS) | [showTitleBar](Form_Methods.html#showTitl) |
+|  | [hideTitleBar](Form_Methods.html#hideTitl) |
+|  | [scrollToWidget](Form_Methods.html#scrollTo) |
+|  | [scrollToBeginning](Form_Methods.html#scrollTo2) |
+|   | [scrollToEnd](Form_Methods.html#scrollTo3) |
 
-##### Creating a Form using a constructor: hcl.ui.Form2
+##### Creating a Form using a constructor: voltmx.ui.Form2
 
-{% highlight voltMx %}​​​​​
-var form1 = new hcl.ui.Form2(basicConf, layoutConf, pspConf)​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}
+var form1 = new voltmx.ui.Form2(basicConf, layoutConf, pspConf)
+{% endhighlight %}
 
 *   **basicConf** is an object with basic properties.
 *   **layoutConf** is an object with layout properties.
@@ -135,7 +131,7 @@ var form1 = new hcl.ui.Form2(basicConf, layoutConf, pspConf)​
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining properties for a form.
 var basicConf = {id:"formHome", title:"Form Home", addWidgets:addwidgetsfrmNew, skin:"frmskn"};
 
@@ -144,14 +140,14 @@ var layoutConf = {contentAlignment:constants.CONTENT\_ALIGN\_TOP\_CENTER, contai
 var pspConf = {titleBar: true, titleBarSkin: "skntitlebar"};
 
 //Creating the form.
-var myForm = new hcl.ui.Form2(basicConf,layoutConf,pspConf)​
-{% endhighlight %}​​​​​
+var myForm = new voltmx.ui.Form2(basicConf,layoutConf,pspConf)
+{% endhighlight %}
 
-For backward compatibility with support for all [deprecated](FlexForm_Example_SampleApp.htm) properties and behaviors, use the constructor **hcl.ui.Form**.
+For backward compatibility with support for all [deprecated](FlexForm_Example_SampleApp.html) properties and behaviors, use the constructor **voltmx.ui.Form**.
 
-{% highlight voltMx %}​​​​​
-var form1 = new hcl.ui.Form(basicConf, layoutConf, pspConf)​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}
+var form1 = new voltmx.ui.Form(basicConf, layoutConf, pspConf)
+{% endhighlight %}
 
 ##### Form Types
 

@@ -1,7 +1,3 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 Image Events
 ============
 
@@ -31,7 +27,7 @@ This event is used to set the layout properties of child widgets in the relation
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set doLayout event callback to a button widget.
+{% highlight voltMx %}//Sample code to set doLayout event callback to a button widget.
 /\*This code changes the top property of button2 and makes it appear below button1.\*/
 myForm.button1.doLayout=doLayoutButton1;
 
@@ -39,8 +35,8 @@ myForm.button1.doLayout=doLayoutButton1;
 function doLayoutButton1(){
       
     myForm.button2.top = myForm.button1.frame.height;
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 
@@ -115,14 +111,14 @@ This event is only triggered when the form containing the image is visible.
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code to set a callback to the onDownloadComplete event for an Image widget.
+{% highlight voltMx %}//Sample code to set a callback to the onDownloadComplete event for an Image widget.
 
 myForm.myImage.onDownloadComplete=onDownloadCompleteCallback;
 
 function onDownloadCompleteCallback(eventobject, imagesrc, issuccess) {
  alert("call back event triggered");
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 
@@ -146,7 +142,7 @@ Read + Write
 
 Example
 
-{% highlight voltMx %}​​​​​var LabelWdg = new hcl.ui.Label(basicConf, layoutConf, pspConf);
+{% highlight voltMx %}var LabelWdg = new voltmx.ui.Label(basicConf, layoutConf, pspConf);
 form.add(LabelWdg);
 LabelWdg.onScrollWidgetPosition = onScrollWidgetPositionCallBack;
 
@@ -157,8 +153,8 @@ the screen's X - coordinates (after downsizing the navigation bar and status bar
 coordinates (after downsizing the navigation bar and status bar).\*/
     //frameX : Position of widget with respect to parent container's X- coordinates.
     //frameY : Position of widget with respect to parent container's Y- coordinates.
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 
@@ -207,14 +203,14 @@ This event is invoked asynchronously.
 
 Example
 
-{% highlight voltMx %}​​​​​function onTouchEndCallback(source, x, y, contextInfo) {
+{% highlight voltMx %}function onTouchEndCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo\[“force”\];
-        hcl.print(“value of force is” + force)
+        voltmx.print(“value of force is” + force)
     }
 }
-Form1.widget1.onTouchEnd = onTouchEndCallback;​
-{% endhighlight %}​​​​​
+Form1.widget1.onTouchEnd = onTouchEndCallback;
+{% endhighlight %}
 
 Platform Availability
 
@@ -262,14 +258,14 @@ This event is invoked asynchronously.
 
 Example
 
-{% highlight voltMx %}​​​​​function onTouchMoveCallback(source, x, y, contextInfo) {
+{% highlight voltMx %}function onTouchMoveCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo\[“force”\];
-        hcl.print(“value of force is” + force)
+        voltmx.print(“value of force is” + force)
     }
     Form1.widget1.onTouchMove = onTouchMoveCallback;  
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -317,15 +313,15 @@ This event is invoked asynchronously.
 
 Example
 
-{% highlight voltMx %}​​​​​function onTouchStartCallback(source, x, y, contextInfo) {
+{% highlight voltMx %}function onTouchStartCallback(source, x, y, contextInfo) {
     if (contextInfo) {
         var force = contextInfo\[“force”\];
-        hcl.print(“value of force is” + force)
+        voltmx.print(“value of force is” + force)
     }
 }
 Form1.widget1.onTouchStart = onTouchStartCallback;  
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 

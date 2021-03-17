@@ -1,7 +1,3 @@
-layout: documentation
-category: iris_api_dev_guide
----
-
 Asynchronous Network Calls
 ==========================
 

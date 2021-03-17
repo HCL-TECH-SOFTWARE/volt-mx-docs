@@ -1,7 +1,3 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 HorizontalImageStrip Properties
 -------------------------------
 
@@ -15,7 +11,7 @@ The basic properties for HorizontalImageStrip widget are:
 
 Enables you to control accessibility behavior and alternative text for the widget.
 
-For more information on using accessibility features in your app, see the [Accessibility](https://docs.hcl.com/hcllibrary/iris/iris_user_guide/Default.htm#Accessibility_Overview.htm) appendix in the VoltMX IrisUser Guide.
+For more information on using accessibility features in your app, see the [Accessibility](https://{{site.baseurl}}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the VoltMX IrisUser Guide.
 
 Syntax
 
@@ -62,7 +58,7 @@ Example 1
 
 This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the accessibilityConfig Property for button widget.
 /\*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.\*/
 
@@ -70,24 +66,24 @@ Form1.myButton.accessibilityConfig = {
     "a11yLabel": "Label",
     "a11yValue": "Value",
     "a11yHint": "Hint"    
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Example 2
 
 This example uses the button widget to implement internationalization in `accessibilityConfig` property, but the principle remains the same for all widgets.
 
-{% highlight voltMx %}​​​​​/\*Sample code to implement internationalization in accessibilityConfig property in Native platform.\*/
+{% highlight voltMx %}/\*Sample code to implement internationalization in accessibilityConfig property in Native platform.\*/
 
 Form1.myButton.accessibilityConfig = {
-    "a11yLabel": hcl.i18n.getLocalizedString("key1")     
+    "a11yLabel": voltmx.i18n.getLocalizedString("key1")     
 };  
 /\*Sample code to implement internationalization in accessibilityConfig property in Desktop Web platform.\*/
 
 Form1.myButton.accessibilityConfig = {
-    "a11yLabel": "hcl.i18n.getLocalizedString(\\"key3\\")"
-};​
-{% endhighlight %}​​​​​
+    "a11yLabel": "voltmx.i18n.getLocalizedString(\\"key3\\")"
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -122,11 +118,11 @@ The default value for this property is center ( {"x":0.5, "y":0.5} ), that repre
 
 Example
 
-{% highlight voltMx %}​​​​​Form1.widget1.anchorPoint = {
+{% highlight voltMx %}Form1.widget1.anchorPoint = {
     "x": 0.5,
     "y": 0.5
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Platform Availability
 
@@ -165,7 +161,7 @@ The available options are:
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with arrowConfig.
 var hISBasic={id:"hIS", 
 	skin:"hISkn", 
@@ -197,12 +193,12 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading arrowConfig of Horizontal Image strip
 
-hcl.print("Horizontal Image strip arrowConfig::"+hIS.arrowConfig);​
-{% endhighlight %}​​​​​
+voltmx.print("Horizontal Image strip arrowConfig::"+hIS.arrowConfig);
+{% endhighlight %}
 
 Platform Availability
 
@@ -220,7 +216,7 @@ Specifies the JSObject which represents the images to be rendered in horizontal 
 
 Data format of JavaScript object
 
-{% highlight voltMx %}​​​​​//Data format of JavaScript object
+{% highlight voltMx %}//Data format of JavaScript object
 formname.widgetname.data=
 \[
  \[
@@ -229,8 +225,8 @@ formname.widgetname.data=
   {"imagekey": "imagen.png", accessibilityConfig:acObject}
  \],	
 		"imagekey"
-\];​
-{% endhighlight %}​​​​​
+\];
+{% endhighlight %}
 
 Syntax
 
@@ -253,7 +249,7 @@ Data format:An array with two elements.
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with data:
 //\[\[{"imagekey":"image1.png"}, {"imagekey":"image2.png"}, "imagekey"\]\]
 					
@@ -301,12 +297,12 @@ var hISLayout=
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading data of Horizontal Image strip
 
-hcl.print("Horizontal Image strip data::"+hIS.data);​
-{% endhighlight %}​​​​​
+voltmx.print("Horizontal Image strip data::"+hIS.data);
+{% endhighlight %}
 
 Platform Availability
 
@@ -342,8 +338,8 @@ The default value for this property is true.
 
 Example
 
-{% highlight voltMx %}​​​​​Form1.widgetID.enableCache = true;​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.widgetID.enableCache = true;
+{% endhighlight %}
 
 Platform Availability
 
@@ -378,7 +374,7 @@ Remarks
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with focusSkin:"hISknFocus"
 var hISBasic={id:"hIS",
 	skin:"hISkn",
@@ -404,12 +400,12 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading focusSkin of Horizontal Image strip.
 
-hcl.print("Horizontal Image strip focusSkin::"+hIS.focusSkin);​
-{% endhighlight %}​​​​​
+voltmx.print("Horizontal Image strip focusSkin::"+hIS.focusSkin);
+{% endhighlight %}
 
 Platform Availability
 
@@ -439,7 +435,7 @@ Yes
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for a HzImageStrip with hoverSkin:"hskin"
 
 var hISBasic={id:"his1", 
@@ -458,8 +454,8 @@ var hIS={padding:\[5,5,5,5\],
 var hISPSP={hoverSkin:"hskin"};
 
 //Creating the HzImageStrip.
-var his1 = new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);​
-{% endhighlight %}​​​​​
+var his1 = new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -489,7 +485,7 @@ Yes - (Read only)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with id:"hIS"
 var hISBasic={id:"hIS", 
 	skin:"hISkn", 
@@ -517,11 +513,11 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading id of Horizontal Image strip
-hcl.print("Horizontal Image strip id::"+hIS.id);​
-{% endhighlight %}​​​​​
+voltmx.print("Horizontal Image strip id::"+hIS.id);
+{% endhighlight %}
 
 Platform Availability
 
@@ -551,7 +547,7 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with imageWhenFailed:"img3.png"
 var hISBasic={id:"hIS",skin:"hISkn", 
 	focusSkin:"hISknFocus", 
@@ -577,8 +573,8 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);​
-{% endhighlight %}​​​​​
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -608,7 +604,7 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with imageWhileDownloading:"img.png"
 var hISBasic={id:"hIS",
 	skin:"hISkn", 
@@ -635,8 +631,8 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);​
-{% endhighlight %}​​​​​
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -654,13 +650,13 @@ A custom JSObject with the key value pairs that a developer can use to store the
 
 Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 var inf = {a: 'hello'};
 widget.info = inf; //works
 widget.info.a = 'hello world';
 //This will not update the widget info a property to Hello world.
-//widget.info.a will have old value as hello.​
-{% endhighlight %}​​​​​
+//widget.info.a will have old value as hello.
+{% endhighlight %}
 
 Syntax
 
@@ -680,7 +676,7 @@ Remarks
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with info property.
 var hISBasic={id:"hIS", skin:"hISkn", 
 	focusSkin:"hISknFocus", 
@@ -704,12 +700,12 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP); 
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP); 
 **hIS.info = {key:"horizontal images"};**
 
 //Reading info of Horizontal Image strip
-hcl.print("Horizontal Image strip info is ::"+hIS.info);​
-{% endhighlight %}​​​​​
+voltmx.print("Horizontal Image strip info is ::"+hIS.info);
+{% endhighlight %}
 
 Platform Availability
 
@@ -745,7 +741,7 @@ The default value for this property is true. If set to _false,_ the widget is no
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with isVisible:true
 var hISBasic={id:"hIS",skin:"hISkn",
 	focusSkin:"hISknFocus", 
@@ -772,12 +768,12 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading isVisible of Horizontal Image strip
 
-hcl.print("Horizontal Image strip isVisible::"+hIS.isVisible);​
-{% endhighlight %}​​​​​
+voltmx.print("Horizontal Image strip isVisible::"+hIS.isVisible);
+{% endhighlight %}
 
 Platform Availability
 
@@ -797,13 +793,13 @@ This property is used to retain the content alignment property value, as it was 
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}​​​​​function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig\[defaultLocale\]
     \["mirrorFlexPositionalProperties"\] == true &&
     !widgetRetainFlexPositionPropertiesValue);
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
@@ -834,11 +830,11 @@ No (only during widget-construction time)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainContentAlignment property for Button widget.
 /\*You need to make a corresponding use of the 
 retainContentAlignment property for other applicable widgets.\*/
-var btn = new hcl.ui.Button({
+var btn = new voltmx.ui.Button({
     "focusSkin": "defBtnFocus",
     "height": "50dp",
     "id": "myButton",
@@ -856,8 +852,8 @@ var btn = new hcl.ui.Button({
     "paddingInPixel": false,
     "retainFlexPositionProperties": false,
     "retainContentAlignment": true
-}, {});​
-{% endhighlight %}​​​​​
+}, {});
+{% endhighlight %}
 
 Platform Availability
 
@@ -876,13 +872,13 @@ This property is used to retain flex positional property values as they were def
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}​​​​​function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig\[defaultLocale\]
     \["mirrorFlexPositionalProperties"\] == true &&
     !widgetRetainFlexPositionPropertiesValue);
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
@@ -913,11 +909,11 @@ No (only during widget-construction time)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
 /\*You need to make a corresponding use of the 
 retainFlexPositionProperties property for other applicable widgets.\*/
-var btn = new hcl.ui.Button({
+var btn = new voltmx.ui.Button({
     "focusSkin": "defBtnFocus",
     "height": "50dp",
     "id": "myButton",
@@ -935,8 +931,8 @@ var btn = new hcl.ui.Button({
     "paddingInPixel": false,
     "retainFlexPositionProperties": true,
     "retainContentAlignment": false
-}, {});​
-{% endhighlight %}​​​​​
+}, {});
+{% endhighlight %}
 
 Platform Availability
 
@@ -955,13 +951,13 @@ This property is used to convert Flow Horizontal Left to Flow Horizontal Right.
 
 The mirroring widget layout properties should be defined as follows.
 
-{% highlight voltMx %}​​​​​function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+{% highlight voltMx %}function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
     return (isI18nLayoutConfigEnabled &&
     localeLayoutConfig\[defaultLocale\]
     \["mirrorFlexPositionalProperties"\] == true &&
     !widgetRetainFlexPositionPropertiesValue);
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 The following table illustrates how widgets consider Local flag and Widget flag values.
 
@@ -992,11 +988,11 @@ No (only during widget-construction time)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic property that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic property that is applicable for various widgets.
 //Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
 /\*You need to make a corresponding use of the 
 retainFlowHorizontalAlignment property for other applicable widgets. \*/
-var btn = new hcl.ui.Button({
+var btn = new voltmx.ui.Button({
  "focusSkin": "defBtnFocus",
  "height": "50dp",
  "id": "myButton",
@@ -1015,8 +1011,8 @@ var btn = new hcl.ui.Button({
  "retainFlexPositionProperties": true,
  "retainContentAlignment": false,
  "retainFlowHorizontalAlignment ": false
-}, {});​
-{% endhighlight %}​​​​​
+}, {});
+{% endhighlight %}
 
 Platform Availability
 
@@ -1049,7 +1045,7 @@ Remarks
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with selectedIndex:1
 					
 var hISBasic={id:"hIS",skin:"hISkn", 
@@ -1076,12 +1072,12 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading selectedIndex of Horizontal Image strip
 
-hcl.print("Horizontal Image strip selectedIndex::"+hIS.selectedIndex);​
-{% endhighlight %}​​​​​
+voltmx.print("Horizontal Image strip selectedIndex::"+hIS.selectedIndex);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1111,7 +1107,7 @@ Read only
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with selectedIndex:1
 var hISBasic={id:"hIS",skin:"hISkn", 
 	focusSkin:"hISknFocus", 
@@ -1138,11 +1134,11 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading selectedItem of Horizontal Image strip
-**hcl.print("Horizontal Image strip selectedItem::"+hIS.selectedItem);**​
-{% endhighlight %}​​​​​
+**voltmx.print("Horizontal Image strip selectedItem::"+hIS.selectedItem);**
+{% endhighlight %}
 
 Platform Availability
 
@@ -1176,7 +1172,7 @@ The default value for this property is false. If set to _true,_ the arrows are d
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with showArrows:true
 var hISBasic={id:"hIS",skin:"hISkn", 
 	focusSkin:"hISknFocus", 
@@ -1202,12 +1198,12 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading showArrows of Horizontal Image strip
 
-hcl.print("Horizontal Image strip showArrows::"+hIS.showArrows);​
-{% endhighlight %}​​​​​
+voltmx.print("Horizontal Image strip showArrows::"+hIS.showArrows);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1241,7 +1237,7 @@ The default value for this property depends on the native platform behavior.
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with showScrollbars:true
 var hISBasic={id:"hIS",skin:"hISkn", 
 	focusSkin:"hISknFocus", 
@@ -1267,11 +1263,11 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading showScrollbars of Horizontal Image strip
-hcl.print("Horizontal Image strip showScrollbars::"+hIS.showScrollbars);​
-{% endhighlight %}​​​​​
+voltmx.print("Horizontal Image strip showScrollbars::"+hIS.showScrollbars);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1301,7 +1297,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with skin:"hISkn"
 var hISBasic={id:"hIS", 
 	**skin:"hISkn"**, 
@@ -1329,12 +1325,12 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading skin of Horizontal Image strip
 
-hcl.print("Horizontal Image strip Skin::"+hIS.skin);​
-{% endhighlight %}​​​​​
+voltmx.print("Horizontal Image strip Skin::"+hIS.skin);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1364,7 +1360,7 @@ No
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with spaceBetweenImages:20
 var hISBasic={id:"hIS",skin:"hISkn", 
 	focusSkin:"hISknFocus", 
@@ -1391,8 +1387,8 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);​
-{% endhighlight %}​​​​​
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1422,7 +1418,7 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for a HzImageStrip with toolTip:sample text
 var hISBasic=
     {id:"hIS1",
@@ -1441,8 +1437,8 @@ var hISLayout=
 var hISPSP=
     {**toolTip:"sample text"**};
 //Creating the HzImageStrip.
-var hIS1 = new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);​
-{% endhighlight %}​​​​​
+var hIS1 = new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1472,19 +1468,19 @@ Read + Write
 
 Remarks
 
-This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [hcl.ui.makeAffineTransform](http://docs.hcl.com/hcllibrary/iris/iris_api_dev_guide/Default.htm#hcl.ui_functions.htm%23makeAffi?TocPath=References|hcl.ui%2520Namespace|Functions|_____6) function.
+This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the [voltmx.ui.makeAffineTransform](https://{{site.baseurl}}/docs/documentation/Iris/iris_api_dev_guide/Content/voltmx.ui_functions.html%23makeAffi?TocPath=References|voltmx.ui%2520Namespace|Functions|_____6) function.
 
 Example
 
 This example uses the button widget, but the principle remains the same for all widgets that have a transform property.
 
-{% highlight voltMx %}​​​​​//Animation sample
-var newTransform = hcl.ui.makeAffineTransform();
+{% highlight voltMx %}//Animation sample
+var newTransform = voltmx.ui.makeAffineTransform();
 newTransform.translate3D(223, 12, 56);
 
 //translates by 223 xAxis,12 in yAxis,56 in zAxis
-widget.transform = newTransform;​
-{% endhighlight %}​​​​​
+widget.transform = newTransform;
+{% endhighlight %}
 
 Platform Availability
 
@@ -1527,7 +1523,7 @@ Following are the available view types:
 
 **Example**
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for a HorizontalImageStrip with viewConfig.
 
 var hISBasic=
@@ -1548,9 +1544,9 @@ var hISLayout=
      displayText:true};
 var hISPSP={};
 //Creating the HzImageStrip.
-var hIS1 = new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
-​
-{% endhighlight %}​​​​​
+var hIS1 = new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+
+{% endhighlight %}
 
 **Platform Availability**
 
@@ -1636,7 +1632,7 @@ Following are the available view types:
 
 Example
 
-{% highlight voltMx %}​​​​​
+{% highlight voltMx %}
 //Defining the properties for Horizontal Image strip with viewType as COVERFLOW.
 var hISBasic={id:"hIS", 
 	skin:"hISkn", 
@@ -1664,12 +1660,12 @@ var hISLayout={padding:\[5,5,5,5\],
 var hISPSP={};
 
 //Creating the Horizontal Image strip.
-var hIS=new hcl.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
+var hIS=new voltmx.ui.HorizontalImageStrip2(hISBasic, hISLayout, hISPSP);
 
 //Reading viewType of Horizontal Image strip.
 
-hcl.print("Horizontal Image strip viewType::"+hIS.viewType);​
-{% endhighlight %}​​​​​
+voltmx.print("Horizontal Image strip viewType::"+hIS.viewType);
+{% endhighlight %}
 
 Platform Availability
 

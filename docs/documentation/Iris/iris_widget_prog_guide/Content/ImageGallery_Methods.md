@@ -1,7 +1,3 @@
-layout: documentation---
-category: iris_widget_prog_guide
----
-
 ImageGallery Methods
 --------------------
 
@@ -17,13 +13,13 @@ This method allows you to add new images to the ImageGallery. The new images are
 
 Syntax
 
-{% highlight voltMx %}​​​​​ addAll(array\_of\_data);​
-{% endhighlight %}​​​​​
+{% highlight voltMx %} addAll(array\_of\_data);
+{% endhighlight %}
 
 For Backward compatibility use the below signature:
 
-{% highlight voltMx %}​​​​​addAll(array\_of\_data,image\_url\_property);​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}addAll(array\_of\_data,image\_url\_property);
+{% endhighlight %}
 
 Parameters
 
@@ -45,7 +41,7 @@ There is no need for the second parameter (image\_url\_property) as this API ass
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining the properties for ImageGallery.
+{% highlight voltMx %}//Defining the properties for ImageGallery.
 var imgGalBasic = 
     {
       id: "imgGallery",
@@ -66,7 +62,7 @@ var imgGalPSP =
       preOnclickJS:preOnclickCallBck
     };
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
 
 //Adding new new images to the Image Gallery by addAll method,
 //We can use external URL images or the images inside resources folder
@@ -77,8 +73,8 @@ imgGallery.addAll
     { imageurl: "http://www.company.com/folder/images/check-box.jpg" }
 	\],
 	"imageurl"
-);​
-{% endhighlight %}​​​​​
+);
+{% endhighlight %}
 
 Exceptions
 
@@ -98,9 +94,9 @@ Allows you to add/insert a new image at a given index. In case the index is not 
 
 Syntax
 
-{% highlight voltMx %}​​​​​addDataAt(imagedata,index);
-​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}addDataAt(imagedata,index);
+
+{% endhighlight %}
 
 Parameters
 
@@ -118,7 +114,7 @@ None
 
 Examples
 
-{% highlight voltMx %}​​​​​var segBasic =
+{% highlight voltMx %}var segBasic =
     {
       id:"segId",
       isVisible:true,
@@ -155,7 +151,7 @@ var segPSP =
     };
 
 //Creating the Segment.
-var segment1 = new hcl.ui.SegmentedUI2
+var segment1 = new voltmx.ui.SegmentedUI2
 (
   segBasic,
   segLayout,
@@ -175,7 +171,7 @@ segment1.addDataAt(dataObj1,15);
   Form1.add(segment1);
 
 //Associating Animation
-var transfromObject = hcl.ui.makeAffineTransform();
+var transfromObject = voltmx.ui.makeAffineTransform();
 transfromObject.translate(10, 0);
 transfromObject.scale(0.1, 1);
 animationDef = 
@@ -187,7 +183,7 @@ animationDef =
 };
 animationConfig = {
                    duration: 0.3,
-                   fillMode: hcl.anim.FILL\_MODE\_FORWARDS
+                   fillMode: voltmx.anim.FILL\_MODE\_FORWARDS
                   };
 //Example of the data would be
 var datacheck= 
@@ -209,16 +205,16 @@ var datacheck=
   "rowtemplateId": {}
   }
 \];
-animationDefObject = hcl.ui.createAnimation(animationDef);
+animationDefObject = voltmx.ui.createAnimation(animationDef);
 animation= 
   {
   definition: animationDefObject, 
   config: animationConfig
 };
 Form1.segments.addDataAt(dataObj1, 15, animation);
-​
-{% endhighlight %}​​​​​{% highlight voltMx %}​​​​​ ​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}{% highlight voltMx %} 
+{% endhighlight %}
 
 Platform Availability
 
@@ -400,7 +396,7 @@ In the android platform, the top and bottom gestures work only when the scrollin
 
 Example
 
-{% highlight voltMx %}​​​​​ //Sample code to add Gestures to the frmGestures FlexForm.
+{% highlight voltMx %} //Sample code to add Gestures to the frmGestures FlexForm.
 //Code to add DOUBLE TAP gesture to the frmGestures, FlexForm.
 var doubletp = {
  fingers: 1,
@@ -427,10 +423,10 @@ var longPressForm = {
 frmGestures.addGestureRecognizer(3, longPressForm, onGestureFunction);
 
 function onGestureFunction(commonWidget, gestureInfo) {
- hcl.print("The Gesture type is:" + gestureInfo.gestureType);
+ voltmx.print("The Gesture type is:" + gestureInfo.gestureType);
 
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 
@@ -452,7 +448,7 @@ Parameters
 
 _animationObj_
 
-An `animation` object created using [hcl.ui.createAnimation](http://docs.hcl.com/hcllibrary/iris/iris_api_dev_guide/Default.htm#hcl.ui_functions.htm%23createAn?TocPath=References|hcl.ui%2520Namespace|Functions|_____5) function.
+An `animation` object created using [voltmx.ui.createAnimation](https://{{site.baseurl}}/docs/documentation/Iris/iris_api_dev_guide/Content/voltmx.ui_functions.html%23createAn?TocPath=References|voltmx.ui%2520Namespace|Functions|_____5) function.
 
 _animationConfig_
 
@@ -495,7 +491,7 @@ If the widget is not part of the currently visible view hierarchy, calling this 
 
 Example
 
-{% highlight voltMx %}​​​​​//Sample code of animation
+{% highlight voltMx %}//Sample code of animation
 function AnimateBoth() {
     var getFuncName = frm1.listbox18.selectedKey;
     if (getFuncName == "BothLT") {
@@ -505,8 +501,8 @@ function AnimateBoth() {
         frm1.textbox26.animate(myAnimDefinitionsc1(),
             animConfiguration(), {});
     }
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 
@@ -540,11 +536,11 @@ This parameter is the handle to the widget instance. Based on this parameter, th
 
 Example
 
-{% highlight voltMx %}​​​​​Form1.widget1.convertPointFromWidget({
+{% highlight voltMx %}Form1.widget1.convertPointFromWidget({
     x: "10dp",
     y: "20dp"
-}, widget2);​
-{% endhighlight %}​​​​​
+}, widget2);
+{% endhighlight %}
 
 Platform Availability
 
@@ -574,11 +570,11 @@ _toWidget_
 
 Example
 
-{% highlight voltMx %}​​​​​Form1.widget2.convertPointToWidget({
+{% highlight voltMx %}Form1.widget2.convertPointToWidget({
     x: "20dp",
     y: "30dp"
-}, widget1);​
-{% endhighlight %}​​​​​
+}, widget1);
+{% endhighlight %}
 
 Platform Availability
 
@@ -614,7 +610,7 @@ On the iOS platform, this method is applicable on Label, Button, Image, TextBox,
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic method that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the getBadge Method for button widget.
 //You need to make a corresponding call of the getBadge method for other applicable widgets.
 function getBadge() {
@@ -624,8 +620,8 @@ function getBadge() {
 
     //For instance, the corresponding getBadge method call on the Label widget is as follows:
     frm1.lbl1.getBadge();
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 
@@ -665,15 +661,15 @@ Callback Return Values
 
 Callback Example
 
-{% highlight voltMx %}​​​​​function onPeekCallback(widget) {
+{% highlight voltMx %}function onPeekCallback(widget) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": \[0, 0, 200, 200\],
         "contentSize": \[320, 480\]
     };
     return previewInfoTable;
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 onPopCallback (Optional)
 
@@ -703,11 +699,11 @@ Use this callback to set the content for pop. The form handle returned by this c
 
 Callback Example
 
-{% highlight voltMx %}​​​​​function onPopCallback(widget, peekForm) {
+{% highlight voltMx %}function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Remarks
 
@@ -737,12 +733,12 @@ Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “2
 
 Example of a PreviewInfoTable:
 
-{% highlight voltMx %}​​​​​var previewInfoTable = {
+{% highlight voltMx %}var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": \[0, 0, 200, 200\],
     "contentSize": \[320, 480\]
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Return Values
 
@@ -762,8 +758,8 @@ This method is used to remove all the images in the HorizontalImageStrip.
 
 Syntax
 
-{% highlight voltMx %}​​​​​ removeAll();​
-{% endhighlight %}​​​​​
+{% highlight voltMx %} removeAll();
+{% endhighlight %}
 
 Parameters
 
@@ -775,7 +771,7 @@ None
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining the properties for ImageGallery.
+{% highlight voltMx %}//Defining the properties for ImageGallery.
 var imgGalBasic = 
     {
      id: "imgGallery",
@@ -798,11 +794,11 @@ var imgGalPSP =
       preOnclickJS:preOnclickCallBck
     };
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
 	
 //Removing all the images inside the imageGallery by removeAll method.
-imgGallery.removeAll();​
-{% endhighlight %}​​​​​
+imgGallery.removeAll();
+{% endhighlight %}
 
 Platform Availability
 
@@ -818,8 +814,8 @@ Removes the image at the given index in the ImageGallery. In JavaScript, the Ind
 
 Syntax
 
-{% highlight voltMx %}​​​​​ removeAt(index);​
-{% endhighlight %}​​​​​
+{% highlight voltMx %} removeAt(index);
+{% endhighlight %}
 
 Parameters
 
@@ -837,7 +833,7 @@ If the index is not within the limits then _removeAt_ will be silent and doesn't
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining the properties for ImageGallery.
+{% highlight voltMx %}//Defining the properties for ImageGallery.
 var imgGalBasic = 
     {
       id: "imgGallery",
@@ -860,11 +856,11 @@ var imgGalPSP =
     };
 	
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
 	
 //Removing the image at index 1 by removeAt method
-imgGallery.removeAt(1);​
-{% endhighlight %}​​​​​
+imgGallery.removeAt(1);
+{% endhighlight %}
 
 Platform Availability
 
@@ -888,13 +884,13 @@ Yes - (Read and Write)
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic method that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the removeFromParent Method for a Calendar widget.
 //You need to make a corresponding call of the removeFromParent method for other applicable widgets.
 
 Form1.calendar.removeFromParent();
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -920,10 +916,10 @@ Specifies the handle to the gesture returned by addGestureRecognizer call.
 
 Example
 
-{% highlight voltMx %}​​​​​ //Sample code to remove Double tap gesture from frmGestures FlexForm.  
+{% highlight voltMx %} //Sample code to remove Double tap gesture from frmGestures FlexForm.  
 frmGestures.removeGestureRecognizer(doubletp);  
-​
-{% endhighlight %}​​​​​
+
+{% endhighlight %}
 
 Platform Availability
 
@@ -983,7 +979,7 @@ For Android platform, this method is applicable on Button and Image widgets only
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic method that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setBadge Method for button widget.
 //You need to make a corresponding call of the setBadge method for other applicable widgets.
 function setBadge() {
@@ -992,8 +988,8 @@ placed on a form frm1, use the following code: \*/
     frm1.btn1.setBadge("2", "badgeSkin");
 }
 //For instance, the corresponding setEnabled method call on the Label widget is as follows:
-form.lbl1.setBadge("4", "badgeSkin");​
-{% endhighlight %}​​​​​
+form.lbl1.setBadge("4", "badgeSkin");
+{% endhighlight %}
 
 Platform Availability
 
@@ -1011,13 +1007,13 @@ Allows you to set new images to the ImageGallery. The existing images will be re
 
 Syntax
 
-{% highlight voltMx %}​​​​​ setData(array\_of\_data);​
-{% endhighlight %}​​​​​
+{% highlight voltMx %} setData(array\_of\_data);
+{% endhighlight %}
 
 For Backward compatiability use the below signature:
 
-{% highlight voltMx %}​​​​​setData(array\_of\_data,image\_url\_property);​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}setData(array\_of\_data,image\_url\_property);
+{% endhighlight %}
 
 Parameters
 
@@ -1039,7 +1035,7 @@ There is no need for the second parameter (image\_url\_property) as this API ass
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining the properties for ImageGallery.
+{% highlight voltMx %}//Defining the properties for ImageGallery.
 var imgGalBasic = 
     {
       id: "imgGallery",
@@ -1061,7 +1057,7 @@ var imgGalPSP =
     };
 
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
 	
 //Replacing existing images with the new images	by setData method,
 //We can use external URL images or the images inside resources folder
@@ -1075,8 +1071,8 @@ imgGallery.setData
 	{ imageurl: "image2.png"}
 	\],
   "imageurl"
-);​
-{% endhighlight %}​​​​​
+);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1092,8 +1088,8 @@ Allows you to set a new image at a given index. The existing image at that index
 
 Syntax
 
-{% highlight voltMx %}​​​​​setDataAt(imagedata,index);​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}setDataAt(imagedata,index);
+{% endhighlight %}
 
 Parameters
 
@@ -1111,7 +1107,7 @@ None
 
 Example
 
-{% highlight voltMx %}​​​​​//Defining the properties for ImageGallery.
+{% highlight voltMx %}//Defining the properties for ImageGallery.
 var imgGalBasic = 
     {
       id: "imgGallery",
@@ -1135,11 +1131,11 @@ var imgGalPSP =
     };
 
 //Creating the ImageGallery.
-var imgGallery = new hcl.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
+var imgGallery = new voltmx.ui.ImageGallery2(imgGalBasic,imgGalLayout,imgGalPSP);
 	
 //Set a new image at a 1st index by setDataAt method
-imgGallery.setDataAt({imageurl: "http://chromeactions.com/i/3d-like-box.png"},1);​
-{% endhighlight %}​​​​​
+imgGallery.setDataAt({imageurl: "http://chromeactions.com/i/3d-like-box.png"},1);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1183,12 +1179,12 @@ This method is not applicable in Map widget.
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic method that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setEnabled Method for button widget.
 //You need to make a corresponding call of the setEnabled method for other applicable widgets.
 
-form1.myButton.setEnabled(false);​
-{% endhighlight %}​​​​​
+form1.myButton.setEnabled(false);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1232,12 +1228,12 @@ This method is not applicable in Form widget.
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic method that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to use the setFocus Method for button widget.
 //You need to make a corresponding call of the setFocus method for other applicable widgets.
 
-form1.myButton.setFocus(true);​
-{% endhighlight %}​​​​​
+form1.myButton.setFocus(true);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1362,7 +1358,7 @@ VoltMX Iris populates the details in the _gestureInfo_ array. This array has the
 
 Example
 
-{% highlight voltMx %}​​​​​//The below function will get invoked  when a gesture is recognized. 
+{% highlight voltMx %}//The below function will get invoked  when a gesture is recognized. 
 function myTap(myWidget, gestureInfo) {
     alert(" Tap Gesture detected");
     alert("gestureType :" + gestureInfo.gestureType);
@@ -1377,8 +1373,8 @@ var setupTblTap = {
 }; //double tap gesture
 
 //To add a TAP gesture recognizer on a hbox with ID hbx1 placed on a form frm1
-var tapGesture = frm1.hbx1.setGgestureRecognizer(1, setupTblTap, myTap);​
-{% endhighlight %}​​​​​
+var tapGesture = frm1.hbx1.setGgestureRecognizer(1, setupTblTap, myTap);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1418,15 +1414,15 @@ PreviewInfoTable. See the Remarks section for a description of this table.
 
 Callback Example
 
-{% highlight voltMx %}​​​​​function onPeekCallback(widget, contextInfo) {
+{% highlight voltMx %}function onPeekCallback(widget, contextInfo) {
     var previewInfoTable = {
         "peekForm": frmSecond,
         "focusRect": \[0, 0, 200, 200\],
         "contentSize": \[320, 480\]
     };
     return previewInfoTable;
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Return Values
 
@@ -1460,16 +1456,16 @@ Example: \[“0dp”, “100dp”\], \[“100%”, “0%”\], \[“0px”, “2
 
 Example of a PreviewInfoTable:
 
-{% highlight voltMx %}​​​​​var previewInfoTable = {
+{% highlight voltMx %}var previewInfoTable = {
     "peekForm": frmSecond,
     "focusRect": \[0, 0, 200, 200\],
     "contentSize": \[320, 480\]
-};​
-{% endhighlight %}​​​​​
+};
+{% endhighlight %}
 
 Example
 
-{% highlight voltMx %}​​​​​function settingPeek() {
+{% highlight voltMx %}function settingPeek() {
     Form1.setOnPeek(onMyPeekcallback);
 }
 
@@ -1485,8 +1481,8 @@ function onMyPeekcallback(widgetref, contextInfo) {
     };
     return previewInfoTable;
 
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 
@@ -1534,11 +1530,11 @@ Callback Remarks
 
 Callback Example
 
-{% highlight voltMx %}​​​​​function onPopCallback(widget, peekForm) {
+{% highlight voltMx %}function onPopCallback(widget, peekForm) {
     // preview form used for pop also
     return peekForm;
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Return Values
 
@@ -1546,15 +1542,15 @@ None.
 
 Example
 
-{% highlight voltMx %}​​​​​function settingPop() {
+{% highlight voltMx %}function settingPop() {
     Form1.setOnPop(myonPopcallback);
 }
 
 function myonPopcallback(widgetref, peekForm) {
     // preview form used for pop also
     return peekForm;
-}​
-{% endhighlight %}​​​​​
+}
+{% endhighlight %}
 
 Platform Availability
 
@@ -1636,7 +1632,7 @@ Error
 
 Remarks
 
-This method is not applicable on Form, Popup, and Alert. It is also not applicable if the widget is placed in a [Segment](Segment.htm). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so by using [Segment](Segment_Methods.htm#top) methods.
+This method is not applicable on Form, Popup, and Alert. It is also not applicable if the widget is placed in a [Segment](Segment.html). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so by using [Segment](Segment_Methods.html#top) methods.
 
 Passing an invalid type other than the above events lead to run time exceptions/ crashes.
 
@@ -1644,7 +1640,7 @@ This method is not supported on the widgets FlexForm, FlexContainer, and FlexScr
 
 Example
 
-{% highlight voltMx %}​​​​​//This is a generic method that is applicable for various widgets.
+{% highlight voltMx %}//This is a generic method that is applicable for various widgets.
 //Here, we have shown how to invoke the setVisibility Method for a button widget with animation.
 //You need to make a corresponding call of the setVisibility method for other applicable widgets.
 
@@ -1660,8 +1656,8 @@ form1.myButton.setVisibility(
         }
     });
 //Sample code to invoke setVisibility Method for button widget without animation.
-form1.myButton.setVisibility(false);​
-{% endhighlight %}​​​​​
+form1.myButton.setVisibility(false);
+{% endhighlight %}
 
 Platform Availability
 
@@ -1689,8 +1685,8 @@ None.
 
 Example
 
-{% highlight voltMx %}​​​​​Form1.unregisterForPeekAndPop();​
-{% endhighlight %}​​​​​
+{% highlight voltMx %}Form1.unregisterForPeekAndPop();
+{% endhighlight %}
 
 Platform Availability
 
