@@ -1,3 +1,6 @@
+---
+---
+
 var docs;
 var index;
 var searchResults = document.getElementById('search-results');
@@ -54,12 +57,26 @@ function initNav() {
       mainHeader.classList.remove('nav-open');
     }
   });
+
+  {%- if site.search_enabled != false and site.search.button %}
+  const searchInput = document.getElementById('search-input');
+  const searchButton = document.getElementById('search-button');
+
+  jtd.addEvent(searchButton, 'click', function(e){
+    e.preventDefault();
+
+    mainHeader.classList.add('nav-open');
+    searchInput.focus();
+  });
+  {%- endif %}
 }
+
+{%- if site.search_enabled != false %}
 // Site search
 
 function initSearch() {
   var request = new XMLHttpRequest();
-  request.open('GET', `https://hcl-tech-software.github.io/volt-mx-docs/assets/js/search-data.json`, true);
+  request.open('GET', `https://opensource.hcltechsw.com/volt-mx-docs/assets/js/search-data.json`, true);
   
 
   request.onload = function(){
@@ -69,7 +86,7 @@ function initSearch() {
 
 
         var request1 = new XMLHttpRequest();
-        request1.open('GET', 'https://hcl-tech-software.github.io/volt-mx-docs/assets/js/search-index.json', true);
+        request1.open('GET', 'https://opensource.hcltechsw.com/volt-mx-docs/assets/js/search-index.json', true);
 
         request1.onload = function(){
           if (request1.status >= 200 && request1.status < 400) {
@@ -241,7 +258,7 @@ function searchLoaded(index, docs) {
             var previewEnd = position[0] + position[1];
             var ellipsesBefore = true;
             var ellipsesAfter = true;
-            for (var k = 0; k < 3; k++) {
+            for (var k = 0; k < {{ site.search.preview_words_before | default: 5 }}; k++) {
               var nextSpace = doc.content.lastIndexOf(' ', previewStart - 2);
               var nextDot = doc.content.lastIndexOf('. ', previewStart - 2);
               if ((nextDot >= 0) && (nextDot > nextSpace)) {
@@ -256,7 +273,7 @@ function searchLoaded(index, docs) {
               }
               previewStart = nextSpace + 1;
             }
-            for (var k = 0; k < 3; k++) {
+            for (var k = 0; k < {{ site.search.preview_words_after | default: 10 }}; k++) {
               var nextSpace = doc.content.indexOf(' ', previewEnd + 1);
               var nextDot = doc.content.indexOf('. ', previewEnd + 1);
               if ((nextDot >= 0) && (nextDot < nextSpace)) {
@@ -316,7 +333,7 @@ function searchLoaded(index, docs) {
         resultLink.appendChild(resultPreviews);
 
         var content = doc.content;
-        for (var j = 0; j < Math.min(previewPositions.length, 2); j++) {
+        for (var j = 0; j < Math.min(previewPositions.length, {{ site.search.previews | default: 3 }}); j++) {
           var position = previewPositions[j];
 
           var resultPreview = document.createElement('div');
@@ -332,10 +349,13 @@ function searchLoaded(index, docs) {
           }
         }
       }
+
+      {%- if site.search.rel_url != false %}
       var resultRelUrl = document.createElement('span');
       resultRelUrl.classList.add('search-result-rel-url');
       resultRelUrl.innerText = doc.relUrl;
       resultTitle.appendChild(resultRelUrl);
+      {%- endif %}
     }
 
     function addHighlightedText(parent, text, start, end, positions) {
@@ -425,6 +445,7 @@ function searchLoaded(index, docs) {
     }
   });
 }
+{%- endif %}
 
 // Switch theme
 
@@ -435,16 +456,18 @@ jtd.getTheme = function() {
 
 jtd.setTheme = function(theme) {
   var cssFile = document.querySelector('[rel="stylesheet"]');
-  cssFile.setAttribute('href', 'https://hcl-tech-software.github.io/volt-mx-docs/assets/css/just-the-docs-' + theme + '.css');
+  cssFile.setAttribute('href', '{{ "assets/css/just-the-docs-" | absolute_url }}' + theme + '.css');
 }
 
 // Document ready
 
 jtd.onReady(function(){
   initNav();
+  {%- if site.search_enabled != false %}
   initSearch();
+  {%- endif %}
 });
 
 })(window.jtd = window.jtd || {});
 
-
+{% include js/custom.js %}
