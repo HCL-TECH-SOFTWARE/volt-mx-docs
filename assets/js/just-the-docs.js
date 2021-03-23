@@ -59,7 +59,7 @@ function initNav() {
 
 function initSearch() {
   var request = new XMLHttpRequest();
-  request.open('GET', 'http://localhost:4000/volt-mx-docs/assets/js/search-data.json', true);
+  request.open('GET', `https://opensource.hcltechsw.com/volt-mx-docs/assets/js/search-data.json`, true);
   
 
   request.onload = function(){
@@ -69,7 +69,7 @@ function initSearch() {
 
 
         var request1 = new XMLHttpRequest();
-        request1.open('GET', 'http://localhost:4000/volt-mx-docs/assets/js/search-index.json', true);
+        request1.open('GET', 'https://opensource.hcltechsw.com/volt-mx-docs/assets/js/search-index.json', true);
 
         request1.onload = function(){
           if (request1.status >= 200 && request1.status < 400) {
@@ -435,7 +435,7 @@ jtd.getTheme = function() {
 
 jtd.setTheme = function(theme) {
   var cssFile = document.querySelector('[rel="stylesheet"]');
-  cssFile.setAttribute('href', 'https://hcl-tech-software.github.io/volt-mx-docs/assets/css/just-the-docs-' + theme + '.css');
+  cssFile.setAttribute('href', 'https://opensource.hcltechsw.com/volt-mx-docs/assets/css/just-the-docs-' + theme + '.css');
 }
 
 // Document ready
