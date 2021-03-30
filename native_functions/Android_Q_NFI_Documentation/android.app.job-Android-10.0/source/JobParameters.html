@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-job-JobParameters'>/**@class android.app.job.JobParameters
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Contains the parameters used to configure/identify your job. You do not create this object
+ yourself, instead it is handed in to your application by the System.
+*/
+var JobParameters = {
+
+<span id='android-app-job-JobParameters-property-REASON_CANCELED'>/**@hide */
+</span>REASON_CANCELED : &quot;null&quot;,
+<span id='android-app-job-JobParameters-property-REASON_CONSTRAINTS_NOT_SATISFIED'>/**@hide */
+</span>REASON_CONSTRAINTS_NOT_SATISFIED : &quot;null&quot;,
+<span id='android-app-job-JobParameters-property-REASON_PREEMPT'>/**@hide */
+</span>REASON_PREEMPT : &quot;null&quot;,
+<span id='android-app-job-JobParameters-property-REASON_TIMEOUT'>/**@hide */
+</span>REASON_TIMEOUT : &quot;null&quot;,
+<span id='android-app-job-JobParameters-property-REASON_DEVICE_IDLE'>/**@hide */
+</span>REASON_DEVICE_IDLE : &quot;null&quot;,
+<span id='android-app-job-JobParameters-property-REASON_DEVICE_THERMAL'>/**@hide */
+</span>REASON_DEVICE_THERMAL : &quot;null&quot;,
+<span id='android-app-job-JobParameters-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-job-JobParameters-method-getReasonName'>/**
+</span>@hide 
+*/
+getReasonName : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-getJobId'>/**
+</span>@return {Number} The unique id of this job, specified at creation time.
+*/
+getJobId : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-getStopReason'>/**Reason onStopJob() was called on this job.
+</span>@hide 
+*/
+getStopReason : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-getDebugStopReason'>/**Reason onStopJob() was called on this job.
+</span>@hide 
+*/
+getDebugStopReason : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-getExtras'>/**
+</span>@return {Object {android.os.PersistableBundle}} The extras you passed in when constructing this job with
+ {@link android.app.job.JobInfo.Builder#setExtras(android.os.PersistableBundle)}. This will
+ never be null. If you did not set any extras this will be an empty bundle.
+*/
+getExtras : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-getTransientExtras'>/**
+</span>@return {Object {android.os.Bundle}} The transient extras you passed in when constructing this job with
+ {@link android.app.job.JobInfo.Builder#setTransientExtras(android.os.Bundle)}. This will
+ never be null. If you did not set any extras this will be an empty bundle.
+*/
+getTransientExtras : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-getClipData'>/**
+</span>@return {Object {android.content.ClipData}} The clip you passed in when constructing this job with
+ {@link android.app.job.JobInfo.Builder#setClipData(ClipData, int)}. Will be null
+ if it was not set.
+*/
+getClipData : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-getClipGrantFlags'>/**
+</span>@return {Number} The clip grant flags you passed in when constructing this job with
+ {@link android.app.job.JobInfo.Builder#setClipData(ClipData, int)}. Will be 0
+ if it was not set.
+*/
+getClipGrantFlags : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-isOverrideDeadlineExpired'>/**For jobs with {@link android.app.job.JobInfo.Builder#setOverrideDeadline(long)} set, this
+</span> provides an easy way to tell whether the job is being executed due to the deadline
+ expiring. Note: If the job is running because its deadline expired, it implies that its
+ constraints will not be met.
+*/
+isOverrideDeadlineExpired : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-getTriggeredContentUris'>/**For jobs with {@link android.app.job.JobInfo.Builder#addTriggerContentUri} set, this
+</span> reports which URIs have triggered the job.  This will be null if either no URIs have
+ triggered it (it went off due to a deadline or other reason), or the number of changed
+ URIs is too large to report.  Whether or not the number of URIs is too large, you can
+ always use {@link #getTriggeredContentAuthorities}() to determine whether the job was
+ triggered due to any content changes and the authorities they are associated with.
+*/
+getTriggeredContentUris : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-getTriggeredContentAuthorities'>/**For jobs with {@link android.app.job.JobInfo.Builder#addTriggerContentUri} set, this
+</span> reports which content authorities have triggered the job.  It will only be null if no
+ authorities have triggered it -- that is, the job executed for some other reason, such
+ as a deadline expiring.  If this is non-null, you can use {@link #getTriggeredContentUris}()
+ to retrieve the details of which URIs changed (as long as that has not exceeded the maximum
+ number it can reported).
+*/
+getTriggeredContentAuthorities : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-getNetwork'>/**Return the network that should be used to perform any network requests
+</span> for this job.
+ &lt;p&gt;
+ Devices may have multiple active network connections simultaneously, or
+ they may not have a default network route at all. To correctly handle all
+ situations like this, your job should always use the network returned by
+ this method instead of implicitly using the default network route.
+ &lt;p&gt;
+ Note that the system may relax the constraints you originally requested,
+ such as allowing a {@link android.app.job.JobInfo#NETWORK_TYPE_UNMETERED} job to run over
+ a metered network when there is a surplus of metered data available.
+@return {Object {android.net.Network}} the network that should be used to perform any network requests
+         for this job, or {@code null} if this job didn't set any required
+         network type.
+@see JobInfo.Builder#setRequiredNetworkType(int)
+*/
+getNetwork : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-dequeueWork'>/**Dequeue the next pending {@link android.app.job.JobWorkItem} from these JobParameters associated with their
+</span> currently running job.  Calling this method when there is no more work available and all
+ previously dequeued work has been completed will result in the system taking care of
+ stopping the job for you --
+ you should not call {@link android.app.job.JobService#jobFinished(JobParameters, boolean)} yourself
+ (otherwise you risk losing an upcoming JobWorkItem that is being enqueued at the same time).
+
+ &lt;p&gt;Once you are done with the {@link android.app.job.JobWorkItem} returned by this method, you must call
+ {@link #completeWork}(JobWorkItem) with it to inform the system that you are done
+ executing the work.  The job will not be finished until all dequeued work has been
+ completed.  You do not, however, have to complete each returned work item before deqeueing
+ the next one -- you can use {@link #dequeueWork}() multiple times before completing
+ previous work if you want to process work in parallel, and you can complete the work
+ in whatever order you want.&lt;/p&gt;
+
+ &lt;p&gt;If the job runs to the end of its available time period before all work has been
+ completed, it will stop as normal.  You should return true from
+ {@link android.app.job.JobService#onStopJob(JobParameters)} in order to have the job rescheduled, and by
+ doing so any pending as well as remaining uncompleted work will be re-queued
+ for the next time the job runs.&lt;/p&gt;
+
+ &lt;p&gt;This example shows how to construct a JobService that will serially dequeue and
+ process work that is available for it:&lt;/p&gt;
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/app/JobWorkService.java
+      service}
+@return {Object {android.app.job.JobWorkItem}} Returns a new {@link JobWorkItem} if there is one pending, otherwise null.
+ If null is returned, the system will also stop the job if all work has also been completed.
+ (This means that for correct operation, you must always call dequeueWork() after you have
+ completed other work, to check either for more work or allow the system to stop the job.)
+*/
+dequeueWork : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-completeWork'>/**Report the completion of executing a {@link android.app.job.JobWorkItem} previously returned by
+</span> {@link #dequeueWork}().  This tells the system you are done with the
+ work associated with that item, so it will not be returned again.  Note that if this
+ is the last work in the queue, completing it here will &lt;em&gt;not&lt;/em&gt; finish the overall
+ job -- for that to happen, you still need to call {@link #dequeueWork}()
+ again.
+
+ &lt;p&gt;If you are enqueueing work into a job, you must call this method for each piece
+ of work you process.  Do &lt;em&gt;not&lt;/em&gt; call
+ {@link android.app.job.JobService#jobFinished(JobParameters, boolean)}
+ or else you can lose work in your queue.&lt;/p&gt;
+@param {Object {JobWorkItem}} work The work you have completed processing, as previously returned by
+ {@link #dequeueWork()}
+*/
+completeWork : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-getCallback'>/**
+</span>@hide 
+*/
+getCallback : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-setStopReason'>/**
+</span>@hide 
+*/
+setStopReason : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-job-JobParameters-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

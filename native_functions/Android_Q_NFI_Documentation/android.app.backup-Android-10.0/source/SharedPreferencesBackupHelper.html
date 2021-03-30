@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-backup-SharedPreferencesBackupHelper'>/**@class android.app.backup.SharedPreferencesBackupHelper
+</span> implements android.app.backup.BackupHelper
+
+@extends android.app.backup.FileBackupHelperBase
+
+ A helper class that can be used in conjunction with
+ {@link android.app.backup.BackupAgentHelper} to manage the backup of
+ {@link android.content.SharedPreferences}. Whenever a backup is performed, it
+ will back up all named shared preferences that have changed since the last
+ backup operation.
+ &lt;p&gt;
+ To use this class, the application's backup agent class should extend
+ {@link android.app.backup.BackupAgentHelper}.  Then, in the agent's
+ {@link android.app.backup.BackupAgent#onCreate()} method, an instance of this class should be
+ allocated and installed as a backup/restore handler within the BackupAgentHelper
+ framework.  For example, an agent supporting backup and restore for
+ an application with two groups of {@link android.content.SharedPreferences}
+ data might look something like this:
+ &lt;pre&gt;
+ import android.app.backup.BackupAgentHelper;
+ import android.app.backup.SharedPreferencesBackupHelper;
+
+ public class MyBackupAgent extends BackupAgentHelper {
+     // The names of the SharedPreferences groups that the application maintains.  These
+     // are the same strings that are passed to {@link Context#getSharedPreferences(String, int)}.
+     static final String PREFS_DISPLAY = &quot;displayprefs&quot;;
+     static final String PREFS_SCORES = &quot;highscores&quot;;
+
+     // An arbitrary string used within the BackupAgentHelper implementation to
+     // identify the SharedPreferenceBackupHelper's data.
+     static final String MY_PREFS_BACKUP_KEY = &quot;myprefs&quot;;
+
+     // Allocate a helper and install it.
+     public void onCreate() {
+         SharedPreferencesBackupHelper helper =
+                 new SharedPreferencesBackupHelper(this, PREFS_DISPLAY, PREFS_SCORES);
+         addHelper(MY_PREFS_BACKUP_KEY, helper);
+     }
+ }&lt;/pre&gt;
+ &lt;p&gt;
+ No further implementation is needed; the {@link android.app.backup.BackupAgentHelper} mechanism automatically
+ dispatches the
+ {@link android.app.backup.BackupAgent#onBackup(android.os.ParcelFileDescriptor, BackupDataOutput, android.os.ParcelFileDescriptor) android.app.backup.BackupAgent.onBackup()}
+ and
+ {@link android.app.backup.BackupAgent#onRestore(BackupDataInput, int, android.os.ParcelFileDescriptor) android.app.backup.BackupAgent.onRestore()}
+ callbacks to the SharedPreferencesBackupHelper as appropriate.
+*/
+var SharedPreferencesBackupHelper = {
+
+<span id='android-app-backup-SharedPreferencesBackupHelper-method-performBackup'>/**Backs up the configured {@link android.content.SharedPreferences} groups.
+</span>*/
+performBackup : function(  ) {},
+
+<span id='android-app-backup-SharedPreferencesBackupHelper-method-restoreEntity'>/**Restores one entity from the restore data stream to its proper shared
+</span> preferences file store.
+*/
+restoreEntity : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

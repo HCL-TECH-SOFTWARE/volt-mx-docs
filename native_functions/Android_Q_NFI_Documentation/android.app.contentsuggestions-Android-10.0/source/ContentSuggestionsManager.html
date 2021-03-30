@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-contentsuggestions-ContentSuggestionsManager'>/**@class android.app.contentsuggestions.ContentSuggestionsManager
+</span>@extends java.lang.Object
+
+ When provided with content from an app, can suggest selections and classifications of that
+ content.
+
+ &lt;p&gt;The content is mainly a snapshot of a running task, the selections will be text and image
+ selections with that image content. These mSelections can then be classified to find actions and
+ entities on those selections.
+
+ &lt;p&gt;Only accessible to blessed components such as Overview.
+
+ @hide
+*/
+var ContentSuggestionsManager = {
+
+<span id='android-app-contentsuggestions-ContentSuggestionsManager-method-provideContextImage'>/**Hints to the system that a new context image for the provided task should be sent to the
+</span> system content suggestions service.
+@param {Number} taskId of the task to snapshot.
+@param {Object {Bundle}} imageContextRequestExtras sent with with request to provide implementation specific
+                                  extra information.
+*/
+provideContextImage : function(  ) {},
+
+<span id='android-app-contentsuggestions-ContentSuggestionsManager-method-suggestContentSelections'>/**Suggest content selections, based on the provided task id and optional
+</span> location on screen provided in the request. Called after provideContextImage().
+ The result can be passed to
+ {@link #classifyContentSelections(ClassificationsRequest, Executor, android.app.contentsuggestions.ContentSuggestionsManager.ClassificationsCallback)}
+  to classify actions and entities on these selections.
+@param {Object {SelectionsRequest}} request containing the task and point location.
+@param {Object {Executor}} callbackExecutor to execute the provided callback on.
+@param {Object {ContentSuggestionsManager.SelectionsCallback}} callback to receive the selections.
+*/
+suggestContentSelections : function(  ) {},
+
+<span id='android-app-contentsuggestions-ContentSuggestionsManager-method-classifyContentSelections'>/**Classify actions and entities in content selections, as returned from
+</span> suggestContentSelections. Note these selections may be modified by the
+ caller before being passed here.
+@param {Object {ClassificationsRequest}} request containing the selections to classify.
+@param {Object {Executor}} callbackExecutor to execute the provided callback on.
+@param {Object {ContentSuggestionsManager.ClassificationsCallback}} callback to receive the classifications.
+*/
+classifyContentSelections : function(  ) {},
+
+<span id='android-app-contentsuggestions-ContentSuggestionsManager-method-notifyInteraction'>/**Report telemetry for interaction with suggestions / classifications.
+</span>@param {String} requestId the id for the associated interaction
+@param {Object {Bundle}} interaction to report back to the system content suggestions service.
+*/
+notifyInteraction : function(  ) {},
+
+<span id='android-app-contentsuggestions-ContentSuggestionsManager-method-isEnabled'>/**Indicates that Content Suggestions is available and enabled for the provided user. That is,
+</span> has an implementation and not disabled through device management.
+@return {Boolean} {@code true} if Content Suggestions is enabled and available for the provided user.
+*/
+isEnabled : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

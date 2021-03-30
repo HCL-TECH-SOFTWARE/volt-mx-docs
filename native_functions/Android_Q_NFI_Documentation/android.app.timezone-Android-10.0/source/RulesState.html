@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-timezone-RulesState'>/**@class android.app.timezone.RulesState
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Description of the state of time zone rules on a device.
+
+ &lt;p&gt;The following properties are included:
+ &lt;dl&gt;
+     &lt;dt&gt;baseRulesVersion&lt;/dt&gt;
+     &lt;dd&gt;the IANA rules version that shipped with the OS. Always present. e.g. &quot;2017a&quot;.&lt;/dd&gt;
+     &lt;dt&gt;distroFormatVersionSupported&lt;/dt&gt;
+     &lt;dd&gt;the distro format version supported by this device. Always present.&lt;/dd&gt;
+     &lt;dt&gt;operationInProgress&lt;/dt&gt;
+     &lt;dd&gt;{@code true} if there is an install / uninstall operation currently happening.&lt;/dd&gt;
+     &lt;dt&gt;stagedOperationType&lt;/dt&gt;
+     &lt;dd&gt;one of {@link #STAGED_OPERATION_UNKNOWN}, {@link #STAGED_OPERATION_NONE},
+     {@link #STAGED_OPERATION_UNINSTALL} and {@link #STAGED_OPERATION_INSTALL} indicating whether
+     there is a currently staged time zone distro operation. {@link #STAGED_OPERATION_UNKNOWN} is
+     used when {@link #isOperationInProgress}() is {@code true}. Staged operations currently
+     require a reboot to become active.&lt;/dd&gt;
+     &lt;dt&gt;stagedDistroRulesVersion&lt;/dt&gt;
+     &lt;dd&gt;[present if distroStagedState == STAGED_STATE_INSTALL], the rules version of the distro
+     currently staged for installation.&lt;/dd&gt;
+     &lt;dt&gt;distroStatus&lt;/dt&gt;
+     &lt;dd&gt;{@link #DISTRO_STATUS_INSTALLED} if there is a time zone distro installed and active,
+     {@link #DISTRO_STATUS_NONE} if there is no active installed distro.
+     {@link #DISTRO_STATUS_UNKNOWN} is used when {@link #isOperationInProgress}() is {@code true}.
+     &lt;/dd&gt;
+     &lt;dt&gt;installedDistroRulesVersion&lt;/dt&gt;
+     &lt;dd&gt;[present if distroStatus == {@link #DISTRO_STATUS_INSTALLED}], the rules version of the
+     installed and active distro.&lt;/dd&gt;
+ &lt;/dl&gt;
+
+ @hide
+*/
+var RulesState = {
+
+<span id='android-app-timezone-RulesState-property-STAGED_OPERATION_UNKNOWN'>/**Staged state could not be determined. */
+</span>STAGED_OPERATION_UNKNOWN : &quot;0&quot;,
+<span id='android-app-timezone-RulesState-property-STAGED_OPERATION_NONE'>/**Nothing is staged. */
+</span>STAGED_OPERATION_NONE : &quot;1&quot;,
+<span id='android-app-timezone-RulesState-property-STAGED_OPERATION_UNINSTALL'>/**An uninstall is staged. */
+</span>STAGED_OPERATION_UNINSTALL : &quot;2&quot;,
+<span id='android-app-timezone-RulesState-property-STAGED_OPERATION_INSTALL'>/**An install is staged. */
+</span>STAGED_OPERATION_INSTALL : &quot;3&quot;,
+<span id='android-app-timezone-RulesState-property-DISTRO_STATUS_UNKNOWN'>/**The current distro status could not be determined. */
+</span>DISTRO_STATUS_UNKNOWN : &quot;0&quot;,
+<span id='android-app-timezone-RulesState-property-DISTRO_STATUS_NONE'>/**There is no active installed time zone distro. */
+</span>DISTRO_STATUS_NONE : &quot;1&quot;,
+<span id='android-app-timezone-RulesState-property-DISTRO_STATUS_INSTALLED'>/**The is an active, installed time zone distro. */
+</span>DISTRO_STATUS_INSTALLED : &quot;2&quot;,
+<span id='android-app-timezone-RulesState-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-timezone-RulesState-method-getBaseRulesVersion'>/**
+</span>*/
+getBaseRulesVersion : function(  ) {},
+
+<span id='android-app-timezone-RulesState-method-isOperationInProgress'>/**
+</span>*/
+isOperationInProgress : function(  ) {},
+
+<span id='android-app-timezone-RulesState-method-getStagedOperationType'>/**
+</span>*/
+getStagedOperationType : function(  ) {},
+
+<span id='android-app-timezone-RulesState-method-getStagedDistroRulesVersion'>/**Returns the staged rules version when {@link #getStagedOperationType}() is
+</span> {@link #STAGED_OPERATION_INSTALL}.
+*/
+getStagedDistroRulesVersion : function(  ) {},
+
+<span id='android-app-timezone-RulesState-method-getDistroStatus'>/**
+</span>*/
+getDistroStatus : function(  ) {},
+
+<span id='android-app-timezone-RulesState-method-getInstalledDistroRulesVersion'>/**Returns the installed rules version when {@link #getDistroStatus}() is
+</span> {@link #DISTRO_STATUS_INSTALLED}.
+*/
+getInstalledDistroRulesVersion : function(  ) {},
+
+<span id='android-app-timezone-RulesState-method-isDistroFormatVersionSupported'>/**Returns true if a distro in the specified format is supported on this device.
+</span>*/
+isDistroFormatVersionSupported : function(  ) {},
+
+<span id='android-app-timezone-RulesState-method-isBaseVersionNewerThan'>/**Returns true if the base data files contain IANA rules data that are newer than the
+</span> distro IANA rules version supplied, i.e. true when the version specified would be &quot;worse&quot;
+ than the one that is in the base data. Returns false if the base version is the
+ same or older, i.e. false when the version specified would be &quot;better&quot; than the one that is
+ in the base set.
+*/
+isBaseVersionNewerThan : function(  ) {},
+
+<span id='android-app-timezone-RulesState-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-timezone-RulesState-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-app-timezone-RulesState-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-app-timezone-RulesState-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-app-timezone-RulesState-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

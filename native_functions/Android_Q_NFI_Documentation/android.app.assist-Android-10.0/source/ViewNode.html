@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-assist-AssistStructure-ViewNode'>/**@class android.app.assist.AssistStructure.ViewNode
+</span>@extends java.lang.Object
+
+ Describes a single view in the assist data.
+*/
+var ViewNode = {
+
+<span id='android-app-assist-AssistStructure-ViewNode-property-TEXT_COLOR_UNDEFINED'>/** Magic value for text color that has not been defined, which is very unlikely
+</span> to be confused with a real text color.
+*/
+TEXT_COLOR_UNDEFINED : &quot;1&quot;,
+<span id='android-app-assist-AssistStructure-ViewNode-property-TEXT_STYLE_BOLD'>/***/
+</span>TEXT_STYLE_BOLD : &quot;1&quot;,
+<span id='android-app-assist-AssistStructure-ViewNode-property-TEXT_STYLE_ITALIC'>/***/
+</span>TEXT_STYLE_ITALIC : &quot;2&quot;,
+<span id='android-app-assist-AssistStructure-ViewNode-property-TEXT_STYLE_UNDERLINE'>/***/
+</span>TEXT_STYLE_UNDERLINE : &quot;4&quot;,
+<span id='android-app-assist-AssistStructure-ViewNode-property-TEXT_STYLE_STRIKE_THRU'>/***/
+</span>TEXT_STYLE_STRIKE_THRU : &quot;8&quot;,
+<span id='android-app-assist-AssistStructure-ViewNode-method-getId'>/**Returns the ID associated with this view, as per {@link View#getId() View.getId()}.
+</span>*/
+getId : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getIdPackage'>/**If {@link #getId}() is a resource identifier, this is the package name of that
+</span> identifier.  See {@link android.view.ViewStructure#setId ViewStructure.setId}
+ for more information.
+*/
+getIdPackage : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getIdType'>/**If {@link #getId}() is a resource identifier, this is the type name of that
+</span> identifier.  See {@link android.view.ViewStructure#setId ViewStructure.setId}
+ for more information.
+*/
+getIdType : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getIdEntry'>/**If {@link #getId}() is a resource identifier, this is the entry name of that
+</span> identifier.  See {@link android.view.ViewStructure#setId ViewStructure.setId}
+ for more information.
+*/
+getIdEntry : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getAutofillId'>/**Gets the id that can be used to autofill the view contents.
+</span>
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for autofill purposes.
+@return {Object {android.view.autofill.AutofillId}} id that can be used to autofill the view contents, or {@code null} if the
+ structure was created for assist purposes.
+*/
+getAutofillId : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getAutofillType'>/**Gets the type of value that can be used to autofill the view contents.
+</span>
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for autofill purposes.
+@return {Number} autofill type as defined by {@link View#getAutofillType()},
+ or {@link View#AUTOFILL_TYPE_NONE} if the structure was created for assist purposes.
+*/
+getAutofillType : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getAutofillHints'>/**Describes the content of a view so that a autofill service can fill in the appropriate
+</span> data.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for autofill purposes,
+ not for Assist - see {@link View#getAutofillHints()} for more info.
+@return {String} The autofill hints for this view, or {@code null} if the structure was created
+ for assist purposes.
+*/
+getAutofillHints : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getAutofillValue'>/**Gets the value of this view.
+</span>
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for autofill purposes,
+ not for assist purposes.
+@return {Object {android.view.autofill.AutofillValue}} the autofill value of this view, or {@code null} if the structure was created
+ for assist purposes.
+*/
+getAutofillValue : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-setAutofillOverlay'>/**
+</span>@hide 
+*/
+setAutofillOverlay : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getAutofillOptions'>/**Gets the options that can be used to autofill this view.
+</span>
+ &lt;p&gt;Typically used by nodes whose {@link View#getAutofillType()} is a list to indicate
+ the meaning of each possible value in the list.
+
+ &lt;p&gt;It's relevant when the {@link android.app.assist.AssistStructure} is used for autofill purposes, not
+ for assist purposes.
+@return {Object {java.lang.CharSequence}} the options that can be used to autofill this view, or {@code null} if the
+ structure was created for assist purposes.
+*/
+getAutofillOptions : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getInputType'>/**Gets the {@link android.text.InputType} bits of this structure.
+</span>@return {Number} bits as defined by {@link android.text.InputType}.
+*/
+getInputType : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isSanitized'>/**
+</span>@hide 
+*/
+isSanitized : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-updateAutofillValue'>/**Updates the {@link AutofillValue} of this structure.
+</span>
+ &lt;p&gt;Should be used just before sending the structure to the
+ {@link android.service.autofill.AutofillService} for saving, since it will override the
+ initial value.
+@hide 
+*/
+updateAutofillValue : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getLeft'>/**Returns the left edge of this view, in pixels, relative to the left edge of its parent.
+</span>*/
+getLeft : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getTop'>/**Returns the top edge of this view, in pixels, relative to the top edge of its parent.
+</span>*/
+getTop : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getScrollX'>/**Returns the current X scroll offset of this view, as per
+</span> {@link android.view.View#getScrollX() View.getScrollX()}.
+*/
+getScrollX : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getScrollY'>/**Returns the current Y scroll offset of this view, as per
+</span> {@link android.view.View#getScrollX() View.getScrollY()}.
+*/
+getScrollY : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getWidth'>/**Returns the width of this view, in pixels.
+</span>*/
+getWidth : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getHeight'>/**Returns the height of this view, in pixels.
+</span>*/
+getHeight : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getTransformation'>/**Returns the transformation that has been applied to this view, such as a translation
+</span> or scaling.  The returned Matrix object is owned by ViewNode; do not modify it.
+ Returns null if there is no transformation applied to the view.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for assist purposes,
+ not for autofill purposes.
+*/
+getTransformation : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getElevation'>/**Returns the visual elevation of the view, used for shadowing and other visual
+</span> characterstics, as set by {@link ViewStructure#setElevation
+ ViewStructure.setElevation(float)}.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for assist purposes,
+ not for autofill purposes.
+*/
+getElevation : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getAlpha'>/**Returns the alpha transformation of the view, used to reduce the overall opacity
+</span> of the view's contents, as set by {@link ViewStructure#setAlpha
+ ViewStructure.setAlpha(float)}.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for assist purposes,
+ not for autofill purposes.
+*/
+getAlpha : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getVisibility'>/**Returns the visibility mode of this view, as per
+</span> {@link android.view.View#getVisibility() View.getVisibility()}.
+*/
+getVisibility : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isAssistBlocked'>/**Returns true if assist data has been blocked starting at this node in the hierarchy.
+</span>*/
+isAssistBlocked : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isEnabled'>/**Returns true if this node is in an enabled state.
+</span>*/
+isEnabled : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isClickable'>/**Returns true if this node is clickable by the user.
+</span>*/
+isClickable : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isFocusable'>/**Returns true if this node can take input focus.
+</span>*/
+isFocusable : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isFocused'>/**Returns true if this node currently had input focus at the time that the
+</span> structure was collected.
+*/
+isFocused : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isAccessibilityFocused'>/**Returns true if this node currently had accessibility focus at the time that the
+</span> structure was collected.
+*/
+isAccessibilityFocused : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isCheckable'>/**Returns true if this node represents something that is checkable by the user.
+</span>*/
+isCheckable : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isChecked'>/**Returns true if this node is currently in a checked state.
+</span>*/
+isChecked : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isSelected'>/**Returns true if this node has currently been selected by the user.
+</span>*/
+isSelected : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isActivated'>/**Returns true if this node has currently been activated by the user.
+</span>*/
+isActivated : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isOpaque'>/**Returns true if this node is opaque.
+</span>*/
+isOpaque : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isLongClickable'>/**Returns true if this node is something the user can perform a long click/press on.
+</span>*/
+isLongClickable : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-isContextClickable'>/**Returns true if this node is something the user can perform a context click on.
+</span>*/
+isContextClickable : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getClassName'>/**Returns the class name of the node's implementation, indicating its behavior.
+</span> For example, a button will report &quot;android.widget.Button&quot; meaning it behaves
+ like a {@link android.widget.Button}.
+*/
+getClassName : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getContentDescription'>/**Returns any content description associated with the node, which semantically describes
+</span> its purpose for accessibility and other uses.
+*/
+getContentDescription : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getWebDomain'>/**Returns the domain of the HTML document represented by this view.
+</span>
+ &lt;p&gt;Typically used when the view associated with the view is a container for an HTML
+ document.
+
+ &lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; an autofill service cannot trust the value reported by this method
+ without verifing its authenticity&amp;mdash;see the &quot;Web security&quot; section of
+ {@link android.service.autofill.AutofillService} for more details.
+@return {String} domain-only part of the document. For example, if the full URL is
+ {@code https://example.com/login?user=my_user}, it returns {@code example.com}.
+*/
+getWebDomain : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-setWebDomain'>/**
+</span>@hide 
+*/
+setWebDomain : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getWebScheme'>/**Returns the scheme of the HTML document represented by this view.
+</span>
+ &lt;p&gt;Typically used when the view associated with the view is a container for an HTML
+ document.
+@return {String} scheme-only part of the document. For example, if the full URL is
+ {@code https://example.com/login?user=my_user}, it returns {@code https}.
+*/
+getWebScheme : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getHtmlInfo'>/**Returns the HTML properties associated with this view.
+</span>
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for autofill purposes,
+ not for assist purposes.
+@return {Object {android.view.ViewStructure.HtmlInfo}} the HTML properties associated with this view, or {@code null} if the
+ structure was created for assist purposes.
+*/
+getHtmlInfo : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getLocaleList'>/**Returns the list of locales associated with this view.
+</span>*/
+getLocaleList : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getText'>/**Returns any text associated with the node that is displayed to the user, or null
+</span> if there is none.
+*/
+getText : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getTextSelectionStart'>/**If {@link #getText}() is non-null, this is where the current selection starts.
+</span>
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for assist purposes,
+ not for autofill purposes.
+*/
+getTextSelectionStart : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getTextSelectionEnd'>/**If {@link #getText}() is non-null, this is where the current selection starts.
+</span> If there is no selection, returns the same value as {@link #getTextSelectionStart}(),
+ indicating the cursor position.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for assist purposes,
+ not for autofill purposes.
+*/
+getTextSelectionEnd : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getTextColor'>/**If {@link #getText}() is non-null, this is the main text color associated with it.
+</span> If there is no text color, {@link #TEXT_COLOR_UNDEFINED} is returned.
+ Note that the text may also contain style spans that modify the color of specific
+ parts of the text.
+*/
+getTextColor : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getTextBackgroundColor'>/**If {@link #getText}() is non-null, this is the main text background color associated
+</span> with it.
+ If there is no text background color, {@link #TEXT_COLOR_UNDEFINED} is returned.
+ Note that the text may also contain style spans that modify the color of specific
+ parts of the text.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for assist purposes,
+ not for autofill purposes.
+*/
+getTextBackgroundColor : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getTextSize'>/**If {@link #getText}() is non-null, this is the main text size (in pixels) associated
+</span> with it.
+ Note that the text may also contain style spans that modify the size of specific
+ parts of the text.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for assist purposes,
+ not for autofill purposes.
+*/
+getTextSize : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getTextStyle'>/**If {@link #getText}() is non-null, this is the main text style associated
+</span> with it, containing a bit mask of {@link #TEXT_STYLE_BOLD},
+ {@link #TEXT_STYLE_BOLD}, {@link #TEXT_STYLE_STRIKE_THRU}, and/or
+ {@link #TEXT_STYLE_UNDERLINE}.
+ Note that the text may also contain style spans that modify the style of specific
+ parts of the text.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for assist purposes,
+ not for autofill purposes.
+*/
+getTextStyle : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getTextLineCharOffsets'>/**Return per-line offsets into the text returned by {@link #getText}().  Each entry
+</span> in the array is a formatted line of text, and the value it contains is the offset
+ into the text string where that line starts.  May return null if there is no line
+ information.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for assist purposes,
+ not for autofill purposes.
+*/
+getTextLineCharOffsets : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getTextLineBaselines'>/**Return per-line baselines into the text returned by {@link #getText}().  Each entry
+</span> in the array is a formatted line of text, and the value it contains is the baseline
+ where that text appears in the view.  May return null if there is no line
+ information.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for assist purposes,
+ not for autofill purposes.
+*/
+getTextLineBaselines : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getTextIdEntry'>/**Gets the identifier used to set the text associated with this view.
+</span>
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for autofill purposes,
+ not for assist purposes.
+*/
+getTextIdEntry : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getHint'>/**Return additional hint text associated with the node; this is typically used with
+</span> a node that takes user input, describing to the user what the input means.
+*/
+getHint : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getExtras'>/**Return a Bundle containing optional vendor-specific extension information.
+</span>*/
+getExtras : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getChildCount'>/**Return the number of children this node has.
+</span>*/
+getChildCount : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getChildAt'>/**Return a child of this node, given an index value from 0 to
+</span> {@link #getChildCount}()-1.
+*/
+getChildAt : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getMinTextEms'>/**Returns the minimum width in ems of the text associated with this node, or {@code -1}
+</span> if not supported by the node.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for autofill purposes,
+ not for assist purposes.
+*/
+getMinTextEms : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getMaxTextEms'>/**Returns the maximum width in ems of the text associated with this node, or {@code -1}
+</span> if not supported by the node.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for autofill purposes,
+ not for assist purposes.
+*/
+getMaxTextEms : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getMaxTextLength'>/**Returns the maximum length of the text associated with this node node, or {@code -1}
+</span> if not supported by the node or not set.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for autofill purposes,
+ not for assist purposes.
+*/
+getMaxTextLength : function(  ) {},
+
+<span id='android-app-assist-AssistStructure-ViewNode-method-getImportantForAutofill'>/**Gets the {@link View#setImportantForAutofill(int) importantForAutofill mode} of
+</span> the view associated with this node.
+
+ &lt;p&gt;It's only relevant when the {@link android.app.assist.AssistStructure} is used for autofill purposes.
+*/
+getImportantForAutofill : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

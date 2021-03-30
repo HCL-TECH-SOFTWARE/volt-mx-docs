@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-backup-RestoreObserver'>/**@class android.app.backup.RestoreObserver
+</span>@extends java.lang.Object
+
+ Callback class for receiving progress reports during a restore operation.  These
+ methods will all be called on your application's main thread.
+*/
+var RestoreObserver = {
+
+<span id='android-app-backup-RestoreObserver-method-restoreSetsAvailable'>/**Supply a list of the restore datasets available from the current transport.  This
+</span> method is invoked as a callback following the application's use of the
+ {@link android.app.backup.IRestoreSession.getAvailableRestoreSets} method.
+@param {Object {android.app.backup.RestoreSet[]}} result An array of {@link android.app.backup.RestoreSet RestoreSet} objects
+   describing all of the available datasets that are candidates for restoring to
+   the current device.  If no applicable datasets exist, {@code result} will be
+   {@code null}.
+@hide 
+*/
+restoreSetsAvailable : function(  ) {},
+
+<span id='android-app-backup-RestoreObserver-method-restoreStarting'>/**The restore operation has begun.
+</span>@param {Number} numPackages The total number of packages being processed in
+   this restore operation.
+*/
+restoreStarting : function(  ) {},
+
+<span id='android-app-backup-RestoreObserver-method-onUpdate'>/**An indication of which package is being restored currently, out of the
+</span> total number provided in the {@link #restoreStarting}(int) callback.  This method
+ is not guaranteed to be called: if the transport is unable to obtain
+ data for one or more of the requested packages, no onUpdate() call will
+ occur for those packages.
+@param {Number} nowBeingRestored The index, between 1 and the numPackages parameter
+   to the {@link #restoreStarting(int)} callback, of the package now being
+   restored.  This may be non-monotonic; it is intended purely as a rough
+   indication of the backup manager's progress through the overall restore process.
+@param {String} currentPackage The name of the package now being restored.
+*/
+onUpdate : function(  ) {},
+
+<span id='android-app-backup-RestoreObserver-method-restoreFinished'>/**The restore process has completed.  This method will always be called,
+</span> even if no individual package restore operations were attempted.
+@param {Number} error Zero on success; a nonzero error code if the restore operation
+   as a whole failed.
+*/
+restoreFinished : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

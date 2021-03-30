@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-slice-SliceItem'>/**@class android.app.slice.SliceItem
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A SliceItem is a single unit in the tree structure of a {@link android.app.slice.Slice}.
+
+ A SliceItem a piece of content and some hints about what that content
+ means or how it should be displayed. The types of content can be:
+ &lt;li&gt;{@link #FORMAT_SLICE}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_TEXT}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_IMAGE}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_ACTION}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_INT}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_LONG}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_REMOTE_INPUT}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_BUNDLE}&lt;/li&gt;
+
+ The hints that a {@link android.app.slice.SliceItem} are a set of strings which annotate
+ the content. The hints that are guaranteed to be understood by the system
+ are defined on {@link android.app.slice.Slice}.
+*/
+var SliceItem = {
+
+<span id='android-app-slice-SliceItem-property-FORMAT_SLICE'>/** A {@link android.app.slice.SliceItem} that contains a {@link android.app.slice.Slice}
+</span>*/
+FORMAT_SLICE : &quot;slice&quot;,
+<span id='android-app-slice-SliceItem-property-FORMAT_TEXT'>/** A {@link android.app.slice.SliceItem} that contains a {@link CharSequence}
+</span>*/
+FORMAT_TEXT : &quot;text&quot;,
+<span id='android-app-slice-SliceItem-property-FORMAT_IMAGE'>/** A {@link android.app.slice.SliceItem} that contains an {@link Icon}
+</span>*/
+FORMAT_IMAGE : &quot;image&quot;,
+<span id='android-app-slice-SliceItem-property-FORMAT_ACTION'>/** A {@link android.app.slice.SliceItem} that contains a {@link PendingIntent}
+</span>
+ Note: Actions contain 2 pieces of data, In addition to the pending intent, the
+ item contains a {@link android.app.slice.Slice} that the action applies to.
+*/
+FORMAT_ACTION : &quot;action&quot;,
+<span id='android-app-slice-SliceItem-property-FORMAT_INT'>/** A {@link android.app.slice.SliceItem} that contains an int.
+</span>*/
+FORMAT_INT : &quot;int&quot;,
+<span id='android-app-slice-SliceItem-property-FORMAT_LONG'>/** A {@link android.app.slice.SliceItem} that contains a long.
+</span>*/
+FORMAT_LONG : &quot;long&quot;,
+<span id='android-app-slice-SliceItem-property-FORMAT_TIMESTAMP'>/** @deprecated TO BE REMOVED
+</span> @removed
+*/
+FORMAT_TIMESTAMP : &quot;long&quot;,
+<span id='android-app-slice-SliceItem-property-FORMAT_REMOTE_INPUT'>/** A {@link android.app.slice.SliceItem} that contains a {@link RemoteInput}.
+</span>*/
+FORMAT_REMOTE_INPUT : &quot;input&quot;,
+<span id='android-app-slice-SliceItem-property-FORMAT_BUNDLE'>/** A {@link android.app.slice.SliceItem} that contains a {@link Bundle}.
+</span>*/
+FORMAT_BUNDLE : &quot;bundle&quot;,
+<span id='android-app-slice-SliceItem-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-slice-SliceItem-method-getHints'>/**Gets all hints associated with this SliceItem.
+</span>@return {Object {java.util.List}} Array of hints.
+*/
+getHints : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-getFormat'>/**Get the format of this SliceItem.
+</span> &lt;p&gt;
+ The format will be one of the following types supported by the platform:
+ &lt;li&gt;{@link #FORMAT_SLICE}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_TEXT}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_IMAGE}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_ACTION}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_INT}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_LONG}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_REMOTE_INPUT}&lt;/li&gt;
+ &lt;li&gt;{@link #FORMAT_BUNDLE}&lt;/li&gt;
+@see #getSubType() ()
+*/
+getFormat : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-getSubType'>/**Get the sub-type of this SliceItem.
+</span> &lt;p&gt;
+ Subtypes provide additional information about the type of this information beyond basic
+ interpretations inferred by {@link #getFormat}(). For example a slice may contain
+ many {@link #FORMAT_TEXT} items, but only some of them may be {@link android.app.slice.Slice#SUBTYPE_MESSAGE}.
+@see #getFormat()
+*/
+getSubType : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-getText'>/**
+</span>@return {Object {java.lang.CharSequence}} The text held by this {@link #FORMAT_TEXT} SliceItem
+*/
+getText : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-getBundle'>/**
+</span>@return {Object {android.os.Bundle}} The parcelable held by this {@link #FORMAT_BUNDLE} SliceItem
+*/
+getBundle : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-getIcon'>/**
+</span>@return {Object {android.graphics.drawable.Icon}} The icon held by this {@link #FORMAT_IMAGE} SliceItem
+*/
+getIcon : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-getAction'>/**
+</span>@return {Object {android.app.PendingIntent}} The pending intent held by this {@link #FORMAT_ACTION} SliceItem
+*/
+getAction : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-getRemoteView'>/**
+</span>@hide This isn't final
+*/
+getRemoteView : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-getRemoteInput'>/**
+</span>@return {Object {android.app.RemoteInput}} The remote input held by this {@link #FORMAT_REMOTE_INPUT} SliceItem
+*/
+getRemoteInput : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-getInt'>/**
+</span>@return {Number} The color held by this {@link #FORMAT_INT} SliceItem
+*/
+getInt : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-getSlice'>/**
+</span>@return {Object {android.app.slice.Slice}} The slice held by this {@link #FORMAT_ACTION} or {@link #FORMAT_SLICE} SliceItem
+*/
+getSlice : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-getLong'>/**
+</span>@return {Number} The long held by this {@link #FORMAT_LONG} SliceItem
+*/
+getLong : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-getTimestamp'>/**
+</span>@deprecated replaced by {@link #getLong()}
+@removed 
+*/
+getTimestamp : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-hasHint'>/**
+</span>@param {String} hint The hint to check for
+@return {Boolean} true if this item contains the given hint
+*/
+hasHint : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-hasHints'>/**
+</span>@hide 
+*/
+hasHints : function(  ) {},
+
+<span id='android-app-slice-SliceItem-method-hasAnyHints'>/**
+</span>@hide 
+*/
+hasAnyHints : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

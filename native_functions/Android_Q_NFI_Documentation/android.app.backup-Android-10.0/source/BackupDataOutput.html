@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-backup-BackupDataOutput'>/**@class android.app.backup.BackupDataOutput
+</span>@extends java.lang.Object
+
+ Provides the structured interface through which a {@link android.app.backup.BackupAgent} commits
+ information to the backup data set, via its {@link android.app.backup.BackupAgent#onBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)
+ onBackup()} method.  Data written for backup is presented
+ as a set of &quot;entities,&quot; key/value pairs in which each binary data record &quot;value&quot; is
+ named with a string &quot;key.&quot;
+ &lt;p&gt;
+ To commit a data record to the backup transport, the agent's
+ {@link android.app.backup.BackupAgent#onBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)
+ onBackup()} method first writes an &quot;entity header&quot; that supplies the key string for the record
+ and the total size of the binary value for the record.  After the header has been
+ written, the agent then writes the binary entity value itself.  The entity value can
+ be written in multiple chunks if desired, as long as the total count of bytes written
+ matches what was supplied to {@link #writeEntityHeader(String, int) writeEntityHeader()}.
+ &lt;p&gt;
+ Entity key strings are considered to be unique within a given application's backup
+ data set. If a backup agent writes a new entity under an existing key string, its value will
+ replace any previous value in the transport's remote data store.  You can remove a record
+ entirely from the remote data set by writing a new entity header using the
+ existing record's key, but supplying a negative &lt;code&gt;dataSize&lt;/code&gt; parameter.
+ When you do so, the agent does not need to call {@link #writeEntityData(byte[], int)}.
+ &lt;h3&gt;Example&lt;/h3&gt;
+ &lt;p&gt;
+ Here is an example illustrating a way to back up the value of a String variable
+ called &lt;code&gt;mStringToBackUp&lt;/code&gt;:
+ &lt;pre&gt;
+ static final String MY_STRING_KEY = &quot;storedstring&quot;;
+
+ public void {@link android.app.backup.BackupAgent#onBackup(ParcelFileDescriptor, BackupDataOutput, ParcelFileDescriptor) onBackup(ParcelFileDescriptor oldState, BackupDataOutput data, ParcelFileDescriptor newState)}
+         throws IOException {
+     ...
+     byte[] stringBytes = mStringToBackUp.getBytes();
+     data.writeEntityHeader(MY_STRING_KEY, stringBytes.length);
+     data.writeEntityData(stringBytes, stringBytes.length);
+     ...
+ }&lt;/pre&gt;
+
+ @see BackupAgent
+*/
+var BackupDataOutput = {
+
+<span id='android-app-backup-BackupDataOutput-method-getQuota'>/**Returns the quota in bytes for the application's current backup operation.  The
+</span> value can vary for each operation.
+@see FullBackupDataOutput#getQuota()
+*/
+getQuota : function(  ) {},
+
+<span id='android-app-backup-BackupDataOutput-method-getTransportFlags'>/**Returns flags with additional information about the backup transport. For supported flags see
+</span> {@link android.app.backup.BackupAgent}
+@see FullBackupDataOutput#getTransportFlags()
+*/
+getTransportFlags : function(  ) {},
+
+<span id='android-app-backup-BackupDataOutput-method-writeEntityHeader'>/**Mark the beginning of one record in the backup data stream. This must be called before
+</span> {@link #writeEntityData}.
+@param {String} key A string key that uniquely identifies the data record within the application.
+    Keys whose first character is ＀ or higher are not valid.
+@param {Number} dataSize The size in bytes of this record's data.  Passing a dataSize
+    of -1 indicates that the record under this key should be deleted.
+@return {Number} The number of bytes written to the backup stream
+@throws IOException if the write failed
+*/
+writeEntityHeader : function(  ) {},
+
+<span id='android-app-backup-BackupDataOutput-method-writeEntityData'>/**Write a chunk of data under the current entity to the backup transport.
+</span>@param {Object {byte[]}} data A raw data buffer to send
+@param {Number} size The number of bytes to be sent in this chunk
+@return {Number} the number of bytes written
+@throws IOException if the write failed
+*/
+writeEntityData : function(  ) {},
+
+<span id='android-app-backup-BackupDataOutput-method-setKeyPrefix'>/**
+</span>@hide 
+*/
+setKeyPrefix : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

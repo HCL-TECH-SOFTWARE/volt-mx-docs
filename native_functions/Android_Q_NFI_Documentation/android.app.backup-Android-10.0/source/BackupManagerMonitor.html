@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-backup-BackupManagerMonitor'>/**@class android.app.backup.BackupManagerMonitor
+</span>@extends java.lang.Object
+
+ Callback class for receiving important events during backup/restore operations.
+ Events consist mostly of errors and exceptions, giving detailed reason on why a restore/backup
+ failed or any time BackupManager makes an important decision.
+ On the other hand {@link android.app.backup.BackupObserver} will give a failure/success view without
+ getting into details why. This callback runs on the thread it was called on because it can get
+ a bit spammy.
+ These callbacks will run on the binder thread.
+
+ @hide
+*/
+var BackupManagerMonitor = {
+
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_CATEGORY_TRANSPORT'>/***/
+</span>LOG_EVENT_CATEGORY_TRANSPORT : &quot;1&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_CATEGORY_AGENT'>/***/
+</span>LOG_EVENT_CATEGORY_AGENT : &quot;2&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_CATEGORY_BACKUP_MANAGER_POLICY'>/***/
+</span>LOG_EVENT_CATEGORY_BACKUP_MANAGER_POLICY : &quot;3&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_EVENT_PACKAGE_NAME'>/**string : the package name */
+</span>EXTRA_LOG_EVENT_PACKAGE_NAME : &quot;android.app.backup.extra.LOG_EVENT_PACKAGE_NAME&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_EVENT_PACKAGE_VERSION'>/**int : the versionCode of the package named by EXTRA_LOG_EVENT_PACKAGE_NAME
+</span> @deprecated Use {@link #EXTRA_LOG_EVENT_PACKAGE_LONG_VERSION} */
+EXTRA_LOG_EVENT_PACKAGE_VERSION : &quot;android.app.backup.extra.LOG_EVENT_PACKAGE_VERSION&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_EVENT_PACKAGE_LONG_VERSION'>/**long : the full versionCode of the package named by EXTRA_LOG_EVENT_PACKAGE_NAME */
+</span>EXTRA_LOG_EVENT_PACKAGE_LONG_VERSION : &quot;android.app.backup.extra.LOG_EVENT_PACKAGE_FULL_VERSION&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_EVENT_ID'>/**int : the id of the log message, will be a unique identifier */
+</span>EXTRA_LOG_EVENT_ID : &quot;android.app.backup.extra.LOG_EVENT_ID&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_EVENT_CATEGORY'>/**  int : category will be one of
+</span>  { LOG_EVENT_CATEGORY_TRANSPORT,
+    LOG_EVENT_CATEGORY_AGENT,
+    LOG_EVENT_CATEGORY_BACKUP_MANAGER_POLICY}.
+*/
+EXTRA_LOG_EVENT_CATEGORY : &quot;android.app.backup.extra.LOG_EVENT_CATEGORY&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_CANCEL_ALL'>/** boolean: when we have an event with id LOG_EVENT_ID_KEY_VALUE_BACKUP_CANCEL we record if
+</span> the call was to cancel backup of all packages
+*/
+EXTRA_LOG_CANCEL_ALL : &quot;android.app.backup.extra.LOG_CANCEL_ALL&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_ILLEGAL_KEY'>/** string: when we have an event with id LOG_EVENT_ID_ILLEGAL_KEY we send the key that was used
+</span> by the app
+*/
+EXTRA_LOG_ILLEGAL_KEY : &quot;android.app.backup.extra.LOG_ILLEGAL_KEY&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_PREFLIGHT_ERROR'>/** long: when we have an event with id LOG_EVENT_ID_ERROR_PREFLIGHT we send the error code that
+</span> was returned by the transport during preflight
+*/
+EXTRA_LOG_PREFLIGHT_ERROR : &quot;android.app.backup.extra.LOG_PREFLIGHT_ERROR&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_EXCEPTION_FULL_BACKUP'>/** string: when we have an event with id LOG_EVENT_ID_EXCEPTION_FULL_BACKUP we send the
+</span> exception's stacktrace
+*/
+EXTRA_LOG_EXCEPTION_FULL_BACKUP : &quot;android.app.backup.extra.LOG_EXCEPTION_FULL_BACKUP&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_RESTORE_VERSION'>/** int: when we have an event with id LOG_EVENT_ID_RESTORE_VERSION_HIGHER we send the
+</span> restore package version
+*/
+EXTRA_LOG_RESTORE_VERSION : &quot;android.app.backup.extra.LOG_RESTORE_VERSION&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_RESTORE_ANYWAY'>/** boolean: when we have an event with id LOG_EVENT_ID_RESTORE_VERSION_HIGHER we record if
+</span> ApplicationInfo.FLAG_RESTORE_ANY_VERSION flag is set
+*/
+EXTRA_LOG_RESTORE_ANYWAY : &quot;android.app.backup.extra.LOG_RESTORE_ANYWAY&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_POLICY_ALLOW_APKS'>/** boolean: when we have an event with id LOG_EVENT_ID_APK_NOT_INSTALLED we record if
+</span> the policy allows to install apks provided with the dataset
+*/
+EXTRA_LOG_POLICY_ALLOW_APKS : &quot;android.app.backup.extra.LOG_POLICY_ALLOW_APKS&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_MANIFEST_PACKAGE_NAME'>/** string: when we have an event with id LOG_EVENT_ID_EXPECTED_DIFFERENT_PACKAGE we record the
+</span> package name provided in the restore manifest
+*/
+EXTRA_LOG_MANIFEST_PACKAGE_NAME : &quot;android.app.backup.extra.LOG_MANIFEST_PACKAGE_NAME&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_WIDGET_PACKAGE_NAME'>/** string: when we have an event with id LOG_EVENT_ID_WIDGET_METADATA_MISMATCH we record the
+</span> package name provided in the widget metadata
+*/
+EXTRA_LOG_WIDGET_PACKAGE_NAME : &quot;android.app.backup.extra.LOG_WIDGET_PACKAGE_NAME&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-EXTRA_LOG_OLD_VERSION'>/** int: when we have event of id LOG_EVENT_ID_VERSION_OF_BACKUP_OLDER we send the version
+</span> of the backup.
+*/
+EXTRA_LOG_OLD_VERSION : &quot;android.app.backup.extra.LOG_OLD_VERSION&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_FULL_BACKUP_CANCEL'>/***/
+</span>LOG_EVENT_ID_FULL_BACKUP_CANCEL : &quot;4&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_ILLEGAL_KEY'>/***/
+</span>LOG_EVENT_ID_ILLEGAL_KEY : &quot;5&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_NO_DATA_TO_SEND'>/***/
+</span>LOG_EVENT_ID_NO_DATA_TO_SEND : &quot;7&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_PACKAGE_INELIGIBLE'>/***/
+</span>LOG_EVENT_ID_PACKAGE_INELIGIBLE : &quot;9&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_PACKAGE_KEY_VALUE_PARTICIPANT'>/***/
+</span>LOG_EVENT_ID_PACKAGE_KEY_VALUE_PARTICIPANT : &quot;10&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_PACKAGE_STOPPED'>/***/
+</span>LOG_EVENT_ID_PACKAGE_STOPPED : &quot;11&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_PACKAGE_NOT_FOUND'>/***/
+</span>LOG_EVENT_ID_PACKAGE_NOT_FOUND : &quot;12&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_BACKUP_DISABLED'>/***/
+</span>LOG_EVENT_ID_BACKUP_DISABLED : &quot;13&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_DEVICE_NOT_PROVISIONED'>/***/
+</span>LOG_EVENT_ID_DEVICE_NOT_PROVISIONED : &quot;14&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_PACKAGE_TRANSPORT_NOT_PRESENT'>/***/
+</span>LOG_EVENT_ID_PACKAGE_TRANSPORT_NOT_PRESENT : &quot;15&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_ERROR_PREFLIGHT'>/***/
+</span>LOG_EVENT_ID_ERROR_PREFLIGHT : &quot;16&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_QUOTA_HIT_PREFLIGHT'>/***/
+</span>LOG_EVENT_ID_QUOTA_HIT_PREFLIGHT : &quot;18&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_EXCEPTION_FULL_BACKUP'>/***/
+</span>LOG_EVENT_ID_EXCEPTION_FULL_BACKUP : &quot;19&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_KEY_VALUE_BACKUP_CANCEL'>/***/
+</span>LOG_EVENT_ID_KEY_VALUE_BACKUP_CANCEL : &quot;21&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_NO_RESTORE_METADATA_AVAILABLE'>/***/
+</span>LOG_EVENT_ID_NO_RESTORE_METADATA_AVAILABLE : &quot;22&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_NO_PM_METADATA_RECEIVED'>/***/
+</span>LOG_EVENT_ID_NO_PM_METADATA_RECEIVED : &quot;23&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_PM_AGENT_HAS_NO_METADATA'>/***/
+</span>LOG_EVENT_ID_PM_AGENT_HAS_NO_METADATA : &quot;24&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_LOST_TRANSPORT'>/***/
+</span>LOG_EVENT_ID_LOST_TRANSPORT : &quot;25&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_PACKAGE_NOT_PRESENT'>/***/
+</span>LOG_EVENT_ID_PACKAGE_NOT_PRESENT : &quot;26&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_RESTORE_VERSION_HIGHER'>/***/
+</span>LOG_EVENT_ID_RESTORE_VERSION_HIGHER : &quot;27&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_APP_HAS_NO_AGENT'>/***/
+</span>LOG_EVENT_ID_APP_HAS_NO_AGENT : &quot;28&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_SIGNATURE_MISMATCH'>/***/
+</span>LOG_EVENT_ID_SIGNATURE_MISMATCH : &quot;29&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_CANT_FIND_AGENT'>/***/
+</span>LOG_EVENT_ID_CANT_FIND_AGENT : &quot;30&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_KEY_VALUE_RESTORE_TIMEOUT'>/***/
+</span>LOG_EVENT_ID_KEY_VALUE_RESTORE_TIMEOUT : &quot;31&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_RESTORE_ANY_VERSION'>/***/
+</span>LOG_EVENT_ID_RESTORE_ANY_VERSION : &quot;34&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_VERSIONS_MATCH'>/***/
+</span>LOG_EVENT_ID_VERSIONS_MATCH : &quot;35&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_VERSION_OF_BACKUP_OLDER'>/***/
+</span>LOG_EVENT_ID_VERSION_OF_BACKUP_OLDER : &quot;36&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_FULL_RESTORE_SIGNATURE_MISMATCH'>/***/
+</span>LOG_EVENT_ID_FULL_RESTORE_SIGNATURE_MISMATCH : &quot;37&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_SYSTEM_APP_NO_AGENT'>/***/
+</span>LOG_EVENT_ID_SYSTEM_APP_NO_AGENT : &quot;38&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_FULL_RESTORE_ALLOW_BACKUP_FALSE'>/***/
+</span>LOG_EVENT_ID_FULL_RESTORE_ALLOW_BACKUP_FALSE : &quot;39&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_APK_NOT_INSTALLED'>/***/
+</span>LOG_EVENT_ID_APK_NOT_INSTALLED : &quot;40&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_CANNOT_RESTORE_WITHOUT_APK'>/***/
+</span>LOG_EVENT_ID_CANNOT_RESTORE_WITHOUT_APK : &quot;41&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_MISSING_SIGNATURE'>/***/
+</span>LOG_EVENT_ID_MISSING_SIGNATURE : &quot;42&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_EXPECTED_DIFFERENT_PACKAGE'>/***/
+</span>LOG_EVENT_ID_EXPECTED_DIFFERENT_PACKAGE : &quot;43&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_UNKNOWN_VERSION'>/***/
+</span>LOG_EVENT_ID_UNKNOWN_VERSION : &quot;44&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_FULL_RESTORE_TIMEOUT'>/***/
+</span>LOG_EVENT_ID_FULL_RESTORE_TIMEOUT : &quot;45&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_CORRUPT_MANIFEST'>/***/
+</span>LOG_EVENT_ID_CORRUPT_MANIFEST : &quot;46&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_WIDGET_METADATA_MISMATCH'>/***/
+</span>LOG_EVENT_ID_WIDGET_METADATA_MISMATCH : &quot;47&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_WIDGET_UNKNOWN_VERSION'>/***/
+</span>LOG_EVENT_ID_WIDGET_UNKNOWN_VERSION : &quot;48&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_NO_PACKAGES'>/***/
+</span>LOG_EVENT_ID_NO_PACKAGES : &quot;49&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_TRANSPORT_IS_NULL'>/***/
+</span>LOG_EVENT_ID_TRANSPORT_IS_NULL : &quot;50&quot;,
+<span id='android-app-backup-BackupManagerMonitor-property-LOG_EVENT_ID_TRANSPORT_NON_INCREMENTAL_BACKUP_REQUIRED'>/** The transport returned {@link android.app.backup.BackupTransport#TRANSPORT_NON_INCREMENTAL_BACKUP_REQUIRED}.
+</span>*/
+LOG_EVENT_ID_TRANSPORT_NON_INCREMENTAL_BACKUP_REQUIRED : &quot;51&quot;,
+<span id='android-app-backup-BackupManagerMonitor-method-onEvent'>/**This method will be called each time something important happens on BackupManager.
+</span>@param {Object {Bundle}} event bundle will contain data about event:
+    - event id, not optional, a unique identifier for each event.
+    - package name, optional, the current package we're backing up/restoring if applicable.
+    - package version, optional, the current package version  we're backing up/restoring
+          if applicable.
+    - category of event, not optional, one of
+          { LOG_EVENT_CATEGORY_TRANSPORT,
+            LOG_EVENT_CATEGORY_AGENT,
+            LOG_EVENT_CATEGORY_BACKUP_MANAGER_POLICY}
+*/
+onEvent : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

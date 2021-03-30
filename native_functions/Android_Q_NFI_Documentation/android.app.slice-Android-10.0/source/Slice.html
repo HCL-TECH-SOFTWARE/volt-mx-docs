@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-slice-Slice'>/**@class android.app.slice.Slice
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ A slice is a piece of app content and actions that can be surfaced outside of the app.
+
+ &lt;p&gt;They are constructed using {@link android.app.slice.Slice.Builder} in a tree structure
+ that provides the OS some information about how the content should be displayed.
+*/
+var Slice = {
+
+<span id='android-app-slice-Slice-property-HINT_TITLE'>/** Hint that this content is a title of other content in the slice. This can also indicate that
+</span> the content should be used in the shortcut representation of the slice (icon, label, action),
+ normally this should be indicated by adding the hint on the action containing that content.
+
+ @see SliceItem#FORMAT_ACTION
+*/
+HINT_TITLE : &quot;title&quot;,
+<span id='android-app-slice-Slice-property-HINT_LIST'>/** Hint that all sub-items/sub-slices within this content should be considered
+</span> to have {@link #HINT_LIST_ITEM}.
+*/
+HINT_LIST : &quot;list&quot;,
+<span id='android-app-slice-Slice-property-HINT_LIST_ITEM'>/** Hint that this item is part of a list and should be formatted as if is part
+</span> of a list.
+*/
+HINT_LIST_ITEM : &quot;list_item&quot;,
+<span id='android-app-slice-Slice-property-HINT_LARGE'>/** Hint that this content is important and should be larger when displayed if
+</span> possible.
+*/
+HINT_LARGE : &quot;large&quot;,
+<span id='android-app-slice-Slice-property-HINT_ACTIONS'>/** Hint that this slice contains a number of actions that can be grouped together
+</span> in a sort of controls area of the UI.
+*/
+HINT_ACTIONS : &quot;actions&quot;,
+<span id='android-app-slice-Slice-property-HINT_SELECTED'>/** Hint indicating that this item (and its sub-items) are the current selection.
+</span>*/
+HINT_SELECTED : &quot;selected&quot;,
+<span id='android-app-slice-Slice-property-HINT_NO_TINT'>/** Hint to indicate that this content should not be tinted.
+</span>*/
+HINT_NO_TINT : &quot;no_tint&quot;,
+<span id='android-app-slice-Slice-property-HINT_SHORTCUT'>/** Hint to indicate that this content should only be displayed if the slice is presented
+</span> as a shortcut.
+*/
+HINT_SHORTCUT : &quot;shortcut&quot;,
+<span id='android-app-slice-Slice-property-HINT_SUMMARY'>/** Hint indicating this content should be shown instead of the normal content when the slice
+</span> is in small format.
+*/
+HINT_SUMMARY : &quot;summary&quot;,
+<span id='android-app-slice-Slice-property-HINT_TOGGLE'>/** Hint to indicate that this content has a toggle action associated with it. To indicate that
+</span> the toggle is on, use {@link #HINT_SELECTED}. When the toggle state changes, the intent
+ associated with it will be sent along with an extra {@link #EXTRA_TOGGLE_STATE} which can be
+ retrieved to see the new state of the toggle.
+ @hide
+*/
+HINT_TOGGLE : &quot;toggle&quot;,
+<span id='android-app-slice-Slice-property-HINT_HORIZONTAL'>/** Hint that list items within this slice or subslice would appear better
+</span> if organized horizontally.
+*/
+HINT_HORIZONTAL : &quot;horizontal&quot;,
+<span id='android-app-slice-Slice-property-HINT_PARTIAL'>/** Hint to indicate that this slice is incomplete and an update will be sent once
+</span> loading is complete. Slices which contain HINT_PARTIAL will not be cached by the
+ OS and should not be cached by apps.
+*/
+HINT_PARTIAL : &quot;partial&quot;,
+<span id='android-app-slice-Slice-property-HINT_SEE_MORE'>/** A hint representing that this item should be used to indicate that there's more
+</span> content associated with this slice.
+*/
+HINT_SEE_MORE : &quot;see_more&quot;,
+<span id='android-app-slice-Slice-property-HINT_CALLER_NEEDED'>/** @see Builder#setCallerNeeded
+</span> @hide
+*/
+HINT_CALLER_NEEDED : &quot;caller_needed&quot;,
+<span id='android-app-slice-Slice-property-HINT_KEYWORDS'>/** A hint to indicate that the contents of this subslice represent a list of keywords
+</span> related to the parent slice.
+ Expected to be on an item of format {@link android.app.slice.SliceItem#FORMAT_SLICE}.
+*/
+HINT_KEYWORDS : &quot;keywords&quot;,
+<span id='android-app-slice-Slice-property-HINT_ERROR'>/** A hint to indicate that this slice represents an error.
+</span>*/
+HINT_ERROR : &quot;error&quot;,
+<span id='android-app-slice-Slice-property-HINT_TTL'>/** Hint indicating an item representing a time-to-live for the content.
+</span>*/
+HINT_TTL : &quot;ttl&quot;,
+<span id='android-app-slice-Slice-property-HINT_LAST_UPDATED'>/** Hint indicating an item representing when the content was created or last updated.
+</span>*/
+HINT_LAST_UPDATED : &quot;last_updated&quot;,
+<span id='android-app-slice-Slice-property-HINT_PERMISSION_REQUEST'>/** A hint to indicate that this slice represents a permission request for showing
+</span> slices.
+*/
+HINT_PERMISSION_REQUEST : &quot;permission_request&quot;,
+<span id='android-app-slice-Slice-property-SUBTYPE_LAYOUT_DIRECTION'>/** Subtype to indicate that this item indicates the layout direction for content
+</span> in the slice.
+ Expected to be an item of format {@link android.app.slice.SliceItem#FORMAT_INT}.
+*/
+SUBTYPE_LAYOUT_DIRECTION : &quot;layout_direction&quot;,
+<span id='android-app-slice-Slice-property-EXTRA_TOGGLE_STATE'>/** Key to retrieve an extra added to an intent when a control is changed.
+</span>*/
+EXTRA_TOGGLE_STATE : &quot;android.app.slice.extra.TOGGLE_STATE&quot;,
+<span id='android-app-slice-Slice-property-EXTRA_SLIDER_VALUE'>/** Key to retrieve an extra added to an intent when the value of a slider is changed.
+</span> @deprecated remove once support lib is update to use EXTRA_RANGE_VALUE instead
+ @removed
+*/
+EXTRA_SLIDER_VALUE : &quot;android.app.slice.extra.SLIDER_VALUE&quot;,
+<span id='android-app-slice-Slice-property-EXTRA_RANGE_VALUE'>/** Key to retrieve an extra added to an intent when the value of an input range is changed.
+</span>*/
+EXTRA_RANGE_VALUE : &quot;android.app.slice.extra.RANGE_VALUE&quot;,
+<span id='android-app-slice-Slice-property-SUBTYPE_MESSAGE'>/** Subtype to indicate that this is a message as part of a communication
+</span> sequence in this slice.
+ Expected to be on an item of format {@link android.app.slice.SliceItem#FORMAT_SLICE}.
+*/
+SUBTYPE_MESSAGE : &quot;message&quot;,
+<span id='android-app-slice-Slice-property-SUBTYPE_SOURCE'>/** Subtype to tag the source (i.e. sender) of a {@link #SUBTYPE_MESSAGE}.
+</span> Expected to be on an item of format {@link android.app.slice.SliceItem#FORMAT_TEXT},
+ {@link android.app.slice.SliceItem#FORMAT_IMAGE} or an {@link android.app.slice.SliceItem#FORMAT_SLICE} containing them.
+*/
+SUBTYPE_SOURCE : &quot;source&quot;,
+<span id='android-app-slice-Slice-property-SUBTYPE_COLOR'>/** Subtype to tag an item as representing a color.
+</span> Expected to be on an item of format {@link android.app.slice.SliceItem#FORMAT_INT}.
+*/
+SUBTYPE_COLOR : &quot;color&quot;,
+<span id='android-app-slice-Slice-property-SUBTYPE_SLIDER'>/** Subtype to tag an item as representing a slider.
+</span> @deprecated remove once support lib is update to use SUBTYPE_RANGE instead
+ @removed
+*/
+SUBTYPE_SLIDER : &quot;slider&quot;,
+<span id='android-app-slice-Slice-property-SUBTYPE_RANGE'>/** Subtype to tag an item as representing a range.
+</span> Expected to be on an item of format {@link android.app.slice.SliceItem#FORMAT_SLICE} containing
+ a {@link #SUBTYPE_VALUE} and possibly a {@link #SUBTYPE_MAX}.
+*/
+SUBTYPE_RANGE : &quot;range&quot;,
+<span id='android-app-slice-Slice-property-SUBTYPE_MAX'>/** Subtype to tag an item as representing the max int value for a {@link #SUBTYPE_RANGE}.
+</span> Expected to be on an item of format {@link android.app.slice.SliceItem#FORMAT_INT}.
+*/
+SUBTYPE_MAX : &quot;max&quot;,
+<span id='android-app-slice-Slice-property-SUBTYPE_VALUE'>/** Subtype to tag an item as representing the current int value for a {@link #SUBTYPE_RANGE}.
+</span> Expected to be on an item of format {@link android.app.slice.SliceItem#FORMAT_INT}.
+*/
+SUBTYPE_VALUE : &quot;value&quot;,
+<span id='android-app-slice-Slice-property-SUBTYPE_TOGGLE'>/** Subtype to indicate that this content has a toggle action associated with it. To indicate
+</span> that the toggle is on, use {@link #HINT_SELECTED}. When the toggle state changes, the
+ intent associated with it will be sent along with an extra {@link #EXTRA_TOGGLE_STATE}
+ which can be retrieved to see the new state of the toggle.
+*/
+SUBTYPE_TOGGLE : &quot;toggle&quot;,
+<span id='android-app-slice-Slice-property-SUBTYPE_PRIORITY'>/** Subtype to tag an item representing priority.
+</span> Expected to be on an item of format {@link android.app.slice.SliceItem#FORMAT_INT}.
+*/
+SUBTYPE_PRIORITY : &quot;priority&quot;,
+<span id='android-app-slice-Slice-property-SUBTYPE_CONTENT_DESCRIPTION'>/** Subtype to tag an item to use as a content description.
+</span> Expected to be on an item of format {@link android.app.slice.SliceItem#FORMAT_TEXT}.
+*/
+SUBTYPE_CONTENT_DESCRIPTION : &quot;content_description&quot;,
+<span id='android-app-slice-Slice-property-SUBTYPE_MILLIS'>/** Subtype to tag an item as representing a time in milliseconds since midnight,
+</span> January 1, 1970 UTC.
+*/
+SUBTYPE_MILLIS : &quot;millis&quot;,
+<span id='android-app-slice-Slice-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-slice-Slice-method-getSpec'>/**
+</span>@return {Object {android.app.slice.SliceSpec}} The spec for this slice
+*/
+getSpec : function(  ) {},
+
+<span id='android-app-slice-Slice-method-getUri'>/**
+</span>@return {Object {android.net.Uri}} The Uri that this Slice represents.
+*/
+getUri : function(  ) {},
+
+<span id='android-app-slice-Slice-method-getItems'>/**
+</span>@return {Object {java.util.List}} All child {@link SliceItem}s that this Slice contains.
+*/
+getItems : function(  ) {},
+
+<span id='android-app-slice-Slice-method-getHints'>/**
+</span>@return {Object {java.util.List}} All hints associated with this Slice.
+*/
+getHints : function(  ) {},
+
+<span id='android-app-slice-Slice-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-app-slice-Slice-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-slice-Slice-method-hasHint'>/**
+</span>@hide 
+*/
+hasHint : function(  ) {},
+
+<span id='android-app-slice-Slice-method-isCallerNeeded'>/**Returns whether the caller for this slice matters.
+</span>@see Builder#setCallerNeeded
+*/
+isCallerNeeded : function(  ) {},
+
+<span id='android-app-slice-Slice-method-toString'>/**
+</span>@hide 
+@return {String} A string representation of this slice.
+*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

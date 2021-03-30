@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-role-RoleManager'>/**@class android.app.role.RoleManager
+</span>@extends java.lang.Object
+
+ This class provides information about and manages roles.
+ &lt;p&gt;
+ A role is a unique name within the system associated with certain privileges. The list of
+ available roles might change with a system app update, so apps should not make assumption about
+ the availability of roles. Instead, they should always query if the role is available using
+ {@link #isRoleAvailable}(String) before trying to do anything with it. Some predefined role names
+ are available as constants in this class, and a list of possibly available roles can be found in
+ the &lt;a href=&quot;{@docRoot}reference/androidx/core/role/package-summary.html&quot;&gt;AndroidX Role
+ library&lt;/a&gt;.
+ &lt;p&gt;
+ There can be multiple applications qualifying for a role, but only a subset of them can become
+ role holders. To qualify for a role, an application must meet certain requirements, including
+ defining certain components in its manifest. These requirements can be found in the AndroidX
+ Libraries. Then the application will need user consent to become a role holder, which can be
+ requested using {@link android.app.Activity#startActivityForResult(Intent, int)} with the
+ {@code Intent} obtained from {@link #createRequestRoleIntent}(String).
+ &lt;p&gt;
+ Upon becoming a role holder, the application may be granted certain privileges that are role
+ specific. When the application loses its role, these privileges will also be revoked.
+*/
+var RoleManager = {
+
+<span id='android-app-role-RoleManager-property-ROLE_ASSISTANT'>/** The name of the assistant app role.
+</span>
+ @see android.service.voice.VoiceInteractionService
+*/
+ROLE_ASSISTANT : &quot;android.app.role.ASSISTANT&quot;,
+<span id='android-app-role-RoleManager-property-ROLE_BROWSER'>/** The name of the browser role.
+</span>
+ @see Intent#CATEGORY_APP_BROWSER
+*/
+ROLE_BROWSER : &quot;android.app.role.BROWSER&quot;,
+<span id='android-app-role-RoleManager-property-ROLE_DIALER'>/** The name of the dialer role.
+</span>
+ @see Intent#ACTION_DIAL
+*/
+ROLE_DIALER : &quot;android.app.role.DIALER&quot;,
+<span id='android-app-role-RoleManager-property-ROLE_SMS'>/** The name of the SMS role.
+</span>
+ @see Intent#CATEGORY_APP_MESSAGING
+*/
+ROLE_SMS : &quot;android.app.role.SMS&quot;,
+<span id='android-app-role-RoleManager-property-ROLE_EMERGENCY'>/** The name of the emergency role
+</span>
+ @see android.telephony.TelephonyManager#ACTION_EMERGENCY_ASSISTANCE
+*/
+ROLE_EMERGENCY : &quot;android.app.role.EMERGENCY&quot;,
+<span id='android-app-role-RoleManager-property-ROLE_HOME'>/** The name of the home role.
+</span>
+ @see Intent#CATEGORY_HOME
+*/
+ROLE_HOME : &quot;android.app.role.HOME&quot;,
+<span id='android-app-role-RoleManager-property-ROLE_CALL_REDIRECTION'>/** The name of the call redirection role.
+</span> &lt;p&gt;
+ A call redirection app provides a means to re-write the phone number for an outgoing call to
+ place the call through a call redirection service.
+
+ @see android.telecom.CallRedirectionService
+*/
+ROLE_CALL_REDIRECTION : &quot;android.app.role.CALL_REDIRECTION&quot;,
+<span id='android-app-role-RoleManager-property-ROLE_CALL_SCREENING'>/** The name of the call screening and caller id role.
+</span>
+ @see android.telecom.CallScreeningService
+*/
+ROLE_CALL_SCREENING : &quot;android.app.role.CALL_SCREENING&quot;,
+<span id='android-app-role-RoleManager-property-MANAGE_HOLDERS_FLAG_DONT_KILL_APP'>/** Flag parameter for {@link #addRoleHolderAsUser}, {@link #removeRoleHolderAsUser} and
+</span> {@link #clearRoleHoldersAsUser} to indicate that apps should not be killed when changing
+ their role holder status.
+
+ @hide
+*/
+MANAGE_HOLDERS_FLAG_DONT_KILL_APP : &quot;1&quot;,
+<span id='android-app-role-RoleManager-property-ACTION_REQUEST_ROLE'>/** The action used to request user approval of a role for an application.
+</span>
+ @hide
+*/
+ACTION_REQUEST_ROLE : &quot;android.app.role.action.REQUEST_ROLE&quot;,
+<span id='android-app-role-RoleManager-property-PERMISSION_MANAGE_ROLES_FROM_CONTROLLER'>/** The permission required to manage records of role holders in {@link android.app.role.RoleManager} directly.
+</span>
+ @hide
+*/
+PERMISSION_MANAGE_ROLES_FROM_CONTROLLER : &quot;com.android.permissioncontroller.permission.MANAGE_ROLES_FROM_CONTROLLER&quot;,
+<span id='android-app-role-RoleManager-method-createRequestRoleIntent'>/**Returns an {@code Intent} suitable for passing to
+</span> {@link android.app.Activity#startActivityForResult(Intent, int)} which prompts the user to
+ grant a role to this application.
+ &lt;p&gt;
+ If the role is granted, the {@code resultCode} will be
+ {@link android.app.Activity#RESULT_OK}, otherwise it will be
+ {@link android.app.Activity#RESULT_CANCELED}.
+@param {String} roleName the name of requested role
+@return {Object {android.content.Intent}} the {@code Intent} to prompt user to grant the role
+*/
+createRequestRoleIntent : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-isRoleAvailable'>/**Check whether a role is available in the system.
+</span>@param {String} roleName the name of role to checking for
+@return {Boolean} whether the role is available in the system
+*/
+isRoleAvailable : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-isRoleHeld'>/**Check whether the calling application is holding a particular role.
+</span>@param {String} roleName the name of the role to check for
+@return {Boolean} whether the calling application is holding the role
+*/
+isRoleHeld : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-getRoleHolders'>/**Get package names of the applications holding the role.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Using this API requires holding
+ {@code android.permission.MANAGE_ROLE_HOLDERS}.
+@param {String} roleName the name of the role to get the role holder for
+@return {Object {java.util.List}} a list of package names of the role holders, or an empty list if none.
+@see #getRoleHoldersAsUser(String, UserHandle)
+@hide 
+*/
+getRoleHolders : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-getRoleHoldersAsUser'>/**Get package names of the applications holding the role.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Using this API requires holding
+ {@code android.permission.MANAGE_ROLE_HOLDERS} and if the user id is not the current user
+ {@code android.permission.INTERACT_ACROSS_USERS_FULL}.
+@param {String} roleName the name of the role to get the role holder for
+@param {Object {UserHandle}} user the user to get the role holder for
+@return {Object {java.util.List}} a list of package names of the role holders, or an empty list if none.
+@see #addRoleHolderAsUser(String, String, int, UserHandle, Executor, Consumer)
+@see #removeRoleHolderAsUser(String, String, int, UserHandle, Executor, Consumer)
+@see #clearRoleHoldersAsUser(String, int, UserHandle, Executor, Consumer)
+@hide 
+*/
+getRoleHoldersAsUser : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-addRoleHolderAsUser'>/**Add a specific application to the holders of a role. If the role is exclusive, the previous
+</span> holder will be replaced.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Using this API requires holding
+ {@code android.permission.MANAGE_ROLE_HOLDERS} and if the user id is not the current user
+ {@code android.permission.INTERACT_ACROSS_USERS_FULL}.
+@param {String} roleName the name of the role to add the role holder for
+@param {String} packageName the package name of the application to add to the role holders
+@param {Number} flags optional behavior flags
+@param {Object {UserHandle}} user the user to add the role holder for
+@param {Object {Executor}} executor the {@code Executor} to run the callback on.
+@param {Object {java.util.function.Consumer}} callback the callback for whether this call is successful
+@see #getRoleHoldersAsUser(String, UserHandle)
+@see #removeRoleHolderAsUser(String, String, int, UserHandle, Executor, Consumer)
+@see #clearRoleHoldersAsUser(String, int, UserHandle, Executor, Consumer)
+@hide 
+*/
+addRoleHolderAsUser : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-removeRoleHolderAsUser'>/**Remove a specific application from the holders of a role.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Using this API requires holding
+ {@code android.permission.MANAGE_ROLE_HOLDERS} and if the user id is not the current user
+ {@code android.permission.INTERACT_ACROSS_USERS_FULL}.
+@param {String} roleName the name of the role to remove the role holder for
+@param {String} packageName the package name of the application to remove from the role holders
+@param {Number} flags optional behavior flags
+@param {Object {UserHandle}} user the user to remove the role holder for
+@param {Object {Executor}} executor the {@code Executor} to run the callback on.
+@param {Object {java.util.function.Consumer}} callback the callback for whether this call is successful
+@see #getRoleHoldersAsUser(String, UserHandle)
+@see #addRoleHolderAsUser(String, String, int, UserHandle, Executor, Consumer)
+@see #clearRoleHoldersAsUser(String, int, UserHandle, Executor, Consumer)
+@hide 
+*/
+removeRoleHolderAsUser : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-clearRoleHoldersAsUser'>/**Remove all holders of a role.
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Using this API requires holding
+ {@code android.permission.MANAGE_ROLE_HOLDERS} and if the user id is not the current user
+ {@code android.permission.INTERACT_ACROSS_USERS_FULL}.
+@param {String} roleName the name of the role to remove role holders for
+@param {Number} flags optional behavior flags
+@param {Object {UserHandle}} user the user to remove role holders for
+@param {Object {Executor}} executor the {@code Executor} to run the callback on.
+@param {Object {java.util.function.Consumer}} callback the callback for whether this call is successful
+@see #getRoleHoldersAsUser(String, UserHandle)
+@see #addRoleHolderAsUser(String, String, int, UserHandle, Executor, Consumer)
+@see #removeRoleHolderAsUser(String, String, int, UserHandle, Executor, Consumer)
+@hide 
+*/
+clearRoleHoldersAsUser : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-addOnRoleHoldersChangedListenerAsUser'>/**Add a listener to observe role holder changes
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Using this API requires holding
+ {@code android.permission.OBSERVE_ROLE_HOLDERS} and if the user id is not the current user
+ {@code android.permission.INTERACT_ACROSS_USERS_FULL}.
+@param {Object {Executor}} executor the {@code Executor} to call the listener on.
+@param {Object {OnRoleHoldersChangedListener}} listener the listener to be added
+@param {Object {UserHandle}} user the user to add the listener for
+@see #removeOnRoleHoldersChangedListenerAsUser(OnRoleHoldersChangedListener, UserHandle)
+@hide 
+*/
+addOnRoleHoldersChangedListenerAsUser : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-removeOnRoleHoldersChangedListenerAsUser'>/**Remove a listener observing role holder changes
+</span> &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Using this API requires holding
+ {@code android.permission.OBSERVE_ROLE_HOLDERS} and if the user id is not the current user
+ {@code android.permission.INTERACT_ACROSS_USERS_FULL}.
+@param {Object {OnRoleHoldersChangedListener}} listener the listener to be removed
+@param {Object {UserHandle}} user the user to remove the listener for
+@see #addOnRoleHoldersChangedListenerAsUser(Executor, OnRoleHoldersChangedListener,
+                                             UserHandle)
+@hide 
+*/
+removeOnRoleHoldersChangedListenerAsUser : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-setRoleNamesFromController'>/**Set the names of all the available roles. Should only be called from
+</span> {@link android.app.role.RoleControllerService}.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Using this API requires holding
+ {@link #PERMISSION_MANAGE_ROLES_FROM_CONTROLLER}.
+@param {Object {java.util.List}} roleNames the names of all the available roles
+@hide 
+*/
+setRoleNamesFromController : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-addRoleHolderFromController'>/**Add a specific application to the holders of a role, only modifying records inside
+</span> {@link android.app.role.RoleManager}. Should only be called from
+ {@link android.app.role.RoleControllerService}.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Using this API requires holding
+ {@link #PERMISSION_MANAGE_ROLES_FROM_CONTROLLER}.
+@param {String} roleName the name of the role to add the role holder for
+@param {String} packageName the package name of the application to add to the role holders
+@return {Boolean} whether the operation was successful, and will also be {@code true} if a matching
+         role holder is already found.
+@see #getRoleHolders(String)
+@see #removeRoleHolderFromController(String, String)
+@hide 
+*/
+addRoleHolderFromController : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-removeRoleHolderFromController'>/**Remove a specific application from the holders of a role, only modifying records inside
+</span> {@link android.app.role.RoleManager}. Should only be called from
+ {@link android.app.role.RoleControllerService}.
+ &lt;p&gt;
+ &lt;strong&gt;Note:&lt;/strong&gt; Using this API requires holding
+ {@link #PERMISSION_MANAGE_ROLES_FROM_CONTROLLER}.
+@param {String} roleName the name of the role to remove the role holder for
+@param {String} packageName the package name of the application to remove from the role holders
+@return {Boolean} whether the operation was successful, and will also be {@code true} if no matching
+         role holder was found to remove.
+@see #getRoleHolders(String)
+@see #addRoleHolderFromController(String, String)
+@hide 
+*/
+removeRoleHolderFromController : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-getHeldRolesFromController'>/**Returns the list of all roles that the given package is currently holding
+</span>@param {String} packageName the package name
+@return {Object {java.util.List}} the list of role names
+@hide 
+*/
+getHeldRolesFromController : function(  ) {},
+
+<span id='android-app-role-RoleManager-method-getDefaultSmsPackage'>/**Allows getting the role holder for {@link #ROLE_SMS} without
+</span> {@link Manifest.permission#OBSERVE_ROLE_HOLDERS}, as required by
+ {@link android.provider.Telephony.Sms#getDefaultSmsPackage(Context)}
+@hide 
+*/
+getDefaultSmsPackage : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

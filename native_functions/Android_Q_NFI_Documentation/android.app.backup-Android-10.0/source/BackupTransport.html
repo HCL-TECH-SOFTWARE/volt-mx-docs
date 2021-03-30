@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-backup-BackupTransport'>/**@class android.app.backup.BackupTransport
+</span>@extends java.lang.Object
+
+ Concrete class that provides a stable-API bridge between IBackupTransport
+ and its implementations.
+
+ @hide
+*/
+var BackupTransport = {
+
+<span id='android-app-backup-BackupTransport-property-TRANSPORT_OK'>/***/
+</span>TRANSPORT_OK : &quot;0&quot;,
+<span id='android-app-backup-BackupTransport-property-NO_MORE_DATA'>/***/
+</span>NO_MORE_DATA : &quot;-1&quot;,
+<span id='android-app-backup-BackupTransport-property-TRANSPORT_ERROR'>/***/
+</span>TRANSPORT_ERROR : &quot;-1000&quot;,
+<span id='android-app-backup-BackupTransport-property-TRANSPORT_NOT_INITIALIZED'>/***/
+</span>TRANSPORT_NOT_INITIALIZED : &quot;-1001&quot;,
+<span id='android-app-backup-BackupTransport-property-TRANSPORT_PACKAGE_REJECTED'>/***/
+</span>TRANSPORT_PACKAGE_REJECTED : &quot;-1002&quot;,
+<span id='android-app-backup-BackupTransport-property-AGENT_ERROR'>/***/
+</span>AGENT_ERROR : &quot;-1003&quot;,
+<span id='android-app-backup-BackupTransport-property-AGENT_UNKNOWN'>/***/
+</span>AGENT_UNKNOWN : &quot;-1004&quot;,
+<span id='android-app-backup-BackupTransport-property-TRANSPORT_QUOTA_EXCEEDED'>/***/
+</span>TRANSPORT_QUOTA_EXCEEDED : &quot;-1005&quot;,
+<span id='android-app-backup-BackupTransport-property-TRANSPORT_NON_INCREMENTAL_BACKUP_REQUIRED'>/** Indicates that the transport cannot accept a diff backup for this package.
+</span>
+ &lt;p&gt;Backup manager should clear its state for this package and immediately retry a
+ non-incremental backup. This might be used if the transport no longer has data for this
+ package in its backing store.
+
+ &lt;p&gt;This is only valid when backup manager called {@link #performBackup(PackageInfo, ParcelFileDescriptor, int)} with {@link #FLAG_INCREMENTAL}.
+*/
+TRANSPORT_NON_INCREMENTAL_BACKUP_REQUIRED : &quot;-1006&quot;,
+<span id='android-app-backup-BackupTransport-property-FLAG_USER_INITIATED'>/***/
+</span>FLAG_USER_INITIATED : &quot;1&quot;,
+<span id='android-app-backup-BackupTransport-property-FLAG_INCREMENTAL'>/** For key value backup, indicates that the backup data is a diff from a previous backup. The
+</span> transport must apply this diff to an existing backup to build the new backup set.
+
+ @see #performBackup(PackageInfo, ParcelFileDescriptor, int)
+*/
+FLAG_INCREMENTAL : &quot;2&quot;,
+<span id='android-app-backup-BackupTransport-property-FLAG_NON_INCREMENTAL'>/** For key value backup, indicates that the backup data is a complete set, not a diff from a
+</span> previous backup. The transport should clear any previous backup when storing this backup.
+
+ @see #performBackup(PackageInfo, ParcelFileDescriptor, int)
+*/
+FLAG_NON_INCREMENTAL : &quot;4&quot;,
+<span id='android-app-backup-BackupTransport-property-EXTRA_TRANSPORT_REGISTRATION'>/** Used as a boolean extra in the binding intent of transports. We pass {@code true} to
+</span> notify transports that the current connection is used for registering the transport.
+*/
+EXTRA_TRANSPORT_REGISTRATION : &quot;android.app.backup.extra.TRANSPORT_REGISTRATION&quot;,
+<span id='android-app-backup-BackupTransport-method-getBinder'>/**
+</span>*/
+getBinder : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-name'>/**Ask the transport for the name under which it should be registered.  This will
+</span> typically be its host service's component name, but need not be.
+*/
+name : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-configurationIntent'>/**Ask the transport for an Intent that can be used to launch any internal
+</span> configuration Activity that it wishes to present.  For example, the transport
+ may offer a UI for allowing the user to supply login credentials for the
+ transport's off-device backend.
+
+ &lt;p&gt;If the transport does not supply any user-facing configuration UI, it should
+ return {@code null} from this method.
+@return {Object {android.content.Intent}} An Intent that can be passed to Context.startActivity() in order to
+         launch the transport's configuration UI.  This method will return {@code null}
+         if the transport does not offer any user-facing configuration UI.
+*/
+configurationIntent : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-currentDestinationString'>/**On demand, supply a one-line string that can be shown to the user that
+</span> describes the current backend destination.  For example, a transport that
+ can potentially associate backup data with arbitrary user accounts should
+ include the name of the currently-active account here.
+@return {String} A string describing the destination to which the transport is currently
+         sending data.  This method should not return null.
+*/
+currentDestinationString : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-dataManagementIntent'>/**Ask the transport for an Intent that can be used to launch a more detailed
+</span> secondary data management activity.  For example, the configuration intent might
+ be one for allowing the user to select which account they wish to associate
+ their backups with, and the management intent might be one which presents a
+ UI for managing the data on the backend.
+
+ &lt;p&gt;In the Settings UI, the configuration intent will typically be invoked
+ when the user taps on the preferences item labeled with the current
+ destination string, and the management intent will be placed in an overflow
+ menu labelled with the management label string.
+
+ &lt;p&gt;If the transport does not supply any user-facing data management
+ UI, then it should return {@code null} from this method.
+@return {Object {android.content.Intent}} An intent that can be passed to Context.startActivity() in order to
+         launch the transport's data-management UI.  This method will return
+         {@code null} if the transport does not offer any user-facing data
+         management UI.
+*/
+dataManagementIntent : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-dataManagementLabel'>/**On demand, supply a short string that can be shown to the user as the label on an overflow
+</span> menu item used to invoke the data management UI.
+@return {String} A string to be used as the label for the transport's data management affordance. If
+     the transport supplies a data management intent, this method must not return {@code
+     null}.
+@deprecated Since Android Q, please use the variant {@link #dataManagementIntentLabel()}
+     instead.
+*/
+dataManagementLabel : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-dataManagementIntentLabel'>/**On demand, supply a short CharSequence that can be shown to the user as the label on an
+</span> overflow menu item used to invoke the data management UI.
+@return {Object {java.lang.CharSequence}} A CharSequence to be used as the label for the transport's data management
+     affordance. If the transport supplies a data management intent, this method must not
+     return {@code null}.
+*/
+dataManagementIntentLabel : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-transportDirName'>/**Ask the transport where, on local device storage, to keep backup state blobs.
+</span> This is per-transport so that mock transports used for testing can coexist with
+ &quot;live&quot; backup services without interfering with the live bookkeeping.  The
+ returned string should be a name that is expected to be unambiguous among all
+ available backup transports; the name of the class implementing the transport
+ is a good choice.
+@return {String} A unique name, suitable for use as a file or directory name, that the
+         Backup Manager could use to disambiguate state files associated with
+         different backup transports.
+*/
+transportDirName : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-initializeDevice'>/**Initialize the server side storage for this device, erasing all stored data.
+</span> The transport may send the request immediately, or may buffer it.  After
+ this is called, {@link #finishBackup} will be called to ensure the request
+ is sent and received successfully.
+
+ &lt;p&gt;If the transport returns anything other than TRANSPORT_OK from this method,
+ the OS will halt the current initialize operation and schedule a retry in the
+ near future.  Even if the transport is in a state such that attempting to
+ &quot;initialize&quot; the backend storage is meaningless -- for example, if there is
+ no current live dataset at all, or there is no authenticated account under which
+ to store the data remotely -- the transport should return TRANSPORT_OK here
+ and treat the initializeDevice() / finishBackup() pair as a graceful no-op.
+@return {Number} One of {@link BackupTransport#TRANSPORT_OK} (OK so far) or
+   {@link BackupTransport#TRANSPORT_ERROR} (to retry following network error
+   or other failure).
+*/
+initializeDevice : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-clearBackupData'>/**Erase the given application's data from the backup destination.  This clears
+</span> out the given package's data from the current backup set, making it as though
+ the app had never yet been backed up.  After this is called, {@link finishBackup}
+ must be called to ensure that the operation is recorded successfully.
+@return {Number} the same error codes as {@link #performBackup}.
+*/
+clearBackupData : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-finishBackup'>/**Finish sending application data to the backup destination.  This must be
+</span> called after {@link #performBackup}, {@link #performFullBackup}, or {@link clearBackupData}
+ to ensure that all data is sent and the operation properly finalized.  Only when this
+ method returns true can a backup be assumed to have succeeded.
+@return {Number} the same error codes as {@link #performBackup} or {@link #performFullBackup}.
+*/
+finishBackup : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-requestBackupTime'>/**Verify that this is a suitable time for a key/value backup pass.  This should return zero
+</span> if a backup is reasonable right now, some positive value otherwise.  This method
+ will be called outside of the {@link #performBackup}/{@link #finishBackup} pair.
+
+ &lt;p&gt;If this is not a suitable time for a backup, the transport should return a
+ backoff delay, in milliseconds, after which the Backup Manager should try again.
+@return {Number} Zero if this is a suitable time for a backup pass, or a positive time delay
+   in milliseconds to suggest deferring the backup pass for a while.
+*/
+requestBackupTime : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-performBackup'>/**Send one application's key/value data update to the backup destination.  The
+</span> transport may send the data immediately, or may buffer it.  If this method returns
+ {@link #TRANSPORT_OK}, {@link #finishBackup} will then be called to ensure the data
+ is sent and recorded successfully.
+
+ If the backup data is a diff against the previous backup then the flag {@link android.app.backup.BackupTransport#FLAG_INCREMENTAL} will be set. Otherwise, if the data is a complete backup
+ set then {@link android.app.backup.BackupTransport#FLAG_NON_INCREMENTAL} will be set. Before P neither flag will
+ be set regardless of whether the backup is incremental or not.
+
+ &lt;p&gt;If {@link android.app.backup.BackupTransport#FLAG_INCREMENTAL} is set and the transport does not have data
+ for this package in its storage backend then it cannot apply the incremental diff. Thus it
+ should return {@link android.app.backup.BackupTransport#TRANSPORT_NON_INCREMENTAL_BACKUP_REQUIRED} to indicate
+ that backup manager should delete its state and retry the package as a non-incremental
+ backup. Before P, or if this is a non-incremental backup, then this return code is equivalent
+ to {@link android.app.backup.BackupTransport#TRANSPORT_ERROR}.
+@param {Object {PackageInfo}} packageInfo The identity of the application whose data is being backed up.
+   This specifically includes the signature list for the package.
+@param {Object {ParcelFileDescriptor}} inFd Descriptor of file with data that resulted from invoking the application's
+   BackupService.doBackup() method.  This may be a pipe rather than a file on
+   persistent media, so it may not be seekable.
+@param {Number} flags a combination of {@link BackupTransport#FLAG_USER_INITIATED}, {@link
+   BackupTransport#FLAG_NON_INCREMENTAL}, {@link BackupTransport#FLAG_INCREMENTAL}, or 0.
+@return {Number} one of {@link BackupTransport#TRANSPORT_OK} (OK so far),
+  {@link BackupTransport#TRANSPORT_PACKAGE_REJECTED} (to suppress backup of this
+  specific package, but allow others to proceed),
+  {@link BackupTransport#TRANSPORT_ERROR} (on network error or other failure), {@link
+  BackupTransport#TRANSPORT_NON_INCREMENTAL_BACKUP_REQUIRED} (if the transport cannot accept
+  an incremental backup for this package), or {@link
+  BackupTransport#TRANSPORT_NOT_INITIALIZED} (if the backend dataset has become lost due to
+  inactivity purge or some other reason and needs re-initializing)
+*/
+performBackup : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-performBackup'>/**Legacy version of {@link #performBackup(PackageInfo, ParcelFileDescriptor, int)} that
+</span> doesn't use flags parameter.
+*/
+performBackup : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-getAvailableRestoreSets'>/**Get the set of all backups currently available over this transport.
+</span>@return {Object {android.app.backup.RestoreSet}} Descriptions of the set of restore images available for this device,
+   or null if an error occurred (the attempt should be rescheduled).
+*/
+getAvailableRestoreSets : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-getCurrentRestoreSet'>/**Get the identifying token of the backup set currently being stored from
+</span> this device.  This is used in the case of applications wishing to restore
+ their last-known-good data.
+@return {Number} A token that can be passed to {@link #startRestore}, or 0 if there
+   is no backup set available corresponding to the current device state.
+*/
+getCurrentRestoreSet : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-startRestore'>/**Start restoring application data from backup.  After calling this function,
+</span> alternate calls to {@link #nextRestorePackage} and {@link #nextRestoreData}
+ to walk through the actual application data.
+@param {Number} token A backup token as returned by {@link #getAvailableRestoreSets}
+   or {@link #getCurrentRestoreSet}.
+@param {Object {android.content.pm.PackageInfo[]}} packages List of applications to restore (if data is available).
+   Application data will be restored in the order given.
+@return {Number} One of {@link BackupTransport#TRANSPORT_OK} (OK so far, call
+   {@link #nextRestorePackage}) or {@link BackupTransport#TRANSPORT_ERROR}
+   (an error occurred, the restore should be aborted and rescheduled).
+*/
+startRestore : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-nextRestorePackage'>/**Get the package name of the next application with data in the backup store, plus
+</span> a description of the structure of the restored archive: either TYPE_KEY_VALUE for
+ an original-API key/value dataset, or TYPE_FULL_STREAM for a tarball-type archive stream.
+
+ &lt;p&gt;If the package name in the returned RestoreDescription object is the singleton
+ {@link android.app.backup.RestoreDescription#NO_MORE_PACKAGES}, it indicates that no further data is available
+ in the current restore session: all packages described in startRestore() have been
+ processed.
+
+ &lt;p&gt;If this method returns {@code null}, it means that a transport-level error has
+ occurred and the entire restore operation should be abandoned.
+
+ &lt;p class=&quot;note&quot;&gt;The OS may call {@link #nextRestorePackage}() multiple times
+ before calling either {@link #getRestoreData(ParcelFileDescriptor) getRestoreData()}
+ or {@link #getNextFullRestoreDataChunk(ParcelFileDescriptor) getNextFullRestoreDataChunk()}.
+ It does this when it has determined that it needs to skip restore of one or more
+ packages.  The transport should not actually transfer any restore data for
+ the given package in response to {@link #nextRestorePackage}(), but rather wait
+ for an explicit request before doing so.
+@return {Object {android.app.backup.RestoreDescription}} A RestoreDescription object containing the name of one of the packages
+   supplied to {@link #startRestore} plus an indicator of the data type of that
+   restore data; or {@link RestoreDescription#NO_MORE_PACKAGES} to indicate that
+   no more packages can be restored in this session; or {@code null} to indicate
+   a transport-level error.
+*/
+nextRestorePackage : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-getRestoreData'>/**Get the data for the application returned by {@link #nextRestorePackage}, if that
+</span> method reported {@link android.app.backup.RestoreDescription#TYPE_KEY_VALUE} as its delivery type.
+ If the package has only TYPE_FULL_STREAM data, then this method will return an
+ error.
+@param {Object {ParcelFileDescriptor}} data An open, writable file into which the key/value backup data should be stored.
+@return {Number} the same error codes as {@link #startRestore}.
+*/
+getRestoreData : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-finishRestore'>/**End a restore session (aborting any in-process data transfer as necessary),
+</span> freeing any resources and connections used during the restore process.
+*/
+finishRestore : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-requestFullBackupTime'>/**Verify that this is a suitable time for a full-data backup pass.  This should return zero
+</span> if a backup is reasonable right now, some positive value otherwise.  This method
+ will be called outside of the {@link #performFullBackup}/{@link #finishBackup} pair.
+
+ &lt;p&gt;If this is not a suitable time for a backup, the transport should return a
+ backoff delay, in milliseconds, after which the Backup Manager should try again.
+@return {Number} Zero if this is a suitable time for a backup pass, or a positive time delay
+   in milliseconds to suggest deferring the backup pass for a while.
+@see #requestBackupTime()
+*/
+requestFullBackupTime : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-performFullBackup'>/**Begin the process of sending an application's full-data archive to the backend.
+</span> The description of the package whose data will be delivered is provided, as well as
+ the socket file descriptor on which the transport will receive the data itself.
+
+ &lt;p&gt;If the package is not eligible for backup, the transport should return
+ {@link android.app.backup.BackupTransport#TRANSPORT_PACKAGE_REJECTED}.  In this case the system will
+ simply proceed with the next candidate if any, or finish the full backup operation
+ if all apps have been processed.
+
+ &lt;p&gt;After the transport returns {@link android.app.backup.BackupTransport#TRANSPORT_OK} from this
+ method, the OS will proceed to call {@link #sendBackupData}() one or more times
+ to deliver the application's data as a streamed tarball.  The transport should not
+ read() from the socket except as instructed to via the {@link #sendBackupData}(int)
+ method.
+
+ &lt;p&gt;After all data has been delivered to the transport, the system will call
+ {@link #finishBackup}().  At this point the transport should commit the data to
+ its datastore, if appropriate, and close the socket that had been provided in
+ {@link #performFullBackup(PackageInfo, ParcelFileDescriptor)}.
+
+ &lt;p class=&quot;note&quot;&gt;If the transport returns TRANSPORT_OK from this method, then the
+ OS will always provide a matching call to {@link #finishBackup}() even if sending
+ data via {@link #sendBackupData}(int) failed at some point.
+@param {Object {PackageInfo}} targetPackage The package whose data is to follow.
+@param {Object {ParcelFileDescriptor}} socket The socket file descriptor through which the data will be provided.
+    If the transport returns {@link #TRANSPORT_PACKAGE_REJECTED} here, it must still
+    close this file descriptor now; otherwise it should be cached for use during
+    succeeding calls to {@link #sendBackupData(int)}, and closed in response to
+    {@link #finishBackup()}.
+@param {Number} flags {@link BackupTransport#FLAG_USER_INITIATED} or 0.
+@return {Number} TRANSPORT_PACKAGE_REJECTED to indicate that the stated application is not
+    to be backed up; TRANSPORT_OK to indicate that the OS may proceed with delivering
+    backup data; TRANSPORT_ERROR to indicate a fatal error condition that precludes
+    performing a backup at this time.
+*/
+performFullBackup : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-performFullBackup'>/**Legacy version of {@link #performFullBackup(PackageInfo, ParcelFileDescriptor, int)} that
+</span> doesn't use flags parameter.
+*/
+performFullBackup : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-checkFullBackupSize'>/**Called after {@link #performFullBackup} to make sure that the transport is willing to
+</span> handle a full-data backup operation of the specified size on the current package.
+ If the transport returns anything other than TRANSPORT_OK, the package's backup
+ operation will be skipped (and {@link #finishBackup() invoked} with no data for that
+ package being passed to {@link #sendBackupData}.
+
+ &lt;p class=&quot;note&quot;&gt;The platform does no size-based rejection of full backup attempts on
+ its own: it is always the responsibility of the transport to implement its own policy.
+ In particular, even if the preflighted payload size is zero, the platform will still call
+ this method and will proceed to back up an archive metadata header with no file content
+ if this method returns TRANSPORT_OK.  To avoid storing such payloads the transport
+ must recognize this case and return TRANSPORT_PACKAGE_REJECTED.
+
+ Added in {@link android.os.Build.VERSION_CODES#M}.
+@param {Number} size The estimated size of the full-data payload for this app.  This includes
+         manifest and archive format overhead, but is not guaranteed to be precise.
+@return {Number} TRANSPORT_OK if the platform is to proceed with the full-data backup,
+         TRANSPORT_PACKAGE_REJECTED if the proposed payload size is too large for
+         the transport to handle, or TRANSPORT_ERROR to indicate a fatal error
+         condition that means the platform cannot perform a backup at this time.
+*/
+checkFullBackupSize : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-sendBackupData'>/**Tells the transport to read {@code numBytes} bytes of data from the socket file
+</span> descriptor provided in the {@link #performFullBackup(PackageInfo, ParcelFileDescriptor)}
+ call, and deliver those bytes to the datastore.
+@param {Number} numBytes The number of bytes of tarball data available to be read from the
+    socket.
+@return {Number} TRANSPORT_OK on successful processing of the data; TRANSPORT_ERROR to
+    indicate a fatal error situation.  If an error is returned, the system will
+    call finishBackup() and stop attempting backups until after a backoff and retry
+    interval.
+*/
+sendBackupData : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-cancelFullBackup'>/**Tells the transport to cancel the currently-ongoing full backup operation.  This
+</span> will happen between {@link #performFullBackup}() and {@link #finishBackup}()
+ if the OS needs to abort the backup operation for any reason, such as a crash in
+ the application undergoing backup.
+
+ &lt;p&gt;When it receives this call, the transport should discard any partial archive
+ that it has stored so far.  If possible it should also roll back to the previous
+ known-good archive in its datastore.
+
+ &lt;p&gt;If the transport receives this callback, it will &lt;em&gt;not&lt;/em&gt; receive a
+ call to {@link #finishBackup}().  It needs to tear down any ongoing backup state
+ here.
+*/
+cancelFullBackup : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-isAppEligibleForBackup'>/**Ask the transport whether this app is eligible for backup.
+</span>@param {Object {PackageInfo}} targetPackage The identity of the application.
+@param {Boolean} isFullBackup If set, transport should check if app is eligible for full data backup,
+   otherwise to check if eligible for key-value backup.
+@return {Boolean} Whether this app is eligible for backup.
+*/
+isAppEligibleForBackup : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-getBackupQuota'>/**Ask the transport about current quota for backup size of the package.
+</span>@param {String} packageName ID of package to provide the quota.
+@param {Boolean} isFullBackup If set, transport should return limit for full data backup, otherwise
+                     for key-value backup.
+@return {Number} Current limit on backup size in bytes.
+*/
+getBackupQuota : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-getNextFullRestoreDataChunk'>/**Ask the transport to provide data for the &quot;current&quot; package being restored.  This
+</span> is the package that was just reported by {@link #nextRestorePackage}() as having
+ {@link android.app.backup.RestoreDescription#TYPE_FULL_STREAM} data.
+
+ The transport writes some data to the socket supplied to this call, and returns
+ the number of bytes written.  The system will then read that many bytes and
+ stream them to the application's agent for restore, then will call this method again
+ to receive the next chunk of the archive.  This sequence will be repeated until the
+ transport returns zero indicating that all of the package's data has been delivered
+ (or returns a negative value indicating some sort of hard error condition at the
+ transport level).
+
+ &lt;p&gt;After this method returns zero, the system will then call
+ {@link #nextRestorePackage}() to begin the restore process for the next
+ application, and the sequence begins again.
+
+ &lt;p&gt;The transport should always close this socket when returning from this method.
+ Do not cache this socket across multiple calls or you may leak file descriptors.
+@param {Object {ParcelFileDescriptor}} socket The file descriptor that the transport will use for delivering the
+    streamed archive.  The transport must close this socket in all cases when returning
+    from this method.
+@return {Number} {@link #NO_MORE_DATA} when no more data for the current package is available.
+    A positive value indicates the presence of that many bytes to be delivered to the app.
+    A value of zero indicates that no data was deliverable at this time, but the restore
+    is still running and the caller should retry.  {@link #TRANSPORT_PACKAGE_REJECTED}
+    means that the current package's restore operation should be aborted, but that
+    the transport itself is still in a good state and so a multiple-package restore
+    sequence can still be continued.  Any other negative return value is treated as a
+    fatal error condition that aborts all further restore operations on the current dataset.
+*/
+getNextFullRestoreDataChunk : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-abortFullRestore'>/**If the OS encounters an error while processing {@link android.app.backup.RestoreDescription#TYPE_FULL_STREAM}
+</span> data for restore, it will invoke this method to tell the transport that it should
+ abandon the data download for the current package.  The OS will then either call
+ {@link #nextRestorePackage}() again to move on to restoring the next package in the
+ set being iterated over, or will call {@link #finishRestore}() to shut down the restore
+ operation.
+@return {Number} {@link #TRANSPORT_OK} if the transport was successful in shutting down the
+    current stream cleanly, or {@link #TRANSPORT_ERROR} to indicate a serious
+    transport-level failure.  If the transport reports an error here, the entire restore
+    operation will immediately be finished with no further attempts to restore app data.
+*/
+abortFullRestore : function(  ) {},
+
+<span id='android-app-backup-BackupTransport-method-getTransportFlags'>/**Returns flags with additional information about the transport, which is accessible to the
+</span> {@link android.app.backup.BackupAgent}. This allows the agent to decide what to do based on
+ properties of the transport.
+*/
+getTransportFlags : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

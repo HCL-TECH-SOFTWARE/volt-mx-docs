@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-slice-SliceProvider'>/**@class android.app.slice.SliceProvider
+</span>@extends android.content.ContentProvider
+
+ A SliceProvider allows an app to provide content to be displayed in system spaces. This content
+ is templated and can contain actions, and the behavior of how it is surfaced is specific to the
+ system surface.
+ &lt;p&gt;
+ Slices are not currently live content. They are bound once and shown to the user. If the content
+ changes due to a callback from user interaction, then
+ {@link ContentResolver#notifyChange(Uri, ContentObserver)} should be used to notify the system.
+ &lt;/p&gt;
+ &lt;p&gt;
+ The provider needs to be declared in the manifest to provide the authority for the app. The
+ authority for most slices is expected to match the package of the application.
+ &lt;/p&gt;
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ {@literal
+ &lt;provider
+     android:name=&quot;com.example.mypkg.MySliceProvider&quot;
+     android:authorities=&quot;com.example.mypkg&quot; /&gt;}
+ &lt;/pre&gt;
+ &lt;p&gt;
+ Slices can be identified by a Uri or by an Intent. To link an Intent with a slice, the provider
+ must have an {@link IntentFilter} matching the slice intent. When a slice is being requested via
+ an intent, {@link #onMapIntentToUri}(Intent) can be called and is expected to return an
+ appropriate Uri representing the slice.
+
+ &lt;pre class=&quot;prettyprint&quot;&gt;
+ {@literal
+ &lt;provider
+     android:name=&quot;com.example.mypkg.MySliceProvider&quot;
+     android:authorities=&quot;com.example.mypkg&quot;&gt;
+     &lt;intent-filter&gt;
+         &lt;action android:name=&quot;com.example.mypkg.intent.action.MY_SLICE_INTENT&quot; /&gt;
+         &lt;category android:name=&quot;android.app.slice.category.SLICE&quot; /&gt;
+     &lt;/intent-filter&gt;
+ &lt;/provider&gt;}
+ &lt;/pre&gt;
+
+ @see Slice
+*/
+var SliceProvider = {
+
+<span id='android-app-slice-SliceProvider-property-SLICE_TYPE'>/** This is the Android platform's MIME type for a URI
+</span> containing a slice implemented through {@link android.app.slice.SliceProvider}.
+*/
+SLICE_TYPE : &quot;vnd.android.slice&quot;,
+<span id='android-app-slice-SliceProvider-property-EXTRA_BIND_URI'>/** @hide
+</span>*/
+EXTRA_BIND_URI : &quot;slice_uri&quot;,
+<span id='android-app-slice-SliceProvider-property-EXTRA_SUPPORTED_SPECS'>/** @hide
+</span>*/
+EXTRA_SUPPORTED_SPECS : &quot;supported_specs&quot;,
+<span id='android-app-slice-SliceProvider-property-METHOD_SLICE'>/** @hide
+</span>*/
+METHOD_SLICE : &quot;bind_slice&quot;,
+<span id='android-app-slice-SliceProvider-property-METHOD_MAP_INTENT'>/** @hide
+</span>*/
+METHOD_MAP_INTENT : &quot;map_slice&quot;,
+<span id='android-app-slice-SliceProvider-property-METHOD_MAP_ONLY_INTENT'>/** @hide
+</span>*/
+METHOD_MAP_ONLY_INTENT : &quot;map_only&quot;,
+<span id='android-app-slice-SliceProvider-property-METHOD_PIN'>/** @hide
+</span>*/
+METHOD_PIN : &quot;pin&quot;,
+<span id='android-app-slice-SliceProvider-property-METHOD_UNPIN'>/** @hide
+</span>*/
+METHOD_UNPIN : &quot;unpin&quot;,
+<span id='android-app-slice-SliceProvider-property-METHOD_GET_DESCENDANTS'>/** @hide
+</span>*/
+METHOD_GET_DESCENDANTS : &quot;get_descendants&quot;,
+<span id='android-app-slice-SliceProvider-property-METHOD_GET_PERMISSIONS'>/** @hide
+</span>*/
+METHOD_GET_PERMISSIONS : &quot;get_permissions&quot;,
+<span id='android-app-slice-SliceProvider-property-EXTRA_INTENT'>/** @hide
+</span>*/
+EXTRA_INTENT : &quot;slice_intent&quot;,
+<span id='android-app-slice-SliceProvider-property-EXTRA_SLICE'>/** @hide
+</span>*/
+EXTRA_SLICE : &quot;slice&quot;,
+<span id='android-app-slice-SliceProvider-property-EXTRA_SLICE_DESCENDANTS'>/** @hide
+</span>*/
+EXTRA_SLICE_DESCENDANTS : &quot;slice_descendants&quot;,
+<span id='android-app-slice-SliceProvider-property-EXTRA_PKG'>/** @hide
+</span>*/
+EXTRA_PKG : &quot;pkg&quot;,
+<span id='android-app-slice-SliceProvider-property-EXTRA_PROVIDER_PKG'>/** @hide
+</span>*/
+EXTRA_PROVIDER_PKG : &quot;provider_pkg&quot;,
+<span id='android-app-slice-SliceProvider-property-EXTRA_RESULT'>/** @hide
+</span>*/
+EXTRA_RESULT : &quot;result&quot;,
+<span id='android-app-slice-SliceProvider-method-attachInfo'>/**
+</span>*/
+attachInfo : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-onBindSlice'>/**Implemented to create a slice.
+</span> &lt;p&gt;
+ onBindSlice should return as quickly as possible so that the UI tied
+ to this slice can be responsive. No network or other IO will be allowed
+ during onBindSlice. Any loading that needs to be done should happen
+ in the background with a call to {@link ContentResolver#notifyChange(Uri, ContentObserver)}
+ when the app is ready to provide the complete data in onBindSlice.
+ &lt;p&gt;
+ The slice returned should have a spec that is compatible with one of
+ the supported specs.
+@param {Object {Uri}} sliceUri Uri to bind.
+@param {Object {java.util.Set}} supportedSpecs List of supported specs.
+@see Slice
+@see Slice#HINT_PARTIAL
+*/
+onBindSlice : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-onBindSlice'>/**
+</span>@deprecated TO BE REMOVED
+@removed 
+*/
+onBindSlice : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-onSlicePinned'>/**Called to inform an app that a slice has been pinned.
+</span> &lt;p&gt;
+ Pinning is a way that slice hosts use to notify apps of which slices
+ they care about updates for. When a slice is pinned the content is
+ expected to be relatively fresh and kept up to date.
+ &lt;p&gt;
+ Being pinned does not provide any escalated privileges for the slice
+ provider. So apps should do things such as turn on syncing or schedule
+ a job in response to a onSlicePinned.
+ &lt;p&gt;
+ Pinned state is not persisted through a reboot, and apps can expect a
+ new call to onSlicePinned for any slices that should remain pinned
+ after a reboot occurs.
+@param {Object {Uri}} sliceUri The uri of the slice being unpinned.
+@see #onSliceUnpinned(Uri)
+*/
+onSlicePinned : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-onSliceUnpinned'>/**Called to inform an app that a slices is no longer pinned.
+</span> &lt;p&gt;
+ This means that no other apps on the device care about updates to this
+ slice anymore and therefore it is not important to be updated. Any syncs
+ or jobs related to this slice should be cancelled.
+@see #onSlicePinned(Uri)
+*/
+onSliceUnpinned : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-onGetSliceDescendants'>/**Obtains a list of slices that are descendants of the specified Uri.
+</span> &lt;p&gt;
+ Implementing this is optional for a SliceProvider, but does provide a good
+ discovery mechanism for finding slice Uris.
+@param {Object {Uri}} uri The uri to look for descendants under.
+@return {Object {java.util.Collection}} All slices within the space.
+@see SliceManager#getSliceDescendants(Uri)
+*/
+onGetSliceDescendants : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-onMapIntentToUri'>/**This method must be overridden if an {@link IntentFilter} is specified on the SliceProvider.
+</span> In that case, this method can be called and is expected to return a non-null Uri representing
+ a slice. Otherwise this will throw {@link UnsupportedOperationException}.
+
+ Any intent filter added to a slice provider should also contain
+ {@link android.app.slice.SliceManager#CATEGORY_SLICE}, because otherwise it will not be detected by
+ {@link android.app.slice.SliceManager#mapIntentToUri(Intent)}.
+@return {Object {android.net.Uri}} Uri representing the slice associated with the provided intent.
+@see Slice
+@see SliceManager#mapIntentToUri(Intent)
+*/
+onMapIntentToUri : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-onCreatePermissionRequest'>/**Called when an app requests a slice it does not have write permission
+</span> to the uri for.
+ &lt;p&gt;
+ The return value will be the action on a slice that prompts the user that
+ the calling app wants to show slices from this app. The default implementation
+ launches a dialog that allows the user to grant access to this slice. Apps
+ that do not want to allow this user grant, can override this and instead
+ launch their own dialog with different behavior.
+@param {Object {Uri}} sliceUri the Uri of the slice attempting to be bound.
+@see #getCallingPackage()
+*/
+onCreatePermissionRequest : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-update'>/**
+</span>*/
+update : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-delete'>/**
+</span>*/
+delete : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-query'>/**
+</span>*/
+query : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-query'>/**
+</span>*/
+query : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-query'>/**
+</span>*/
+query : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-insert'>/**
+</span>*/
+insert : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-getType'>/**
+</span>*/
+getType : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-call'>/**
+</span>*/
+call : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-createPermissionSlice'>/**
+</span>@hide 
+*/
+createPermissionSlice : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-createPermissionIntent'>/**
+</span>@hide 
+*/
+createPermissionIntent : function(  ) {},
+
+<span id='android-app-slice-SliceProvider-method-getPermissionString'>/**
+</span>@hide 
+*/
+getPermissionString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

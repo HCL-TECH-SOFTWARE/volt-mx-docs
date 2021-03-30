@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-job-JobInfo-Builder'>/**@class android.app.job.JobInfo.Builder
+</span>@extends java.lang.Object
+
+Builder class for constructing {@link android.app.job.JobInfo} objects. */
+var Builder = {
+
+<span id='android-app-job-JobInfo-Builder-method-setPriority'>/**
+</span>@hide 
+*/
+setPriority : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setFlags'>/**
+</span>@hide 
+*/
+setFlags : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setExtras'>/**Set optional extras. This is persisted, so we only allow primitive types.
+</span>@param {Object {PersistableBundle}} extras Bundle containing extras you want the scheduler to hold on to for you.
+@see JobInfo#getExtras()
+*/
+setExtras : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setTransientExtras'>/**Set optional transient extras.
+</span>
+ &lt;p&gt;Because setting this property is not compatible with persisted
+ jobs, doing so will throw an {@link java.lang.IllegalArgumentException} when
+ {@link android.app.job.JobInfo.Builder#build()} is called.&lt;/p&gt;
+@param {Object {Bundle}} extras Bundle containing extras you want the scheduler to hold on to for you.
+@see JobInfo#getTransientExtras()
+*/
+setTransientExtras : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setClipData'>/**Set a {@link ClipData} associated with this Job.
+</span>
+ &lt;p&gt;The main purpose of providing a ClipData is to allow granting of
+ URI permissions for data associated with the clip.  The exact kind
+ of permission grant to perform is specified through &lt;var&gt;grantFlags&lt;/var&gt;.
+
+ &lt;p&gt;If the ClipData contains items that are Intents, any
+ grant flags in those Intents will be ignored.  Only flags provided as an argument
+ to this method are respected, and will be applied to all Uri or
+ Intent items in the clip (or sub-items of the clip).
+
+ &lt;p&gt;Because setting this property is not compatible with persisted
+ jobs, doing so will throw an {@link java.lang.IllegalArgumentException} when
+ {@link android.app.job.JobInfo.Builder#build()} is called.&lt;/p&gt;
+@param {Object {ClipData}} clip The new clip to set.  May be null to clear the current clip.
+@param {Number} grantFlags The desired permissions to grant for any URIs.  This should be
+ a combination of {@link android.content.Intent#FLAG_GRANT_READ_URI_PERMISSION},
+ {@link android.content.Intent#FLAG_GRANT_WRITE_URI_PERMISSION}, and
+ {@link android.content.Intent#FLAG_GRANT_PREFIX_URI_PERMISSION}.
+@see JobInfo#getClipData()
+@see JobInfo#getClipGrantFlags()
+*/
+setClipData : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setRequiredNetworkType'>/**Set basic description of the kind of network your job requires. If
+</span> you need more precise control over network capabilities, see
+ {@link #setRequiredNetwork}(NetworkRequest).
+ &lt;p&gt;
+ If your job doesn't need a network connection, you don't need to call
+ this method, as the default value is {@link #NETWORK_TYPE_NONE}.
+ &lt;p&gt;
+ Calling this method defines network as a strict requirement for your
+ job. If the network requested is not available your job will never
+ run. See {@link #setOverrideDeadline}(long) to change this behavior.
+ Calling this method will override any requirements previously defined
+ by {@link #setRequiredNetwork}(NetworkRequest); you typically only
+ want to call one of these methods.
+ &lt;p class=&quot;note&quot;&gt;
+ When your job executes in
+ {@link android.app.job.JobService#onStartJob(JobParameters)}, be sure to use the
+ specific network returned by {@link android.app.job.JobParameters#getNetwork()},
+ otherwise you'll use the default network which may not meet this
+ constraint.
+@see #setRequiredNetwork(NetworkRequest)
+@see JobInfo#getNetworkType()
+@see JobParameters#getNetwork()
+*/
+setRequiredNetworkType : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setRequiredNetwork'>/**Set detailed description of the kind of network your job requires.
+</span> &lt;p&gt;
+ If your job doesn't need a network connection, you don't need to call
+ this method, as the default is {@code null}.
+ &lt;p&gt;
+ Calling this method defines network as a strict requirement for your
+ job. If the network requested is not available your job will never
+ run. See {@link #setOverrideDeadline}(long) to change this behavior.
+ Calling this method will override any requirements previously defined
+ by {@link #setRequiredNetworkType}(int); you typically only want to
+ call one of these methods.
+ &lt;p class=&quot;note&quot;&gt;
+ When your job executes in
+ {@link android.app.job.JobService#onStartJob(JobParameters)}, be sure to use the
+ specific network returned by {@link android.app.job.JobParameters#getNetwork()},
+ otherwise you'll use the default network which may not meet this
+ constraint.
+@param {Object {NetworkRequest}} networkRequest The detailed description of the kind of network
+            this job requires, or {@code null} if no specific kind of
+            network is required. Defining a {@link NetworkSpecifier}
+            is only supported for jobs that aren't persisted.
+@see #setRequiredNetworkType(int)
+@see JobInfo#getRequiredNetwork()
+@see JobParameters#getNetwork()
+*/
+setRequiredNetwork : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setEstimatedNetworkBytes'>/**
+</span>@deprecated replaced by
+             {@link #setEstimatedNetworkBytes(long, long)}.
+@removed 
+*/
+setEstimatedNetworkBytes : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setEstimatedNetworkBytes'>/**Set the estimated size of network traffic that will be performed by
+</span> this job, in bytes.
+ &lt;p&gt;
+ Apps are encouraged to provide values that are as accurate as
+ possible, but when the exact size isn't available, an
+ order-of-magnitude estimate can be provided instead. Here are some
+ specific examples:
+ &lt;ul&gt;
+ &lt;li&gt;A job that is backing up a photo knows the exact size of that
+ photo, so it should provide that size as the estimate.
+ &lt;li&gt;A job that refreshes top news stories wouldn't know an exact
+ size, but if the size is expected to be consistently around 100KB, it
+ can provide that order-of-magnitude value as the estimate.
+ &lt;li&gt;A job that synchronizes email could end up using an extreme range
+ of data, from under 1KB when nothing has changed, to dozens of MB
+ when there are new emails with attachments. Jobs that cannot provide
+ reasonable estimates should use the sentinel value
+ {@link android.app.job.JobInfo#NETWORK_BYTES_UNKNOWN}.
+ &lt;/ul&gt;
+ Note that the system may choose to delay jobs with large network
+ usage estimates when the device has a poor network connection, in
+ order to save battery.
+ &lt;p&gt;
+ The values provided here only reflect the traffic that will be
+ performed by the base job; if you're using {@link android.app.job.JobWorkItem} then
+ you also need to define the network traffic used by each work item
+ when constructing them.
+@param {Number} downloadBytes The estimated size of network traffic that will
+            be downloaded by this job, in bytes.
+@param {Number} uploadBytes The estimated size of network traffic that will be
+            uploaded by this job, in bytes.
+@see JobInfo#getEstimatedNetworkDownloadBytes()
+@see JobInfo#getEstimatedNetworkUploadBytes()
+@see JobWorkItem#JobWorkItem(android.content.Intent, long, long)
+*/
+setEstimatedNetworkBytes : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setRequiresCharging'>/**Specify that to run this job, the device must be charging (or be a
+</span> non-battery-powered device connected to permanent power, such as Android TV
+ devices). This defaults to {@code false}.
+
+ &lt;p class=&quot;note&quot;&gt;For purposes of running jobs, a battery-powered device
+ &quot;charging&quot; is not quite the same as simply being connected to power.  If the
+ device is so busy that the battery is draining despite a power connection, jobs
+ with this constraint will &lt;em&gt;not&lt;/em&gt; run.  This can happen during some
+ common use cases such as video chat, particularly if the device is plugged in
+ to USB rather than to wall power.
+@param {Boolean} requiresCharging Pass {@code true} to require that the device be
+     charging in order to run the job.
+@see JobInfo#isRequireCharging()
+*/
+setRequiresCharging : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setRequiresBatteryNotLow'>/**Specify that to run this job, the device's battery level must not be low.
+</span> This defaults to false.  If true, the job will only run when the battery level
+ is not low, which is generally the point where the user is given a &quot;low battery&quot;
+ warning.
+@param {Boolean} batteryNotLow Whether or not the device's battery level must not be low.
+@see JobInfo#isRequireBatteryNotLow()
+*/
+setRequiresBatteryNotLow : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setRequiresDeviceIdle'>/**When set {@code true}, ensure that this job will not run if the device is in active use.
+</span> The default state is {@code false}: that is, the for the job to be runnable even when
+ someone is interacting with the device.
+
+ &lt;p&gt;This state is a loose definition provided by the system. In general, it means that
+ the device is not currently being used interactively, and has not been in use for some
+ time. As such, it is a good time to perform resource heavy jobs. Bear in mind that
+ battery usage will still be attributed to your application, and surfaced to the user in
+ battery stats.&lt;/p&gt;
+
+ &lt;p class=&quot;note&quot;&gt;Despite the similar naming, this job constraint is &lt;em&gt;not&lt;/em&gt;
+ related to the system's &quot;device idle&quot; or &quot;doze&quot; states.  This constraint only
+ determines whether a job is allowed to run while the device is directly in use.
+@param {Boolean} requiresDeviceIdle Pass {@code true} to prevent the job from running
+     while the device is being used interactively.
+@see JobInfo#isRequireDeviceIdle()
+*/
+setRequiresDeviceIdle : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setRequiresStorageNotLow'>/**Specify that to run this job, the device's available storage must not be low.
+</span> This defaults to false.  If true, the job will only run when the device is not
+ in a low storage state, which is generally the point where the user is given a
+ &quot;low storage&quot; warning.
+@param {Boolean} storageNotLow Whether or not the device's available storage must not be low.
+@see JobInfo#isRequireStorageNotLow()
+*/
+setRequiresStorageNotLow : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-addTriggerContentUri'>/**Add a new content: URI that will be monitored with a
+</span> {@link android.database.ContentObserver}, and will cause the job to execute if changed.
+ If you have any trigger content URIs associated with a job, it will not execute until
+ there has been a change report for one or more of them.
+
+ &lt;p&gt;Note that trigger URIs can not be used in combination with
+ {@link #setPeriodic}(long) or {@link #setPersisted}(boolean).  To continually monitor
+ for content changes, you need to schedule a new JobInfo observing the same URIs
+ before you finish execution of the JobService handling the most recent changes.
+ Following this pattern will ensure you do not lost any content changes: while your
+ job is running, the system will continue monitoring for content changes, and propagate
+ any it sees over to the next job you schedule.&lt;/p&gt;
+
+ &lt;p&gt;Because setting this property is not compatible with periodic or
+ persisted jobs, doing so will throw an {@link java.lang.IllegalArgumentException} when
+ {@link android.app.job.JobInfo.Builder#build()} is called.&lt;/p&gt;
+
+ &lt;p&gt;The following example shows how this feature can be used to monitor for changes
+ in the photos on a device.&lt;/p&gt;
+
+ {@sample development/samples/ApiDemos/src/com/example/android/apis/content/PhotosContentJob.java
+      job}
+@param {Object {JobInfo.TriggerContentUri}} uri The content: URI to monitor.
+@see JobInfo#getTriggerContentUris()
+*/
+addTriggerContentUri : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setTriggerContentUpdateDelay'>/**Set the delay (in milliseconds) from when a content change is detected until
+</span> the job is scheduled.  If there are more changes during that time, the delay
+ will be reset to start at the time of the most recent change.
+@param {Number} durationMs Delay after most recent content change, in milliseconds.
+@see JobInfo#getTriggerContentUpdateDelay()
+*/
+setTriggerContentUpdateDelay : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setTriggerContentMaxDelay'>/**Set the maximum total delay (in milliseconds) that is allowed from the first
+</span> time a content change is detected until the job is scheduled.
+@param {Number} durationMs Delay after initial content change, in milliseconds.
+@see JobInfo#getTriggerContentMaxDelay()
+*/
+setTriggerContentMaxDelay : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setPeriodic'>/**Specify that this job should recur with the provided interval, not more than once per
+</span> period. You have no control over when within this interval this job will be executed,
+ only the guarantee that it will be executed at most once within this interval.
+ Setting this function on the builder with {@link #setMinimumLatency}(long) or
+ {@link #setOverrideDeadline}(long) will result in an error.
+@param {Number} intervalMillis Millisecond interval for which this job will repeat.
+@see JobInfo#getIntervalMillis()
+@see JobInfo#getFlexMillis()
+*/
+setPeriodic : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setPeriodic'>/**Specify that this job should recur with the provided interval and flex. The job can
+</span> execute at any time in a window of flex length at the end of the period.
+@param {Number} intervalMillis Millisecond interval for which this job will repeat. A minimum
+                       value of {@link #getMinPeriodMillis()} is enforced.
+@param {Number} flexMillis Millisecond flex for this job. Flex is clamped to be at least
+                   {@link #getMinFlexMillis()} or 5 percent of the period, whichever is
+                   higher.
+@see JobInfo#getIntervalMillis()
+@see JobInfo#getFlexMillis()
+*/
+setPeriodic : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setMinimumLatency'>/**Specify that this job should be delayed by the provided amount of time.
+</span> Because it doesn't make sense setting this property on a periodic job, doing so will
+ throw an {@link java.lang.IllegalArgumentException} when
+ {@link android.app.job.JobInfo.Builder#build()} is called.
+@param {Number} minLatencyMillis Milliseconds before which this job will not be considered for
+                         execution.
+@see JobInfo#getMinLatencyMillis()
+*/
+setMinimumLatency : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setOverrideDeadline'>/**Set deadline which is the maximum scheduling latency. The job will be run by this
+</span> deadline even if other requirements are not met. Because it doesn't make sense setting
+ this property on a periodic job, doing so will throw an
+ {@link java.lang.IllegalArgumentException} when
+ {@link android.app.job.JobInfo.Builder#build()} is called.
+@see JobInfo#getMaxExecutionDelayMillis()
+*/
+setOverrideDeadline : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setBackoffCriteria'>/**Set up the back-off/retry policy.
+</span> This defaults to some respectable values: {30 seconds, Exponential}. We cap back-off at
+ 5hrs.
+ Note that trying to set a backoff criteria for a job with
+ {@link #setRequiresDeviceIdle}(boolean) will throw an exception when you call build().
+ This is because back-off typically does not make sense for these types of jobs. See
+ {@link android.app.job.JobService#jobFinished(android.app.job.JobParameters, boolean)}
+ for more description of the return value for the case of a job executing while in idle
+ mode.
+@param {Number} initialBackoffMillis Millisecond time interval to wait initially when job has
+                             failed.
+@see JobInfo#getInitialBackoffMillis()
+@see JobInfo#getBackoffPolicy()
+*/
+setBackoffCriteria : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setImportantWhileForeground'>/**Setting this to true indicates that this job is important while the scheduling app
+</span> is in the foreground or on the temporary whitelist for background restrictions.
+ This means that the system will relax doze restrictions on this job during this time.
+
+ Apps should use this flag only for short jobs that are essential for the app to function
+ properly in the foreground.
+
+ Note that once the scheduling app is no longer whitelisted from background restrictions
+ and in the background, or the job failed due to unsatisfied constraints,
+ this job should be expected to behave like other jobs without this flag.
+@param {Boolean} importantWhileForeground whether to relax doze restrictions for this job when the
+                                 app is in the foreground. False by default.
+@see JobInfo#isImportantWhileForeground()
+*/
+setImportantWhileForeground : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setIsPrefetch'>/**
+</span>@removed 
+@deprecated replaced with {@link #setPrefetch(boolean)}
+*/
+setIsPrefetch : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setPrefetch'>/**Setting this to true indicates that this job is designed to prefetch
+</span> content that will make a material improvement to the experience of
+ the specific user of this device. For example, fetching top headlines
+ of interest to the current user.
+ &lt;p&gt;
+ The system may use this signal to relax the network constraints you
+ originally requested, such as allowing a
+ {@link android.app.job.JobInfo#NETWORK_TYPE_UNMETERED} job to run over a metered
+ network when there is a surplus of metered data available. The system
+ may also use this signal in combination with end user usage patterns
+ to ensure data is prefetched before the user launches your app.
+@see JobInfo#isPrefetch()
+*/
+setPrefetch : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-setPersisted'>/**Set whether or not to persist this job across device reboots.
+</span>@param {Boolean} isPersisted True to indicate that the job will be written to
+            disk and loaded at boot.
+@see JobInfo#isPersisted()
+*/
+setPersisted : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-build'>/**
+</span>@return {Object {android.app.job.JobInfo}} The job object to hand to the JobScheduler. This object is immutable.
+*/
+build : function(  ) {},
+
+<span id='android-app-job-JobInfo-Builder-method-summarize'>/**
+</span>@hide 
+*/
+summarize : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

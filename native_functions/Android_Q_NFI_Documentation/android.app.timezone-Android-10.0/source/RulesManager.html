@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-timezone-RulesManager'>/**@class android.app.timezone.RulesManager
+</span>@extends java.lang.Object
+
+ The interface through which a time zone update application interacts with the Android system
+ to handle time zone rule updates.
+
+ &lt;p&gt;This interface is intended for use with the default APK-based time zone rules update
+ application but it can also be used by OEMs if that mechanism is turned off using configuration.
+ All callers must possess the {@link android.Manifest.permission#UPDATE_TIME_ZONE_RULES} system
+ permission unless otherwise stated.
+
+ &lt;p&gt;When using the default mechanism, when properly configured the Android system will send a
+ {@link android.app.timezone.RulesUpdaterContract#ACTION_TRIGGER_RULES_UPDATE_CHECK} intent with a
+ {@link android.app.timezone.RulesUpdaterContract#EXTRA_CHECK_TOKEN} extra to the time zone rules updater application
+ when it detects that it or the OEM's APK containing time zone rules data has been modified. The
+ updater application is then responsible for calling one of
+ {@link #requestInstall(ParcelFileDescriptor, byte[], android.app.timezone.Callback)},
+ {@link #requestUninstall(byte[], android.app.timezone.Callback)} or
+ {@link #requestNothing(byte[], boolean)}, indicating, respectively, whether a new time zone rules
+ distro should be installed, the current distro should be uninstalled, or there is nothing to do
+ (or that the correct operation could not be determined due to an error). In each case the updater
+ must pass the {@link android.app.timezone.RulesUpdaterContract#EXTRA_CHECK_TOKEN} value it received from the intent
+ back so the system in the {@code checkToken} parameter.
+
+ &lt;p&gt;If OEMs want to handle their own time zone rules updates, perhaps via a server-side component
+ rather than an APK, then they should disable the default triggering mechanism in config and are
+ responsible for triggering their own update checks / installs / uninstalls. In this case the
+ &quot;check token&quot; parameter can be left null and there is never any need to call
+ {@link #requestNothing(byte[], boolean)}.
+
+ &lt;p&gt;OEMs should not mix the default mechanism and their own as this could lead to conflicts and
+ unnecessary checks being triggered.
+
+ &lt;p&gt;Applications obtain this using {@link android.app.Activity#getSystemService(String)} with
+ {@link Context#TIME_ZONE_RULES_MANAGER_SERVICE}.
+ @hide
+*/
+var RulesManager = {
+
+<span id='android-app-timezone-RulesManager-property-ACTION_RULES_UPDATE_OPERATION'>/** The action of the intent that the Android system will broadcast when a time zone rules update
+</span> operation has been successfully staged  (i.e. to be applied next reboot) or unstaged.
+
+ &lt;p&gt;See {@link #EXTRA_OPERATION_STAGED}
+
+ &lt;p&gt;This is a protected intent that can only be sent by the system.
+*/
+ACTION_RULES_UPDATE_OPERATION : &quot;com.android.intent.action.timezone.RULES_UPDATE_OPERATION&quot;,
+<span id='android-app-timezone-RulesManager-property-EXTRA_OPERATION_STAGED'>/** The key for a boolean extra for the {@link #ACTION_RULES_UPDATE_OPERATION} intent used to
+</span> indicate whether the operation was a &quot;stage&quot; or an &quot;unstage&quot;.
+*/
+EXTRA_OPERATION_STAGED : &quot;staged&quot;,
+<span id='android-app-timezone-RulesManager-property-SUCCESS'>/** Indicates that an operation succeeded.
+</span>*/
+SUCCESS : &quot;0&quot;,
+<span id='android-app-timezone-RulesManager-property-ERROR_OPERATION_IN_PROGRESS'>/** Indicates that an install/uninstall cannot be initiated because there is one already in
+</span> progress.
+*/
+ERROR_OPERATION_IN_PROGRESS : &quot;1&quot;,
+<span id='android-app-timezone-RulesManager-property-ERROR_UNKNOWN_FAILURE'>/** Indicates an install / uninstall did not fully succeed for an unknown reason.
+</span>*/
+ERROR_UNKNOWN_FAILURE : &quot;2&quot;,
+<span id='android-app-timezone-RulesManager-method-getRulesState'>/**Returns information about the current time zone rules state such as the IANA version of
+</span> the system and any currently installed distro. This method allows clients to determine the
+ current device state, perhaps to see if it can be improved; for example by passing the
+ information to a server that may provide a new distro for download.
+
+ &lt;p&gt;Callers must possess the {@link android.Manifest.permission#QUERY_TIME_ZONE_RULES} system
+ permission.
+*/
+getRulesState : function(  ) {},
+
+<span id='android-app-timezone-RulesManager-method-requestInstall'>/**Requests installation of the supplied distro. The distro must have been checked for integrity
+</span> by the caller or have been received via a trusted mechanism.
+@param {Object {ParcelFileDescriptor}} distroFileDescriptor the file descriptor for the distro
+@param {Object {byte[]}} checkToken an optional token provided if the install was triggered in response to a
+     {@link RulesUpdaterContract#ACTION_TRIGGER_RULES_UPDATE_CHECK} intent
+@param {Object {Callback}} callback the {@link Callback} to receive callbacks related to the installation
+@return {Number} {@link #SUCCESS} if the installation will be attempted
+*/
+requestInstall : function(  ) {},
+
+<span id='android-app-timezone-RulesManager-method-requestUninstall'>/**Requests uninstallation of the currently installed distro (leaving the device with no
+</span> distro installed).
+@param {Object {byte[]}} checkToken an optional token provided if the uninstall was triggered in response to a
+     {@link RulesUpdaterContract#ACTION_TRIGGER_RULES_UPDATE_CHECK} intent
+@param {Object {Callback}} callback the {@link Callback} to receive callbacks related to the uninstall
+@return {Number} {@link #SUCCESS} if the uninstallation will be attempted
+*/
+requestUninstall : function(  ) {},
+
+<span id='android-app-timezone-RulesManager-method-requestNothing'>/**Requests the system does not modify the currently installed time zone distro, if any. This
+</span> method records the fact that a time zone check operation triggered by the system is now
+ complete and there was nothing to do. The token passed should be the one presented when the
+ check was triggered.
+
+ &lt;p&gt;Note: Passing {@code success == false} may result in more checks being triggered. Clients
+ should be careful not to pass false if the failure is unlikely to resolve by itself.
+@param {Object {byte[]}} checkToken an optional token provided if the install was triggered in response to a
+     {@link RulesUpdaterContract#ACTION_TRIGGER_RULES_UPDATE_CHECK} intent
+@param {Boolean} succeeded true if the check was successful, false if it was not successful but may
+     succeed if it is retried
+*/
+requestNothing : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

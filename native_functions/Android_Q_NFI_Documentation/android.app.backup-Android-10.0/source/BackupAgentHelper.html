@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-backup-BackupAgentHelper'>/**@class android.app.backup.BackupAgentHelper
+</span>@extends android.app.backup.BackupAgent
+
+ A convenient {@link android.app.backup.BackupAgent} wrapper class that automatically manages
+ heterogeneous data sets within the backup data, each identified by a unique
+ key prefix.  When processing a backup or restore operation, the BackupAgentHelper
+ dispatches to one or more installed {@link android.app.backup.BackupHelper} objects, each
+ of which is responsible for a defined subset of the data being processed.
+ &lt;p&gt;
+ An application will typically extend this class in its own
+ backup agent. Then, within the agent's {@link android.app.backup.BackupAgent#onCreate() onCreate()}
+ method, it will call {@link #addHelper(String, android.app.backup.BackupHelper) addHelper()} one or more times to
+ install the handlers for each kind of data it wishes to manage within its backups.
+ &lt;p&gt;
+ The Android framework currently provides two predefined {@link android.app.backup.BackupHelper} classes:&lt;/p&gt;
+ &lt;ul&gt;&lt;li&gt;{@link android.app.backup.FileBackupHelper} - Manages the backup and restore of entire files
+ within an application's data directory hierarchy.&lt;/li&gt;
+ &lt;li&gt;{@link android.app.backup.SharedPreferencesBackupHelper} - Manages the backup and restore of an
+ application's {@link android.content.SharedPreferences} data.&lt;/li&gt;&lt;/ul&gt;
+ &lt;p&gt;
+ An application can also implement its own helper classes to work within the
+ {@link android.app.backup.BackupAgentHelper} framework.  See the {@link android.app.backup.BackupHelper} interface
+ documentation for details.
+
+ &lt;div class=&quot;special reference&quot;&gt;
+ &lt;h3&gt;Developer Guides&lt;/h3&gt;
+ &lt;p&gt;For more information about using BackupAgentHelper, read the
+ &lt;a href=&quot;{@docRoot}guide/topics/data/backup.html&quot;&gt;Data Backup&lt;/a&gt; developer guide.&lt;/p&gt;
+ &lt;/div&gt;
+
+ @see BackupHelper
+ @see FileBackupHelper
+ @see SharedPreferencesBackupHelper
+*/
+var BackupAgentHelper = {
+
+<span id='android-app-backup-BackupAgentHelper-method-onBackup'>/**Run the backup process on each of the configured handlers.
+</span>*/
+onBackup : function(  ) {},
+
+<span id='android-app-backup-BackupAgentHelper-method-onRestore'>/**Run the restore process on each of the configured handlers.
+</span>*/
+onRestore : function(  ) {},
+
+<span id='android-app-backup-BackupAgentHelper-method-getDispatcher'>/**
+</span>@hide 
+*/
+getDispatcher : function(  ) {},
+
+<span id='android-app-backup-BackupAgentHelper-method-addHelper'>/**Add a helper for a given data subset to the agent's configuration.  Each helper
+</span> must have a prefix string that is unique within this backup agent's set of
+ helpers.
+@param {String} keyPrefix A string used to disambiguate the various helpers within this agent
+@param {Object {BackupHelper}} helper A backup/restore helper object to be invoked during backup and restore
+    operations.
+*/
+addHelper : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

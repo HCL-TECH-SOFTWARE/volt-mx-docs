@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='android-app-job-JobInfo'>/**@class android.app.job.JobInfo
+</span> implements android.os.Parcelable
+
+@extends java.lang.Object
+
+ Container of data passed to the {@link android.app.job.JobScheduler} fully encapsulating the
+ parameters required to schedule work against the calling application. These are constructed
+ using the {@link android.app.job.JobInfo.Builder}.
+ You must specify at least one sort of constraint on the JobInfo object that you are creating.
+ The goal here is to provide the scheduler with high-level semantics about the work you want to
+ accomplish. Doing otherwise with throw an exception in your app.
+*/
+var JobInfo = {
+
+<span id='android-app-job-JobInfo-property-NETWORK_TYPE_NONE'>/**Default. */
+</span>NETWORK_TYPE_NONE : &quot;0&quot;,
+<span id='android-app-job-JobInfo-property-NETWORK_TYPE_ANY'>/**This job requires network connectivity. */
+</span>NETWORK_TYPE_ANY : &quot;1&quot;,
+<span id='android-app-job-JobInfo-property-NETWORK_TYPE_UNMETERED'>/**This job requires network connectivity that is unmetered. */
+</span>NETWORK_TYPE_UNMETERED : &quot;2&quot;,
+<span id='android-app-job-JobInfo-property-NETWORK_TYPE_NOT_ROAMING'>/**This job requires network connectivity that is not roaming. */
+</span>NETWORK_TYPE_NOT_ROAMING : &quot;3&quot;,
+<span id='android-app-job-JobInfo-property-NETWORK_TYPE_CELLULAR'>/**This job requires network connectivity that is a cellular network. */
+</span>NETWORK_TYPE_CELLULAR : &quot;4&quot;,
+<span id='android-app-job-JobInfo-property-NETWORK_TYPE_METERED'>/** This job requires metered connectivity such as most cellular data
+</span> networks.
+
+ @deprecated Cellular networks may be unmetered, or Wi-Fi networks may be
+             metered, so this isn't a good way of selecting a specific
+             transport. Instead, use {@link #NETWORK_TYPE_CELLULAR} or
+             {@link android.net.NetworkRequest.Builder#addTransportType(int)}
+             if your job requires a specific network transport.
+*/
+NETWORK_TYPE_METERED : &quot;4&quot;,
+<span id='android-app-job-JobInfo-property-NETWORK_BYTES_UNKNOWN'>/**Sentinel value indicating that bytes are unknown. */
+</span>NETWORK_BYTES_UNKNOWN : &quot;-1&quot;,
+<span id='android-app-job-JobInfo-property-DEFAULT_INITIAL_BACKOFF_MILLIS'>/** Amount of backoff a job has initially by default, in milliseconds.
+</span>*/
+DEFAULT_INITIAL_BACKOFF_MILLIS : &quot;30000&quot;,
+<span id='android-app-job-JobInfo-property-MAX_BACKOFF_DELAY_MILLIS'>/** Maximum backoff we allow for a job, in milliseconds.
+</span>*/
+MAX_BACKOFF_DELAY_MILLIS : &quot;18000000&quot;,
+<span id='android-app-job-JobInfo-property-BACKOFF_POLICY_LINEAR'>/** Linearly back-off a failed job. See
+</span> {@link android.app.job.JobInfo.Builder#setBackoffCriteria(long, int)}
+ retry_time(current_time, num_failures) =
+     current_time + initial_backoff_millis * num_failures, num_failures &gt;= 1
+*/
+BACKOFF_POLICY_LINEAR : &quot;0&quot;,
+<span id='android-app-job-JobInfo-property-BACKOFF_POLICY_EXPONENTIAL'>/** Exponentially back-off a failed job. See
+</span> {@link android.app.job.JobInfo.Builder#setBackoffCriteria(long, int)}
+
+ retry_time(current_time, num_failures) =
+     current_time + initial_backoff_millis * 2 ^ (num_failures - 1), num_failures &gt;= 1
+*/
+BACKOFF_POLICY_EXPONENTIAL : &quot;1&quot;,
+<span id='android-app-job-JobInfo-property-MIN_BACKOFF_MILLIS'>/** Minimum backoff interval for a job, in milliseconds
+</span> @hide
+*/
+MIN_BACKOFF_MILLIS : &quot;10000&quot;,
+<span id='android-app-job-JobInfo-property-DEFAULT_BACKOFF_POLICY'>/** Default type of backoff.
+</span> @hide
+*/
+DEFAULT_BACKOFF_POLICY : &quot;1&quot;,
+<span id='android-app-job-JobInfo-property-PRIORITY_DEFAULT'>/** Default of {@link #getPriority}.
+</span> @hide
+*/
+PRIORITY_DEFAULT : &quot;0&quot;,
+<span id='android-app-job-JobInfo-property-PRIORITY_SYNC_EXPEDITED'>/** Value of {@link #getPriority} for expedited syncs.
+</span> @hide
+*/
+PRIORITY_SYNC_EXPEDITED : &quot;10&quot;,
+<span id='android-app-job-JobInfo-property-PRIORITY_SYNC_INITIALIZATION'>/** Value of {@link #getPriority} for first time initialization syncs.
+</span> @hide
+*/
+PRIORITY_SYNC_INITIALIZATION : &quot;20&quot;,
+<span id='android-app-job-JobInfo-property-PRIORITY_BOUND_FOREGROUND_SERVICE'>/** Value of {@link #getPriority} for a BFGS app (overrides the supplied
+</span> JobInfo priority if it is smaller).
+ @hide
+*/
+PRIORITY_BOUND_FOREGROUND_SERVICE : &quot;30&quot;,
+<span id='android-app-job-JobInfo-property-PRIORITY_FOREGROUND_APP'>/**@hide For backward compatibility. */
+</span>PRIORITY_FOREGROUND_APP : &quot;30&quot;,
+<span id='android-app-job-JobInfo-property-PRIORITY_FOREGROUND_SERVICE'>/** Value of {@link #getPriority} for a FG service app (overrides the supplied
+</span> JobInfo priority if it is smaller).
+ @hide
+*/
+PRIORITY_FOREGROUND_SERVICE : &quot;35&quot;,
+<span id='android-app-job-JobInfo-property-PRIORITY_TOP_APP'>/** Value of {@link #getPriority} for the current top app (overrides the supplied
+</span> JobInfo priority if it is smaller).
+ @hide
+*/
+PRIORITY_TOP_APP : &quot;40&quot;,
+<span id='android-app-job-JobInfo-property-PRIORITY_ADJ_OFTEN_RUNNING'>/** Adjustment of {@link #getPriority} if the app has often (50% or more of the time)
+</span> been running jobs.
+ @hide
+*/
+PRIORITY_ADJ_OFTEN_RUNNING : &quot;-40&quot;,
+<span id='android-app-job-JobInfo-property-PRIORITY_ADJ_ALWAYS_RUNNING'>/** Adjustment of {@link #getPriority} if the app has always (90% or more of the time)
+</span> been running jobs.
+ @hide
+*/
+PRIORITY_ADJ_ALWAYS_RUNNING : &quot;-80&quot;,
+<span id='android-app-job-JobInfo-property-FLAG_WILL_BE_FOREGROUND'>/** Indicates that the implementation of this job will be using
+</span> {@link android.app.job.JobService#startForeground(int, android.app.Notification)} to run
+ in the foreground.
+ &lt;p&gt;
+ When set, the internal scheduling of this job will ignore any background
+ network restrictions for the requesting app. Note that this flag alone
+ doesn't actually place your {@link android.app.job.JobService} in the foreground; you
+ still need to post the notification yourself.
+ &lt;p&gt;
+ To use this flag, the caller must hold the
+ {@link android.Manifest.permission#CONNECTIVITY_INTERNAL} permission.
+
+ @hide
+*/
+FLAG_WILL_BE_FOREGROUND : &quot;1&quot;,
+<span id='android-app-job-JobInfo-property-FLAG_IMPORTANT_WHILE_FOREGROUND'>/** Allows this job to run despite doze restrictions as long as the app is in the foreground
+</span> or on the temporary whitelist
+ @hide
+*/
+FLAG_IMPORTANT_WHILE_FOREGROUND : &quot;2&quot;,
+<span id='android-app-job-JobInfo-property-FLAG_PREFETCH'>/** @hide
+</span>*/
+FLAG_PREFETCH : &quot;4&quot;,
+<span id='android-app-job-JobInfo-property-FLAG_EXEMPT_FROM_APP_STANDBY'>/** This job needs to be exempted from the app standby throttling. Only the system (UID 1000)
+</span> can set it. Jobs with a time constrant must not have it.
+
+ @hide
+*/
+FLAG_EXEMPT_FROM_APP_STANDBY : &quot;8&quot;,
+<span id='android-app-job-JobInfo-property-CONSTRAINT_FLAG_CHARGING'>/** @hide
+</span>*/
+CONSTRAINT_FLAG_CHARGING : &quot;1&quot;,
+<span id='android-app-job-JobInfo-property-CONSTRAINT_FLAG_BATTERY_NOT_LOW'>/** @hide
+</span>*/
+CONSTRAINT_FLAG_BATTERY_NOT_LOW : &quot;2&quot;,
+<span id='android-app-job-JobInfo-property-CONSTRAINT_FLAG_DEVICE_IDLE'>/** @hide
+</span>*/
+CONSTRAINT_FLAG_DEVICE_IDLE : &quot;4&quot;,
+<span id='android-app-job-JobInfo-property-CONSTRAINT_FLAG_STORAGE_NOT_LOW'>/** @hide
+</span>*/
+CONSTRAINT_FLAG_STORAGE_NOT_LOW : &quot;8&quot;,
+<span id='android-app-job-JobInfo-property-CREATOR'>/***/
+</span>CREATOR : &quot;null&quot;,
+<span id='android-app-job-JobInfo-method-getMinPeriodMillis'>/**Query the minimum interval allowed for periodic scheduled jobs.  Attempting
+</span> to declare a smaller period that this when scheduling a job will result in a
+ job that is still periodic, but will run with this effective period.
+@return {Number} The minimum available interval for scheduling periodic jobs, in milliseconds.
+*/
+getMinPeriodMillis : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getMinFlexMillis'>/**Query the minimum flex time allowed for periodic scheduled jobs.  Attempting
+</span> to declare a shorter flex time than this when scheduling such a job will
+ result in this amount as the effective flex time for the job.
+@return {Number} The minimum available flex time for scheduling periodic jobs, in milliseconds.
+*/
+getMinFlexMillis : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getMinBackoffMillis'>/**Query the minimum automatic-reschedule backoff interval permitted for jobs.
+</span>@hide 
+*/
+getMinBackoffMillis : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getId'>/**Unique job id associated with this application (uid).  This is the same job ID
+</span> you supplied in the {@link android.app.job.JobInfo.Builder} constructor.
+*/
+getId : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getExtras'>/**
+</span>@see JobInfo.Builder#setExtras(PersistableBundle)
+*/
+getExtras : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getTransientExtras'>/**
+</span>@see JobInfo.Builder#setTransientExtras(Bundle)
+*/
+getTransientExtras : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getClipData'>/**
+</span>@see JobInfo.Builder#setClipData(ClipData, int)
+*/
+getClipData : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getClipGrantFlags'>/**
+</span>@see JobInfo.Builder#setClipData(ClipData, int)
+*/
+getClipGrantFlags : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getService'>/**Name of the service endpoint that will be called back into by the JobScheduler.
+</span>*/
+getService : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getPriority'>/**
+</span>@hide 
+*/
+getPriority : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getFlags'>/**
+</span>@hide 
+*/
+getFlags : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-isExemptedFromAppStandby'>/**
+</span>@hide 
+*/
+isExemptedFromAppStandby : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-isRequireCharging'>/**
+</span>@see JobInfo.Builder#setRequiresCharging(boolean)
+*/
+isRequireCharging : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-isRequireBatteryNotLow'>/**
+</span>@see JobInfo.Builder#setRequiresBatteryNotLow(boolean)
+*/
+isRequireBatteryNotLow : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-isRequireDeviceIdle'>/**
+</span>@see JobInfo.Builder#setRequiresDeviceIdle(boolean)
+*/
+isRequireDeviceIdle : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-isRequireStorageNotLow'>/**
+</span>@see JobInfo.Builder#setRequiresStorageNotLow(boolean)
+*/
+isRequireStorageNotLow : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getConstraintFlags'>/**
+</span>@hide 
+*/
+getConstraintFlags : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getTriggerContentUris'>/**Which content: URIs must change for the job to be scheduled.  Returns null
+</span> if there are none required.
+@see JobInfo.Builder#addTriggerContentUri(TriggerContentUri)
+*/
+getTriggerContentUris : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getTriggerContentUpdateDelay'>/**When triggering on content URI changes, this is the delay from when a change
+</span> is detected until the job is scheduled.
+@see JobInfo.Builder#setTriggerContentUpdateDelay(long)
+*/
+getTriggerContentUpdateDelay : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getTriggerContentMaxDelay'>/**When triggering on content URI changes, this is the maximum delay we will
+</span> use before scheduling the job.
+@see JobInfo.Builder#setTriggerContentMaxDelay(long)
+*/
+getTriggerContentMaxDelay : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getNetworkType'>/**Return the basic description of the kind of network this job requires.
+</span>@deprecated This method attempts to map {@link #getRequiredNetwork()}
+             into the set of simple constants, which results in a loss of
+             fidelity. Callers should move to using
+             {@link #getRequiredNetwork()} directly.
+@see Builder#setRequiredNetworkType(int)
+*/
+getNetworkType : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getRequiredNetwork'>/**Return the detailed description of the kind of network this job requires,
+</span> or {@code null} if no specific kind of network is required.
+@see Builder#setRequiredNetwork(NetworkRequest)
+*/
+getRequiredNetwork : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getEstimatedNetworkBytes'>/**
+</span>@deprecated replaced by {@link #getEstimatedNetworkDownloadBytes()} and
+             {@link #getEstimatedNetworkUploadBytes()}.
+@removed 
+*/
+getEstimatedNetworkBytes : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getEstimatedNetworkDownloadBytes'>/**Return the estimated size of download traffic that will be performed by
+</span> this job, in bytes.
+@return {Number} Estimated size of download traffic, or
+         {@link #NETWORK_BYTES_UNKNOWN} when unknown.
+@see Builder#setEstimatedNetworkBytes(long, long)
+*/
+getEstimatedNetworkDownloadBytes : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getEstimatedNetworkUploadBytes'>/**Return the estimated size of upload traffic that will be performed by
+</span> this job, in bytes.
+@return {Number} Estimated size of upload traffic, or
+         {@link #NETWORK_BYTES_UNKNOWN} when unknown.
+@see Builder#setEstimatedNetworkBytes(long, long)
+*/
+getEstimatedNetworkUploadBytes : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getMinLatencyMillis'>/**Set for a job that does not recur periodically, to specify a delay after which the job
+</span> will be eligible for execution. This value is not set if the job recurs periodically.
+@see JobInfo.Builder#setMinimumLatency(long)
+*/
+getMinLatencyMillis : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getMaxExecutionDelayMillis'>/**
+</span>@see JobInfo.Builder#setOverrideDeadline(long)
+*/
+getMaxExecutionDelayMillis : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-isPeriodic'>/**Track whether this job will repeat with a given period.
+</span>@see JobInfo.Builder#setPeriodic(long)
+@see JobInfo.Builder#setPeriodic(long, long)
+*/
+isPeriodic : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-isPersisted'>/**
+</span>@see JobInfo.Builder#setPersisted(boolean)
+*/
+isPersisted : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getIntervalMillis'>/**Set to the interval between occurrences of this job. This value is &lt;b&gt;not&lt;/b&gt; set if the
+</span> job does not recur periodically.
+@see JobInfo.Builder#setPeriodic(long)
+@see JobInfo.Builder#setPeriodic(long, long)
+*/
+getIntervalMillis : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getFlexMillis'>/**Flex time for this job. Only valid if this is a periodic job.  The job can
+</span> execute at any time in a window of flex length at the end of the period.
+@see JobInfo.Builder#setPeriodic(long)
+@see JobInfo.Builder#setPeriodic(long, long)
+*/
+getFlexMillis : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getInitialBackoffMillis'>/**The amount of time the JobScheduler will wait before rescheduling a failed job. This value
+</span> will be increased depending on the backoff policy specified at job creation time. Defaults
+ to 30 seconds, minimum is currently 10 seconds.
+@see JobInfo.Builder#setBackoffCriteria(long, int)
+*/
+getInitialBackoffMillis : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getBackoffPolicy'>/**Return the backoff policy of this job.
+</span>@see JobInfo.Builder#setBackoffCriteria(long, int)
+*/
+getBackoffPolicy : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-isImportantWhileForeground'>/**
+</span>@see JobInfo.Builder#setImportantWhileForeground(boolean)
+*/
+isImportantWhileForeground : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-isPrefetch'>/**
+</span>@see JobInfo.Builder#setPrefetch(boolean)
+*/
+isPrefetch : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-hasEarlyConstraint'>/**User can specify an early constraint of 0L, which is valid, so we keep track of whether the
+</span> function was called at all.
+@hide 
+*/
+hasEarlyConstraint : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-hasLateConstraint'>/**User can specify a late constraint of 0L, which is valid, so we keep track of whether the
+</span> function was called at all.
+@hide 
+*/
+hasLateConstraint : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-equals'>/**
+</span>*/
+equals : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-hashCode'>/**
+</span>*/
+hashCode : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-describeContents'>/**
+</span>*/
+describeContents : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-writeToParcel'>/**
+</span>*/
+writeToParcel : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='android-app-job-JobInfo-method-getPriorityString'>/**Convert a priority integer into a human readable string for debugging.
+</span>@hide 
+*/
+getPriorityString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>
