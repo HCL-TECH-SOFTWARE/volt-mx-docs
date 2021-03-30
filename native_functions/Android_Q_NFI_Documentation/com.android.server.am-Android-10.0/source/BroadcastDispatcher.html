@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-am-BroadcastDispatcher'>/**@class com.android.server.am.BroadcastDispatcher
+</span>@extends java.lang.Object
+
+ Manages ordered broadcast delivery, applying policy to mitigate the effects of
+ slow receivers.
+*/
+var BroadcastDispatcher = {
+
+<span id='com-android-server-am-BroadcastDispatcher-method-start'>/**Spin up the integration with the alarm manager service; done lazily to manage
+</span> service availability ordering during boot.
+*/
+start : function(  ) {},
+
+<span id='com-android-server-am-BroadcastDispatcher-method-isEmpty'>/**Standard contents-are-empty check
+</span>*/
+isEmpty : function(  ) {},
+
+<span id='com-android-server-am-BroadcastDispatcher-method-describeStateLocked'>/**Strictly for logging, describe the currently pending contents in a human-
+</span> readable way
+*/
+describeStateLocked : function(  ) {},
+
+<span id='com-android-server-am-BroadcastDispatcher-method-writeToProto'>/**Standard proto dump entry point
+</span>*/
+writeToProto : function(  ) {},
+
+<span id='com-android-server-am-BroadcastDispatcher-method-getActiveBroadcastLocked'>/**
+</span>*/
+getActiveBroadcastLocked : function(  ) {},
+
+<span id='com-android-server-am-BroadcastDispatcher-method-getNextBroadcastLocked'>/**If there is a deferred broadcast that is being sent to an alarm target, return
+</span> that one.  If there's no deferred alarm target broadcast but there is one
+ that has reached the end of its deferral, return that.
+
+ This stages the broadcast internally until it is retired, and returns that
+ staged record if this is called repeatedly, until retireBroadcast(r) is called.
+*/
+getNextBroadcastLocked : function(  ) {},
+
+<span id='com-android-server-am-BroadcastDispatcher-method-retireBroadcastLocked'>/**Called after the broadcast queue finishes processing the currently
+</span> active broadcast (obtained by calling getNextBroadcastLocked()).
+*/
+retireBroadcastLocked : function(  ) {},
+
+<span id='com-android-server-am-BroadcastDispatcher-method-isDeferringLocked'>/**Called prior to broadcast dispatch to check whether the intended
+</span> recipient is currently subject to deferral policy.
+*/
+isDeferringLocked : function(  ) {},
+
+<span id='com-android-server-am-BroadcastDispatcher-method-startDeferring'>/**Defer broadcasts for the given app.  If 'br' is non-null, this also makes
+</span> sure that broadcast record is enqueued as the next upcoming broadcast for
+ the app.
+*/
+startDeferring : function(  ) {},
+
+<span id='com-android-server-am-BroadcastDispatcher-method-addDeferredBroadcast'>/**Key entry point when a broadcast about to be delivered is instead
+</span> set aside for deferred delivery
+*/
+addDeferredBroadcast : function(  ) {},
+
+<span id='com-android-server-am-BroadcastDispatcher-method-scheduleDeferralCheckLocked'>/**When there are deferred broadcasts, we need to make sure to recheck the
+</span> dispatch queue when they come due.  Alarm-sensitive deferrals get dispatched
+ aggressively, so we only need to use the ordinary deferrals timing to figure
+ out when to recheck.
+*/
+scheduleDeferralCheckLocked : function(  ) {},
+
+<span id='com-android-server-am-BroadcastDispatcher-method-cancelDeferralsLocked'>/**Cancel all current deferrals; that is, make all currently-deferred broadcasts
+</span> immediately deliverable.  Used by the wait-for-broadcast-idle mechanism.
+*/
+cancelDeferralsLocked : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

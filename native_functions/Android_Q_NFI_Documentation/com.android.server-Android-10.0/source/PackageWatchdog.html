@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-PackageWatchdog'>/**@class com.android.server.PackageWatchdog
+</span>@extends java.lang.Object
+
+ Monitors the health of packages on the system and notifies interested observers when packages
+ fail. On failure, the registered observer with the least user impacting mitigation will
+ be notified.
+*/
+var PackageWatchdog = {
+
+<span id='com-android-server-PackageWatchdog-method-getInstance'>/**Creates or gets singleton instance of PackageWatchdog.
+</span>*/
+getInstance : function(  ) {},
+
+<span id='com-android-server-PackageWatchdog-method-onPackagesReady'>/**Called during boot to notify when packages are ready on the device so we can start
+</span> binding.
+*/
+onPackagesReady : function(  ) {},
+
+<span id='com-android-server-PackageWatchdog-method-registerHealthObserver'>/**Registers {@code observer} to listen for package failures
+</span>
+ &lt;p&gt;Observers are expected to call this on boot. It does not specify any packages but
+ it will resume observing any packages requested from a previous boot.
+*/
+registerHealthObserver : function(  ) {},
+
+<span id='com-android-server-PackageWatchdog-method-startObservingHealth'>/**Starts observing the health of the {@code packages} for {@code observer} and notifies
+</span> {@code observer} of any package failures within the monitoring duration.
+
+ &lt;p&gt;If monitoring a package supporting explicit health check, at the end of the monitoring
+ duration if {@link #onHealthCheckPassed} was never called,
+ {@link com.android.server.PackageWatchdog.PackageHealthObserver#execute} will be called as if the package failed.
+
+ &lt;p&gt;If {@code observer} is already monitoring a package in {@code packageNames},
+ the monitoring window of that package will be reset to {@code durationMs} and the health
+ check state will be reset to a default depending on if the package is contained in
+ {@link mPackagesWithExplicitHealthCheckEnabled}.
+@throws IllegalArgumentException if {@code packageNames} is empty
+ or {@code durationMs} is less than 1
+*/
+startObservingHealth : function(  ) {},
+
+<span id='com-android-server-PackageWatchdog-method-unregisterHealthObserver'>/**Unregisters {@code observer} from listening to package failure.
+</span> Additionally, this stops observing any packages that may have previously been observed
+ even from a previous boot.
+*/
+unregisterHealthObserver : function(  ) {},
+
+<span id='com-android-server-PackageWatchdog-method-getPackages'>/**Returns packages observed by {@code observer}
+</span>@return {Object {java.util.Set}} an empty set if {@code observer} has some packages observerd from a previous boot
+ but has not registered itself in the current boot to receive notifications. Returns null
+ if there are no active packages monitored from any boot.
+*/
+getPackages : function(  ) {},
+
+<span id='com-android-server-PackageWatchdog-method-onPackageFailure'>/**Called when a process fails either due to a crash or ANR.
+</span>
+ &lt;p&gt;For each package contained in the process, one registered observer with the least user
+ impact will be notified for mitigation.
+
+ &lt;p&gt;This method could be called frequently if there is a severe problem on the device.
+*/
+onPackageFailure : function(  ) {},
+
+<span id='com-android-server-PackageWatchdog-method-writeNow'>/**Writes the package information to file during shutdown.
+</span>*/
+writeNow : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

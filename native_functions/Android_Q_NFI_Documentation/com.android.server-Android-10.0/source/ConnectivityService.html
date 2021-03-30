@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-ConnectivityService'>/**@class com.android.server.ConnectivityService
+</span> implements android.app.PendingIntent.OnFinished
+
+@extends IConnectivityManager.Stub
+
+ @hide
+*/
+var ConnectivityService = {
+
+<span id='com-android-server-ConnectivityService-property-SHORT_ARG'>/***/
+</span>SHORT_ARG : &quot;--short&quot;,
+<span id='com-android-server-ConnectivityService-property-EVENT_NETWORK_TESTED'>/** Event for NetworkMonitor/NetworkAgentInfo to inform ConnectivityService that the network has
+</span> been tested.
+ obj = String representing URL that Internet probe was redirect to, if it was redirected.
+ arg1 = One of the NETWORK_TESTED_RESULT_* constants.
+ arg2 = NetID.
+*/
+EVENT_NETWORK_TESTED : &quot;41&quot;,
+<span id='com-android-server-ConnectivityService-property-EVENT_PRIVATE_DNS_CONFIG_RESOLVED'>/** Event for NetworkMonitor/NetworkAgentInfo to inform ConnectivityService that the private DNS
+</span> config was resolved.
+ obj = PrivateDnsConfig
+ arg2 = netid
+*/
+EVENT_PRIVATE_DNS_CONFIG_RESOLVED : &quot;42&quot;,
+<span id='com-android-server-ConnectivityService-property-EVENT_PROVISIONING_NOTIFICATION'>/** Request ConnectivityService display provisioning notification.
+</span> arg1    = Whether to make the notification visible.
+ arg2    = NetID.
+ obj     = Intent to be launched when notification selected by user, null if !arg1.
+*/
+EVENT_PROVISIONING_NOTIFICATION : &quot;43&quot;,
+<span id='com-android-server-ConnectivityService-property-EVENT_TIMEOUT_NOTIFICATION'>/** This event can handle dismissing notification by given network id.
+</span>*/
+EVENT_TIMEOUT_NOTIFICATION : &quot;44&quot;,
+<span id='com-android-server-ConnectivityService-property-PROVISIONING_NOTIFICATION_SHOW'>/** Argument for {@link #EVENT_PROVISIONING_NOTIFICATION} to indicate that the notification
+</span> should be shown.
+*/
+PROVISIONING_NOTIFICATION_SHOW : &quot;1&quot;,
+<span id='com-android-server-ConnectivityService-property-PROVISIONING_NOTIFICATION_HIDE'>/** Argument for {@link #EVENT_PROVISIONING_NOTIFICATION} to indicate that the notification
+</span> should be hidden.
+*/
+PROVISIONING_NOTIFICATION_HIDE : &quot;0&quot;,
+<span id='com-android-server-ConnectivityService-method-getActiveNetworkInfo'>/**Return NetworkInfo for the active (i.e., connected) network interface.
+</span> It is assumed that at most one network is active at a time. If more
+ than one is active, it is indeterminate which will be returned.
+@return {Object {android.net.NetworkInfo}} the info for the active network, or {@code null} if none is
+ active
+*/
+getActiveNetworkInfo : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getActiveNetwork'>/**
+</span>*/
+getActiveNetwork : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getActiveNetworkForUid'>/**
+</span>*/
+getActiveNetworkForUid : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getActiveNetworkInfoUnfiltered'>/**
+</span>*/
+getActiveNetworkInfoUnfiltered : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getActiveNetworkInfoForUid'>/**
+</span>*/
+getActiveNetworkInfoForUid : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getNetworkInfo'>/**
+</span>*/
+getNetworkInfo : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getNetworkInfoForUid'>/**
+</span>*/
+getNetworkInfoForUid : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getAllNetworkInfo'>/**
+</span>*/
+getAllNetworkInfo : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getNetworkForType'>/**
+</span>*/
+getNetworkForType : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getAllNetworks'>/**
+</span>*/
+getAllNetworks : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getDefaultNetworkCapabilitiesForUser'>/**
+</span>*/
+getDefaultNetworkCapabilitiesForUser : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-isNetworkSupported'>/**
+</span>*/
+isNetworkSupported : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getActiveLinkProperties'>/**Return LinkProperties for the active (i.e., connected) default
+</span> network interface.  It is assumed that at most one default network
+ is active at a time. If more than one is active, it is indeterminate
+ which will be returned.
+@return {Object {android.net.LinkProperties}} the ip properties for the active network, or {@code null} if
+ none is active
+*/
+getActiveLinkProperties : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getLinkPropertiesForType'>/**
+</span>*/
+getLinkPropertiesForType : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getLinkProperties'>/**
+</span>*/
+getLinkProperties : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getNetworkCapabilities'>/**
+</span>*/
+getNetworkCapabilities : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getAllNetworkState'>/**
+</span>*/
+getAllNetworkState : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getActiveNetworkQuotaInfo'>/**
+</span>*/
+getActiveNetworkQuotaInfo : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-isActiveNetworkMetered'>/**
+</span>*/
+isActiveNetworkMetered : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-requestRouteToHostAddress'>/**Ensure that a network route exists to deliver traffic to the specified
+</span> host via the specified network interface.
+@param {Number} networkType the type of the network over which traffic to the
+ specified host is to be routed
+@param {Object {byte[]}} hostAddress the IP address of the host to which the route is
+ desired
+@return {Boolean} {@code true} on success, {@code false} on failure
+*/
+requestRouteToHostAddress : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-sendConnectedBroadcast'>/**
+</span>*/
+sendConnectedBroadcast : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getRestoreDefaultNetworkDelay'>/**
+</span>*/
+getRestoreDefaultNetworkDelay : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-setAcceptUnvalidated'>/**
+</span>*/
+setAcceptUnvalidated : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-setAcceptPartialConnectivity'>/**
+</span>*/
+setAcceptPartialConnectivity : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-setAvoidUnvalidated'>/**
+</span>*/
+setAvoidUnvalidated : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-startCaptivePortalApp'>/**
+</span>*/
+startCaptivePortalApp : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-startCaptivePortalAppInternal'>/**NetworkStack endpoint to start the captive portal app. The NetworkStack needs to use this
+</span> endpoint as it does not have INTERACT_ACROSS_USERS_FULL itself.
+@param {Object {Network}} network Network on which the captive portal was detected.
+@param {Object {Bundle}} appExtras Bundle to use as intent extras for the captive portal application.
+                  Must be treated as opaque to avoid preventing the captive portal app to
+                  update its arguments.
+*/
+startCaptivePortalAppInternal : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-avoidBadWifi'>/**
+</span>*/
+avoidBadWifi : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-shouldAvoidBadWifi'>/**Return whether the device should maintain continuous, working connectivity by switching away
+</span> from WiFi networks having no connectivity.
+@see MultinetworkPolicyTracker#getAvoidBadWifi()
+*/
+shouldAvoidBadWifi : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getMultipathPreference'>/**
+</span>*/
+getMultipathPreference : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getDefaultRequest'>/**
+</span>*/
+getDefaultRequest : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-tether'>/**
+</span>*/
+tether : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-untether'>/**
+</span>*/
+untether : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getLastTetherError'>/**
+</span>*/
+getLastTetherError : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getTetherableUsbRegexs'>/**
+</span>*/
+getTetherableUsbRegexs : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getTetherableWifiRegexs'>/**
+</span>*/
+getTetherableWifiRegexs : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getTetherableBluetoothRegexs'>/**
+</span>*/
+getTetherableBluetoothRegexs : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-setUsbTethering'>/**
+</span>*/
+setUsbTethering : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getTetherableIfaces'>/**
+</span>*/
+getTetherableIfaces : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getTetheredIfaces'>/**
+</span>*/
+getTetheredIfaces : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getTetheringErroredIfaces'>/**
+</span>*/
+getTetheringErroredIfaces : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getTetheredDhcpRanges'>/**
+</span>*/
+getTetheredDhcpRanges : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-isTetheringSupported'>/**
+</span>*/
+isTetheringSupported : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-startTethering'>/**
+</span>*/
+startTethering : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-stopTethering'>/**
+</span>*/
+stopTethering : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getLatestTetheringEntitlementResult'>/**Get the latest value of the tethering entitlement check.
+</span>
+ Note: Allow privileged apps who have TETHER_PRIVILEGED permission to access. If it turns
+ out some such apps are observed to abuse this API, change to per-UID limits on this API
+ if it's really needed.
+*/
+getLatestTetheringEntitlementResult : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-registerTetheringEventCallback'>/**Register tethering event callback.
+</span>*/
+registerTetheringEventCallback : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-unregisterTetheringEventCallback'>/**Unregister tethering event callback.
+</span>*/
+unregisterTetheringEventCallback : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-reportInetCondition'>/**
+</span>*/
+reportInetCondition : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-reportNetworkConnectivity'>/**
+</span>*/
+reportNetworkConnectivity : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getProxyForNetwork'>/**Returns information about the proxy a certain network is using. If given a null network, it
+</span> it will return the proxy for the bound network for the caller app or the default proxy if
+ none.
+@param {Object {Network}} network the network we want to get the proxy information for.
+@return {Object {android.net.ProxyInfo}} Proxy information if a network has a proxy configured, or otherwise null.
+*/
+getProxyForNetwork : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-setGlobalProxy'>/**
+</span>*/
+setGlobalProxy : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getGlobalProxy'>/**
+</span>*/
+getGlobalProxy : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-prepareVpn'>/**Prepare for a VPN application.
+</span> VPN permissions are checked in the {@link Vpn} class. If the caller is not {@code userId},
+ {@link android.Manifest.permission.INTERACT_ACROSS_USERS_FULL} permission is required.
+@param {String} oldPackage Package name of the application which currently controls VPN, which will
+                   be replaced. If there is no such application, this should should either be
+                   {@code null} or {@link VpnConfig.LEGACY_VPN}.
+@param {String} newPackage Package name of the application which should gain control of VPN, or
+                   {@code null} to disable.
+@param {Number} userId User for whom to prepare the new VPN.
+@hide 
+*/
+prepareVpn : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-setVpnPackageAuthorization'>/**Set whether the VPN package has the ability to launch VPNs without user intervention.
+</span> This method is used by system-privileged apps.
+ VPN permissions are checked in the {@link Vpn} class. If the caller is not {@code userId},
+ {@link android.Manifest.permission.INTERACT_ACROSS_USERS_FULL} permission is required.
+@param {String} packageName The package for which authorization state should change.
+@param {Number} userId User for whom {@code packageName} is installed.
+@param {Boolean} authorized {@code true} if this app should be able to start a VPN connection without
+                   explicit user approval, {@code false} if not.
+@hide 
+*/
+setVpnPackageAuthorization : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-establishVpn'>/**Configure a TUN interface and return its file descriptor. Parameters
+</span> are encoded and opaque to this class. This method is used by VpnBuilder
+ and not available in ConnectivityManager. Permissions are checked in
+ Vpn class.
+@hide 
+*/
+establishVpn : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-startLegacyVpn'>/**Start legacy VPN, controlling native daemons as needed. Creates a
+</span> secondary thread to perform connection work, returning quickly.
+*/
+startLegacyVpn : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getLegacyVpnInfo'>/**Return the information of the ongoing legacy VPN. This method is used
+</span> by VpnSettings and not available in ConnectivityManager. Permissions
+ are checked in Vpn class.
+*/
+getLegacyVpnInfo : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getVpnConfig'>/**Returns the information of the ongoing VPN for {@code userId}. This method is used by
+</span> VpnDialogs and not available in ConnectivityManager.
+ Permissions are checked in Vpn class.
+@hide 
+*/
+getVpnConfig : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-updateLockdownVpn'>/**
+</span>*/
+updateLockdownVpn : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-isAlwaysOnVpnPackageSupported'>/**
+</span>*/
+isAlwaysOnVpnPackageSupported : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-setAlwaysOnVpnPackage'>/**
+</span>*/
+setAlwaysOnVpnPackage : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getAlwaysOnVpnPackage'>/**
+</span>*/
+getAlwaysOnVpnPackage : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-isVpnLockdownEnabled'>/**
+</span>*/
+isVpnLockdownEnabled : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getVpnLockdownWhitelist'>/**
+</span>*/
+getVpnLockdownWhitelist : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-checkMobileProvisioning'>/**
+</span>*/
+checkMobileProvisioning : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getMobileProvisioningUrl'>/**
+</span>*/
+getMobileProvisioningUrl : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-setProvisioningNotificationVisible'>/**
+</span>*/
+setProvisioningNotificationVisible : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-setAirplaneMode'>/**
+</span>*/
+setAirplaneMode : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-requestNetwork'>/**
+</span>*/
+requestNetwork : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-requestBandwidthUpdate'>/**
+</span>*/
+requestBandwidthUpdate : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-pendingRequestForNetwork'>/**
+</span>*/
+pendingRequestForNetwork : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-releasePendingNetworkRequest'>/**
+</span>*/
+releasePendingNetworkRequest : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-listenForNetwork'>/**
+</span>*/
+listenForNetwork : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-pendingListenForNetwork'>/**
+</span>*/
+pendingListenForNetwork : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-releaseNetworkRequest'>/**
+</span>*/
+releaseNetworkRequest : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-registerNetworkFactory'>/**
+</span>*/
+registerNetworkFactory : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-unregisterNetworkFactory'>/**
+</span>*/
+unregisterNetworkFactory : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-registerNetworkAgent'>/**
+</span>*/
+registerNetworkAgent : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-registerNetworkAgent'>/**Register a new agent with ConnectivityService to handle a network.
+</span>@param {Object {Messenger}} messenger a messenger for ConnectivityService to contact the agent asynchronously.
+@param {Object {NetworkInfo}} networkInfo the initial info associated with this network. It can be updated later :
+         see {@link #updateNetworkInfo}.
+@param {Object {LinkProperties}} linkProperties the initial link properties of this network. They can be updated
+         later : see {@link #updateLinkProperties}.
+@param {Object {NetworkCapabilities}} networkCapabilities the initial capabilites of this network. They can be updated
+         later : see {@link #updateNetworkCapabilities}.
+@param {Number} currentScore the initial score of the network. See
+         {@link NetworkAgentInfo#getCurrentScore}.
+@param {Object {NetworkMisc}} networkMisc metadata about the network. This is never updated.
+@param {Number} factorySerialNumber the serial number of the factory owning this NetworkAgent.
+*/
+registerNetworkAgent : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-handleUpdateLinkProperties'>/**
+</span>*/
+handleUpdateLinkProperties : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-onSendFinished'>/**
+</span>*/
+onSendFinished : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-addVpnAddress'>/**
+</span>*/
+addVpnAddress : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-removeVpnAddress'>/**
+</span>*/
+removeVpnAddress : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-setUnderlyingNetworksForVpn'>/**
+</span>*/
+setUnderlyingNetworksForVpn : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getCaptivePortalServerUrl'>/**
+</span>*/
+getCaptivePortalServerUrl : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-startNattKeepalive'>/**
+</span>*/
+startNattKeepalive : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-startNattKeepaliveWithFd'>/**
+</span>*/
+startNattKeepaliveWithFd : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-startTcpKeepalive'>/**
+</span>*/
+startTcpKeepalive : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-stopKeepalive'>/**
+</span>*/
+stopKeepalive : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-factoryReset'>/**
+</span>*/
+factoryReset : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getNetworkWatchlistConfigHash'>/**
+</span>*/
+getNetworkWatchlistConfigHash : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-makeWakeupMessage'>/**
+</span>*/
+makeWakeupMessage : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-hasService'>/**
+</span>*/
+hasService : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-onShellCommand'>/**
+</span>*/
+onShellCommand : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-getConnectionOwnerUid'>/**
+</span>@param {Object {ConnectionInfo}} connectionInfo the connection to resolve.
+@return {Number} {@code uid} if the connection is found and the app has permission to observe it
+ (e.g., if it is associated with the calling VPN app's tunnel) or {@code INVALID_UID} if the
+ connection is not found.
+*/
+getConnectionOwnerUid : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-isCallerCurrentAlwaysOnVpnApp'>/**
+</span>*/
+isCallerCurrentAlwaysOnVpnApp : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-isCallerCurrentAlwaysOnVpnLockdownApp'>/**
+</span>*/
+isCallerCurrentAlwaysOnVpnLockdownApp : function(  ) {},
+
+<span id='com-android-server-ConnectivityService-method-startOrGetTestNetworkService'>/**Returns a IBinder to a TestNetworkService. Will be lazily created as needed.
+</span>
+ &lt;p&gt;The TestNetworkService must be run in the system server due to TUN creation.
+*/
+startOrGetTestNetworkService : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

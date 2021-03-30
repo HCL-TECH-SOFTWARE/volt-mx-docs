@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-SystemService'>/**@class com.android.server.SystemService
+</span>@extends java.lang.Object
+
+ The base class for services running in the system process. Override and implement
+ the lifecycle event callback methods as needed.
+ &lt;p&gt;
+ The lifecycle of a SystemService:
+ &lt;/p&gt;&lt;ul&gt;
+ &lt;li&gt;The constructor is called and provided with the system {@link Context}
+ to initialize the system service.
+ &lt;li&gt;{@link #onStart}() is called to get the service running.  The service should
+ publish its binder interface at this point using
+ {@link #publishBinderService(String, IBinder)}.  It may also publish additional
+ local interfaces that other services within the system server may use to access
+ privileged internal functions.
+ &lt;li&gt;Then {@link #onBootPhase}(int) is called as many times as there are boot phases
+ until {@link #PHASE_BOOT_COMPLETED} is sent, which is the last boot phase. Each phase
+ is an opportunity to do special work, like acquiring optional service dependencies,
+ waiting to see if SafeMode is enabled, or registering with a service that gets
+ started after this one.
+ &lt;/ul&gt;&lt;p&gt;
+ NOTE: All lifecycle methods are called from the system server's main looper thread.
+ &lt;/p&gt;
+
+ {@hide}
+*/
+var SystemService = {
+
+<span id='com-android-server-SystemService-property-PHASE_WAIT_FOR_DEFAULT_DISPLAY'>/***/
+</span>PHASE_WAIT_FOR_DEFAULT_DISPLAY : &quot;100&quot;,
+<span id='com-android-server-SystemService-property-PHASE_LOCK_SETTINGS_READY'>/** After receiving this boot phase, services can obtain lock settings data.
+</span>*/
+PHASE_LOCK_SETTINGS_READY : &quot;480&quot;,
+<span id='com-android-server-SystemService-property-PHASE_SYSTEM_SERVICES_READY'>/** After receiving this boot phase, services can safely call into core system services
+</span> such as the PowerManager or PackageManager.
+*/
+PHASE_SYSTEM_SERVICES_READY : &quot;500&quot;,
+<span id='com-android-server-SystemService-property-PHASE_DEVICE_SPECIFIC_SERVICES_READY'>/** After receiving this boot phase, services can safely call into device specific services.
+</span>*/
+PHASE_DEVICE_SPECIFIC_SERVICES_READY : &quot;520&quot;,
+<span id='com-android-server-SystemService-property-PHASE_ACTIVITY_MANAGER_READY'>/** After receiving this boot phase, services can broadcast Intents.
+</span>*/
+PHASE_ACTIVITY_MANAGER_READY : &quot;550&quot;,
+<span id='com-android-server-SystemService-property-PHASE_THIRD_PARTY_APPS_CAN_START'>/** After receiving this boot phase, services can start/bind to third party apps.
+</span> Apps will be able to make Binder calls into services at this point.
+*/
+PHASE_THIRD_PARTY_APPS_CAN_START : &quot;600&quot;,
+<span id='com-android-server-SystemService-property-PHASE_BOOT_COMPLETED'>/** After receiving this boot phase, services can allow user interaction with the device.
+</span> This phase occurs when boot has completed and the home application has started.
+ System services may prefer to listen to this phase rather than registering a
+ broadcast receiver for ACTION_BOOT_COMPLETED to reduce overall latency.
+*/
+PHASE_BOOT_COMPLETED : &quot;1000&quot;,
+<span id='com-android-server-SystemService-method-getContext'>/**Gets the system context.
+</span>*/
+getContext : function(  ) {},
+
+<span id='com-android-server-SystemService-method-getUiContext'>/**Get the system UI context. This context is to be used for displaying UI. It is themable,
+</span> which means resources can be overridden at runtime. Do not use to retrieve properties that
+ configure the behavior of the device that is not UX related.
+*/
+getUiContext : function(  ) {},
+
+<span id='com-android-server-SystemService-method-isSafeMode'>/**Returns true if the system is running in safe mode.
+</span> TODO: we should define in which phase this becomes valid
+*/
+isSafeMode : function(  ) {},
+
+<span id='com-android-server-SystemService-method-onStart'>/**Called when the dependencies listed in the @Service class-annotation are available
+</span> and after the chosen start phase.
+ When this method returns, the service should be published.
+*/
+onStart : function(  ) {},
+
+<span id='com-android-server-SystemService-method-onBootPhase'>/**Called on each phase of the boot process. Phases before the service's start phase
+</span> (as defined in the @Service annotation) are never received.
+@param {Number} phase The current boot phase.
+*/
+onBootPhase : function(  ) {},
+
+<span id='com-android-server-SystemService-method-onStartUser'>/**Called when a new user is starting, for system services to initialize any per-user
+</span> state they maintain for running users.
+@param {Number} userHandle The identifier of the user.
+*/
+onStartUser : function(  ) {},
+
+<span id='com-android-server-SystemService-method-onUnlockUser'>/**Called when an existing user is in the process of being unlocked. This
+</span> means the credential-encrypted storage for that user is now available,
+ and encryption-aware component filtering is no longer in effect.
+ &lt;p&gt;
+ While dispatching this event to services, the user is in the
+ {@code STATE_RUNNING_UNLOCKING} state, and once dispatching is finished
+ the user will transition into the {@code STATE_RUNNING_UNLOCKED} state.
+ Code written inside system services should use
+ {@link UserManager#isUserUnlockingOrUnlocked(int)} to handle both of
+ these states.
+@param {Number} userHandle The identifier of the user.
+*/
+onUnlockUser : function(  ) {},
+
+<span id='com-android-server-SystemService-method-onSwitchUser'>/**Called when switching to a different foreground user, for system services that have
+</span> special behavior for whichever user is currently in the foreground.  This is called
+ before any application processes are aware of the new user.
+@param {Number} userHandle The identifier of the user.
+*/
+onSwitchUser : function(  ) {},
+
+<span id='com-android-server-SystemService-method-onStopUser'>/**Called when an existing user is stopping, for system services to finalize any per-user
+</span> state they maintain for running users.  This is called prior to sending the SHUTDOWN
+ broadcast to the user; it is a good place to stop making use of any resources of that
+ user (such as binding to a service running in the user).
+
+ &lt;p&gt;NOTE: This is the last callback where the callee may access the target user's CE storage.
+@param {Number} userHandle The identifier of the user.
+*/
+onStopUser : function(  ) {},
+
+<span id='com-android-server-SystemService-method-onCleanupUser'>/**Called when an existing user is stopping, for system services to finalize any per-user
+</span> state they maintain for running users.  This is called after all application process
+ teardown of the user is complete.
+
+ &lt;p&gt;NOTE: When this callback is called, the CE storage for the target user may not be
+ accessible already.  Use {@link #onStopUser} instead if you need to access the CE storage.
+@param {Number} userHandle The identifier of the user.
+*/
+onCleanupUser : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

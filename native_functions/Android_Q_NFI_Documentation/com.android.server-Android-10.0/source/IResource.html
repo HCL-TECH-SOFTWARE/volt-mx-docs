@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-IpSecService-IResource'>/**@class com.android.server.IpSecService.IResource
+</span> Interface for user-reference and kernel-resource cleanup.
+
+ &lt;p&gt;This interface must be implemented for a resource to be reference counted.
+*/
+var IResource = {
+
+<span id='com-android-server-IpSecService-IResource-method-invalidate'>/**Invalidates a IResource object, ensuring it is invalid for the purposes of allocating new
+</span> objects dependent on it.
+
+ &lt;p&gt;Implementations of this method are expected to remove references to the IResource
+ object from the IpSecService's tracking arrays. The removal from the arrays ensures that
+ the resource is considered invalid for user access or allocation or use in other
+ resources.
+
+ &lt;p&gt;References to the IResource object may be held by other RefcountedResource objects,
+ and as such, the underlying resources and quota may not be cleaned up.
+*/
+invalidate : function(  ) {},
+
+<span id='com-android-server-IpSecService-IResource-method-freeUnderlyingResources'>/**Releases underlying resources and related quotas.
+</span>
+ &lt;p&gt;Implementations of this method are expected to remove all system resources that are
+ tracked by the IResource object. Due to other RefcountedResource objects potentially
+ having references to the IResource object, freeUnderlyingResources may not always be
+ called from releaseIfUnreferencedRecursively().
+*/
+freeUnderlyingResources : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

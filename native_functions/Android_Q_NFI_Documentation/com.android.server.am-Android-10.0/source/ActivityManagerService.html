@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-am-ActivityManagerService'>/**@class com.android.server.am.ActivityManagerService
+</span> implements com.android.server.Watchdog.Monitor
+
+ implements com.android.internal.os.BatteryStatsImpl.BatteryCallback
+
+@extends IActivityManager.Stub
+
+*/
+var ActivityManagerService = {
+
+<span id='com-android-server-am-ActivityManagerService-property-TOP_APP_PRIORITY_BOOST'>/** Priority we boost main thread and RT of top app to.
+</span>*/
+TOP_APP_PRIORITY_BOOST : &quot;-10&quot;,
+<span id='com-android-server-am-ActivityManagerService-property-ACTION_TRIGGER_IDLE'>/***/
+</span>ACTION_TRIGGER_IDLE : &quot;com.android.server.ACTION_TRIGGER_IDLE&quot;,
+<span id='com-android-server-am-ActivityManagerService-property-STOCK_PM_FLAGS'>/***/
+</span>STOCK_PM_FLAGS : &quot;1024&quot;,
+<span id='com-android-server-am-ActivityManagerService-property-ANR_TRACE_DIR'>/***/
+</span>ANR_TRACE_DIR : &quot;/data/anr&quot;,
+<span id='com-android-server-am-ActivityManagerService-property-MY_PID'>/***/
+</span>MY_PID : &quot;null&quot;,
+<span id='com-android-server-am-ActivityManagerService-property-mIntentFirewall'>/***/
+</span>mIntentFirewall : &quot;null&quot;,
+<span id='com-android-server-am-ActivityManagerService-property-mOomAdjProfiler'>/***/
+</span>mOomAdjProfiler : &quot;null&quot;,
+<span id='com-android-server-am-ActivityManagerService-property-mPendingIntentController'>/***/
+</span>mPendingIntentController : &quot;null&quot;,
+<span id='com-android-server-am-ActivityManagerService-property-mWindowManager'>/***/
+</span>mWindowManager : &quot;null&quot;,
+<span id='com-android-server-am-ActivityManagerService-property-mActivityTaskManager'>/***/
+</span>mActivityTaskManager : &quot;null&quot;,
+<span id='com-android-server-am-ActivityManagerService-property-mAtmInternal'>/***/
+</span>mAtmInternal : &quot;null&quot;,
+<span id='com-android-server-am-ActivityManagerService-property-mUgmInternal'>/***/
+</span>mUgmInternal : &quot;null&quot;,
+<span id='com-android-server-am-ActivityManagerService-property-mHandlerThread'>/***/
+</span>mHandlerThread : &quot;null&quot;,
+<span id='com-android-server-am-ActivityManagerService-method-setSystemProcess'>/**
+</span>*/
+setSystemProcess : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setWindowManager'>/**
+</span>*/
+setWindowManager : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setUsageStatsManager'>/**
+</span>*/
+setUsageStatsManager : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setContentCaptureManager'>/**Sets the internal content capture manager service.
+</span>
+ &lt;p&gt;It's called when {@code SystemServer} starts, so we don't really need to acquire the lock.
+*/
+setContentCaptureManager : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startObservingNativeCrashes'>/**
+</span>*/
+startObservingNativeCrashes : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getAppOpsService'>/**
+</span>*/
+getAppOpsService : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setSystemServiceManager'>/**
+</span>*/
+setSystemServiceManager : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setInstaller'>/**
+</span>*/
+setInstaller : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-initPowerManagement'>/**
+</span>*/
+initPowerManagement : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-onTransact'>/**
+</span>*/
+onTransact : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-batteryNeedsCpuUpdate'>/**
+</span>*/
+batteryNeedsCpuUpdate : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-batteryPowerChanged'>/**
+</span>*/
+batteryPowerChanged : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-batteryStatsReset'>/**
+</span>*/
+batteryStatsReset : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-batterySendBroadcast'>/**
+</span>*/
+batterySendBroadcast : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setFocusedStack'>/**
+</span>*/
+setFocusedStack : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-registerTaskStackListener'>/**Sets the task stack listener that gets callbacks when a task stack changes.
+</span>*/
+registerTaskStackListener : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unregisterTaskStackListener'>/**Unregister a task stack listener so that it stops receiving callbacks.
+</span>*/
+unregisterTaskStackListener : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-updateActivityUsageStats'>/**Update UsageStas on the activity's usage.
+</span>@param {Object {ComponentName}} activity
+@param {Number} userId
+@param {Number} event
+@param {Object {IBinder}} appToken ActivityRecord's appToken.
+@param {Object {ComponentName}} taskRoot TaskRecord's root
+*/
+updateActivityUsageStats : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-updateActivityUsageStats'>/**Update UsageStats on this package's usage.
+</span>@param {String} packageName
+@param {Number} userId
+@param {Number} event
+*/
+updateActivityUsageStats : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setPackageScreenCompatMode'>/**
+</span>*/
+setPackageScreenCompatMode : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getPackageProcessState'>/**
+</span>*/
+getPackageProcessState : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setProcessMemoryTrimLevel'>/**
+</span>*/
+setProcessMemoryTrimLevel : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startActivity'>/**
+</span>*/
+startActivity : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startActivityAsUser'>/**
+</span>*/
+startActivityAsUser : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startActivityFromRecents'>/**
+</span>*/
+startActivityFromRecents : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startRecentsActivity'>/**
+</span>*/
+startRecentsActivity : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-cancelRecentsAnimation'>/**
+</span>*/
+cancelRecentsAnimation : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-finishActivity'>/**This is the internal entry point for handling Activity.finish().
+</span>@param {Object {IBinder}} token The Binder token referencing the Activity we want to finish.
+@param {Number} resultCode Result code, if any, from this Activity.
+@param {Object {Intent}} resultData Result data (Intent), if any, from this Activity.
+@param {Number} finishTask Whether to finish the task associated with this Activity.
+@return {Boolean} Returns true if the activity successfully finished, or false if it is still running.
+*/
+finishActivity : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setRequestedOrientation'>/**
+</span>*/
+setRequestedOrientation : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-finishHeavyWeightApp'>/**
+</span>*/
+finishHeavyWeightApp : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-crashApplication'>/**
+</span>*/
+crashApplication : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-dumpStackTraces'>/**If a stack trace dump file is configured, dump process stack traces.
+</span>@param {Object {java.util.ArrayList}} firstPids of dalvik VM processes to dump stack traces for first
+@param {Object {ProcessCpuTracker}} lastPids of dalvik VM processes to dump stack traces for last
+@param {Object {android.util.SparseArray}} nativePids optional list of native pids to dump stack crawls
+*/
+dumpStackTraces : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-dumpStackTraces'>/**
+</span>*/
+dumpStackTraces : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-clearApplicationUserData'>/**
+</span>*/
+clearApplicationUserData : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-killBackgroundProcesses'>/**
+</span>*/
+killBackgroundProcesses : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-killAllBackgroundProcesses'>/**
+</span>*/
+killAllBackgroundProcesses : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-forceStopPackage'>/**
+</span>*/
+forceStopPackage : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-addPackageDependency'>/**
+</span>*/
+addPackageDependency : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-killApplication'>/**
+</span>*/
+killApplication : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-closeSystemDialogs'>/**
+</span>*/
+closeSystemDialogs : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getProcessMemoryInfo'>/**
+</span>*/
+getProcessMemoryInfo : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getProcessPss'>/**
+</span>*/
+getProcessPss : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-killApplicationProcess'>/**
+</span>*/
+killApplicationProcess : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-attachApplication'>/**
+</span>*/
+attachApplication : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-showBootMessage'>/**
+</span>*/
+showBootMessage : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-bootAnimationComplete'>/**
+</span>*/
+bootAnimationComplete : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getIntentSender'>/**
+</span>*/
+getIntentSender : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-sendIntentSender'>/**
+</span>*/
+sendIntentSender : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-cancelIntentSender'>/**
+</span>*/
+cancelIntentSender : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getPackageForIntentSender'>/**
+</span>*/
+getPackageForIntentSender : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-registerIntentSenderCancelListener'>/**
+</span>*/
+registerIntentSenderCancelListener : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unregisterIntentSenderCancelListener'>/**
+</span>*/
+unregisterIntentSenderCancelListener : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getUidForIntentSender'>/**
+</span>*/
+getUidForIntentSender : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isIntentSenderTargetedToPackage'>/**
+</span>*/
+isIntentSenderTargetedToPackage : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isIntentSenderAnActivity'>/**
+</span>*/
+isIntentSenderAnActivity : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isIntentSenderAForegroundService'>/**
+</span>*/
+isIntentSenderAForegroundService : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isIntentSenderABroadcast'>/**
+</span>*/
+isIntentSenderABroadcast : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getIntentForIntentSender'>/**
+</span>*/
+getIntentForIntentSender : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getTagForIntentSender'>/**
+</span>*/
+getTagForIntentSender : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setProcessLimit'>/**
+</span>*/
+setProcessLimit : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getProcessLimit'>/**
+</span>*/
+getProcessLimit : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setProcessImportant'>/**
+</span>*/
+setProcessImportant : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getProcessStatesAndOomScoresForPIDs'>/**For each PID in the given input array, write the current process state
+</span> for that process into the states array, or -1 to indicate that no
+ process with the given PID exists. If scores array is provided, write
+ the oom score for the process into the scores array, with INVALID_ADJ
+ indicating the PID doesn't exist.
+*/
+getProcessStatesAndOomScoresForPIDs : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-checkComponentPermission'>/**
+</span>*/
+checkComponentPermission : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-checkPermission'>/**As the only public entry point for permissions checking, this method
+</span> can enforce the semantic that requesting a check on a null global
+ permission is automatically denied.  (Internally a null permission
+ string is used when calling {@link #checkComponentPermission} in cases
+ when only uid-based security is needed.)
+
+ This can be called with or without the global lock held.
+*/
+checkPermission : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-checkPermissionWithToken'>/**
+</span>*/
+checkPermissionWithToken : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isAppStartModeDisabled'>/**
+</span>*/
+isAppStartModeDisabled : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-grantEphemeralAccessLocked'>/**
+</span>*/
+grantEphemeralAccessLocked : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-checkUriPermission'>/**
+</span>@param {Object {Uri}} uri This uri must NOT contain an embedded userId.
+@param {Number} userId The userId in which the uri is to be resolved.
+*/
+checkUriPermission : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-grantUriPermission'>/**
+</span>@param {Object {IApplicationThread}} uri This uri must NOT contain an embedded userId.
+@param {String} userId The userId in which the uri is to be resolved.
+*/
+grantUriPermission : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-revokeUriPermission'>/**
+</span>@param {Object {IApplicationThread}} uri This uri must NOT contain an embedded userId.
+@param {String} userId The userId in which the uri is to be resolved.
+*/
+revokeUriPermission : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-showWaitingForDebugger'>/**
+</span>*/
+showWaitingForDebugger : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getMemoryInfo'>/**
+</span>*/
+getMemoryInfo : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getTasks'>/**
+</span>*/
+getTasks : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getFilteredTasks'>/**
+</span>*/
+getFilteredTasks : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-cancelTaskWindowTransition'>/**
+</span>*/
+cancelTaskWindowTransition : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setTaskResizeable'>/**
+</span>*/
+setTaskResizeable : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getTaskSnapshot'>/**
+</span>*/
+getTaskSnapshot : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-resizeTask'>/**
+</span>*/
+resizeTask : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getTaskBounds'>/**
+</span>*/
+getTaskBounds : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-removeStack'>/**
+</span>*/
+removeStack : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-removeTask'>/**
+</span>*/
+removeTask : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-moveTaskToFront'>/**
+</span>*/
+moveTaskToFront : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-moveActivityTaskToBack'>/**Attempts to move a task backwards in z-order (the order of activities within the task is
+</span> unchanged).
+
+ There are several possible results of this call:
+ - if the task is locked, then we will show the lock toast
+ - if there is a task behind the provided task, then that task is made visible and resumed as
+   this task is moved to the back
+ - otherwise, if there are no other tasks in the stack:
+     - if this task is in the pinned stack, then we remove the stack completely, which will
+       have the effect of moving the task to the top or bottom of the fullscreen stack
+       (depending on whether it is visible)
+     - otherwise, we simply return home and hide this task
+@param {Object {IBinder}} token A reference to the activity we wish to move
+@param {Boolean} nonRoot If false then this only works if the activity is the root
+                of a task; if true it will work for any activity in a task.
+@return {Boolean} Returns true if the move completed, false if not.
+*/
+moveActivityTaskToBack : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-moveTaskToStack'>/**
+</span>*/
+moveTaskToStack : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-resizeStack'>/**
+</span>*/
+resizeStack : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getRecentTasks'>/**
+</span>*/
+getRecentTasks : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-moveTopActivityToPinnedStack'>/**Moves the top activity in the input stackId to the pinned stack.
+</span>@param {Number} stackId Id of stack to move the top activity to pinned stack.
+@param {Object {Rect}} bounds Bounds to use for pinned stack.
+@return {Boolean} True if the top activity of the input stack was successfully moved to the pinned
+          stack.
+*/
+moveTopActivityToPinnedStack : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-resizeDockedStack'>/**
+</span>*/
+resizeDockedStack : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-positionTaskInStack'>/**
+</span>*/
+positionTaskInStack : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getAllStackInfos'>/**
+</span>*/
+getAllStackInfos : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getTaskForActivity'>/**
+</span>*/
+getTaskForActivity : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-updateDeviceOwner'>/**
+</span>*/
+updateDeviceOwner : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-updateLockTaskPackages'>/**
+</span>*/
+updateLockTaskPackages : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isInLockTaskMode'>/**
+</span>*/
+isInLockTaskMode : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getLockTaskModeState'>/**
+</span>*/
+getLockTaskModeState : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startSystemLockTaskMode'>/**
+</span>*/
+startSystemLockTaskMode : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-checkContentProviderAccess'>/**Check if the calling UID has a possible chance at accessing the provider
+</span> at the given authority and user.
+*/
+checkContentProviderAccess : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getPackageManager'>/**Returns the PackageManager. Used by classes hosted by {@link com.android.server.am.ActivityManagerService}. The
+</span> PackageManager could be unavailable at construction time and therefore needs to be accessed
+ on demand.
+*/
+getPackageManager : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getPackageManagerInternalLocked'>/**
+</span>*/
+getPackageManagerInternalLocked : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getContentProvider'>/**
+</span>*/
+getContentProvider : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getContentProviderExternal'>/**
+</span>*/
+getContentProviderExternal : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-removeContentProvider'>/**Drop a content provider from a ProcessRecord's bookkeeping
+</span>*/
+removeContentProvider : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-removeContentProviderExternal'>/**
+</span>@deprecated - Use {@link #removeContentProviderExternalAsUser} which takes a user ID.
+*/
+removeContentProviderExternal : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-removeContentProviderExternalAsUser'>/**
+</span>*/
+removeContentProviderExternalAsUser : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-publishContentProviders'>/**
+</span>*/
+publishContentProviders : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-refContentProvider'>/**
+</span>*/
+refContentProvider : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unstableProviderDied'>/**
+</span>*/
+unstableProviderDied : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-appNotRespondingViaProvider'>/**
+</span>*/
+appNotRespondingViaProvider : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-installSystemProviders'>/**
+</span>*/
+installSystemProviders : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getProviderMimeType'>/**Allows apps to retrieve the MIME type of a URI.
+</span> If an app is in the same user as the ContentProvider, or if it is allowed to interact across
+ users, then it does not need permission to access the ContentProvider.
+ Either, it needs cross-user uri grants.
+
+ CTS tests for this functionality can be run with &quot;runtest cts-appsecurity&quot;.
+
+ Test cases are at cts/tests/appsecurity-tests/test-apps/UsePermissionDiffCert/
+     src/com/android/cts/usespermissiondiffcertapp/AccessPermissionWithDiffSigTest.java
+*/
+getProviderMimeType : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isBackgroundRestricted'>/**
+</span>*/
+isBackgroundRestricted : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-backgroundWhitelistUid'>/**
+</span>*/
+backgroundWhitelistUid : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unhandledBack'>/**
+</span>*/
+unhandledBack : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-openContentUri'>/**
+</span>*/
+openContentUri : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-notifyCleartextNetwork'>/**
+</span>*/
+notifyCleartextNetwork : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-shutdown'>/**
+</span>*/
+shutdown : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-notifyLockedProfile'>/**
+</span>*/
+notifyLockedProfile : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startConfirmDeviceCredentialIntent'>/**
+</span>*/
+startConfirmDeviceCredentialIntent : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-stopAppSwitches'>/**
+</span>*/
+stopAppSwitches : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-resumeAppSwitches'>/**
+</span>*/
+resumeAppSwitches : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setDebugApp'>/**
+</span>*/
+setDebugApp : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setAgentApp'>/**Set or remove an agent to be run whenever an app with the given process name starts.
+</span>
+ This method will not check whether the given process name matches a debuggable app. That
+ would require scanning all current packages, and a rescan when new packages are installed
+ or updated.
+
+ Instead, do the check when an application is started and matched to a stored agent.
+@param {String} packageName the process name of the app.
+@param {String} agent the agent string to be used, or null to remove any previously set agent.
+*/
+setAgentApp : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setAlwaysFinish'>/**
+</span>*/
+setAlwaysFinish : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setActivityController'>/**
+</span>*/
+setActivityController : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setUserIsMonkey'>/**
+</span>*/
+setUserIsMonkey : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isUserAMonkey'>/**
+</span>*/
+isUserAMonkey : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-requestSystemServerHeapDump'>/**
+</span>*/
+requestSystemServerHeapDump : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-requestBugReport'>/**
+</span>@deprecated This method is only used by a few internal components and it will soon be
+ replaced by a proper bug report API (which will be restricted to a few, pre-defined apps).
+ No new code should be calling it.
+*/
+requestBugReport : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-requestTelephonyBugReport'>/**
+</span>@deprecated This method is only used by a few internal components and it will soon be
+ replaced by a proper bug report API (which will be restricted to a few, pre-defined apps).
+ No new code should be calling it.
+*/
+requestTelephonyBugReport : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-requestWifiBugReport'>/**
+</span>@deprecated This method is only used by a few internal components and it will soon be
+ replaced by a proper bug report API (which will be restricted to a few, pre-defined apps).
+ No new code should be calling it.
+*/
+requestWifiBugReport : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-registerProcessObserver'>/**
+</span>*/
+registerProcessObserver : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unregisterProcessObserver'>/**
+</span>*/
+unregisterProcessObserver : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getUidProcessState'>/**
+</span>*/
+getUidProcessState : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-registerUidObserver'>/**
+</span>*/
+registerUidObserver : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unregisterUidObserver'>/**
+</span>*/
+unregisterUidObserver : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isUidActive'>/**
+</span>*/
+isUidActive : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setPersistentVrThread'>/**
+</span>*/
+setPersistentVrThread : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-scheduleAsRegularPriority'>/**Schedule the given thread a normal scheduling priority.
+</span>@param {Number} tid the tid of the thread to adjust the scheduling of.
+@param {Boolean} suppressLogs {@code true} if any error logging should be disabled.
+@return {Boolean} {@code true} if this succeeded.
+*/
+scheduleAsRegularPriority : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-scheduleAsFifoPriority'>/**Schedule the given thread an FIFO scheduling priority.
+</span>@param {Number} tid the tid of the thread to adjust the scheduling of.
+@param {Boolean} suppressLogs {@code true} if any error logging should be disabled.
+@return {Boolean} {@code true} if this succeeded.
+*/
+scheduleAsFifoPriority : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setRenderThread'>/**
+</span>*/
+setRenderThread : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isVrModePackageEnabled'>/**
+</span>*/
+isVrModePackageEnabled : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isTopActivityImmersive'>/**
+</span>*/
+isTopActivityImmersive : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isTopOfTask'>/**
+</span>*/
+isTopOfTask : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setHasTopUi'>/**
+</span>*/
+setHasTopUi : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-enterSafeMode'>/**
+</span>*/
+enterSafeMode : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-showSafeModeOverlay'>/**
+</span>*/
+showSafeModeOverlay : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-noteWakeupAlarm'>/**
+</span>*/
+noteWakeupAlarm : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-noteAlarmStart'>/**
+</span>*/
+noteAlarmStart : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-noteAlarmFinish'>/**
+</span>*/
+noteAlarmFinish : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-killPids'>/**
+</span>*/
+killPids : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-killUid'>/**
+</span>*/
+killUid : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-killProcessesBelowForeground'>/**
+</span>*/
+killProcessesBelowForeground : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-hang'>/**
+</span>*/
+hang : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-restart'>/**
+</span>*/
+restart : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-performIdleMaintenance'>/**
+</span>*/
+performIdleMaintenance : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-sendIdleJobTrigger'>/**
+</span>*/
+sendIdleJobTrigger : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-systemReady'>/**
+</span>*/
+systemReady : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-handleApplicationCrash'>/**Used by {@link com.android.internal.os.RuntimeInit} to report when an application crashes.
+</span> The application process will exit immediately after this call returns.
+@param {Object {IBinder}} app object of the crashing app, null for the system server
+@param {Object {ApplicationErrorReport.ParcelableCrashInfo}} crashInfo describing the exception
+*/
+handleApplicationCrash : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-handleApplicationStrictModeViolation'>/**
+</span>*/
+handleApplicationStrictModeViolation : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-handleApplicationWtf'>/**Used by {@link Log} via {@link com.android.internal.os.RuntimeInit} to report serious errors.
+</span>@param {Object {IBinder}} app object of the crashing app, null for the system server
+@param {String} tag reported by the caller
+@param {Boolean} system whether this wtf is coming from the system
+@param {Object {ApplicationErrorReport.ParcelableCrashInfo}} crashInfo describing the context of the error
+@return {Boolean} true if the process should exit immediately (WTF is fatal)
+*/
+handleApplicationWtf : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-addErrorToDropBox'>/**Write a description of an error (crash, WTF, ANR) to the drop box.
+</span>@param {String} eventType to include in the drop box tag (&quot;crash&quot;, &quot;wtf&quot;, etc.)
+@param {Object {ProcessRecord}} process which caused the error, null means the system server
+@param {String} activityShortComponentName which triggered the error, null if unknown
+@param {String} parentShortComponentName activity related to the error, null if unknown
+@param {String} parentProcess parent process
+@param {Object {ProcessRecord}} subject line related to the error, null if absent
+@param {String} report in long form describing the error, null if absent
+@param {String} dataFile text file to include in the report, null if none
+@param {Object {File}} crashInfo giving an application stack trace, null if absent
+*/
+addErrorToDropBox : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getProcessesInErrorState'>/**
+</span>*/
+getProcessesInErrorState : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getRunningAppProcesses'>/**
+</span>*/
+getRunningAppProcesses : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getRunningExternalApplications'>/**
+</span>*/
+getRunningExternalApplications : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getMyMemoryState'>/**
+</span>*/
+getMyMemoryState : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getMemoryTrimLevel'>/**
+</span>*/
+getMemoryTrimLevel : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-onShellCommand'>/**
+</span>*/
+onShellCommand : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getServices'>/**
+</span>*/
+getServices : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getRunningServiceControlPanel'>/**
+</span>*/
+getRunningServiceControlPanel : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startService'>/**
+</span>*/
+startService : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-stopService'>/**
+</span>*/
+stopService : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-peekService'>/**
+</span>*/
+peekService : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-stopServiceToken'>/**
+</span>*/
+stopServiceToken : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setServiceForeground'>/**
+</span>*/
+setServiceForeground : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getForegroundServiceType'>/**
+</span>*/
+getForegroundServiceType : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-handleIncomingUser'>/**
+</span>*/
+handleIncomingUser : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-bindService'>/**
+</span>*/
+bindService : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-bindIsolatedService'>/**
+</span>*/
+bindIsolatedService : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-updateServiceGroup'>/**
+</span>*/
+updateServiceGroup : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unbindService'>/**
+</span>*/
+unbindService : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-publishService'>/**
+</span>*/
+publishService : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unbindFinished'>/**
+</span>*/
+unbindFinished : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-serviceDoneExecuting'>/**
+</span>*/
+serviceDoneExecuting : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-bindBackupAgent'>/**
+</span>*/
+bindBackupAgent : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-backupAgentCreated'>/**
+</span>*/
+backupAgentCreated : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unbindBackupAgent'>/**
+</span>*/
+unbindBackupAgent : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-registerReceiver'>/**
+</span>*/
+registerReceiver : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unregisterReceiver'>/**
+</span>*/
+unregisterReceiver : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-broadcastIntent'>/**
+</span>*/
+broadcastIntent : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unbroadcastIntent'>/**
+</span>*/
+unbroadcastIntent : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-finishReceiver'>/**
+</span>*/
+finishReceiver : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startInstrumentation'>/**
+</span>*/
+startInstrumentation : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-addInstrumentationResults'>/**
+</span>*/
+addInstrumentationResults : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-finishInstrumentation'>/**
+</span>*/
+finishInstrumentation : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getFocusedStackInfo'>/**
+</span>*/
+getFocusedStackInfo : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getConfiguration'>/**
+</span>*/
+getConfiguration : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-suppressResizeConfigChanges'>/**
+</span>*/
+suppressResizeConfigChanges : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-updatePersistentConfiguration'>/**
+</span>*/
+updatePersistentConfiguration : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-updateConfiguration'>/**
+</span>*/
+updateConfiguration : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getLaunchedFromUid'>/**
+</span>*/
+getLaunchedFromUid : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getLaunchedFromPackage'>/**
+</span>*/
+getLaunchedFromPackage : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setTestPssMode'>/**
+</span>*/
+setTestPssMode : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-makePackageIdle'>/**
+</span>*/
+makePackageIdle : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-signalPersistentProcesses'>/**This method sends the specified signal to each of the persistent apps
+</span>*/
+signalPersistentProcesses : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-profileControl'>/**
+</span>*/
+profileControl : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-dumpHeap'>/**
+</span>*/
+dumpHeap : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-setDumpHeapDebugLimit'>/**
+</span>*/
+setDumpHeapDebugLimit : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-dumpHeapFinished'>/**
+</span>*/
+dumpHeapFinished : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-monitor'>/**In this method we try to acquire our lock to make sure that we have not deadlocked
+</span>*/
+monitor : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startUserInBackground'>/**Start user, if its not already running, but don't bring it to foreground.
+</span>*/
+startUserInBackground : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startUserInBackgroundWithListener'>/**
+</span>*/
+startUserInBackgroundWithListener : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startUserInForegroundWithListener'>/**
+</span>*/
+startUserInForegroundWithListener : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unlockUser'>/**
+</span>*/
+unlockUser : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-switchUser'>/**
+</span>*/
+switchUser : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-stopUser'>/**
+</span>*/
+stopUser : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getCurrentUser'>/**
+</span>*/
+getCurrentUser : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isUserRunning'>/**
+</span>*/
+isUserRunning : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getRunningUserIds'>/**
+</span>*/
+getRunningUserIds : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-registerUserSwitchObserver'>/**
+</span>*/
+registerUserSwitchObserver : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-unregisterUserSwitchObserver'>/**
+</span>*/
+unregisterUserSwitchObserver : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-isUserStopped'>/**
+</span>*/
+isUserStopped : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startBinderTracking'>/**
+</span>*/
+startBinderTracking : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-stopBinderTrackingAndDump'>/**
+</span>*/
+stopBinderTrackingAndDump : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-waitForNetworkStateUpdate'>/**Called by app main thread to wait for the network policy rules to get updated.
+</span>@param {Number} procStateSeq The sequence number indicating the process state change that the main
+                     thread is interested in.
+*/
+waitForNetworkStateUpdate : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-waitForBroadcastIdle'>/**
+</span>*/
+waitForBroadcastIdle : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-killPackageDependents'>/**Kill processes for the user with id userId and that depend on the package named packageName
+</span>*/
+killPackageDependents : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-restartUserInBackground'>/**
+</span>*/
+restartUserInBackground : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-scheduleApplicationInfoChanged'>/**
+</span>*/
+scheduleApplicationInfoChanged : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-updateSystemUiContext'>/**Synchronously update the system ActivityThread, bypassing any deferred threading so any
+</span> resources and overlaid values are available immediately.
+*/
+updateSystemUiContext : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-attachAgent'>/**Attach an agent to the specified process (proces name or PID)
+</span>*/
+attachAgent : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-prepareForPossibleShutdown'>/**When power button is very long pressed, call this interface to do some pre-shutdown work
+</span> like persisting database etc.
+*/
+prepareForPossibleShutdown : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-startDelegateShellPermissionIdentity'>/**
+</span>*/
+startDelegateShellPermissionIdentity : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-stopDelegateShellPermissionIdentity'>/**
+</span>*/
+stopDelegateShellPermissionIdentity : function(  ) {},
+
+<span id='com-android-server-am-ActivityManagerService-method-getLifeMonitor'>/**
+</span>*/
+getLifeMonitor : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

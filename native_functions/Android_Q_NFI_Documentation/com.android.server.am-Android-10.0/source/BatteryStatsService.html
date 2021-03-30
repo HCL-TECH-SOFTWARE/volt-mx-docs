@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-am-BatteryStatsService'>/**@class com.android.server.am.BatteryStatsService
+</span> implements android.os.PowerManagerInternal.LowPowerModeListener
+
+ implements com.android.internal.os.BatteryStatsImpl.PlatformIdleStateCallback
+
+ implements com.android.internal.os.BatteryStatsImpl.RailEnergyDataCallback
+
+@extends IBatteryStats.Stub
+
+ All information we are collecting about things that can happen that impact
+ battery life.
+*/
+var BatteryStatsService = {
+
+<span id='com-android-server-am-BatteryStatsService-method-fillLowPowerStats'>/**Replaces the information in the given rpmStats with up-to-date information.
+</span>*/
+fillLowPowerStats : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-fillRailDataStats'>/**
+</span>*/
+fillRailDataStats : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-getPlatformLowPowerStats'>/**
+</span>*/
+getPlatformLowPowerStats : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-getSubsystemLowPowerStats'>/**
+</span>*/
+getSubsystemLowPowerStats : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-publish'>/**
+</span>*/
+publish : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-systemServicesReady'>/**
+</span>*/
+systemServicesReady : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-initPowerManagement'>/**At the time when the constructor runs, the power manager has not yet been
+</span> initialized.  So we initialize the low power observer later.
+*/
+initPowerManagement : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-shutdown'>/**
+</span>*/
+shutdown : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-getService'>/**
+</span>*/
+getService : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-getServiceType'>/**
+</span>*/
+getServiceType : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-onLowPowerModeChanged'>/**
+</span>*/
+onLowPowerModeChanged : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-getActiveStatistics'>/**
+</span>@return {Object {com.android.internal.os.BatteryStatsImpl}} the current statistics object, which may be modified
+ to reflect events that affect battery usage.  You must lock the
+ stats object before doing anything with it.
+*/
+getActiveStatistics : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-scheduleWriteToDisk'>/**Schedules a write to disk to occur. This will cause the BatteryStatsImpl
+</span> object to update with the latest info, then write to disk.
+*/
+scheduleWriteToDisk : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-getStatistics'>/**
+</span>*/
+getStatistics : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-getStatisticsStream'>/**
+</span>*/
+getStatisticsStream : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-isCharging'>/**
+</span>*/
+isCharging : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-computeBatteryTimeRemaining'>/**
+</span>*/
+computeBatteryTimeRemaining : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-computeChargeTimeRemaining'>/**
+</span>*/
+computeChargeTimeRemaining : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteEvent'>/**
+</span>*/
+noteEvent : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteSyncStart'>/**
+</span>*/
+noteSyncStart : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteSyncFinish'>/**
+</span>*/
+noteSyncFinish : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteJobStart'>/**A scheduled job was started.
+</span>*/
+noteJobStart : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteJobFinish'>/**A scheduled job was finished.
+</span>*/
+noteJobFinish : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWakupAlarm'>/**
+</span>*/
+noteWakupAlarm : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteAlarmStart'>/**
+</span>*/
+noteAlarmStart : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteAlarmFinish'>/**
+</span>*/
+noteAlarmFinish : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteStartWakelock'>/**
+</span>*/
+noteStartWakelock : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteStopWakelock'>/**
+</span>*/
+noteStopWakelock : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteStartWakelockFromSource'>/**
+</span>*/
+noteStartWakelockFromSource : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteChangeWakelockFromSource'>/**
+</span>*/
+noteChangeWakelockFromSource : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteStopWakelockFromSource'>/**
+</span>*/
+noteStopWakelockFromSource : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteLongPartialWakelockStart'>/**
+</span>*/
+noteLongPartialWakelockStart : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteLongPartialWakelockStartFromSource'>/**
+</span>*/
+noteLongPartialWakelockStartFromSource : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteLongPartialWakelockFinish'>/**
+</span>*/
+noteLongPartialWakelockFinish : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteLongPartialWakelockFinishFromSource'>/**
+</span>*/
+noteLongPartialWakelockFinishFromSource : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteStartSensor'>/**
+</span>*/
+noteStartSensor : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteStopSensor'>/**
+</span>*/
+noteStopSensor : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteVibratorOn'>/**
+</span>*/
+noteVibratorOn : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteVibratorOff'>/**
+</span>*/
+noteVibratorOff : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteGpsChanged'>/**
+</span>*/
+noteGpsChanged : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteGpsSignalQuality'>/**
+</span>*/
+noteGpsSignalQuality : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteScreenState'>/**
+</span>*/
+noteScreenState : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteScreenBrightness'>/**
+</span>*/
+noteScreenBrightness : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteUserActivity'>/**
+</span>*/
+noteUserActivity : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWakeUp'>/**
+</span>*/
+noteWakeUp : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteInteractive'>/**
+</span>*/
+noteInteractive : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteConnectivityChanged'>/**
+</span>*/
+noteConnectivityChanged : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteMobileRadioPowerState'>/**
+</span>*/
+noteMobileRadioPowerState : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-notePhoneOn'>/**
+</span>*/
+notePhoneOn : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-notePhoneOff'>/**
+</span>*/
+notePhoneOff : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-notePhoneSignalStrength'>/**
+</span>*/
+notePhoneSignalStrength : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-notePhoneDataConnectionState'>/**
+</span>*/
+notePhoneDataConnectionState : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-notePhoneState'>/**
+</span>*/
+notePhoneState : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiOn'>/**
+</span>*/
+noteWifiOn : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiOff'>/**
+</span>*/
+noteWifiOff : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteStartAudio'>/**
+</span>*/
+noteStartAudio : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteStopAudio'>/**
+</span>*/
+noteStopAudio : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteStartVideo'>/**
+</span>*/
+noteStartVideo : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteStopVideo'>/**
+</span>*/
+noteStopVideo : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteResetAudio'>/**
+</span>*/
+noteResetAudio : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteResetVideo'>/**
+</span>*/
+noteResetVideo : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteFlashlightOn'>/**
+</span>*/
+noteFlashlightOn : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteFlashlightOff'>/**
+</span>*/
+noteFlashlightOff : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteStartCamera'>/**
+</span>*/
+noteStartCamera : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteStopCamera'>/**
+</span>*/
+noteStopCamera : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteResetCamera'>/**
+</span>*/
+noteResetCamera : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteResetFlashlight'>/**
+</span>*/
+noteResetFlashlight : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiRadioPowerState'>/**
+</span>*/
+noteWifiRadioPowerState : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiRunning'>/**
+</span>*/
+noteWifiRunning : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiRunningChanged'>/**
+</span>*/
+noteWifiRunningChanged : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiStopped'>/**
+</span>*/
+noteWifiStopped : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiState'>/**
+</span>*/
+noteWifiState : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiSupplicantStateChanged'>/**
+</span>*/
+noteWifiSupplicantStateChanged : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiRssiChanged'>/**
+</span>*/
+noteWifiRssiChanged : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteFullWifiLockAcquired'>/**
+</span>*/
+noteFullWifiLockAcquired : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteFullWifiLockReleased'>/**
+</span>*/
+noteFullWifiLockReleased : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiScanStarted'>/**
+</span>*/
+noteWifiScanStarted : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiScanStopped'>/**
+</span>*/
+noteWifiScanStopped : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiMulticastEnabled'>/**
+</span>*/
+noteWifiMulticastEnabled : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiMulticastDisabled'>/**
+</span>*/
+noteWifiMulticastDisabled : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteFullWifiLockAcquiredFromSource'>/**
+</span>*/
+noteFullWifiLockAcquiredFromSource : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteFullWifiLockReleasedFromSource'>/**
+</span>*/
+noteFullWifiLockReleasedFromSource : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiScanStartedFromSource'>/**
+</span>*/
+noteWifiScanStartedFromSource : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiScanStoppedFromSource'>/**
+</span>*/
+noteWifiScanStoppedFromSource : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiBatchedScanStartedFromSource'>/**
+</span>*/
+noteWifiBatchedScanStartedFromSource : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiBatchedScanStoppedFromSource'>/**
+</span>*/
+noteWifiBatchedScanStoppedFromSource : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteNetworkInterfaceType'>/**
+</span>*/
+noteNetworkInterfaceType : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteNetworkStatsEnabled'>/**
+</span>*/
+noteNetworkStatsEnabled : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteDeviceIdleMode'>/**
+</span>*/
+noteDeviceIdleMode : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-notePackageInstalled'>/**
+</span>*/
+notePackageInstalled : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-notePackageUninstalled'>/**
+</span>*/
+notePackageUninstalled : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteBleScanStarted'>/**
+</span>*/
+noteBleScanStarted : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteBleScanStopped'>/**
+</span>*/
+noteBleScanStopped : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteResetBleScan'>/**
+</span>*/
+noteResetBleScan : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteBleScanResults'>/**
+</span>*/
+noteBleScanResults : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteWifiControllerActivity'>/**
+</span>*/
+noteWifiControllerActivity : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteBluetoothControllerActivity'>/**
+</span>*/
+noteBluetoothControllerActivity : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-noteModemControllerActivity'>/**
+</span>*/
+noteModemControllerActivity : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-isOnBattery'>/**
+</span>*/
+isOnBattery : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-setBatteryState'>/**
+</span>*/
+setBatteryState : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-getAwakeTimeBattery'>/**
+</span>*/
+getAwakeTimeBattery : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-getAwakeTimePlugged'>/**
+</span>*/
+getAwakeTimePlugged : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-enforceCallingPermission'>/**
+</span>*/
+enforceCallingPermission : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-getCellularBatteryStats'>/**Gets a snapshot of cellular stats
+</span>@hide 
+*/
+getCellularBatteryStats : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-getWifiBatteryStats'>/**Gets a snapshot of Wifi stats
+</span>@hide 
+*/
+getWifiBatteryStats : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-getGpsBatteryStats'>/**Gets a snapshot of Gps stats
+</span>@hide 
+*/
+getGpsBatteryStats : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-takeUidSnapshot'>/**Gets a snapshot of the system health for a particular uid.
+</span>*/
+takeUidSnapshot : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-takeUidSnapshots'>/**Gets a snapshot of the system health for a number of uids.
+</span>*/
+takeUidSnapshots : function(  ) {},
+
+<span id='com-android-server-am-BatteryStatsService-method-setChargingStateUpdateDelayMillis'>/**Delay for sending ACTION_CHARGING after device is plugged in.
+</span>@hide 
+*/
+setChargingStateUpdateDelayMillis : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

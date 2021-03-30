@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-am-PersistentConnection'>/**@class com.android.server.am.PersistentConnection
+</span>@extends java.lang.Object
+
+ Connects to a given service component on a given user.
+
+ - Call {@link #bind}() to create a connection.
+ - Call {@link #unbind}() to disconnect.  Make sure to disconnect when the user stops.
+
+ Add onConnected/onDisconnected callbacks as needed.
+
+ When the target process gets killed (by OOM-killer, etc), then the activity manager will
+ re-connect the connection automatically, in which case onServiceDisconnected() gets called
+ and then onServiceConnected().
+
+ However sometimes the activity manager just &quot;kills&quot; the connection -- like when the target
+ package gets updated or the target process crashes multiple times in a row, in which case
+ onBindingDied() gets called.  This class handles this case by re-connecting in the time
+ {@link #mRebindBackoffMs}.  If this happens again, this class increases the back-off time
+ by {@link #mRebindBackoffIncrease} and retry.  The back-off time is capped at
+ {@link #mRebindMaxBackoffMs}.
+
+ The back-off time will never be reset until {@link #unbind}() and {@link #bind}() are called
+ explicitly.
+
+ NOTE: This class does *not* handle package-updates -- i.e. even if the binding dies due to
+ the target package being updated, this class won't reconnect.  This is because this class doesn't
+ know what to do when the service component has gone missing, for example.  If the user of this
+ class wants to restore the connection, then it should call {@link #unbind}() and {@link #bind}
+ explicitly.
+
+ atest ${ANDROID_BUILD_TOP}/frameworks/base/services/tests/mockingservicestests/src/com/android/server/am/PersistentConnectionTest.java
+*/
+var PersistentConnection = {
+
+<span id='com-android-server-am-PersistentConnection-method-getComponentName'>/**
+</span>*/
+getComponentName : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-getUserId'>/**
+</span>*/
+getUserId : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-isBound'>/**
+</span>@return {Boolean} whether {@link #bind()} has been called and {@link #unbind()} hasn't.
+
+ Note when the AM gives up on connection, this class detects it and un-bind automatically,
+ and schedule rebind, and {@link #isBound} returns false when it's waiting for a retry.
+*/
+isBound : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-isRebindScheduled'>/**
+</span>@return {Boolean} whether re-bind is scheduled after the AM gives up on a connection.
+*/
+isRebindScheduled : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-isConnected'>/**
+</span>@return {Boolean} whether connected.
+*/
+isConnected : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-getServiceBinder'>/**
+</span>@return {Object {java.lang.Object}} the service binder interface.
+*/
+getServiceBinder : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-bind'>/**Connects to the service.
+</span>*/
+bind : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-getNextBackoffMs'>/**Return the next back-off time
+</span>*/
+getNextBackoffMs : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-getNumConnected'>/**Return the number of times the connected callback called.
+</span>*/
+getNumConnected : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-getNumDisconnected'>/**Return the number of times the disconnected callback called.
+</span>*/
+getNumDisconnected : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-getNumBindingDied'>/**Return the number of times the binding died callback called.
+</span>*/
+getNumBindingDied : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-bindInnerLocked'>/**
+</span>*/
+bindInnerLocked : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-unbind'>/**Disconnect from the service.
+</span>*/
+unbind : function(  ) {},
+
+<span id='com-android-server-am-PersistentConnection-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

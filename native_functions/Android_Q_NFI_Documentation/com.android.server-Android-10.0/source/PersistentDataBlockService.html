@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-PersistentDataBlockService'>/**@class com.android.server.PersistentDataBlockService
+</span>@extends com.android.server.SystemService
+
+ Service for reading and writing blocks to a persistent partition.
+ This data will live across factory resets not initiated via the Settings UI.
+ When a device is factory reset through Settings this data is wiped.
+
+ Allows writing one block at a time. Namely, each time {@link IPersistentDataBlockService#write}
+ is called, it will overwrite the data that was previously written on the block.
+
+ Clients can query the size of the currently written block via
+ {@link IPersistentDataBlockService#getDataBlockSize}
+
+ Clients can read any number of bytes from the currently written block up to its total size by
+ invoking {@link IPersistentDataBlockService#read}
+
+ The persistent data block is currently laid out as follows:
+ | ---------BEGINNING OF PARTITION-------------|
+ | Partition digest (32 bytes)                 |
+ | --------------------------------------------|
+ | PARTITION_TYPE_MARKER (4 bytes)             |
+ | --------------------------------------------|
+ | FRP data block length (4 bytes)             |
+ | --------------------------------------------|
+ | FRP data (variable length)                  |
+ | --------------------------------------------|
+ | ...                                         |
+ | --------------------------------------------|
+ | Test mode data block (10000 bytes)          |
+ | --------------------------------------------|
+ |     | Test mode data length (4 bytes)       |
+ | --------------------------------------------|
+ |     | Test mode data (variable length)      |
+ |     | ...                                   |
+ | --------------------------------------------|
+ | FRP credential handle block (1000 bytes)    |
+ | --------------------------------------------|
+ |     | FRP credential handle length (4 bytes)|
+ | --------------------------------------------|
+ |     | FRP credential handle (variable len)  |
+ |     | ...                                   |
+ | --------------------------------------------|
+ | OEM Unlock bit (1 byte)                     |
+ | ---------END OF PARTITION-------------------|
+
+ TODO: now that the persistent partition contains several blocks, next time someone wants a new
+ block, we should look at adding more generic block definitions and get rid of the various raw
+ XXX_RESERVED_SIZE and XXX_DATA_SIZE constants. That will ensure the code is easier to maintain
+ and less likely to introduce out-of-bounds read/write.
+*/
+var PersistentDataBlockService = {
+
+<span id='com-android-server-PersistentDataBlockService-property-DIGEST_SIZE_BYTES'>/***/
+</span>DIGEST_SIZE_BYTES : &quot;32&quot;,
+<span id='com-android-server-PersistentDataBlockService-method-onStart'>/**
+</span>*/
+onStart : function(  ) {},
+
+<span id='com-android-server-PersistentDataBlockService-method-onBootPhase'>/**
+</span>*/
+onBootPhase : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

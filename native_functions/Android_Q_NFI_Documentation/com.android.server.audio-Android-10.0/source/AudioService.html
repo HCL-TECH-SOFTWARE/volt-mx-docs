@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-audio-AudioService'>/**@class com.android.server.audio.AudioService
+</span> implements android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener
+
+@extends IAudioService.Stub
+
+ The implementation of the volume manager service.
+ &lt;p&gt;
+ This implementation focuses on delivering a responsive UI. Most methods are
+ asynchronous to external calls. For example, the task of setting a volume
+ will update our internal state, but in a separate thread will set the system
+ volume and later persist to the database. Similarly, setting the ringer mode
+ will update the state and broadcast a change and in a separate thread later
+ persist the ringer mode.
+
+ @hide
+*/
+var AudioService = {
+
+<span id='com-android-server-audio-AudioService-method-makeAlsaAddressString'>/**
+</span>*/
+makeAlsaAddressString : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-systemReady'>/**
+</span>*/
+systemReady : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-onSystemReady'>/**
+</span>*/
+onSystemReady : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-onAudioServerDied'>/**
+</span>*/
+onAudioServerDied : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getAudioProductStrategies'>/**
+</span>@return {Object {java.util.List}} the {@link android.media.audiopolicy.AudioProductStrategy} discovered from the
+ platform configuration file.
+*/
+getAudioProductStrategies : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getAudioVolumeGroups'>/**
+</span>@return {Object {java.util.List}} the List of {@link android.media.audiopolicy.AudioVolumeGroup} discovered from the
+ platform configuration file.
+*/
+getAudioVolumeGroups : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-adjustSuggestedStreamVolume'>/**
+</span>@see AudioManager#adjustVolume(int, int)
+*/
+adjustSuggestedStreamVolume : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-adjustStreamVolume'>/**
+</span>@see AudioManager#adjustStreamVolume(int, int, int)
+*/
+adjustStreamVolume : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setVolumeIndexForAttributes'>/**
+</span>@see AudioManager#setVolumeIndexForAttributes(attr, int, int)
+*/
+setVolumeIndexForAttributes : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getVolumeIndexForAttributes'>/**
+</span>@see AudioManager#getVolumeIndexForAttributes(attr)
+*/
+getVolumeIndexForAttributes : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getMaxVolumeIndexForAttributes'>/**
+</span>@see AudioManager#getMaxVolumeIndexForAttributes(attr)
+*/
+getMaxVolumeIndexForAttributes : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getMinVolumeIndexForAttributes'>/**
+</span>@see AudioManager#getMinVolumeIndexForAttributes(attr)
+*/
+getMinVolumeIndexForAttributes : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setStreamVolume'>/**
+</span>@see AudioManager#setStreamVolume(int, int, int)
+*/
+setStreamVolume : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-forceVolumeControlStream'>/**
+</span>@see AudioManager#forceVolumeControlStream(int)
+*/
+forceVolumeControlStream : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-isStreamMute'>/**get stream mute state.
+</span>*/
+isStreamMute : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-forceRemoteSubmixFullVolume'>/**
+</span>*/
+forceRemoteSubmixFullVolume : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-isMasterMute'>/**get master mute state.
+</span>*/
+isMasterMute : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setMasterMute'>/**
+</span>*/
+setMasterMute : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getStreamVolume'>/**
+</span>@see AudioManager#getStreamVolume(int)
+*/
+getStreamVolume : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getStreamMaxVolume'>/**
+</span>@see AudioManager#getStreamMaxVolume(int)
+*/
+getStreamMaxVolume : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getStreamMinVolume'>/**
+</span>@see AudioManager#getStreamMinVolumeInt(int)
+*/
+getStreamMinVolume : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getLastAudibleStreamVolume'>/**Get last audible volume before stream was muted.
+</span>*/
+getLastAudibleStreamVolume : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getUiSoundsStreamType'>/**
+</span>@see AudioManager#getUiSoundsStreamType()
+*/
+getUiSoundsStreamType : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setMicrophoneMute'>/**
+</span>@see AudioManager#setMicrophoneMute(boolean)
+*/
+setMicrophoneMute : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getRingerModeExternal'>/**
+</span>*/
+getRingerModeExternal : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getRingerModeInternal'>/**
+</span>*/
+getRingerModeInternal : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-isValidRingerMode'>/**
+</span>@see AudioManager#isValidRingerMode(int)
+*/
+isValidRingerMode : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setRingerModeExternal'>/**
+</span>*/
+setRingerModeExternal : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setRingerModeInternal'>/**
+</span>*/
+setRingerModeInternal : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-silenceRingerModeInternal'>/**
+</span>*/
+silenceRingerModeInternal : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-shouldVibrate'>/**
+</span>@see AudioManager#shouldVibrate(int)
+*/
+shouldVibrate : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getVibrateSetting'>/**
+</span>@see AudioManager#getVibrateSetting(int)
+*/
+getVibrateSetting : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setVibrateSetting'>/**
+</span>@see AudioManager#setVibrateSetting(int, int)
+*/
+setVibrateSetting : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setMode'>/**
+</span>@see AudioManager#setMode(int)
+*/
+setMode : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getMode'>/**
+</span>@see AudioManager#getMode()
+*/
+getMode : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-playSoundEffect'>/**
+</span>@see AudioManager#playSoundEffect(int)
+*/
+playSoundEffect : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-playSoundEffectVolume'>/**
+</span>@see AudioManager#playSoundEffect(int, float)
+*/
+playSoundEffectVolume : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-loadSoundEffects'>/**Loads samples into the soundpool.
+</span> This method must be called at first when sound effects are enabled
+*/
+loadSoundEffects : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-unloadSoundEffects'>/**Unloads samples from the sound pool.
+</span>  This method can be called to free some memory when
+  sound effects are disabled.
+*/
+unloadSoundEffects : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-reloadAudioSettings'>/**
+</span>@see AudioManager#reloadAudioSettings()
+*/
+reloadAudioSettings : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setSpeakerphoneOn'>/**
+</span>@see AudioManager#setSpeakerphoneOn(boolean)
+*/
+setSpeakerphoneOn : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-isSpeakerphoneOn'>/**
+</span>@see AudioManager#isSpeakerphoneOn()
+*/
+isSpeakerphoneOn : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setBluetoothScoOn'>/**
+</span>@see AudioManager#setBluetoothScoOn(boolean)
+*/
+setBluetoothScoOn : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-isBluetoothScoOn'>/**
+</span>@see AudioManager#isBluetoothScoOn()
+ Note that it doesn't report internal state, but state seen by apps (which may have
+ called setBluetoothScoOn()
+*/
+isBluetoothScoOn : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setBluetoothA2dpOn'>/**
+</span>@see AudioManager#setBluetoothA2dpOn(boolean)
+*/
+setBluetoothA2dpOn : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-isBluetoothA2dpOn'>/**
+</span>@see AudioManager#isBluetoothA2dpOn()
+*/
+isBluetoothA2dpOn : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-startBluetoothSco'>/**
+</span>@see AudioManager#startBluetoothSco()
+*/
+startBluetoothSco : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-startBluetoothScoVirtualCall'>/**
+</span>@see AudioManager#startBluetoothScoVirtualCall()
+*/
+startBluetoothScoVirtualCall : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-stopBluetoothSco'>/**
+</span>@see AudioManager#stopBluetoothSco()
+*/
+stopBluetoothSco : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-isStreamAffectedByRingerMode'>/**
+</span>*/
+isStreamAffectedByRingerMode : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-isStreamAffectedByMute'>/**
+</span>*/
+isStreamAffectedByMute : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setWiredDeviceConnectionState'>/**see AudioManager.setWiredDeviceConnectionState()
+</span>*/
+setWiredDeviceConnectionState : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setBluetoothHearingAidDeviceConnectionState'>/**See AudioManager.setBluetoothHearingAidDeviceConnectionState()
+</span>*/
+setBluetoothHearingAidDeviceConnectionState : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setBluetoothA2dpDeviceConnectionStateSuppressNoisyIntent'>/**See AudioManager.setBluetoothA2dpDeviceConnectionStateSuppressNoisyIntent()
+</span>*/
+setBluetoothA2dpDeviceConnectionStateSuppressNoisyIntent : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-handleBluetoothA2dpDeviceConfigChange'>/**See AudioManager.handleBluetoothA2dpDeviceConfigChange()
+</span>@param {Object {BluetoothDevice}} device
+*/
+handleBluetoothA2dpDeviceConfigChange : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-hasHapticChannels'>/**See AudioManager.hasHapticChannels(Uri).
+</span>*/
+hasHapticChannels : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-avrcpSupportsAbsoluteVolume'>/**
+</span>*/
+avrcpSupportsAbsoluteVolume : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-requestAudioFocus'>/**
+</span>*/
+requestAudioFocus : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-abandonAudioFocus'>/**
+</span>*/
+abandonAudioFocus : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-unregisterAudioFocusClient'>/**
+</span>*/
+unregisterAudioFocusClient : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getCurrentAudioFocus'>/**
+</span>*/
+getCurrentAudioFocus : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getFocusRampTimeMs'>/**
+</span>*/
+getFocusRampTimeMs : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setRingtonePlayer'>/**
+</span>*/
+setRingtonePlayer : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getRingtonePlayer'>/**
+</span>*/
+getRingtonePlayer : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-startWatchingRoutes'>/**
+</span>*/
+startWatchingRoutes : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-disableSafeMediaVolume'>/**
+</span>*/
+disableSafeMediaVolume : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setHdmiSystemAudioSupported'>/**
+</span>*/
+setHdmiSystemAudioSupported : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-isHdmiSystemAudioSupported'>/**
+</span>*/
+isHdmiSystemAudioSupported : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-onTouchExplorationStateChanged'>/**
+</span>*/
+onTouchExplorationStateChanged : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-onAccessibilityServicesStateChanged'>/**
+</span>*/
+onAccessibilityServicesStateChanged : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-isCameraSoundForced'>/**
+</span>*/
+isCameraSoundForced : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setVolumeController'>/**
+</span>*/
+setVolumeController : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-notifyVolumeControllerVisible'>/**
+</span>*/
+notifyVolumeControllerVisible : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setVolumePolicy'>/**
+</span>*/
+setVolumePolicy : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-registerAudioPolicy'>/**
+</span>*/
+registerAudioPolicy : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-unregisterAudioPolicyAsync'>/**See {@link AudioManager#unregisterAudioPolicyAsync(AudioPolicy)}
+</span> Declared oneway
+@param {Object {IAudioPolicyCallback}} pcb nullable because on service interface
+*/
+unregisterAudioPolicyAsync : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-unregisterAudioPolicy'>/**See {@link AudioManager#unregisterAudioPolicy(AudioPolicy)}
+</span>@param {Object {IAudioPolicyCallback}} pcb nullable because on service interface
+*/
+unregisterAudioPolicy : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-addMixForPolicy'>/**
+</span>*/
+addMixForPolicy : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-removeMixForPolicy'>/**
+</span>*/
+removeMixForPolicy : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setUidDeviceAffinity'>/**see AudioPolicy.setUidDeviceAffinity()
+</span>*/
+setUidDeviceAffinity : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-removeUidDeviceAffinity'>/**see AudioPolicy.removeUidDeviceAffinity()
+</span>*/
+removeUidDeviceAffinity : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setFocusPropertiesForPolicy'>/**
+</span>*/
+setFocusPropertiesForPolicy : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-hasRegisteredDynamicPolicy'>/**see AudioManager.hasRegisteredDynamicPolicy
+</span>*/
+hasRegisteredDynamicPolicy : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-registerRecordingCallback'>/**
+</span>*/
+registerRecordingCallback : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-unregisterRecordingCallback'>/**
+</span>*/
+unregisterRecordingCallback : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getActiveRecordingConfigurations'>/**
+</span>*/
+getActiveRecordingConfigurations : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-trackRecorder'>/**Track a recorder provided by the client
+</span>*/
+trackRecorder : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-recorderEvent'>/**Receive an event from the client about a tracked recorder
+</span>*/
+recorderEvent : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-releaseRecorder'>/**Stop tracking the recorder
+</span>*/
+releaseRecorder : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-disableRingtoneSync'>/**
+</span>*/
+disableRingtoneSync : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-registerPlaybackCallback'>/**
+</span>*/
+registerPlaybackCallback : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-unregisterPlaybackCallback'>/**
+</span>*/
+unregisterPlaybackCallback : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-getActivePlaybackConfigurations'>/**
+</span>*/
+getActivePlaybackConfigurations : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-trackPlayer'>/**
+</span>*/
+trackPlayer : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-playerAttributes'>/**
+</span>*/
+playerAttributes : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-playerEvent'>/**
+</span>*/
+playerEvent : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-playerHasOpPlayAudio'>/**
+</span>*/
+playerHasOpPlayAudio : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-releasePlayer'>/**
+</span>*/
+releasePlayer : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-dispatchFocusChange'>/**
+</span>*/
+dispatchFocusChange : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-setFocusRequestResultFromExtPolicy'>/**
+</span>*/
+setFocusRequestResultFromExtPolicy : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-registerAudioServerStateDispatcher'>/**
+</span>*/
+registerAudioServerStateDispatcher : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-unregisterAudioServerStateDispatcher'>/**
+</span>*/
+unregisterAudioServerStateDispatcher : function(  ) {},
+
+<span id='com-android-server-audio-AudioService-method-isAudioServerRunning'>/**
+</span>*/
+isAudioServerRunning : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

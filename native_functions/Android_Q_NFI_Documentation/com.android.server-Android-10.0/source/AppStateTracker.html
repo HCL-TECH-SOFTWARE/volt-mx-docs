@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-AppStateTracker'>/**@class com.android.server.AppStateTracker
+</span>@extends java.lang.Object
+
+ Class to keep track of the information related to &quot;force app standby&quot;, which includes:
+ - OP_RUN_ANY_IN_BACKGROUND for each package
+ - UID foreground/active state
+ - User+system power save whitelist
+ - Temporary power save whitelist
+ - Global &quot;force all apps standby&quot; mode enforced by battery saver.
+
+ Test:
+  atest $ANDROID_BUILD_TOP/frameworks/base/services/tests/servicestests/src/com/android/server/AppStateTrackerTest.java
+*/
+var AppStateTracker = {
+
+<span id='com-android-server-AppStateTracker-method-onSystemServicesReady'>/**Call it when the system is ready.
+</span>*/
+onSystemServicesReady : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-setPowerSaveWhitelistAppIds'>/**Called by device idle controller to update the power save whitelists.
+</span>*/
+setPowerSaveWhitelistAppIds : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-addListener'>/**Register a new listener.
+</span>*/
+addListener : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-areAlarmsRestricted'>/**
+</span>@return {Boolean} whether alarms should be restricted for a UID package-name.
+*/
+areAlarmsRestricted : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-areJobsRestricted'>/**
+</span>@return {Boolean} whether jobs should be restricted for a UID package-name.
+*/
+areJobsRestricted : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-areForegroundServicesRestricted'>/**
+</span>@return {Boolean} whether foreground services should be suppressed in the background
+ due to forced app standby for the given app
+*/
+areForegroundServicesRestricted : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-isUidActive'>/**
+</span>@return {Boolean} whether a UID is in active or not *based on cached information.*
+
+ Note this information is based on the UID proc state callback, meaning it's updated
+ asynchronously and may subtly be stale. If the fresh data is needed, use
+ {@link #isUidActiveSynced} instead.
+*/
+isUidActive : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-isUidActiveSynced'>/**
+</span>@return {Boolean} whether a UID is in active or not *right now.*
+
+ This gives the fresh information, but may access the activity manager so is slower.
+*/
+isUidActiveSynced : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-isUidInForeground'>/**
+</span>@return {Boolean} whether a UID is in the foreground or not.
+
+ Note this information is based on the UID proc state callback, meaning it's updated
+ asynchronously and may subtly be stale. If the fresh data is needed, use
+ {@link ActivityManagerInternal#getUidProcessState} instead.
+*/
+isUidInForeground : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-isRunAnyInBackgroundAppOpsAllowed'>/**
+</span>@return {Boolean} whether a UID/package has {@code OP_RUN_ANY_IN_BACKGROUND} allowed or not.
+
+ Note clients normally shouldn't need to access it. It's only for dumpsys.
+*/
+isRunAnyInBackgroundAppOpsAllowed : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-isUidPowerSaveWhitelisted'>/**
+</span>@return {Boolean} whether a UID is in the user / system defined power-save whitelist or not.
+
+ Note clients normally shouldn't need to access it. It's only for dumpsys.
+*/
+isUidPowerSaveWhitelisted : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-isUidPowerSaveUserWhitelisted'>/**
+</span>@param {Number} uid the uid to check for
+@return {Boolean} whether a UID is in the user defined power-save whitelist or not.
+*/
+isUidPowerSaveUserWhitelisted : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-isUidTempPowerSaveWhitelisted'>/**
+</span>@return {Boolean} whether a UID is in the temp power-save whitelist or not.
+
+ Note clients normally shouldn't need to access it. It's only for dumpsys.
+*/
+isUidTempPowerSaveWhitelisted : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-AppStateTracker-method-dumpProto'>/**
+</span>*/
+dumpProto : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

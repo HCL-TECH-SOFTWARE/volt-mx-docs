@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-accessibility-KeyEventDispatcher'>/**@class com.android.server.accessibility.KeyEventDispatcher
+</span> implements android.os.Handler.Callback
+
+@extends java.lang.Object
+
+ Dispatcher to send KeyEvents to all accessibility services that are able to process them.
+ Events that are handled by one or more services are consumed. Events that are not processed
+ by any service (or time out before a service reports them as handled) are passed along to
+ the rest of the system.
+
+ The class assumes that services report their return values in order, which is valid because
+ they process each call to {@code AccessibilityService.onKeyEvent} on a single thread, and so
+ don't see the N+1th event until they have processed the Nth event.
+*/
+var KeyEventDispatcher = {
+
+<span id='com-android-server-accessibility-KeyEventDispatcher-property-MSG_ON_KEY_EVENT_TIMEOUT'>/***/
+</span>MSG_ON_KEY_EVENT_TIMEOUT : &quot;1&quot;,
+<span id='com-android-server-accessibility-KeyEventDispatcher-method-notifyKeyEventLocked'>/**Notify that a new KeyEvent is available to accessibility services. Must be called with the
+</span> lock used to construct this object held. The keyEventFilters list must also be protected
+ by the lock.
+@param {Object {KeyEvent}} event The new key event
+@param {Number} policyFlags Flags for the event
+@param {Object {java.util.List}} keyEventFilters A list of keyEventFilters that should be considered for processing
+ this event
+@return {Boolean} {@code true} if the event was passed to at least one AccessibilityService,
+ {@code false} otherwise.
+*/
+notifyKeyEventLocked : function(  ) {},
+
+<span id='com-android-server-accessibility-KeyEventDispatcher-method-setOnKeyEventResult'>/**Set the result from onKeyEvent from one service.
+</span>@param {Object {KeyEventDispatcher.KeyEventFilter}} keyEventFilter The filter setting the result
+@param {Boolean} handled {@code true} if the service handled the {@code KeyEvent}
+@param {Number} sequence The sequence number of the {@code KeyEvent}
+*/
+setOnKeyEventResult : function(  ) {},
+
+<span id='com-android-server-accessibility-KeyEventDispatcher-method-flush'>/**Flush all pending key events for a service, treating all of them as unhandled
+</span>@param {Object {KeyEventDispatcher.KeyEventFilter}} keyEventFilter The filter for which to flush events
+*/
+flush : function(  ) {},
+
+<span id='com-android-server-accessibility-KeyEventDispatcher-method-handleMessage'>/**
+</span>*/
+handleMessage : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

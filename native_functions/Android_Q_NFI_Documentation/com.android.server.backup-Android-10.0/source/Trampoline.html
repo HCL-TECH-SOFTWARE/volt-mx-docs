@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-backup-Trampoline'>/**@class com.android.server.backup.Trampoline
+</span>@extends IBackupManager.Stub
+
+ A proxy to the {@link com.android.server.backup.BackupManagerService} implementation.
+
+ &lt;p&gt;This is an external interface to the {@link com.android.server.backup.BackupManagerService} which is being accessed via
+ published binder {@link com.android.server.backup.BackupManagerService.Lifecycle}. This lets us turn down the heavy
+ implementation object on the fly without disturbing binders that have been cached somewhere in
+ the system.
+
+ &lt;p&gt;Trampoline determines whether the backup service is available. It can be disabled in the
+ following two ways:
+
+ &lt;ul&gt;
+ &lt;li&gt;Temporary - create the file {@link #BACKUP_SUPPRESS_FILENAME}, or
+ &lt;li&gt;Permanent - set the system property {@link #BACKUP_DISABLE_PROPERTY} to true.
+ &lt;/ul&gt;
+
+ Temporary disabling is controlled by {@link #setBackupServiceActive(int, boolean)} through
+ privileged callers (currently {@link DevicePolicyManager}). This is called on {@link UserHandle#USER_SYSTEM} and disables backup for all users.
+
+ &lt;p&gt;Creation of the backup service is done when {@link UserHandle#USER_SYSTEM} is unlocked. The
+ system user is unlocked before any other users.
+*/
+var Trampoline = {
+
+<span id='com-android-server-backup-Trampoline-method-setBackupServiceActive'>/**Only privileged callers should be changing the backup state. Deactivating backup in the
+</span> system user also deactivates backup in all users. We are not guaranteed that {@code userId}
+ is unlocked at this point yet, so handle both cases.
+*/
+setBackupServiceActive : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-isBackupServiceActive'>/**Querying activity state of backup service. Calling this method before initialize yields
+</span> undefined result.
+@param {Number} userId The user in which the activity state of backup service is queried.
+@return {Boolean} true if the service is active.
+*/
+isBackupServiceActive : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-dataChangedForUser'>/**
+</span>*/
+dataChangedForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-dataChanged'>/**
+</span>*/
+dataChanged : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-initializeTransportsForUser'>/**
+</span>*/
+initializeTransportsForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-clearBackupDataForUser'>/**
+</span>*/
+clearBackupDataForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-clearBackupData'>/**
+</span>*/
+clearBackupData : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-agentConnectedForUser'>/**
+</span>*/
+agentConnectedForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-agentConnected'>/**
+</span>*/
+agentConnected : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-agentDisconnectedForUser'>/**
+</span>*/
+agentDisconnectedForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-agentDisconnected'>/**
+</span>*/
+agentDisconnected : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-restoreAtInstallForUser'>/**
+</span>*/
+restoreAtInstallForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-restoreAtInstall'>/**
+</span>*/
+restoreAtInstall : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-setBackupEnabledForUser'>/**
+</span>*/
+setBackupEnabledForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-setBackupEnabled'>/**
+</span>*/
+setBackupEnabled : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-setAutoRestoreForUser'>/**
+</span>*/
+setAutoRestoreForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-setAutoRestore'>/**
+</span>*/
+setAutoRestore : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-isBackupEnabledForUser'>/**
+</span>*/
+isBackupEnabledForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-isBackupEnabled'>/**
+</span>*/
+isBackupEnabled : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-setBackupPassword'>/**
+</span>*/
+setBackupPassword : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-hasBackupPassword'>/**
+</span>*/
+hasBackupPassword : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-backupNowForUser'>/**
+</span>*/
+backupNowForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-backupNow'>/**
+</span>*/
+backupNow : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-adbBackup'>/**
+</span>*/
+adbBackup : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-fullTransportBackupForUser'>/**
+</span>*/
+fullTransportBackupForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-adbRestore'>/**
+</span>*/
+adbRestore : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-acknowledgeFullBackupOrRestoreForUser'>/**
+</span>*/
+acknowledgeFullBackupOrRestoreForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-acknowledgeFullBackupOrRestore'>/**
+</span>*/
+acknowledgeFullBackupOrRestore : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getCurrentTransportForUser'>/**
+</span>*/
+getCurrentTransportForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getCurrentTransport'>/**
+</span>*/
+getCurrentTransport : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getCurrentTransportComponentForUser'>/**Returns the {@link ComponentName} of the host service of the selected transport or
+</span> {@code null} if no transport selected or if the transport selected is not registered.
+*/
+getCurrentTransportComponentForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-listAllTransportsForUser'>/**
+</span>*/
+listAllTransportsForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-listAllTransports'>/**
+</span>*/
+listAllTransports : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-listAllTransportComponentsForUser'>/**
+</span>*/
+listAllTransportComponentsForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getTransportWhitelist'>/**
+</span>*/
+getTransportWhitelist : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-updateTransportAttributesForUser'>/**
+</span>*/
+updateTransportAttributesForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-selectBackupTransportForUser'>/**
+</span>*/
+selectBackupTransportForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-selectBackupTransport'>/**
+</span>*/
+selectBackupTransport : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-selectBackupTransportAsyncForUser'>/**
+</span>*/
+selectBackupTransportAsyncForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getConfigurationIntentForUser'>/**
+</span>*/
+getConfigurationIntentForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getConfigurationIntent'>/**
+</span>*/
+getConfigurationIntent : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getDestinationStringForUser'>/**
+</span>*/
+getDestinationStringForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getDestinationString'>/**
+</span>*/
+getDestinationString : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getDataManagementIntentForUser'>/**
+</span>*/
+getDataManagementIntentForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getDataManagementIntent'>/**
+</span>*/
+getDataManagementIntent : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getDataManagementLabelForUser'>/**
+</span>*/
+getDataManagementLabelForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-beginRestoreSessionForUser'>/**
+</span>*/
+beginRestoreSessionForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-opCompleteForUser'>/**
+</span>*/
+opCompleteForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-opComplete'>/**
+</span>*/
+opComplete : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getAvailableRestoreTokenForUser'>/**
+</span>*/
+getAvailableRestoreTokenForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-isAppEligibleForBackupForUser'>/**
+</span>*/
+isAppEligibleForBackupForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-filterAppsEligibleForBackupForUser'>/**
+</span>*/
+filterAppsEligibleForBackupForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-requestBackupForUser'>/**
+</span>*/
+requestBackupForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-requestBackup'>/**
+</span>*/
+requestBackup : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-cancelBackupsForUser'>/**
+</span>*/
+cancelBackupsForUser : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-cancelBackups'>/**
+</span>*/
+cancelBackups : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-getUserForAncestralSerialNumber'>/**
+</span>*/
+getUserForAncestralSerialNumber : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-setAncestralSerialNumber'>/**
+</span>*/
+setAncestralSerialNumber : function(  ) {},
+
+<span id='com-android-server-backup-Trampoline-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-backup-TransportManager'>/**@class com.android.server.backup.TransportManager
+</span>@extends java.lang.Object
+
+Handles in-memory bookkeeping of all BackupTransport objects. */
+var TransportManager = {
+
+<span id='com-android-server-backup-TransportManager-property-SERVICE_ACTION_TRANSPORT_HOST'>/***/
+</span>SERVICE_ACTION_TRANSPORT_HOST : &quot;android.backup.TRANSPORT_HOST&quot;,
+<span id='com-android-server-backup-TransportManager-method-setOnTransportRegisteredListener'>/**
+</span>*/
+setOnTransportRegisteredListener : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getCurrentTransportName'>/**Returns the name of the selected transport or {@code null} if no transport selected.
+</span>*/
+getCurrentTransportName : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getCurrentTransportComponent'>/**Returns the {@link ComponentName} of the host service of the selected transport or
+</span> {@code null} if no transport selected.
+@throws TransportNotRegisteredException if the selected transport is not registered.
+*/
+getCurrentTransportComponent : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getTransportName'>/**Returns the transport name associated with {@code transportComponent}.
+</span>@throws TransportNotRegisteredException if the transport is not registered.
+*/
+getTransportName : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getTransportDirName'>/**Retrieves the transport dir name of {@code transportComponent}.
+</span>@throws TransportNotRegisteredException if the transport is not registered.
+*/
+getTransportDirName : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getTransportDirName'>/**Retrieves the transport dir name of {@code transportName}.
+</span>@throws TransportNotRegisteredException if the transport is not registered.
+*/
+getTransportDirName : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getTransportConfigurationIntent'>/**Retrieves the configuration intent of {@code transportName}.
+</span>@throws TransportNotRegisteredException if the transport is not registered.
+*/
+getTransportConfigurationIntent : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getTransportCurrentDestinationString'>/**Retrieves the current destination string of {@code transportName}.
+</span>@throws TransportNotRegisteredException if the transport is not registered.
+*/
+getTransportCurrentDestinationString : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getTransportDataManagementIntent'>/**Retrieves the data management intent of {@code transportName}.
+</span>@throws TransportNotRegisteredException if the transport is not registered.
+*/
+getTransportDataManagementIntent : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getTransportDataManagementLabel'>/**Retrieves the data management label of {@code transportName}.
+</span>@throws TransportNotRegisteredException if the transport is not registered.
+*/
+getTransportDataManagementLabel : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-isTransportRegistered'>/**
+</span>*/
+isTransportRegistered : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-forEachRegisteredTransport'>/**Execute {@code transportConsumer} for each registered transport passing the transport name.
+</span> This is called with an internal lock held, ensuring that the transport will remain registered
+ while {@code transportConsumer} is being executed. Don't do heavy operations in {@code
+ transportConsumer}.
+
+ &lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; Do NOT make any calls to {@link IBackupTransport} or call any variants of
+ {@link TransportClient#connect(String)} here, otherwise you risk deadlock.
+*/
+forEachRegisteredTransport : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-updateTransportAttributes'>/**Updates given values for the transport already registered and identified with {@param
+</span> transportComponent}. If the transport is not registered it will log and return.
+*/
+updateTransportAttributes : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getTransportClient'>/**Returns a {@link TransportClient} for {@code transportName} or {@code null} if not
+</span> registered.
+@param {String} transportName The name of the transport.
+@param {String} caller A {@link String} identifying the caller for logging/debugging purposes. Check
+     {@link TransportClient#connectAsync(TransportConnectionListener, String)} for more
+     details.
+@return {Object {com.android.server.backup.transport.TransportClient}} A {@link TransportClient} or null if not registered.
+*/
+getTransportClient : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getTransportClientOrThrow'>/**Returns a {@link TransportClient} for {@code transportName} or throws if not registered.
+</span>@param {String} transportName The name of the transport.
+@param {String} caller A {@link String} identifying the caller for logging/debugging purposes. Check
+     {@link TransportClient#connectAsync(TransportConnectionListener, String)} for more
+     details.
+@return {Object {com.android.server.backup.transport.TransportClient}} A {@link TransportClient}.
+@throws TransportNotRegisteredException if the transport is not registered.
+*/
+getTransportClientOrThrow : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getCurrentTransportClient'>/**Returns a {@link TransportClient} for the current transport or {@code null} if not
+</span> registered.
+@param {String} caller A {@link String} identifying the caller for logging/debugging purposes. Check
+     {@link TransportClient#connectAsync(TransportConnectionListener, String)} for more
+     details.
+@return {Object {com.android.server.backup.transport.TransportClient}} A {@link TransportClient} or null if not registered.
+@throws IllegalStateException if no transport is selected.
+*/
+getCurrentTransportClient : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-getCurrentTransportClientOrThrow'>/**Returns a {@link TransportClient} for the current transport or throws if not registered.
+</span>@param {String} caller A {@link String} identifying the caller for logging/debugging purposes. Check
+     {@link TransportClient#connectAsync(TransportConnectionListener, String)} for more
+     details.
+@return {Object {com.android.server.backup.transport.TransportClient}} A {@link TransportClient}.
+@throws TransportNotRegisteredException if the transport is not registered.
+@throws IllegalStateException if no transport is selected.
+*/
+getCurrentTransportClientOrThrow : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-disposeOfTransportClient'>/**Disposes of the {@link TransportClient}.
+</span>@param {Object {TransportClient}} transportClient The {@link TransportClient} to be disposed of.
+@param {String} caller A {@link String} identifying the caller for logging/debugging purposes. Check
+     {@link TransportClient#connectAsync(TransportConnectionListener, String)} for more
+     details.
+*/
+disposeOfTransportClient : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-registerAndSelectTransport'>/**Tries to register the transport if not registered. If successful also selects the transport.
+</span>@param {Object {ComponentName}} transportComponent Host of the transport.
+@return {Number} One of {@link BackupManager#SUCCESS}, {@link BackupManager#ERROR_TRANSPORT_INVALID}
+     or {@link BackupManager#ERROR_TRANSPORT_UNAVAILABLE}.
+*/
+registerAndSelectTransport : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-registerTransports'>/**
+</span>*/
+registerTransports : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-dumpTransportClients'>/**
+</span>*/
+dumpTransportClients : function(  ) {},
+
+<span id='com-android-server-backup-TransportManager-method-dumpTransportStats'>/**
+</span>*/
+dumpTransportStats : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

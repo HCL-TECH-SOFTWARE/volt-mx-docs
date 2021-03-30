@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-nfc_extras-NfcExecutionEnvironment'>/**@class com.android.nfc_extras.NfcExecutionEnvironment
+</span>@extends java.lang.Object
+
+*/
+var NfcExecutionEnvironment = {
+
+<span id='com-android-nfc_extras-NfcExecutionEnvironment-property-ACTION_AID_SELECTED'>/** Broadcast Action: An ISO-DEP AID was selected.
+</span>
+ &lt;p&gt;This happens as the result of a 'SELECT AID' command from an
+ external NFC reader/writer.
+
+ &lt;p&gt;Always contains the extra field {@link #EXTRA_AID}
+
+ &lt;p class=&quot;note&quot;&gt;
+ Requires the {@link android.Manifest.permission#WRITE_SECURE_SETTINGS} permission
+ to receive.
+*/
+ACTION_AID_SELECTED : &quot;com.android.nfc_extras.action.AID_SELECTED&quot;,
+<span id='com-android-nfc_extras-NfcExecutionEnvironment-property-EXTRA_AID'>/** Mandatory byte array extra field in {@link #ACTION_AID_SELECTED}.
+</span>
+ &lt;p&gt;Contains the AID selected.
+ @hide
+*/
+EXTRA_AID : &quot;com.android.nfc_extras.extra.AID&quot;,
+<span id='com-android-nfc_extras-NfcExecutionEnvironment-property-ACTION_APDU_RECEIVED'>/** Broadcast action: A filtered APDU was received.
+</span>
+ &lt;p&gt;This happens when an APDU of interest was matched by the Nfc adapter,
+ for instance as the result of matching an externally-configured filter.
+
+ &lt;p&gt;The filter configuration mechanism is not currently defined.
+
+ &lt;p&gt;Always contains the extra field {@link EXTRA_APDU_BYTES}.
+
+ @hide
+*/
+ACTION_APDU_RECEIVED : &quot;com.android.nfc_extras.action.APDU_RECEIVED&quot;,
+<span id='com-android-nfc_extras-NfcExecutionEnvironment-property-EXTRA_APDU_BYTES'>/** Mandatory byte array extra field in {@link #ACTION_APDU_RECEIVED}.
+</span>
+ &lt;p&gt;Contains the bytes of the received APDU.
+
+ @hide
+*/
+EXTRA_APDU_BYTES : &quot;com.android.nfc_extras.extra.APDU_BYTES&quot;,
+<span id='com-android-nfc_extras-NfcExecutionEnvironment-property-ACTION_EMV_CARD_REMOVAL'>/** Broadcast action: An EMV card removal event was detected.
+</span>
+ @hide
+*/
+ACTION_EMV_CARD_REMOVAL : &quot;com.android.nfc_extras.action.EMV_CARD_REMOVAL&quot;,
+<span id='com-android-nfc_extras-NfcExecutionEnvironment-property-ACTION_MIFARE_ACCESS_DETECTED'>/** Broadcast action: An adapter implementing MIFARE Classic via card
+</span> emulation detected that a block has been accessed.
+
+ &lt;p&gt;This may only be issued for the first block that the reader
+ authenticates to.
+
+ &lt;p&gt;May contain the extra field {@link #EXTRA_MIFARE_BLOCK}.
+
+ @hide
+*/
+ACTION_MIFARE_ACCESS_DETECTED : &quot;com.android.nfc_extras.action.MIFARE_ACCESS_DETECTED&quot;,
+<span id='com-android-nfc_extras-NfcExecutionEnvironment-property-EXTRA_MIFARE_BLOCK'>/** Optional integer extra field in {@link #ACTION_MIFARE_ACCESS_DETECTED}.
+</span>
+ &lt;p&gt;Provides the block number being accessed.  If not set, the block
+ number being accessed is unknown.
+
+ @hide
+*/
+EXTRA_MIFARE_BLOCK : &quot;com.android.nfc_extras.extra.MIFARE_BLOCK&quot;,
+<span id='com-android-nfc_extras-NfcExecutionEnvironment-method-open'>/**Open the NFC Execution Environment on its contact interface.
+</span>
+ &lt;p&gt;Opening a channel to the the secure element may fail
+ for a number of reasons:
+ &lt;ul&gt;
+ &lt;li&gt;NFC must be enabled for the connection to the SE to be opened.
+ If it is disabled at the time of this call, an {@link com.android.nfc_extras.EeNfcDisabledException}
+ is thrown.
+
+ &lt;li&gt;Only one process may open the secure element at a time. Additionally,
+ this method is not reentrant. If the secure element is already opened,
+ either by this process or by a different process, an {@link com.android.nfc_extras.EeAlreadyOpenException}
+ is thrown.
+
+ &lt;li&gt;If the connection to the secure element could not be initialized,
+ an {@link com.android.nfc_extras.EeInitializationException} is thrown.
+
+ &lt;li&gt;If the secure element or the NFC controller is activated in listen
+ mode - that is, it is talking over the contactless interface - an
+ {@link com.android.nfc_extras.EeListenModeException} is thrown.
+
+ &lt;li&gt;If the NFC controller is in a field powered by a remote device,
+ such as a payment terminal, an {@link com.android.nfc_extras.EeExternalFieldException} is
+ thrown.
+ &lt;/ul&gt;
+ &lt;p&gt;All other NFC functionality is disabled while the NFC-EE is open
+ on its contact interface, so make sure to call {@link #close} once complete.
+
+ &lt;p class=&quot;note&quot;&gt;
+ Requires the {@link android.Manifest.permission#WRITE_SECURE_SETTINGS} permission.
+@throws EeAlreadyOpenException if the NFC-EE is already open
+@throws EeNfcDisabledException if NFC is disabled
+@throws EeInitializationException if the Secure Element could not be initialized
+@throws EeListenModeException if the NFCC or Secure Element is activated in listen mode
+@throws EeExternalFieldException if the NFCC is in the presence of a remote-powered field
+@throws EeIoException if an unknown error occurs
+*/
+open : function(  ) {},
+
+<span id='com-android-nfc_extras-NfcExecutionEnvironment-method-close'>/**Close the NFC Execution Environment on its contact interface.
+</span>
+ &lt;p class=&quot;note&quot;&gt;
+ Requires the {@link android.Manifest.permission#WRITE_SECURE_SETTINGS} permission.
+@throws IOException if the NFC-EE is already open, or some other error occurs
+*/
+close : function(  ) {},
+
+<span id='com-android-nfc_extras-NfcExecutionEnvironment-method-transceive'>/**Send raw commands to the NFC-EE and receive the response.
+</span>
+ &lt;p class=&quot;note&quot;&gt;
+ Requires the {@link android.Manifest.permission#WRITE_SECURE_SETTINGS} permission.
+@throws IOException if the NFC-EE is not open, or some other error occurs
+*/
+transceive : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-backup-UserBackupManagerService'>/**@class com.android.server.backup.UserBackupManagerService
+</span>@extends java.lang.Object
+
+System service that performs backup/restore operations. */
+var UserBackupManagerService = {
+
+<span id='com-android-server-backup-UserBackupManagerService-property-KEY_WIDGET_STATE'>/***/
+</span>KEY_WIDGET_STATE : &quot;￭￭widget&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-BACKUP_MANIFEST_FILENAME'>/***/
+</span>BACKUP_MANIFEST_FILENAME : &quot;_manifest&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-BACKUP_MANIFEST_VERSION'>/***/
+</span>BACKUP_MANIFEST_VERSION : &quot;1&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-BACKUP_FILE_VERSION'>/***/
+</span>BACKUP_FILE_VERSION : &quot;5&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-BACKUP_FILE_HEADER_MAGIC'>/***/
+</span>BACKUP_FILE_HEADER_MAGIC : &quot;ANDROID BACKUP
+&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-BACKUP_METADATA_FILENAME'>/***/
+</span>BACKUP_METADATA_FILENAME : &quot;_meta&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-BACKUP_METADATA_VERSION'>/***/
+</span>BACKUP_METADATA_VERSION : &quot;1&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-BACKUP_WIDGET_METADATA_TOKEN'>/***/
+</span>BACKUP_WIDGET_METADATA_TOKEN : &quot;33549569&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-SETTINGS_PACKAGE'>/***/
+</span>SETTINGS_PACKAGE : &quot;com.android.providers.settings&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-SHARED_BACKUP_AGENT_PACKAGE'>/***/
+</span>SHARED_BACKUP_AGENT_PACKAGE : &quot;com.android.sharedstoragebackup&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-PACKAGE_MANAGER_SENTINEL'>/***/
+</span>PACKAGE_MANAGER_SENTINEL : &quot;@pm@&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-RUN_BACKUP_ACTION'>/***/
+</span>RUN_BACKUP_ACTION : &quot;android.app.backup.intent.RUN&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-RUN_INITIALIZE_ACTION'>/***/
+</span>RUN_INITIALIZE_ACTION : &quot;android.app.backup.intent.INIT&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-OP_PENDING'>/***/
+</span>OP_PENDING : &quot;0&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-OP_TYPE_BACKUP_WAIT'>/***/
+</span>OP_TYPE_BACKUP_WAIT : &quot;0&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-OP_TYPE_RESTORE_WAIT'>/***/
+</span>OP_TYPE_RESTORE_WAIT : &quot;1&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-property-OP_TYPE_BACKUP'>/***/
+</span>OP_TYPE_BACKUP : &quot;2&quot;,
+<span id='com-android-server-backup-UserBackupManagerService-method-createAndInitializeService'>/**Creates an instance of {@link com.android.server.backup.UserBackupManagerService}.
+</span>@param {Number} userId The user which this service is for.
+@param {Object {Context}} context The system server context.
+@param {Object {Trampoline}} trampoline A reference to the proxy to {@link BackupManagerService}.
+@param {Object {HandlerThread}} userBackupThread The thread running backup/restore operations for the user.
+@param {Object {File}} baseStateDir The directory we store the user's persistent bookkeeping data.
+@param {Object {File}} dataDir The directory we store the user's temporary staging data.
+@param {Object {TransportManager}} transportManager The {@link TransportManager} responsible for handling the user's
+     transports.
+*/
+createAndInitializeService : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getSetupCompleteSettingForUser'>/**Returns the value of {@link Settings.Secure#USER_SETUP_COMPLETE} for the specified user
+</span> {@code userId} as a {@code boolean}.
+*/
+getSetupCompleteSettingForUser : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getUserId'>/**
+</span>*/
+getUserId : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getConstants'>/**
+</span>*/
+getConstants : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getAgentTimeoutParameters'>/**
+</span>*/
+getAgentTimeoutParameters : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getContext'>/**
+</span>*/
+getContext : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getPackageManager'>/**
+</span>*/
+getPackageManager : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getPackageManagerBinder'>/**
+</span>*/
+getPackageManagerBinder : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getActivityManager'>/**
+</span>*/
+getActivityManager : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getAlarmManager'>/**
+</span>*/
+getAlarmManager : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getTransportManager'>/**
+</span>*/
+getTransportManager : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-isEnabled'>/**
+</span>*/
+isEnabled : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setEnabled'>/**
+</span>*/
+setEnabled : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-isSetupComplete'>/**
+</span>*/
+isSetupComplete : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setSetupComplete'>/**
+</span>*/
+setSetupComplete : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getWakelock'>/**
+</span>*/
+getWakelock : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setWorkSource'>/**Sets the {@link WorkSource} of the {@link PowerManager.WakeLock} returned by {@link #getWakelock}().
+</span>*/
+setWorkSource : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getBackupHandler'>/**
+</span>*/
+getBackupHandler : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getRunInitIntent'>/**
+</span>*/
+getRunInitIntent : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getPendingBackups'>/**
+</span>*/
+getPendingBackups : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getQueueLock'>/**
+</span>*/
+getQueueLock : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-isBackupRunning'>/**
+</span>*/
+isBackupRunning : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setBackupRunning'>/**
+</span>*/
+setBackupRunning : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setLastBackupPass'>/**
+</span>*/
+setLastBackupPass : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getClearDataLock'>/**
+</span>*/
+getClearDataLock : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setClearingData'>/**
+</span>*/
+setClearingData : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-isRestoreInProgress'>/**
+</span>*/
+isRestoreInProgress : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setRestoreInProgress'>/**
+</span>*/
+setRestoreInProgress : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getPendingRestores'>/**
+</span>*/
+getPendingRestores : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getActiveRestoreSession'>/**
+</span>*/
+getActiveRestoreSession : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getCurrentOperations'>/**
+</span>*/
+getCurrentOperations : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getCurrentOpLock'>/**
+</span>*/
+getCurrentOpLock : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getAdbBackupRestoreConfirmations'>/**
+</span>*/
+getAdbBackupRestoreConfirmations : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getBaseStateDir'>/**
+</span>*/
+getBaseStateDir : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getDataDir'>/**
+</span>*/
+getDataDir : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getJournal'>/**
+</span>*/
+getJournal : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setJournal'>/**
+</span>*/
+setJournal : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getRng'>/**
+</span>*/
+getRng : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setAncestralPackages'>/**
+</span>*/
+setAncestralPackages : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setAncestralToken'>/**
+</span>*/
+setAncestralToken : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getCurrentToken'>/**
+</span>*/
+getCurrentToken : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setCurrentToken'>/**
+</span>*/
+setCurrentToken : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getPendingInits'>/**
+</span>*/
+getPendingInits : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-clearPendingInits'>/**Clear all pending transport initializations.
+</span>*/
+clearPendingInits : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getRunningFullBackupTask'>/**
+</span>*/
+getRunningFullBackupTask : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setRunningFullBackupTask'>/**
+</span>*/
+setRunningFullBackupTask : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-generateRandomIntegerToken'>/**Utility: build a new random integer token. The low bits are the ordinal of the operation for
+</span>  near-time uniqueness, and the upper bits are random for app-side unpredictability.
+*/
+generateRandomIntegerToken : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-makeMetadataAgent'>/**Construct a backup agent instance for the metadata pseudopackage. This is a process-local
+</span> non-lifecycle agent instance, so we manually set up the context topology for it.
+*/
+makeMetadataAgent : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-makeMetadataAgent'>/**Same as {@link #makeMetadataAgent}() but with explicit package-set configuration.
+</span>*/
+makeMetadataAgent : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-randomBytes'>/**Used for generating random salts or passwords.
+</span>*/
+randomBytes : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setBackupPassword'>/**For adb backup/restore.
+</span>*/
+setBackupPassword : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-hasBackupPassword'>/**For adb backup/restore.
+</span>*/
+hasBackupPassword : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-backupPasswordMatches'>/**For adb backup/restore.
+</span>*/
+backupPasswordMatches : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-recordInitPending'>/**Maintain persistent state around whether need to do an initialize operation. This will lock
+</span> on {@link #getQueueLock}().
+*/
+recordInitPending : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-resetBackupState'>/**Reset all of our bookkeeping because the backend data has been wiped (for example due to idle
+</span> expiry), so we must re-upload all saved settings.
+*/
+resetBackupState : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-logBackupComplete'>/**Called from the backup tasks: record that the given app has been successfully backed up at
+</span> least once. This includes both key/value and full-data backups through the transport.
+*/
+logBackupComplete : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-writeRestoreTokens'>/**Persistently record the current and ancestral backup tokens, as well as the set of packages
+</span> with data available in the ancestral dataset.
+*/
+writeRestoreTokens : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-bindToAgentSynchronous'>/**Fires off a backup agent, blocking until it attaches or times out.
+</span>*/
+bindToAgentSynchronous : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-unbindAgent'>/**Unbind from a backup agent.
+</span>*/
+unbindAgent : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-clearApplicationDataAfterRestoreFailure'>/**Clear an application's data after a failed restore, blocking until the operation completes or
+</span> times out.
+*/
+clearApplicationDataAfterRestoreFailure : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-clearApplicationDataBeforeRestore'>/**Clear an application's data before restore, blocking until the operation completes or times
+</span> out.
+*/
+clearApplicationDataBeforeRestore : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getAvailableRestoreToken'>/**Get the restore-set token for the best-available restore set for this {@code packageName}:
+</span> the active set if possible, else the ancestral one. Returns zero if none available.
+*/
+getAvailableRestoreToken : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-requestBackup'>/**Requests a backup for the inputted {@code packages}.
+</span>@see #requestBackup(String[], IBackupObserver, IBackupManagerMonitor, int).
+*/
+requestBackup : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-requestBackup'>/**Requests a backup for the inputted {@code packages} with a specified {@link IBackupManagerMonitor}.
+</span>*/
+requestBackup : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-cancelBackups'>/**Cancel all running backups.
+</span>*/
+cancelBackups : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-prepareOperationTimeout'>/**Schedule a timeout message for the operation identified by {@code token}.
+</span>*/
+prepareOperationTimeout : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-putOperation'>/**Add an operation to the list of currently running operations. Used for cancellation,
+</span> completion and timeout callbacks that act on the operation via the {@code token}.
+*/
+putOperation : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-removeOperation'>/**Remove an operation from the list of currently running operations. An operation is removed
+</span> when it is completed, cancelled, or timed out, and thus no longer running.
+*/
+removeOperation : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-waitUntilOperationComplete'>/**Block until we received an operation complete message (from the agent or cancellation).
+</span>*/
+waitUntilOperationComplete : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-handleCancel'>/**Cancel the operation associated with {@code token}.
+</span>*/
+handleCancel : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-isBackupOperationInProgress'>/**Returns {@code true} if a backup is currently running, else returns {@code false}.
+</span>*/
+isBackupOperationInProgress : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-tearDownAgentAndKill'>/**Unbind the backup agent and kill the app if it's a non-system app.
+</span>*/
+tearDownAgentAndKill : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-deviceIsEncrypted'>/**For adb backup/restore.
+</span>*/
+deviceIsEncrypted : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-scheduleNextFullBackupJob'>/**Schedule a job to tell us when it's a good time to run a full backup
+</span>*/
+scheduleNextFullBackupJob : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-enqueueFullBackup'>/**Enqueue full backup for the given app, with a note about when it last ran.
+</span>*/
+enqueueFullBackup : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-beginFullBackup'>/**Conditions are right for a full backup operation, so run one.  The model we use is
+</span> to perform one app backup per scheduled job execution, and to reschedule the job
+ with zero latency as long as conditions remain right and we still have work to do.
+
+ &lt;p&gt;This is the &quot;start a full backup operation&quot; entry point called by the scheduled job.
+@return {Boolean} Whether ongoing work will continue.  The return value here will be passed
+ along as the return value to the scheduled job's onStartJob() callback.
+*/
+beginFullBackup : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-endFullBackup'>/**The job scheduler says our constraints don't hold anymore, so tear down any ongoing backup
+</span> task right away.
+*/
+endFullBackup : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-restoreWidgetData'>/**Used by both incremental and full restore to restore widget data.
+</span>*/
+restoreWidgetData : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-dataChangedImpl'>/**Schedule a backup pass for {@code packageName}.
+</span>*/
+dataChangedImpl : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-dataChanged'>/**Sent from an app's backup agent to let the service know that there's new data to backup.
+</span>*/
+dataChanged : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-initializeTransports'>/**Run an initialize operation for the given transport.
+</span>*/
+initializeTransports : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setAncestralSerialNumber'>/**Sets the work profile serial number of the ancestral work profile.
+</span>*/
+setAncestralSerialNumber : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getAncestralSerialNumber'>/**Returns the work profile serial number of the ancestral device. This will be set by
+</span> {@link #setAncestralSerialNumber}(long). Will return {@code -1} if not set.
+*/
+getAncestralSerialNumber : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-clearBackupData'>/**Clear the given package's backup data from the current transport.
+</span>*/
+clearBackupData : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-backupNow'>/**Run a backup pass immediately for any applications that have declared that they have pending
+</span> updates.
+*/
+backupNow : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-adbBackup'>/**Used by 'adb backup' to run a backup pass for packages supplied via the command line, writing
+</span> the resulting data stream to the supplied {@code fd}. This method is synchronous and does not
+ return to the caller until the backup has been completed. It requires on-screen confirmation
+ by the user.
+*/
+adbBackup : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-fullTransportBackup'>/**Run a full backup pass for the given packages. Used by 'adb shell bmgr'.
+</span>*/
+fullTransportBackup : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-adbRestore'>/**Used by 'adb restore' to run a restore pass, blocking until completion. Requires user
+</span> confirmation.
+*/
+adbRestore : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-signalAdbBackupRestoreCompletion'>/**Called when adb backup/restore has completed.
+</span>*/
+signalAdbBackupRestoreCompletion : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-acknowledgeAdbBackupOrRestore'>/**Confirm that the previously-requested full backup/restore operation can proceed. This is used
+</span> to require a user-facing disclosure about the operation.
+*/
+acknowledgeAdbBackupOrRestore : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setBackupEnabled'>/**User-configurable enabling/disabling of backups.
+</span>*/
+setBackupEnabled : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-setAutoRestore'>/**Enable/disable automatic restore of app data at install time.
+</span>*/
+setAutoRestore : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-isBackupEnabled'>/**Report whether the backup mechanism is currently enabled.
+</span>*/
+isBackupEnabled : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getCurrentTransport'>/**Report the name of the currently active transport.
+</span>*/
+getCurrentTransport : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getCurrentTransportComponent'>/**Returns the {@link ComponentName} of the host service of the selected transport or {@code
+</span> null} if no transport selected or if the transport selected is not registered.
+*/
+getCurrentTransportComponent : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-listAllTransports'>/**Report all known, available backup transports by name.
+</span>*/
+listAllTransports : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-listAllTransportComponents'>/**Report all known, available backup transports by component.
+</span>*/
+listAllTransportComponents : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-updateTransportAttributes'>/**Update the attributes of the transport identified by {@code transportComponent}. If the
+</span> specified transport has not been bound at least once (for registration), this call will be
+ ignored. Only the host process of the transport can change its description, otherwise a
+ {@link SecurityException} will be thrown.
+@param {Object {ComponentName}} transportComponent The identity of the transport being described.
+@param {String} name A {@link String} with the new name for the transport. This is NOT for
+     identification. MUST NOT be {@code null}.
+@param {Object {Intent}} configurationIntent An {@link Intent} that can be passed to
+     {@link Context#startActivity} in order to launch the transport's configuration UI. It may
+     be {@code null} if the transport does not offer any user-facing configuration UI.
+@param {String} currentDestinationString A {@link String} describing the destination to which the
+     transport is currently sending data. MUST NOT be {@code null}.
+@param {Object {Intent}} dataManagementIntent An {@link Intent} that can be passed to
+     {@link Context#startActivity} in order to launch the transport's data-management UI. It
+     may be {@code null} if the transport does not offer any user-facing data
+     management UI.
+@param {Object {CharSequence}} dataManagementLabel A {@link CharSequence} to be used as the label for the transport's
+     data management affordance. This MUST be {@code null} when dataManagementIntent is
+     {@code null} and MUST NOT be {@code null} when dataManagementIntent is not {@code null}.
+@throws SecurityException If the UID of the calling process differs from the package UID of
+     {@code transportComponent} or if the caller does NOT have BACKUP permission.
+*/
+updateTransportAttributes : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-selectBackupTransport'>/**Selects transport {@code transportName} and returns previously selected transport.
+</span>@deprecated Use {@link #selectBackupTransportAsync(ComponentName,
+ ISelectBackupTransportCallback)} instead.
+*/
+selectBackupTransport : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-selectBackupTransportAsync'>/**Selects transport {@code transportComponent} asynchronously and notifies {@code listener}
+</span> with the result upon completion.
+*/
+selectBackupTransportAsync : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getConfigurationIntent'>/**Supply the configuration intent for the given transport. If the name is not one of the
+</span> available transports, or if the transport does not supply any configuration UI, the method
+ returns {@code null}.
+*/
+getConfigurationIntent : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getDestinationString'>/**Supply the current destination string for the given transport. If the name is not one of the
+</span> registered transports the method will return null.
+
+ &lt;p&gt;This string is used VERBATIM as the summary text of the relevant Settings item.
+@param {String} transportName The name of the registered transport.
+@return {String} The current destination string or null if the transport is not registered.
+*/
+getDestinationString : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getDataManagementIntent'>/**Supply the manage-data intent for the given transport.
+</span>*/
+getDataManagementIntent : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getDataManagementLabel'>/**Supply the menu label for affordances that fire the manage-data intent for the given
+</span> transport.
+*/
+getDataManagementLabel : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-agentConnected'>/**Callback: a requested backup agent has been instantiated. This should only be called from the
+</span> {@link ActivityManager}.
+*/
+agentConnected : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-agentDisconnected'>/**Callback: a backup agent has failed to come up, or has unexpectedly quit. If the agent failed
+</span> to come up in the first place, the agentBinder argument will be {@code null}. This should
+ only be called from the {@link ActivityManager}.
+*/
+agentDisconnected : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-restoreAtInstall'>/**An application being installed will need a restore pass, then the {@link PackageManager} will
+</span> need to be told when the restore is finished.
+*/
+restoreAtInstall : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-beginRestoreSession'>/**Hand off a restore session.
+</span>*/
+beginRestoreSession : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-clearRestoreSession'>/**Clear the specified restore session.
+</span>*/
+clearRestoreSession : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-opComplete'>/**Note that a currently-active backup agent has notified us that it has completed the given
+</span> outstanding asynchronous backup/restore operation.
+*/
+opComplete : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-isAppEligibleForBackup'>/**Checks if the package is eligible for backup.
+</span>*/
+isAppEligibleForBackup : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-filterAppsEligibleForBackup'>/**Returns the inputted packages that are eligible for backup.
+</span>*/
+filterAppsEligibleForBackup : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-dump'>/**Prints service state for 'dumpsys backup'.
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-backup-UserBackupManagerService-method-getBackupManagerBinder'>/**
+</span>*/
+getBackupManagerBinder : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

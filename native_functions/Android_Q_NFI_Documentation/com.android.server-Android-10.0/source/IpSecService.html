@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-IpSecService'>/**@class com.android.server.IpSecService
+</span>@extends IIpSecService.Stub
+
+ A service to manage multiple clients that want to access the IpSec API. The service is
+ responsible for maintaining a list of clients and managing the resources (and related quotas)
+ that each of them own.
+
+ &lt;p&gt;Synchronization in IpSecService is done on all entrypoints due to potential race conditions at
+ the kernel/xfrm level. Further, this allows the simplifying assumption to be made that only one
+ thread is ever running at a time.
+
+ @hide
+*/
+var IpSecService = {
+
+<span id='com-android-server-IpSecService-method-systemReady'>/**
+</span>*/
+systemReady : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-allocateSecurityParameterIndex'>/**Get a new SPI and maintain the reservation in the system server
+</span>*/
+allocateSecurityParameterIndex : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-releaseSecurityParameterIndex'>/**Release a previously allocated SPI that has been registered with the system server
+</span>*/
+releaseSecurityParameterIndex : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-openUdpEncapsulationSocket'>/**Open a socket via the system server and bind it to the specified port (random if port=0).
+</span> This will return a PFD to the user that represent a bound UDP socket. The system server will
+ cache the socket and a record of its owner so that it can and must be freed when no longer
+ needed.
+*/
+openUdpEncapsulationSocket : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-closeUdpEncapsulationSocket'>/**close a socket that has been been allocated by and registered with the system server
+</span>*/
+closeUdpEncapsulationSocket : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-createTunnelInterface'>/**Create a tunnel interface for use in IPSec tunnel mode. The system server will cache the
+</span> tunnel interface and a record of its owner so that it can and must be freed when no longer
+ needed.
+*/
+createTunnelInterface : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-addAddressToTunnelInterface'>/**Adds a new local address to the tunnel interface. This allows packets to be sent and received
+</span> from multiple local IP addresses over the same tunnel.
+*/
+addAddressToTunnelInterface : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-removeAddressFromTunnelInterface'>/**Remove a new local address from the tunnel interface. After removal, the address will no
+</span> longer be available to send from, or receive on.
+*/
+removeAddressFromTunnelInterface : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-deleteTunnelInterface'>/**Delete a TunnelInterface that has been been allocated by and registered with the system
+</span> server
+*/
+deleteTunnelInterface : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-createTransform'>/**Create a IPsec transform, which represents a single security association in the kernel. The
+</span> transform will be cached by the system server and must be freed when no longer needed. It is
+ possible to free one, deleting the SA from underneath sockets that are using it, which will
+ result in all of those sockets becoming unable to send or receive data.
+*/
+createTransform : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-deleteTransform'>/**Delete a transport mode transform that was previously allocated by + registered with the
+</span> system server. If this is called on an inactive (or non-existent) transform, it will not
+ return an error. It's safe to de-allocate transforms that may have already been deleted for
+ other reasons.
+*/
+deleteTransform : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-applyTransportModeTransform'>/**Apply an active transport mode transform to a socket, which will apply the IPsec security
+</span> association as a correspondent policy to the provided socket
+*/
+applyTransportModeTransform : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-removeTransportModeTransforms'>/**Remove transport mode transforms from a socket, applying the default (empty) policy. This
+</span> ensures that NO IPsec policy is applied to the socket (would be the equivalent of applying a
+ policy that performs no IPsec). Today the resourceId parameter is passed but not used:
+ reserved for future improved input validation.
+*/
+removeTransportModeTransforms : function(  ) {},
+
+<span id='com-android-server-IpSecService-method-applyTunnelModeTransform'>/**Apply an active tunnel mode transform to a TunnelInterface, which will apply the IPsec
+</span> security association as a correspondent policy to the provided interface
+*/
+applyTunnelModeTransform : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

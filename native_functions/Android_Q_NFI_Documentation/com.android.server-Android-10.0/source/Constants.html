@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-DeviceIdleController-Constants'>/**@class com.android.server.DeviceIdleController.Constants
+</span>@extends android.database.ContentObserver
+
+ All times are in milliseconds. These constants are kept synchronized with the system
+ global Settings. Any access to this class or its fields should be done while
+ holding the DeviceIdleController lock.
+*/
+var Constants = {
+
+<span id='com-android-server-DeviceIdleController-Constants-property-LIGHT_IDLE_AFTER_INACTIVE_TIMEOUT'>/** This is the time, after becoming inactive, that we go in to the first
+</span> light-weight idle mode.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_LIGHT_IDLE_AFTER_INACTIVE_TIMEOUT
+*/
+LIGHT_IDLE_AFTER_INACTIVE_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-LIGHT_PRE_IDLE_TIMEOUT'>/** This is amount of time we will wait from the point where we decide we would
+</span> like to go idle until we actually do, while waiting for jobs and other current
+ activity to finish.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_LIGHT_PRE_IDLE_TIMEOUT
+*/
+LIGHT_PRE_IDLE_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-LIGHT_IDLE_TIMEOUT'>/** This is the initial time that we will run in idle maintenance mode.
+</span> @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_LIGHT_IDLE_TIMEOUT
+*/
+LIGHT_IDLE_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-LIGHT_IDLE_FACTOR'>/** Scaling factor to apply to the light idle mode time each time we complete a cycle.
+</span> @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_LIGHT_IDLE_FACTOR
+*/
+LIGHT_IDLE_FACTOR : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-LIGHT_MAX_IDLE_TIMEOUT'>/** This is the maximum time we will run in idle maintenance mode.
+</span> @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_LIGHT_MAX_IDLE_TIMEOUT
+*/
+LIGHT_MAX_IDLE_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-LIGHT_IDLE_MAINTENANCE_MIN_BUDGET'>/** This is the minimum amount of time we want to make available for maintenance mode
+</span> when lightly idling.  That is, we will always have at least this amount of time
+ available maintenance before timing out and cutting off maintenance mode.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_LIGHT_IDLE_MAINTENANCE_MIN_BUDGET
+*/
+LIGHT_IDLE_MAINTENANCE_MIN_BUDGET : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-LIGHT_IDLE_MAINTENANCE_MAX_BUDGET'>/** This is the maximum amount of time we want to make available for maintenance mode
+</span> when lightly idling.  That is, if the system isn't using up its minimum maintenance
+ budget and this time is being added to the budget reserve, this is the maximum
+ reserve size we will allow to grow and thus the maximum amount of time we will
+ allow for the maintenance window.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_LIGHT_IDLE_MAINTENANCE_MAX_BUDGET
+*/
+LIGHT_IDLE_MAINTENANCE_MAX_BUDGET : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-MIN_LIGHT_MAINTENANCE_TIME'>/** This is the minimum amount of time that we will stay in maintenance mode after
+</span> a light doze.  We have this minimum to allow various things to respond to switching
+ in to maintenance mode and scheduling their work -- otherwise we may
+ see there is nothing to do (no jobs pending) and go out of maintenance
+ mode immediately.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_MIN_LIGHT_MAINTENANCE_TIME
+*/
+MIN_LIGHT_MAINTENANCE_TIME : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-MIN_DEEP_MAINTENANCE_TIME'>/** This is the minimum amount of time that we will stay in maintenance mode after
+</span> a full doze.  We have this minimum to allow various things to respond to switching
+ in to maintenance mode and scheduling their work -- otherwise we may
+ see there is nothing to do (no jobs pending) and go out of maintenance
+ mode immediately.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_MIN_DEEP_MAINTENANCE_TIME
+*/
+MIN_DEEP_MAINTENANCE_TIME : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-INACTIVE_TIMEOUT'>/** This is the time, after becoming inactive, at which we start looking at the
+</span> motion sensor to determine if the device is being left alone.  We don't do this
+ immediately after going inactive just because we don't want to be continually running
+ the motion sensor whenever the screen is off.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_INACTIVE_TIMEOUT
+*/
+INACTIVE_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-SENSING_TIMEOUT'>/** If we don't receive a callback from AnyMotion in this amount of time +
+</span> {@link #LOCATING_TIMEOUT}, we will change from
+ STATE_SENSING to STATE_INACTIVE, and any AnyMotion callbacks while not in STATE_SENSING
+ will be ignored.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_SENSING_TIMEOUT
+*/
+SENSING_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-LOCATING_TIMEOUT'>/** This is how long we will wait to try to get a good location fix before going in to
+</span> idle mode.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_LOCATING_TIMEOUT
+*/
+LOCATING_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-LOCATION_ACCURACY'>/** The desired maximum accuracy (in meters) we consider the location to be good enough to go
+</span> on to idle.  We will be trying to get an accuracy fix at least this good or until
+ {@link #LOCATING_TIMEOUT} expires.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_LOCATION_ACCURACY
+*/
+LOCATION_ACCURACY : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-MOTION_INACTIVE_TIMEOUT'>/** This is the time, after seeing motion, that we wait after becoming inactive from
+</span> that until we start looking for motion again.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_MOTION_INACTIVE_TIMEOUT
+*/
+MOTION_INACTIVE_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-IDLE_AFTER_INACTIVE_TIMEOUT'>/** This is the time, after the inactive timeout elapses, that we will wait looking
+</span> for motion until we truly consider the device to be idle.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_IDLE_AFTER_INACTIVE_TIMEOUT
+*/
+IDLE_AFTER_INACTIVE_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-IDLE_PENDING_TIMEOUT'>/** This is the initial time, after being idle, that we will allow ourself to be back
+</span> in the IDLE_MAINTENANCE state allowing the system to run normally until we return to
+ idle.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_IDLE_PENDING_TIMEOUT
+*/
+IDLE_PENDING_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-MAX_IDLE_PENDING_TIMEOUT'>/** Maximum pending idle timeout (time spent running) we will be allowed to use.
+</span> @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_MAX_IDLE_PENDING_TIMEOUT
+*/
+MAX_IDLE_PENDING_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-IDLE_PENDING_FACTOR'>/** Scaling factor to apply to current pending idle timeout each time we cycle through
+</span> that state.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_IDLE_PENDING_FACTOR
+*/
+IDLE_PENDING_FACTOR : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-QUICK_DOZE_DELAY_TIMEOUT'>/** This is amount of time we will wait from the point where we go into
+</span> STATE_QUICK_DOZE_DELAY until we actually go into STATE_IDLE, while waiting for jobs
+ and other current activity to finish.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_QUICK_DOZE_DELAY_TIMEOUT
+*/
+QUICK_DOZE_DELAY_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-IDLE_TIMEOUT'>/** This is the initial time that we want to sit in the idle state before waking up
+</span> again to return to pending idle and allowing normal work to run.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_IDLE_TIMEOUT
+*/
+IDLE_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-MAX_IDLE_TIMEOUT'>/** Maximum idle duration we will be allowed to use.
+</span> @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_MAX_IDLE_TIMEOUT
+*/
+MAX_IDLE_TIMEOUT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-IDLE_FACTOR'>/** Scaling factor to apply to current idle timeout each time we cycle through that state.
+</span> @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_IDLE_FACTOR
+*/
+IDLE_FACTOR : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-MIN_TIME_TO_ALARM'>/** This is the minimum time we will allow until the next upcoming alarm for us to
+</span> actually go in to idle mode.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_MIN_TIME_TO_ALARM
+*/
+MIN_TIME_TO_ALARM : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-MAX_TEMP_APP_WHITELIST_DURATION'>/** Max amount of time to temporarily whitelist an app when it receives a high priority
+</span> tickle.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_MAX_TEMP_APP_WHITELIST_DURATION
+*/
+MAX_TEMP_APP_WHITELIST_DURATION : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-MMS_TEMP_APP_WHITELIST_DURATION'>/** Amount of time we would like to whitelist an app that is receiving an MMS.
+</span> @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_MMS_TEMP_APP_WHITELIST_DURATION
+*/
+MMS_TEMP_APP_WHITELIST_DURATION : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-SMS_TEMP_APP_WHITELIST_DURATION'>/** Amount of time we would like to whitelist an app that is receiving an SMS.
+</span> @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_SMS_TEMP_APP_WHITELIST_DURATION
+*/
+SMS_TEMP_APP_WHITELIST_DURATION : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-NOTIFICATION_WHITELIST_DURATION'>/** Amount of time we would like to whitelist an app that is handling a
+</span> {@link android.app.PendingIntent} triggered by a {@link android.app.Notification}.
+ @see Settings.Global#DEVICE_IDLE_CONSTANTS
+ @see #KEY_NOTIFICATION_WHITELIST_DURATION
+*/
+NOTIFICATION_WHITELIST_DURATION : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-PRE_IDLE_FACTOR_LONG'>/** Pre idle time factor use to make idle delay longer
+</span>*/
+PRE_IDLE_FACTOR_LONG : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-PRE_IDLE_FACTOR_SHORT'>/** Pre idle time factor use to make idle delay shorter
+</span>*/
+PRE_IDLE_FACTOR_SHORT : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-property-WAIT_FOR_UNLOCK'>/***/
+</span>WAIT_FOR_UNLOCK : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-Constants-method-onChange'>/**
+</span>*/
+onChange : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

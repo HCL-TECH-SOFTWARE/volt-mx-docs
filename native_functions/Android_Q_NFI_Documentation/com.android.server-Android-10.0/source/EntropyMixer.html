@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-EntropyMixer'>/**@class com.android.server.EntropyMixer
+</span>@extends android.os.Binder
+
+ A service designed to load and periodically save &amp;quot;randomness&amp;quot;
+ for the Linux kernel RNG and to mix in data from Hardware RNG (if present)
+ into the Linux RNG.
+
+ &lt;p&gt;When a Linux system starts up, the entropy pool associated with
+ {@code /dev/random} may be in a fairly predictable state.  Applications which
+ depend strongly on randomness may find {@code /dev/random} or
+ {@code /dev/urandom} returning predictable data.  In order to counteract
+ this effect, it's helpful to carry the entropy pool information across
+ shutdowns and startups.
+
+ &lt;p&gt;On systems with Hardware RNG (/dev/hw_random), a block of output from HW
+ RNG is mixed into the Linux RNG on EntropyMixer's startup and whenever
+ EntropyMixer periodically runs to save a block of output from Linux RNG on
+ disk. This mixing is done in a way that does not increase the Linux RNG's
+ entropy estimate is not increased. This is to avoid having to trust/verify
+ the quality and authenticity of the &amp;quot;randomness&amp;quot; of the HW RNG.
+
+ &lt;p&gt;This class was modeled after the script in
+ &lt;a href=&quot;http://www.kernel.org/doc/man-pages/online/pages/man4/random.4.html&quot;&gt;man
+ 4 random&lt;/a&gt;.
+*/
+var EntropyMixer = {
+
+
+};</pre>
+</body>
+</html>

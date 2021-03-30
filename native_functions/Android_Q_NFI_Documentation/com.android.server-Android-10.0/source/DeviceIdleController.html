@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-DeviceIdleController'>/**@class com.android.server.DeviceIdleController
+</span> implements com.android.server.AnyMotionDetector.DeviceIdleCallback
+
+@extends com.android.server.SystemService
+
+ Keeps track of device idleness and drives low power mode based on that.
+
+ Test: atest com.android.server.DeviceIdleControllerTest
+
+ Current idling state machine (as of Android Q). This can be visualized using Graphviz:
+   &lt;pre&gt;
+
+   digraph {
+     subgraph deep {
+       label=&quot;deep&quot;;
+
+       STATE_ACTIVE [label=&quot;STATE_ACTIVE\nScreen on OR Charging OR Alarm going off soon&quot;]
+       STATE_INACTIVE [label=&quot;STATE_INACTIVE\nScreen off AND Not charging&quot;]
+       STATE_QUICK_DOZE_DELAY [
+         label=&quot;STATE_QUICK_DOZE_DELAY\n&quot;
+             + &quot;Screen off AND Not charging\n&quot;
+             + &quot;Location, motion detection, and significant motion monitoring turned off&quot;
+       ]
+       STATE_IDLE_PENDING [
+         label=&quot;STATE_IDLE_PENDING\nSignificant motion monitoring turned on&quot;
+       ]
+       STATE_SENSING [label=&quot;STATE_SENSING\nMonitoring for ANY motion&quot;]
+       STATE_LOCATING [
+         label=&quot;STATE_LOCATING\nRequesting location, motion monitoring still on&quot;
+       ]
+       STATE_IDLE [
+         label=&quot;STATE_IDLE\nLocation and motion detection turned off\n&quot;
+             + &quot;Significant motion monitoring state unchanged&quot;
+       ]
+       STATE_IDLE_MAINTENANCE [label=&quot;STATE_IDLE_MAINTENANCE\n&quot;]
+
+       STATE_ACTIVE -&gt; STATE_INACTIVE [
+         label=&quot;becomeInactiveIfAppropriateLocked() AND Quick Doze not enabled&quot;
+       ]
+       STATE_ACTIVE -&gt; STATE_QUICK_DOZE_DELAY [
+         label=&quot;becomeInactiveIfAppropriateLocked() AND Quick Doze enabled&quot;
+       ]
+
+       STATE_INACTIVE -&gt; STATE_ACTIVE [
+         label=&quot;handleMotionDetectedLocked(), becomeActiveLocked()&quot;
+       ]
+       STATE_INACTIVE -&gt; STATE_IDLE_PENDING [label=&quot;stepIdleStateLocked()&quot;]
+       STATE_INACTIVE -&gt; STATE_QUICK_DOZE_DELAY [
+         label=&quot;becomeInactiveIfAppropriateLocked() AND Quick Doze enabled&quot;
+       ]
+
+       STATE_IDLE_PENDING -&gt; STATE_ACTIVE [
+         label=&quot;handleMotionDetectedLocked(), becomeActiveLocked()&quot;
+       ]
+       STATE_IDLE_PENDING -&gt; STATE_SENSING [label=&quot;stepIdleStateLocked()&quot;]
+       STATE_IDLE_PENDING -&gt; STATE_QUICK_DOZE_DELAY [
+         label=&quot;becomeInactiveIfAppropriateLocked() AND Quick Doze enabled&quot;
+       ]
+
+       STATE_SENSING -&gt; STATE_ACTIVE [
+         label=&quot;handleMotionDetectedLocked(), becomeActiveLocked()&quot;
+       ]
+       STATE_SENSING -&gt; STATE_LOCATING [label=&quot;stepIdleStateLocked()&quot;]
+       STATE_SENSING -&gt; STATE_QUICK_DOZE_DELAY [
+         label=&quot;becomeInactiveIfAppropriateLocked() AND Quick Doze enabled&quot;
+       ]
+       STATE_SENSING -&gt; STATE_IDLE [
+         label=&quot;stepIdleStateLocked()\n&quot;
+             + &quot;No Location Manager OR (no Network provider AND no GPS provider)&quot;
+       ]
+
+       STATE_LOCATING -&gt; STATE_ACTIVE [
+         label=&quot;handleMotionDetectedLocked(), becomeActiveLocked()&quot;
+       ]
+       STATE_LOCATING -&gt; STATE_QUICK_DOZE_DELAY [
+         label=&quot;becomeInactiveIfAppropriateLocked() AND Quick Doze enabled&quot;
+       ]
+       STATE_LOCATING -&gt; STATE_IDLE [label=&quot;stepIdleStateLocked()&quot;]
+
+       STATE_QUICK_DOZE_DELAY -&gt; STATE_ACTIVE [
+         label=&quot;handleMotionDetectedLocked(), becomeActiveLocked()&quot;
+       ]
+       STATE_QUICK_DOZE_DELAY -&gt; STATE_IDLE [label=&quot;stepIdleStateLocked()&quot;]
+
+       STATE_IDLE -&gt; STATE_ACTIVE [label=&quot;handleMotionDetectedLocked(), becomeActiveLocked()&quot;]
+       STATE_IDLE -&gt; STATE_IDLE_MAINTENANCE [label=&quot;stepIdleStateLocked()&quot;]
+
+       STATE_IDLE_MAINTENANCE -&gt; STATE_ACTIVE [
+         label=&quot;handleMotionDetectedLocked(), becomeActiveLocked()&quot;
+       ]
+       STATE_IDLE_MAINTENANCE -&gt; STATE_IDLE [
+         label=&quot;stepIdleStateLocked(), exitMaintenanceEarlyIfNeededLocked()&quot;
+       ]
+     }
+
+     subgraph light {
+       label=&quot;light&quot;
+
+       LIGHT_STATE_ACTIVE [
+         label=&quot;LIGHT_STATE_ACTIVE\nScreen on OR Charging OR Alarm going off soon&quot;
+       ]
+       LIGHT_STATE_INACTIVE [label=&quot;LIGHT_STATE_INACTIVE\nScreen off AND Not charging&quot;]
+       LIGHT_STATE_PRE_IDLE [
+         label=&quot;LIGHT_STATE_PRE_IDLE\n&quot;
+             + &quot;Delay going into LIGHT_STATE_IDLE due to some running jobs or alarms&quot;
+       ]
+       LIGHT_STATE_IDLE [label=&quot;LIGHT_STATE_IDLE\n&quot;]
+       LIGHT_STATE_WAITING_FOR_NETWORK [
+         label=&quot;LIGHT_STATE_WAITING_FOR_NETWORK\n&quot;
+             + &quot;Coming out of LIGHT_STATE_IDLE, waiting for network&quot;
+       ]
+       LIGHT_STATE_IDLE_MAINTENANCE [label=&quot;LIGHT_STATE_IDLE_MAINTENANCE\n&quot;]
+       LIGHT_STATE_OVERRIDE [
+         label=&quot;LIGHT_STATE_OVERRIDE\nDevice in deep doze, light no longer changing states&quot;
+       ]
+
+       LIGHT_STATE_ACTIVE -&gt; LIGHT_STATE_INACTIVE [
+         label=&quot;becomeInactiveIfAppropriateLocked()&quot;
+       ]
+       LIGHT_STATE_ACTIVE -&gt; LIGHT_STATE_OVERRIDE [label=&quot;deep goes to STATE_IDLE&quot;]
+
+       LIGHT_STATE_INACTIVE -&gt; LIGHT_STATE_ACTIVE [label=&quot;becomeActiveLocked()&quot;]
+       LIGHT_STATE_INACTIVE -&gt; LIGHT_STATE_PRE_IDLE [label=&quot;active jobs&quot;]
+       LIGHT_STATE_INACTIVE -&gt; LIGHT_STATE_IDLE [label=&quot;no active jobs&quot;]
+       LIGHT_STATE_INACTIVE -&gt; LIGHT_STATE_OVERRIDE [label=&quot;deep goes to STATE_IDLE&quot;]
+
+       LIGHT_STATE_PRE_IDLE -&gt; LIGHT_STATE_ACTIVE [label=&quot;becomeActiveLocked()&quot;]
+       LIGHT_STATE_PRE_IDLE -&gt; LIGHT_STATE_IDLE [
+         label=&quot;stepLightIdleStateLocked(), exitMaintenanceEarlyIfNeededLocked()&quot;
+       ]
+       LIGHT_STATE_PRE_IDLE -&gt; LIGHT_STATE_OVERRIDE [label=&quot;deep goes to STATE_IDLE&quot;]
+
+       LIGHT_STATE_IDLE -&gt; LIGHT_STATE_ACTIVE [label=&quot;becomeActiveLocked()&quot;]
+       LIGHT_STATE_IDLE -&gt; LIGHT_STATE_WAITING_FOR_NETWORK [label=&quot;no network&quot;]
+       LIGHT_STATE_IDLE -&gt; LIGHT_STATE_IDLE_MAINTENANCE
+       LIGHT_STATE_IDLE -&gt; LIGHT_STATE_OVERRIDE [label=&quot;deep goes to STATE_IDLE&quot;]
+
+       LIGHT_STATE_WAITING_FOR_NETWORK -&gt; LIGHT_STATE_ACTIVE [label=&quot;becomeActiveLocked()&quot;]
+       LIGHT_STATE_WAITING_FOR_NETWORK -&gt; LIGHT_STATE_IDLE_MAINTENANCE
+       LIGHT_STATE_WAITING_FOR_NETWORK -&gt; LIGHT_STATE_OVERRIDE [
+         label=&quot;deep goes to STATE_IDLE&quot;
+       ]
+
+       LIGHT_STATE_IDLE_MAINTENANCE -&gt; LIGHT_STATE_ACTIVE [label=&quot;becomeActiveLocked()&quot;]
+       LIGHT_STATE_IDLE_MAINTENANCE -&gt; LIGHT_STATE_IDLE [
+         label=&quot;stepLightIdleStateLocked(), exitMaintenanceEarlyIfNeededLocked()&quot;
+       ]
+       LIGHT_STATE_IDLE_MAINTENANCE -&gt; LIGHT_STATE_OVERRIDE [label=&quot;deep goes to STATE_IDLE&quot;]
+
+       LIGHT_STATE_OVERRIDE -&gt; LIGHT_STATE_ACTIVE [
+         label=&quot;handleMotionDetectedLocked(), becomeActiveLocked()&quot;
+       ]
+     }
+   }
+   &lt;/pre&gt;
+*/
+var DeviceIdleController = {
+
+<span id='com-android-server-DeviceIdleController-property-mConfigFile'>/***/
+</span>mConfigFile : &quot;null&quot;,
+<span id='com-android-server-DeviceIdleController-method-onAnyMotionResult'>/**
+</span>*/
+onAnyMotionResult : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-onStart'>/**
+</span>*/
+onStart : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-onBootPhase'>/**
+</span>*/
+onBootPhase : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-addPowerSaveWhitelistAppInternal'>/**
+</span>*/
+addPowerSaveWhitelistAppInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-removePowerSaveWhitelistAppInternal'>/**
+</span>*/
+removePowerSaveWhitelistAppInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-getPowerSaveWhitelistAppInternal'>/**
+</span>*/
+getPowerSaveWhitelistAppInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-restoreSystemPowerWhitelistAppInternal'>/**
+</span>*/
+restoreSystemPowerWhitelistAppInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-removeSystemPowerWhitelistAppInternal'>/**
+</span>*/
+removeSystemPowerWhitelistAppInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-addPowerSaveWhitelistExceptIdleInternal'>/**
+</span>*/
+addPowerSaveWhitelistExceptIdleInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-resetPowerSaveWhitelistExceptIdleInternal'>/**
+</span>*/
+resetPowerSaveWhitelistExceptIdleInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-getPowerSaveWhitelistExceptIdleInternal'>/**
+</span>*/
+getPowerSaveWhitelistExceptIdleInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-getSystemPowerWhitelistExceptIdleInternal'>/**
+</span>*/
+getSystemPowerWhitelistExceptIdleInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-getSystemPowerWhitelistInternal'>/**
+</span>*/
+getSystemPowerWhitelistInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-getRemovedSystemPowerWhitelistAppsInternal'>/**
+</span>*/
+getRemovedSystemPowerWhitelistAppsInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-getUserPowerWhitelistInternal'>/**
+</span>*/
+getUserPowerWhitelistInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-getFullPowerWhitelistExceptIdleInternal'>/**
+</span>*/
+getFullPowerWhitelistExceptIdleInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-getFullPowerWhitelistInternal'>/**
+</span>*/
+getFullPowerWhitelistInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-isPowerSaveWhitelistExceptIdleAppInternal'>/**
+</span>*/
+isPowerSaveWhitelistExceptIdleAppInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-isPowerSaveWhitelistAppInternal'>/**
+</span>*/
+isPowerSaveWhitelistAppInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-getAppIdWhitelistExceptIdleInternal'>/**
+</span>*/
+getAppIdWhitelistExceptIdleInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-getAppIdWhitelistInternal'>/**
+</span>*/
+getAppIdWhitelistInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-getAppIdUserWhitelistInternal'>/**
+</span>*/
+getAppIdUserWhitelistInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-getAppIdTempWhitelistInternal'>/**
+</span>*/
+getAppIdTempWhitelistInternal : function(  ) {},
+
+<span id='com-android-server-DeviceIdleController-method-exitIdleInternal'>/**
+</span>*/
+exitIdleInternal : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

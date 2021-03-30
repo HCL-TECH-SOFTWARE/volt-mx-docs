@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-backup-fullbackup-PerformFullTransportBackupTask'>/**@class com.android.server.backup.fullbackup.PerformFullTransportBackupTask
+</span> implements com.android.server.backup.BackupRestoreTask
+
+@extends com.android.server.backup.fullbackup.FullBackupTask
+
+ Full backup task extension used for transport-oriented operation.
+
+ Flow:
+ For each requested package:
+     - Spin off a new SinglePackageBackupRunner (mBackupRunner) for the current package.
+     - Wait until preflight is complete. (mBackupRunner.getPreflightResultBlocking())
+     - If preflight data size is within limit, start reading data from agent pipe and writing
+       to transport pipe. While there is data to send, call transport.sendBackupData(int) to
+       tell the transport how many bytes to expect on its pipe.
+     - After sending all data, call transport.finishBackup() if things went well. And
+       transport.cancelFullBackup() otherwise.
+
+ Interactions with mCurrentOperations:
+     - An entry for this object is added to mCurrentOperations for the entire lifetime of this
+       object. Used to cancel the operation.
+     - SinglePackageBackupRunner and SinglePackageBackupPreflight will put ephemeral entries
+       to get timeouts or operation complete callbacks.
+
+ Handling cancels:
+     - The contract we provide is that the task won't interact with the transport after
+       handleCancel() is done executing.
+     - This task blocks at 3 points: 1. Preflight result check 2. Reading on agent side pipe
+       and 3. Get backup result from mBackupRunner.
+     - Bubbling up handleCancel to mBackupRunner handles all 3: 1. Calls handleCancel on the
+       preflight operation which counts down on the preflight latch. 2. Tears down the agent,
+       so read() returns -1. 3. Notifies mCurrentOpLock which unblocks
+       mBackupRunner.getBackupResultBlocking().
+*/
+var PerformFullTransportBackupTask = {
+
+<span id='com-android-server-backup-fullbackup-PerformFullTransportBackupTask-method-newWithCurrentTransport'>/**
+</span>*/
+newWithCurrentTransport : function(  ) {},
+
+<span id='com-android-server-backup-fullbackup-PerformFullTransportBackupTask-method-unregisterTask'>/**
+</span>*/
+unregisterTask : function(  ) {},
+
+<span id='com-android-server-backup-fullbackup-PerformFullTransportBackupTask-method-execute'>/**
+</span>*/
+execute : function(  ) {},
+
+<span id='com-android-server-backup-fullbackup-PerformFullTransportBackupTask-method-handleCancel'>/**
+</span>*/
+handleCancel : function(  ) {},
+
+<span id='com-android-server-backup-fullbackup-PerformFullTransportBackupTask-method-operationComplete'>/**
+</span>*/
+operationComplete : function(  ) {},
+
+<span id='com-android-server-backup-fullbackup-PerformFullTransportBackupTask-method-run'>/**
+</span>*/
+run : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

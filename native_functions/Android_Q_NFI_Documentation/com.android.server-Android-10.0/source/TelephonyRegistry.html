@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-TelephonyRegistry'>/**@class com.android.server.TelephonyRegistry
+</span>@extends ITelephonyRegistry.Stub
+
+ Since phone process can be restarted, this class provides a centralized place
+ that applications can register and be called back from.
+
+ Change-Id: I450c968bda93767554b5188ee63e10c9f43c5aa4 fixes bugs 16148026
+ and 15973975 by saving the phoneId of the registrant and then using the
+ phoneId when deciding to to make a callback. This is necessary because
+ a subId changes from to a dummy value when a SIM is removed and thus won't
+ compare properly. Because SubscriptionManager.getPhoneId(int subId) handles
+ the dummy value conversion we properly do the callbacks.
+
+ Eventually we may want to remove the notion of dummy value but for now this
+ looks like the best approach.
+*/
+var TelephonyRegistry = {
+
+<span id='com-android-server-TelephonyRegistry-method-systemRunning'>/**
+</span>*/
+systemRunning : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-addOnSubscriptionsChangedListener'>/**
+</span>*/
+addOnSubscriptionsChangedListener : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-removeOnSubscriptionsChangedListener'>/**
+</span>*/
+removeOnSubscriptionsChangedListener : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-addOnOpportunisticSubscriptionsChangedListener'>/**
+</span>*/
+addOnOpportunisticSubscriptionsChangedListener : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifySubscriptionInfoChanged'>/**
+</span>*/
+notifySubscriptionInfoChanged : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyOpportunisticSubscriptionInfoChanged'>/**
+</span>*/
+notifyOpportunisticSubscriptionInfoChanged : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-listen'>/**
+</span>*/
+listen : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-listenForSubscriber'>/**
+</span>*/
+listenForSubscriber : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyCallState'>/**
+</span>*/
+notifyCallState : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyCallStateForPhoneId'>/**
+</span>*/
+notifyCallStateForPhoneId : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyServiceStateForPhoneId'>/**
+</span>*/
+notifyServiceStateForPhoneId : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifySimActivationStateChangedForPhoneId'>/**
+</span>*/
+notifySimActivationStateChangedForPhoneId : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifySignalStrengthForPhoneId'>/**
+</span>*/
+notifySignalStrengthForPhoneId : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyCarrierNetworkChange'>/**
+</span>*/
+notifyCarrierNetworkChange : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyCellInfo'>/**
+</span>*/
+notifyCellInfo : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyCellInfoForSubscriber'>/**
+</span>*/
+notifyCellInfoForSubscriber : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyPhysicalChannelConfiguration'>/**
+</span>*/
+notifyPhysicalChannelConfiguration : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyPhysicalChannelConfigurationForSubscriber'>/**
+</span>*/
+notifyPhysicalChannelConfigurationForSubscriber : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyMessageWaitingChangedForPhoneId'>/**
+</span>*/
+notifyMessageWaitingChangedForPhoneId : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyUserMobileDataStateChangedForPhoneId'>/**
+</span>*/
+notifyUserMobileDataStateChangedForPhoneId : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyCallForwardingChanged'>/**
+</span>*/
+notifyCallForwardingChanged : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyCallForwardingChangedForSubscriber'>/**
+</span>*/
+notifyCallForwardingChangedForSubscriber : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyDataActivity'>/**
+</span>*/
+notifyDataActivity : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyDataActivityForSubscriber'>/**
+</span>*/
+notifyDataActivityForSubscriber : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyDataConnection'>/**
+</span>*/
+notifyDataConnection : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyDataConnectionForSubscriber'>/**
+</span>*/
+notifyDataConnectionForSubscriber : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyDataConnectionFailed'>/**
+</span>*/
+notifyDataConnectionFailed : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyDataConnectionFailedForSubscriber'>/**
+</span>*/
+notifyDataConnectionFailedForSubscriber : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyCellLocation'>/**
+</span>*/
+notifyCellLocation : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyCellLocationForSubscriber'>/**
+</span>*/
+notifyCellLocationForSubscriber : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyOtaspChanged'>/**
+</span>*/
+notifyOtaspChanged : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyPreciseCallState'>/**
+</span>*/
+notifyPreciseCallState : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyDisconnectCause'>/**
+</span>*/
+notifyDisconnectCause : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyImsDisconnectCause'>/**
+</span>*/
+notifyImsDisconnectCause : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyPreciseDataConnectionFailed'>/**
+</span>*/
+notifyPreciseDataConnectionFailed : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifySrvccStateChanged'>/**
+</span>*/
+notifySrvccStateChanged : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyOemHookRawEventForSubscriber'>/**
+</span>*/
+notifyOemHookRawEventForSubscriber : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyPhoneCapabilityChanged'>/**
+</span>*/
+notifyPhoneCapabilityChanged : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyActiveDataSubIdChanged'>/**
+</span>*/
+notifyActiveDataSubIdChanged : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyRadioPowerStateChanged'>/**
+</span>*/
+notifyRadioPowerStateChanged : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyEmergencyNumberList'>/**
+</span>*/
+notifyEmergencyNumberList : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-notifyCallQualityChanged'>/**
+</span>*/
+notifyCallQualityChanged : function(  ) {},
+
+<span id='com-android-server-TelephonyRegistry-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

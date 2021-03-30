@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-GraphicsStatsService'>/**@class com.android.server.GraphicsStatsService
+</span>@extends IGraphicsStats.Stub
+
+ This service's job is to collect aggregate rendering profile data. It
+ does this by allowing rendering processes to request an ashmem buffer
+ to place their stats into.
+
+ Buffers are rotated on a daily (in UTC) basis and only the 3 most-recent days
+ are kept.
+
+ The primary consumer of this is incident reports and automated metric checking. It is not
+ intended for end-developer consumption, for that we have gfxinfo.
+
+ Buffer rotation process:
+ 1) Alarm fires
+ 2) onRotateGraphicsStatsBuffer() is sent to all active processes
+ 3) Upon receiving the callback, the process will stop using the previous ashmem buffer and
+    request a new one.
+ 4) When that request is received we now know that the ashmem region is no longer in use so
+    it gets queued up for saving to disk and a new ashmem region is created and returned
+    for the process to use.
+
+  @hide */
+var GraphicsStatsService = {
+
+<span id='com-android-server-GraphicsStatsService-property-GRAPHICS_STATS_SERVICE'>/***/
+</span>GRAPHICS_STATS_SERVICE : &quot;graphicsstats&quot;,
+<span id='com-android-server-GraphicsStatsService-method-requestBufferForProcess'>/**
+</span>*/
+requestBufferForProcess : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

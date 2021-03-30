@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-accessibility-MagnificationController'>/**@class com.android.server.accessibility.MagnificationController
+</span>@extends java.lang.Object
+
+ This class is used to control and query the state of display magnification
+ from the accessibility manager and related classes. It is responsible for
+ holding the current state of magnification and animation, and it handles
+ communication between the accessibility manager and window manager.
+
+ Magnification is limited to the range [MIN_SCALE, MAX_SCALE], and can only occur inside the
+ magnification region. If a value is out of bounds, it will be adjusted to guarantee these
+ constraints.
+*/
+var MagnificationController = {
+
+<span id='com-android-server-accessibility-MagnificationController-property-MIN_SCALE'>/***/
+</span>MIN_SCALE : &quot;1.0&quot;,
+<span id='com-android-server-accessibility-MagnificationController-property-MAX_SCALE'>/***/
+</span>MAX_SCALE : &quot;8.0&quot;,
+<span id='com-android-server-accessibility-MagnificationController-method-register'>/**Start tracking the magnification region for services that control magnification and the
+</span> magnification gesture handler.
+
+ This tracking imposes a cost on the system, so we avoid tracking this data unless it's
+ required.
+@param {Number} displayId The logical display id.
+*/
+register : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-unregister'>/**Stop requiring tracking the magnification region. We may remain registered while we
+</span> reset magnification.
+@param {Number} displayId The logical display id.
+*/
+unregister : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-unregisterAll'>/**Stop tracking all displays' magnification region.
+</span>*/
+unregisterAll : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-onDisplayRemoved'>/**Remove the display magnification with given id.
+</span>@param {Number} displayId The logical display id.
+*/
+onDisplayRemoved : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-isRegistered'>/**Check if we are registered on specified display. Note that we may be planning to unregister
+</span> at any moment.
+@param {Number} displayId The logical display id.
+@param displayId The logical display id.
+*/
+isRegistered : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-isMagnifying'>/**
+</span>@param {Number} displayId The logical display id.
+@return {Boolean} {@code true} if magnification is active, e.g. the scale
+         is &gt; 1, {@code false} otherwise
+*/
+isMagnifying : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-magnificationRegionContains'>/**Returns whether the magnification region contains the specified
+</span> screen-relative coordinates.
+@param {Number} displayId The logical display id.
+@param {Number} x the screen-relative X coordinate to check
+@param {Number} y the screen-relative Y coordinate to check
+@return {Boolean} {@code true} if the coordinate is contained within the
+         magnified region, or {@code false} otherwise
+*/
+magnificationRegionContains : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-getMagnificationBounds'>/**Populates the specified rect with the screen-relative bounds of the
+</span> magnification region. If magnification is not enabled, the returned
+ bounds will be empty.
+@param {Number} displayId The logical display id.
+@param {Object {Rect}} outBounds rect to populate with the bounds of the magnified
+                  region
+*/
+getMagnificationBounds : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-getMagnificationRegion'>/**Populates the specified region with the screen-relative magnification
+</span> region. If magnification is not enabled, then the returned region
+ will be empty.
+@param {Number} displayId The logical display id.
+@param {Object {Region}} outRegion the region to populate
+*/
+getMagnificationRegion : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-getScale'>/**Returns the magnification scale. If an animation is in progress,
+</span> this reflects the end state of the animation.
+@param {Number} displayId The logical display id.
+@return {Number} the scale
+*/
+getScale : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-getOffsetX'>/**Returns the X offset of the magnification viewport. If an animation
+</span> is in progress, this reflects the end state of the animation.
+@param {Number} displayId The logical display id.
+@return {Number} the X offset
+*/
+getOffsetX : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-getCenterX'>/**Returns the screen-relative X coordinate of the center of the
+</span> magnification viewport.
+@param {Number} displayId The logical display id.
+@return {Number} the X coordinate
+*/
+getCenterX : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-getOffsetY'>/**Returns the Y offset of the magnification viewport. If an animation
+</span> is in progress, this reflects the end state of the animation.
+@param {Number} displayId The logical display id.
+@return {Number} the Y offset
+*/
+getOffsetY : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-getCenterY'>/**Returns the screen-relative Y coordinate of the center of the
+</span> magnification viewport.
+@param {Number} displayId The logical display id.
+@return {Number} the Y coordinate
+*/
+getCenterY : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-reset'>/**Resets the magnification scale and center, optionally animating the
+</span> transition.
+@param {Number} displayId The logical display id.
+@param {Boolean} animate {@code true} to animate the transition, {@code false}
+                to transition immediately
+@return {Boolean} {@code true} if the magnification spec changed, {@code false} if
+         the spec did not change
+*/
+reset : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-setScale'>/**Scales the magnified region around the specified pivot point,
+</span> optionally animating the transition. If animation is disabled, the
+ transition is immediate.
+@param {Number} displayId The logical display id.
+@param {Number} scale the target scale, must be &gt;= 1
+@param {Number} pivotX the screen-relative X coordinate around which to scale
+@param {Number} pivotY the screen-relative Y coordinate around which to scale
+@param {Boolean} animate {@code true} to animate the transition, {@code false}
+                to transition immediately
+@param {Number} id the ID of the service requesting the change
+@return {Boolean} {@code true} if the magnification spec changed, {@code false} if
+         the spec did not change
+*/
+setScale : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-setCenter'>/**Sets the center of the magnified region, optionally animating the
+</span> transition. If animation is disabled, the transition is immediate.
+@param {Number} displayId The logical display id.
+@param {Number} centerX the screen-relative X coordinate around which to
+                center
+@param {Number} centerY the screen-relative Y coordinate around which to
+                center
+@param {Boolean} animate {@code true} to animate the transition, {@code false}
+                to transition immediately
+@param {Number} id      the ID of the service requesting the change
+@return {Boolean} {@code true} if the magnification spec changed, {@code false} if
+ the spec did not change
+*/
+setCenter : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-setScaleAndCenter'>/**Sets the scale and center of the magnified region, optionally
+</span> animating the transition. If animation is disabled, the transition
+ is immediate.
+@param {Number} displayId The logical display id.
+@param {Number} scale the target scale, or {@link Float#NaN} to leave unchanged
+@param {Number} centerX the screen-relative X coordinate around which to
+                center and scale, or {@link Float#NaN} to leave unchanged
+@param {Number} centerY the screen-relative Y coordinate around which to
+                center and scale, or {@link Float#NaN} to leave unchanged
+@param {Boolean} animate {@code true} to animate the transition, {@code false}
+                to transition immediately
+@param {Number} id the ID of the service requesting the change
+@return {Boolean} {@code true} if the magnification spec changed, {@code false} if
+         the spec did not change
+*/
+setScaleAndCenter : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-offsetMagnifiedRegion'>/**Offsets the magnified region. Note that the offsetX and offsetY values actually move in the
+</span> opposite direction as the offsets passed in here.
+@param {Number} displayId The logical display id.
+@param {Number} offsetX the amount in pixels to offset the region in the X direction, in current
+                screen pixels.
+@param {Number} offsetY the amount in pixels to offset the region in the Y direction, in current
+                screen pixels.
+@param {Number} id      the ID of the service requesting the change
+*/
+offsetMagnifiedRegion : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-getIdOfLastServiceToMagnify'>/**Get the ID of the last service that changed the magnification spec.
+</span>@param {Number} displayId The logical display id.
+@return {Number} The id
+*/
+getIdOfLastServiceToMagnify : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-persistScale'>/**Persists the default display magnification scale to the current user's settings.
+</span>*/
+persistScale : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-getPersistedScale'>/**Retrieves a previously persisted magnification scale from the current
+</span> user's settings.
+@return {Number} the previously persisted magnification scale, or the default
+         scale if none is available
+*/
+getPersistedScale : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-setUserId'>/**Sets the currently active user ID.
+</span>@param {Number} userId the currently active user ID
+*/
+setUserId : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-resetAllIfNeeded'>/**Resets all displays' magnification if last magnifying service is disabled.
+</span>@param {Number} connectionId
+*/
+resetAllIfNeeded : function(  ) {},
+
+<span id='com-android-server-accessibility-MagnificationController-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>
