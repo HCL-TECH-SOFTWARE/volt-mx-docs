@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-connectivity-NetworkAgentInfo'>/**@class com.android.server.connectivity.NetworkAgentInfo
+</span> implements java.lang.Comparable
+
+@extends java.lang.Object
+
+ A bag class used by ConnectivityService for holding a collection of most recent
+ information published by a particular NetworkAgent as well as the
+ AsyncChannel/messenger for reaching that NetworkAgent and lists of NetworkRequests
+ interested in using it.  Default sort order is descending by score.
+*/
+var NetworkAgentInfo = {
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-networkInfo'>/***/
+</span>networkInfo : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-network'>/***/
+</span>network : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-linkProperties'>/***/
+</span>linkProperties : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-networkCapabilities'>/***/
+</span>networkCapabilities : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-networkMisc'>/***/
+</span>networkMisc : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-created'>/***/
+</span>created : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-everConnected'>/***/
+</span>everConnected : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-everValidated'>/***/
+</span>everValidated : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-lastValidated'>/***/
+</span>lastValidated : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-avoidUnvalidated'>/***/
+</span>avoidUnvalidated : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-everCaptivePortalDetected'>/***/
+</span>everCaptivePortalDetected : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-lastCaptivePortalDetected'>/***/
+</span>lastCaptivePortalDetected : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-captivePortalValidationPending'>/***/
+</span>captivePortalValidationPending : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-partialConnectivity'>/***/
+</span>partialConnectivity : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-EVENT_NETWORK_LINGER_COMPLETE'>/** Inform ConnectivityService that the network LINGER period has
+</span> expired.
+ obj = this NetworkAgentInfo
+*/
+EVENT_NETWORK_LINGER_COMPLETE : &quot;1001&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-messenger'>/***/
+</span>messenger : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-asyncChannel'>/***/
+</span>asyncChannel : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-factorySerialNumber'>/***/
+</span>factorySerialNumber : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-property-clatd'>/***/
+</span>clatd : &quot;null&quot;,
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-onNetworkMonitorCreated'>/**Inform NetworkAgentInfo that a new NetworkMonitor was created.
+</span>*/
+onNetworkMonitorCreated : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-setNetworkCapabilities'>/**Set the NetworkCapabilities on this NetworkAgentInfo. Also attempts to notify NetworkMonitor
+</span> of the new capabilities, if NetworkMonitor has been created.
+
+ &lt;p&gt;If {@link NetworkMonitor#notifyNetworkCapabilitiesChanged(NetworkCapabilities)} fails,
+ the exception is logged but not reported to callers.
+*/
+setNetworkCapabilities : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-connService'>/**
+</span>*/
+connService : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-netMisc'>/**
+</span>*/
+netMisc : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-handler'>/**
+</span>*/
+handler : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-network'>/**
+</span>*/
+network : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-networkMonitor'>/**Get the NetworkMonitorManager in this NetworkAgentInfo.
+</span>
+ &lt;p&gt;This will be null before {@link #onNetworkMonitorCreated}(INetworkMonitor) is called.
+*/
+networkMonitor : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-addRequest'>/**Add {@code networkRequest} to this network as it's satisfied by this network.
+</span>@return {Boolean} true if {@code networkRequest} was added or false if {@code networkRequest} was
+         already present.
+*/
+addRequest : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-removeRequest'>/**Remove the specified request from this network.
+</span>*/
+removeRequest : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-isSatisfyingRequest'>/**Returns whether this network is currently satisfying the request with the specified ID.
+</span>*/
+isSatisfyingRequest : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-requestAt'>/**Returns the request at the specified position in the list of requests satisfied by this
+</span> network.
+*/
+requestAt : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-numRequestNetworkRequests'>/**Returns the number of requests currently satisfied by this network for which
+</span> {@link android.net.NetworkRequest#isRequest} returns {@code true}.
+*/
+numRequestNetworkRequests : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-numBackgroundNetworkRequests'>/**Returns the number of requests currently satisfied by this network of type
+</span> {@link android.net.NetworkRequest.Type.BACKGROUND_REQUEST}.
+*/
+numBackgroundNetworkRequests : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-numForegroundNetworkRequests'>/**Returns the number of foreground requests currently satisfied by this network.
+</span>*/
+numForegroundNetworkRequests : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-numNetworkRequests'>/**Returns the number of requests of any type currently satisfied by this network.
+</span>*/
+numNetworkRequests : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-isBackgroundNetwork'>/**Returns whether the network is a background network. A network is a background network if it
+</span> does not have the NET_CAPABILITY_FOREGROUND capability, which implies it is satisfying no
+ foreground request, is not lingering (i.e. kept for a while after being outscored), and is
+ not a speculative network (i.e. kept pending validation when validation would have it
+ outscore another foreground network). That implies it is being kept up by some background
+ request (otherwise it would be torn down), maybe the mobile always-on request.
+*/
+isBackgroundNetwork : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-isSuspended'>/**Returns whether this network is currently suspended. A network is suspended if it is still
+</span> connected but data temporarily fails to transfer. See {@link NetworkInfo.State#SUSPENDED}
+ and {@link NetworkCapabilities#NET_CAPABILITY_NOT_SUSPENDED}.
+*/
+isSuspended : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-satisfies'>/**
+</span>*/
+satisfies : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-satisfiesImmutableCapabilitiesOf'>/**
+</span>*/
+satisfiesImmutableCapabilitiesOf : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-isVPN'>/**
+</span>*/
+isVPN : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-getCurrentScore'>/**
+</span>*/
+getCurrentScore : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-getCurrentScoreAsValidated'>/**
+</span>*/
+getCurrentScoreAsValidated : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-setCurrentScore'>/**
+</span>*/
+setCurrentScore : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-getNetworkState'>/**
+</span>*/
+getNetworkState : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-lingerRequest'>/**Sets the specified request to linger on this network for the specified time. Called by
+</span> ConnectivityService when the request is moved to another network with a higher score.
+*/
+lingerRequest : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-unlingerRequest'>/**Cancel lingering. Called by ConnectivityService when a request is added to this network.
+</span> Returns true if the given request was lingering on this network, false otherwise.
+*/
+unlingerRequest : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-getLingerExpiry'>/**
+</span>*/
+getLingerExpiry : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-updateLingerTimer'>/**
+</span>*/
+updateLingerTimer : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-linger'>/**
+</span>*/
+linger : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-unlinger'>/**
+</span>*/
+unlinger : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-isLingering'>/**
+</span>*/
+isLingering : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-clearLingerState'>/**
+</span>*/
+clearLingerState : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-dumpLingerTimers'>/**
+</span>*/
+dumpLingerTimers : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-name'>/**
+</span>*/
+name : function(  ) {},
+
+<span id='com-android-server-connectivity-NetworkAgentInfo-method-compareTo'>/**
+</span>*/
+compareTo : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

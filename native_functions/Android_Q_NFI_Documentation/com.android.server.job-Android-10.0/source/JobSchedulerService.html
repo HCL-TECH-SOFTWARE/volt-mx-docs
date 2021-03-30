@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-job-JobSchedulerService'>/**@class com.android.server.job.JobSchedulerService
+</span> implements com.android.server.job.StateChangedListener
+
+ implements com.android.server.job.JobCompletedListener
+
+@extends com.android.server.SystemService
+
+ Responsible for taking jobs representing work to be performed by a client app, and determining
+ based on the criteria specified when that job should be run against the client application's
+ endpoint.
+ Implements logic for scheduling, and rescheduling jobs. The JobSchedulerService knows nothing
+ about constraints, or the state of active jobs. It receives callbacks from the various
+ controllers and completed jobs and operates accordingly.
+
+ Note on locking: Any operations that manipulate {@link #mJobs} need to lock on that object.
+ Any function with the suffix 'Locked' also needs to lock on {@link #mJobs}.
+ @hide
+*/
+var JobSchedulerService = {
+
+<span id='com-android-server-job-JobSchedulerService-property-TAG'>/***/
+</span>TAG : &quot;JobScheduler&quot;,
+<span id='com-android-server-job-JobSchedulerService-property-DEBUG'>/***/
+</span>DEBUG : &quot;null&quot;,
+<span id='com-android-server-job-JobSchedulerService-property-DEBUG_STANDBY'>/***/
+</span>DEBUG_STANDBY : &quot;null&quot;,
+<span id='com-android-server-job-JobSchedulerService-property-sSystemClock'>/***/
+</span>sSystemClock : &quot;null&quot;,
+<span id='com-android-server-job-JobSchedulerService-property-sUptimeMillisClock'>/***/
+</span>sUptimeMillisClock : &quot;null&quot;,
+<span id='com-android-server-job-JobSchedulerService-property-sElapsedRealtimeClock'>/***/
+</span>sElapsedRealtimeClock : &quot;null&quot;,
+<span id='com-android-server-job-JobSchedulerService-property-ACTIVE_INDEX'>/** Named indices into the STANDBY_BEATS array, for clarity in referring to
+</span> specific buckets' bookkeeping.
+*/
+ACTIVE_INDEX : &quot;0&quot;,
+<span id='com-android-server-job-JobSchedulerService-property-WORKING_INDEX'>/***/
+</span>WORKING_INDEX : &quot;1&quot;,
+<span id='com-android-server-job-JobSchedulerService-property-FREQUENT_INDEX'>/***/
+</span>FREQUENT_INDEX : &quot;2&quot;,
+<span id='com-android-server-job-JobSchedulerService-property-RARE_INDEX'>/***/
+</span>RARE_INDEX : &quot;3&quot;,
+<span id='com-android-server-job-JobSchedulerService-property-NEVER_INDEX'>/***/
+</span>NEVER_INDEX : &quot;4&quot;,
+<span id='com-android-server-job-JobSchedulerService-property-MAX_ALLOWED_PERIOD_MS'>/**The maximum period a periodic job can have. Anything higher will be clamped down to this. */
+</span>MAX_ALLOWED_PERIOD_MS : &quot;31536000000&quot;,
+<span id='com-android-server-job-JobSchedulerService-method-getTestableContext'>/**
+</span>*/
+getTestableContext : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-getLock'>/**
+</span>*/
+getLock : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-getJobStore'>/**
+</span>*/
+getJobStore : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-getConstants'>/**
+</span>*/
+getConstants : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-isChainedAttributionEnabled'>/**
+</span>*/
+isChainedAttributionEnabled : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-onStartUser'>/**
+</span>*/
+onStartUser : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-onUnlockUser'>/**
+</span>*/
+onUnlockUser : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-onStopUser'>/**
+</span>*/
+onStopUser : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-scheduleAsPackage'>/**
+</span>*/
+scheduleAsPackage : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-getPendingJobs'>/**
+</span>*/
+getPendingJobs : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-getPendingJob'>/**
+</span>*/
+getPendingJob : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-cancelJobsForUid'>/**Entry point from client to cancel all jobs originating from their uid.
+</span> This will remove the job from the master list, and cancel the job if it was staged for
+ execution or being executed.
+@param {Number} uid Uid to check against for removal of a job.
+*/
+cancelJobsForUid : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-cancelJob'>/**Entry point from client to cancel the job corresponding to the jobId provided.
+</span> This will remove the job from the master list, and cancel the job if it was staged for
+ execution or being executed.
+@param {Number} uid Uid of the calling client.
+@param {Number} jobId Id of the job, provided at schedule-time.
+*/
+cancelJob : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-onDeviceIdleStateChanged'>/**
+</span>*/
+onDeviceIdleStateChanged : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-onStart'>/**
+</span>*/
+onStart : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-onBootPhase'>/**
+</span>*/
+onBootPhase : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-onJobCompletedLocked'>/**A job just finished executing. We fetch the
+</span> {@link com.android.server.job.controllers.JobStatus} from the store and depending on
+ whether we want to reschedule we re-add it to the controllers.
+@param {Object {JobStatus}} jobStatus Completed job.
+@param {Boolean} needsReschedule Whether the implementing class should reschedule this job.
+*/
+onJobCompletedLocked : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-onControllerStateChanged'>/**Posts a message to the {@link com.android.server.job.JobSchedulerService.JobHandler} that
+</span> some controller's state has changed, so as to run through the list of jobs and start/stop
+ any that are eligible.
+*/
+onControllerStateChanged : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-onRunJobNow'>/**
+</span>*/
+onRunJobNow : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-areComponentsInPlaceLocked'>/**Returns true if non-job constraint components are in place -- if job.isReady() returns true
+</span> and this method returns true, then the job is ready to be executed.
+*/
+areComponentsInPlaceLocked : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-standbyBucketToBucketIndex'>/**
+</span>*/
+standbyBucketToBucketIndex : function(  ) {},
+
+<span id='com-android-server-job-JobSchedulerService-method-standbyBucketForPackage'>/**
+</span>*/
+standbyBucketForPackage : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

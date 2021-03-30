@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-job-JobServiceContext'>/**@class com.android.server.job.JobServiceContext
+</span> implements android.content.ServiceConnection
+
+@extends java.lang.Object
+
+ Handles client binding and lifecycle of a job. Jobs execute one at a time on an instance of this
+ class.
+
+ There are two important interactions into this class from the
+ {@link com.android.server.job.JobSchedulerService}. To execute a job and to cancel a job.
+ - Execution of a new job is handled by the {@link #mAvailable}. This bit is flipped once when a
+ job lands, and again when it is complete.
+ - Cancelling is trickier, because there are also interactions from the client. It's possible
+ the {@link com.android.server.job.JobServiceContext.JobServiceHandler} tries to process a
+ {@link #doCancelLocked} after the client has already finished. This is handled by having
+ {@link com.android.server.job.JobServiceContext.JobServiceHandler#handleCancelLocked} check whether
+ the context is still valid.
+ To mitigate this, we avoid sending duplicate onStopJob()
+ calls to the client after they've specified jobFinished().
+*/
+var JobServiceContext = {
+
+<span id='com-android-server-job-JobServiceContext-property-EXECUTING_TIMESLICE_MILLIS'>/**Amount of time a job is allowed to execute for before being considered timed-out. */
+</span>EXECUTING_TIMESLICE_MILLIS : &quot;600000&quot;,
+<span id='com-android-server-job-JobServiceContext-property-NO_PREFERRED_UID'>/***/
+</span>NO_PREFERRED_UID : &quot;-1&quot;,
+<span id='com-android-server-job-JobServiceContext-property-mStoppedReason'>/***/
+</span>mStoppedReason : &quot;null&quot;,
+<span id='com-android-server-job-JobServiceContext-property-mStoppedTime'>/***/
+</span>mStoppedTime : &quot;null&quot;,
+<span id='com-android-server-job-JobServiceContext-method-onServiceConnected'>/**We acquire/release a wakelock on onServiceConnected/unbindService. This mirrors the work
+</span> we intend to send to the client - we stop sending work when the service is unbound so until
+ then we keep the wakelock.
+@param {Object {ComponentName}} name The concrete component name of the service that has been connected.
+@param {Object {IBinder}} service The IBinder of the Service's communication channel,
+*/
+onServiceConnected : function(  ) {},
+
+<span id='com-android-server-job-JobServiceContext-method-onServiceDisconnected'>/**If the client service crashes we reschedule this job and clean up.
+</span>*/
+onServiceDisconnected : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

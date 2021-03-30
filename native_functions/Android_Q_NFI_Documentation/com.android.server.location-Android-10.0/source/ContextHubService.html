@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-location-ContextHubService'>/**@class com.android.server.location.ContextHubService
+</span>@extends IContextHubService.Stub
+
+ @hide
+*/
+var ContextHubService = {
+
+<span id='com-android-server-location-ContextHubService-property-MSG_ENABLE_NANO_APP'>/***/
+</span>MSG_ENABLE_NANO_APP : &quot;1&quot;,
+<span id='com-android-server-location-ContextHubService-property-MSG_DISABLE_NANO_APP'>/***/
+</span>MSG_DISABLE_NANO_APP : &quot;2&quot;,
+<span id='com-android-server-location-ContextHubService-property-MSG_LOAD_NANO_APP'>/***/
+</span>MSG_LOAD_NANO_APP : &quot;3&quot;,
+<span id='com-android-server-location-ContextHubService-property-MSG_UNLOAD_NANO_APP'>/***/
+</span>MSG_UNLOAD_NANO_APP : &quot;4&quot;,
+<span id='com-android-server-location-ContextHubService-property-MSG_QUERY_NANO_APPS'>/***/
+</span>MSG_QUERY_NANO_APPS : &quot;5&quot;,
+<span id='com-android-server-location-ContextHubService-property-MSG_QUERY_MEMORY'>/***/
+</span>MSG_QUERY_MEMORY : &quot;6&quot;,
+<span id='com-android-server-location-ContextHubService-property-MSG_HUB_RESET'>/***/
+</span>MSG_HUB_RESET : &quot;7&quot;,
+<span id='com-android-server-location-ContextHubService-method-registerCallback'>/**
+</span>*/
+registerCallback : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-getContextHubHandles'>/**
+</span>*/
+getContextHubHandles : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-getContextHubInfo'>/**
+</span>*/
+getContextHubInfo : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-getContextHubs'>/**Returns a List of ContextHubInfo object describing the available hubs.
+</span>@return {Object {java.util.List}} the List of ContextHubInfo objects
+*/
+getContextHubs : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-loadNanoApp'>/**
+</span>*/
+loadNanoApp : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-unloadNanoApp'>/**
+</span>*/
+unloadNanoApp : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-getNanoAppInstanceInfo'>/**
+</span>*/
+getNanoAppInstanceInfo : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-findNanoAppOnHub'>/**
+</span>*/
+findNanoAppOnHub : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-sendMessage'>/**
+</span>*/
+sendMessage : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-createClient'>/**Creates and registers a client at the service for the specified Context Hub.
+</span>@param {Number} contextHubId   the ID of the hub this client is attached to
+@param {Object {IContextHubClientCallback}} clientCallback the client interface to register with the service
+@return {Object {IContextHubClient}} the generated client interface, null if registration was unsuccessful
+@throws IllegalArgumentException if contextHubId is not a valid ID
+@throws IllegalStateException if max number of clients have already registered
+@throws NullPointerException if clientCallback is null
+*/
+createClient : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-createPendingIntentClient'>/**Creates and registers a PendingIntent client at the service for the specified Context Hub.
+</span>@param {Number} contextHubId  the ID of the hub this client is attached to
+@param {Object {PendingIntent}} pendingIntent the PendingIntent associated with this client
+@param {Number} nanoAppId     the ID of the nanoapp PendingIntent events will be sent for
+@return {Object {IContextHubClient}} the generated client interface
+@throws IllegalArgumentException if hubInfo does not represent a valid hub
+@throws IllegalStateException    if there were too many registered clients at the service
+*/
+createPendingIntentClient : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-loadNanoAppOnHub'>/**Loads a nanoapp binary at the specified Context hub.
+</span>@param {Number} contextHubId        the ID of the hub to load the binary
+@param {Object {IContextHubTransactionCallback}} transactionCallback the client-facing transaction callback interface
+@param {Object {NanoAppBinary}} nanoAppBinary       the binary to load
+@throws IllegalStateException if the transaction queue is full
+*/
+loadNanoAppOnHub : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-unloadNanoAppFromHub'>/**Unloads a nanoapp from the specified Context Hub.
+</span>@param {Number} contextHubId        the ID of the hub to unload the nanoapp
+@param {Object {IContextHubTransactionCallback}} transactionCallback the client-facing transaction callback interface
+@param {Number} nanoAppId           the ID of the nanoapp to unload
+@throws IllegalStateException if the transaction queue is full
+*/
+unloadNanoAppFromHub : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-enableNanoApp'>/**Enables a nanoapp at the specified Context Hub.
+</span>@param {Number} contextHubId        the ID of the hub to enable the nanoapp
+@param {Object {IContextHubTransactionCallback}} transactionCallback the client-facing transaction callback interface
+@param {Number} nanoAppId           the ID of the nanoapp to enable
+@throws IllegalStateException if the transaction queue is full
+*/
+enableNanoApp : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-disableNanoApp'>/**Disables a nanoapp at the specified Context Hub.
+</span>@param {Number} contextHubId        the ID of the hub to disable the nanoapp
+@param {Object {IContextHubTransactionCallback}} transactionCallback the client-facing transaction callback interface
+@param {Number} nanoAppId           the ID of the nanoapp to disable
+@throws IllegalStateException if the transaction queue is full
+*/
+disableNanoApp : function(  ) {},
+
+<span id='com-android-server-location-ContextHubService-method-queryNanoApps'>/**Queries for a list of nanoapps from the specified Context hub.
+</span>@param {Number} contextHubId        the ID of the hub to query
+@param {Object {IContextHubTransactionCallback}} transactionCallback the client-facing transaction callback interface
+@throws IllegalStateException if the transaction queue is full
+*/
+queryNanoApps : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-infra-AbstractMasterSystemService'>/**@class com.android.server.infra.AbstractMasterSystemService
+</span>@extends com.android.server.SystemService
+
+ Base class for {@link SystemService SystemServices} that support multi user.
+
+ &lt;p&gt;Subclasses of this service are just a facade for the service binder calls - the &quot;real&quot; work
+ is done by the {@link com.android.server.infra.AbstractPerUserSystemService} subclasses, which are automatically managed
+ through an user -&gt; service cache.
+
+ &lt;p&gt;It also takes care of other plumbing tasks such as:
+
+ &lt;ul&gt;
+   &lt;li&gt;Disabling the service when {@link UserManager} restrictions change.
+   &lt;li&gt;Refreshing the service when its underlying
+   {@link #getServiceSettingsProperty() Settings property} changed.
+   &lt;li&gt;Calling the service when other Settings properties changed.
+ &lt;/ul&gt;
+
+ &lt;p&gt;See {@code com.android.server.autofill.AutofillManagerService} for a concrete
+ (no pun intended) example of how to use it.
+
+ @param &lt;M&gt; &quot;master&quot; service class.
+ @param &lt;S&gt; &quot;real&quot; service class.
+
+ @hide
+*/
+var AbstractMasterSystemService = {
+
+<span id='com-android-server-infra-AbstractMasterSystemService-property-PACKAGE_UPDATE_POLICY_NO_REFRESH'>/**On a package update, does not refresh the per-user service in the cache. */
+</span>PACKAGE_UPDATE_POLICY_NO_REFRESH : &quot;0&quot;,
+<span id='com-android-server-infra-AbstractMasterSystemService-property-PACKAGE_UPDATE_POLICY_REFRESH_LAZY'>/** On a package update, removes any existing per-user services in the cache.
+</span>
+ &lt;p&gt;This does not immediately recreate these services. It is assumed they will be recreated
+ for the next user request.
+*/
+PACKAGE_UPDATE_POLICY_REFRESH_LAZY : &quot;1&quot;,
+<span id='com-android-server-infra-AbstractMasterSystemService-property-PACKAGE_UPDATE_POLICY_REFRESH_EAGER'>/** On a package update, removes and recreates any existing per-user services in the cache.
+</span>*/
+PACKAGE_UPDATE_POLICY_REFRESH_EAGER : &quot;2&quot;,
+<span id='com-android-server-infra-AbstractMasterSystemService-property-verbose'>/** Whether the service should log debug statements.
+</span>*/
+verbose : &quot;null&quot;,
+<span id='com-android-server-infra-AbstractMasterSystemService-property-debug'>/** Whether the service should log verbose statements.
+</span>*/
+debug : &quot;null&quot;,
+<span id='com-android-server-infra-AbstractMasterSystemService-method-onBootPhase'>/**
+</span>*/
+onBootPhase : function(  ) {},
+
+<span id='com-android-server-infra-AbstractMasterSystemService-method-onUnlockUser'>/**
+</span>*/
+onUnlockUser : function(  ) {},
+
+<span id='com-android-server-infra-AbstractMasterSystemService-method-onCleanupUser'>/**
+</span>*/
+onCleanupUser : function(  ) {},
+
+<span id='com-android-server-infra-AbstractMasterSystemService-method-getAllowInstantService'>/**Gets whether the service is allowed to bind to an instant-app.
+</span>
+ &lt;p&gt;Typically called by {@code ShellCommand} during CTS tests.
+@throws SecurityException if caller is not allowed to manage this service's settings.
+*/
+getAllowInstantService : function(  ) {},
+
+<span id='com-android-server-infra-AbstractMasterSystemService-method-isBindInstantServiceAllowed'>/**Checks whether the service is allowed to bind to an instant-app.
+</span>
+ &lt;p&gt;Typically called by subclasses when creating {@link AbstractRemoteService} instances.
+
+ &lt;p&gt;&lt;b&gt;NOTE: &lt;/b&gt;must not be called by {@code ShellCommand} as it does not check for
+ permission.
+*/
+isBindInstantServiceAllowed : function(  ) {},
+
+<span id='com-android-server-infra-AbstractMasterSystemService-method-setAllowInstantService'>/**Sets whether the service is allowed to bind to an instant-app.
+</span>
+ &lt;p&gt;Typically called by {@code ShellCommand} during CTS tests.
+@throws SecurityException if caller is not allowed to manage this service's settings.
+*/
+setAllowInstantService : function(  ) {},
+
+<span id='com-android-server-infra-AbstractMasterSystemService-method-setTemporaryService'>/**Temporarily sets the service implementation.
+</span>
+ &lt;p&gt;Typically used by Shell command and/or CTS tests.
+@param {Number} componentName name of the new component
+@param {String} durationMs how long the change will be valid (the service will be automatically reset
+            to the default component after this timeout expires).
+@throws SecurityException if caller is not allowed to manage this service's settings.
+@throws IllegalArgumentException if value of {@code durationMs} is higher than
+             {@link #getMaximumTemporaryServiceDurationMs()}.
+*/
+setTemporaryService : function(  ) {},
+
+<span id='com-android-server-infra-AbstractMasterSystemService-method-setDefaultServiceEnabled'>/**Sets whether the default service should be used.
+</span>
+ &lt;p&gt;Typically used during CTS tests to make sure only the default service doesn't interfere
+ with the test results.
+@throws SecurityException if caller is not allowed to manage this service's settings.
+@return {Boolean} whether the enabled state changed.
+*/
+setDefaultServiceEnabled : function(  ) {},
+
+<span id='com-android-server-infra-AbstractMasterSystemService-method-isDefaultServiceEnabled'>/**Checks whether the default service should be used.
+</span>
+ &lt;p&gt;Typically used during CTS tests to make sure only the default service doesn't interfere
+ with the test results.
+@throws SecurityException if caller is not allowed to manage this service's settings.
+*/
+isDefaultServiceEnabled : function(  ) {},
+
+<span id='com-android-server-infra-AbstractMasterSystemService-method-resetTemporaryService'>/**Resets the temporary service implementation to the default component.
+</span>
+ &lt;p&gt;Typically used by Shell command and/or CTS tests.
+@throws SecurityException if caller is not allowed to manage this service's settings.
+*/
+resetTemporaryService : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

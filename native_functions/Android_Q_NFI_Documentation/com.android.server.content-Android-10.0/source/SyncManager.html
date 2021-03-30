@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-content-SyncManager'>/**@class com.android.server.content.SyncManager
+</span>@extends java.lang.Object
+
+ Implementation details:
+ All scheduled syncs will be passed on to JobScheduler as jobs
+ (See {@link #scheduleSyncOperationH(SyncOperation, long)}. This function schedules a job
+ with JobScheduler with appropriate delay and constraints (according to backoffs and extras).
+ The scheduleSyncOperationH function also assigns a unique jobId to each
+ SyncOperation.
+
+ Periodic Syncs:
+ Each periodic sync is scheduled as a periodic job. If a periodic sync fails, we create a new
+ one off SyncOperation and set its {@link com.android.server.content.SyncOperation#sourcePeriodicId} field to the jobId of the
+ periodic sync. We don't allow the periodic job to run while any job initiated by it is pending.
+
+ Backoffs:
+ Each {@link com.android.server.content.SyncStorageEngine.EndPoint} has a backoff associated with it. When a SyncOperation fails, we increase
+ the backoff on the authority. Then we reschedule all syncs associated with that authority to
+ run at a later time. Similarly, when a sync succeeds, backoff is cleared and all associated syncs
+ are rescheduled. A rescheduled sync will get a new jobId.
+
+ @hide
+*/
+var SyncManager = {
+
+<span id='com-android-server-content-SyncManager-method-onStartUser'>/**
+</span>*/
+onStartUser : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-onUnlockUser'>/**
+</span>*/
+onUnlockUser : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-onStopUser'>/**
+</span>*/
+onStopUser : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-onBootPhase'>/**
+</span>*/
+onBootPhase : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-getSyncStorageEngine'>/**
+</span>*/
+getSyncStorageEngine : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-scheduleSync'>/**Initiate a sync. This can start a sync for all providers
+</span> (pass null to url, set onlyTicklable to false), only those
+ providers that are marked as ticklable (pass null to url,
+ set onlyTicklable to true), or a specific provider (set url
+ to the content url of the provider).
+
+ &lt;p&gt;If the ContentResolver.SYNC_EXTRAS_UPLOAD boolean in extras is
+ true then initiate a sync that just checks for local changes to send
+ to the server, otherwise initiate a sync that first gets any
+ changes from the server before sending local changes back to
+ the server.
+
+ &lt;p&gt;If a specific provider is being synced (the url is non-null)
+ then the extras can contain SyncAdapter-specific information
+ to control what gets synced (e.g. which specific feed to sync).
+
+ &lt;p&gt;You'll start getting callbacks after this.
+@param {Object {Account}} requestedAccount the account to sync, may be null to signify all accounts
+@param {Number} userId the id of the user whose accounts are to be synced. If userId is USER_ALL,
+          then all users' accounts are considered.
+@param {Number} reason for sync request. If this is a positive integer, it is the Linux uid
+ assigned to the process that requested the sync. If it's negative, the sync was requested by
+ the SyncManager itself and could be one of the following:
+      {@link SyncOperation#REASON_BACKGROUND_DATA_SETTINGS_CHANGED}
+      {@link SyncOperation#REASON_ACCOUNTS_UPDATED}
+      {@link SyncOperation#REASON_SERVICE_CHANGED}
+      {@link SyncOperation#REASON_PERIODIC}
+      {@link SyncOperation#REASON_IS_SYNCABLE}
+      {@link SyncOperation#REASON_SYNC_AUTO}
+      {@link SyncOperation#REASON_MASTER_SYNC_AUTO}
+      {@link SyncOperation#REASON_USER_START}
+@param {String} requestedAuthority the authority to sync, may be null to indicate all authorities
+@param {Object {Bundle}} extras a Map of SyncAdapter-specific information to control
+          syncs of a specific provider. Can be null. Is ignored
+          if the url is null.
+@param {Number} targetSyncState Only sync authorities that have the specified sync state.
+           Use {@link AuthorityInfo#UNDEFINED} to sync all authorities.
+*/
+scheduleSync : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-computeSyncable'>/**
+</span>*/
+computeSyncable : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-removePeriodicSync'>/**Remove a specific periodic sync identified by its target and extras.
+</span>*/
+removePeriodicSync : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-updateOrAddPeriodicSync'>/**Add a periodic sync. If a sync with same target and extras exists, its period and
+</span> flexMillis will be updated.
+*/
+updateOrAddPeriodicSync : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-getPeriodicSyncs'>/**Get a list of periodic syncs corresponding to the given target.
+</span>*/
+getPeriodicSyncs : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-scheduleLocalSync'>/**Schedule sync based on local changes to a provider. We wait for at least LOCAL_SYNC_DELAY
+</span> ms to batch syncs.
+*/
+scheduleLocalSync : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-getSyncAdapterTypes'>/**
+</span>*/
+getSyncAdapterTypes : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-getSyncAdapterPackagesForAuthorityAsUser'>/**
+</span>*/
+getSyncAdapterPackagesForAuthorityAsUser : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-cancelActiveSync'>/**Cancel the active sync if it matches the target.
+</span>@param {Object {SyncStorageEngine.EndPoint}} info object containing info about which syncs to cancel. The target can
+ have null account/provider info to specify all accounts/providers.
+@param {Object {Bundle}} extras if non-null, specifies the exact sync to remove.
+*/
+cancelActiveSync : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-clearScheduledSyncOperations'>/**Remove scheduled sync operations.
+</span>@param {Object {SyncStorageEngine.EndPoint}} info limit the removals to operations that match this target. The target can
+ have null account/provider info to specify all accounts/providers.
+*/
+clearScheduledSyncOperations : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-cancelScheduledSyncOperation'>/**Remove a specified sync, if it exists.
+</span>@param {Object {SyncStorageEngine.EndPoint}} info Authority for which the sync is to be removed.
+@param {Object {Bundle}} extras extras bundle to uniquely identify sync.
+*/
+cancelScheduledSyncOperation : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-formatDurationHMS'>/**Similar to {@link android.util.TimeUtils#formatDuration}, but it's more suitable and concise
+</span> for the sync manager dumpsys.  (Don't add the leading + sign, don't show milliseconds.)
+*/
+formatDurationHMS : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-readyToSync'>/**
+</span>@return {Boolean} whether the device is ready to run sync jobs for a given user.
+*/
+readyToSync : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-sendMessage'>/**
+</span>*/
+sendMessage : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-syncExtrasEquals'>/**Sync extra comparison function.
+</span>@param {Object {Bundle}} b1 bundle to compare
+@param {Object {Bundle}} b2 other bundle to compare
+@param {Boolean} includeSyncSettings if false, ignore system settings in bundle.
+*/
+syncExtrasEquals : function(  ) {},
+
+<span id='com-android-server-content-SyncManager-method-resetTodayStats'>/**
+</span>*/
+resetTodayStats : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

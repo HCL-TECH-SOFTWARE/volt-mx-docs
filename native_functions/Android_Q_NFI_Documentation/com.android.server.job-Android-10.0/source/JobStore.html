@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-job-JobStore'>/**@class com.android.server.job.JobStore
+</span>@extends java.lang.Object
+
+ Maintains the master list of jobs that the job scheduler is tracking. These jobs are compared by
+ reference, so none of the functions in this class should make a copy.
+ Also handles read/write of persisted jobs.
+
+ Note on locking:
+      All callers to this class must &lt;strong&gt;lock on the class object they are calling&lt;/strong&gt;.
+      This is important b/c {@link com.android.server.job.JobStore.WriteJobsMapToDiskRunnable}
+      and {@link com.android.server.job.JobStore.ReadJobMapFromDiskRunnable} lock on that
+      object.
+
+ Test:
+ atest $ANDROID_BUILD_TOP/frameworks/base/services/tests/servicestests/src/com/android/server/job/JobStoreTest.java
+*/
+var JobStore = {
+
+<span id='com-android-server-job-JobStore-method-initAndGetForTesting'>/**
+</span>@return {Object {com.android.server.job.JobStore}} A freshly initialized job store object, with no loaded jobs.
+*/
+initAndGetForTesting : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-jobTimesInflatedValid'>/**
+</span>*/
+jobTimesInflatedValid : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-clockNowValidToInflate'>/**
+</span>*/
+clockNowValidToInflate : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-getRtcCorrectedJobsLocked'>/**Find all the jobs that were affected by RTC clock uncertainty at boot time.  Returns
+</span> parallel lists of the existing JobStatus objects and of new, equivalent JobStatus instances
+ with now-corrected time bounds.
+*/
+getRtcCorrectedJobsLocked : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-add'>/**Add a job to the master list, persisting it if necessary. If the JobStatus already exists,
+</span> it will be replaced.
+@param {Object {JobStatus}} jobStatus Job to add.
+@return {Boolean} Whether or not an equivalent JobStatus was replaced by this operation.
+*/
+add : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-size'>/**
+</span>*/
+size : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-getPersistStats'>/**
+</span>*/
+getPersistStats : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-countJobsForUid'>/**
+</span>*/
+countJobsForUid : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-remove'>/**Remove the provided job. Will also delete the job if it was persisted.
+</span>@param {Object {JobStatus}} writeBack If true, the job will be deleted (if it was persisted) immediately.
+@return {Boolean} Whether or not the job existed to be removed.
+*/
+remove : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-removeJobsOfNonUsers'>/**Remove the jobs of users not specified in the whitelist.
+</span>@param {Object {int[]}} whitelist Array of User IDs whose jobs are not to be removed.
+*/
+removeJobsOfNonUsers : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-clear'>/**
+</span>*/
+clear : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-getJobsByUser'>/**
+</span>@param {Number} userHandle User for whom we are querying the list of jobs.
+@return {Object {java.util.List}} A list of all the jobs scheduled for the provided user. Never null.
+*/
+getJobsByUser : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-getJobsByUid'>/**
+</span>@param {Number} uid Uid of the requesting app.
+@return {Object {java.util.List}} All JobStatus objects for a given uid from the master list. Never null.
+*/
+getJobsByUid : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-getJobByUidAndJobId'>/**
+</span>@param {Number} uid Uid of the requesting app.
+@param {Number} jobId Job id, specified at schedule-time.
+@return {Object {com.android.server.job.controllers.JobStatus}} the JobStatus that matches the provided uId and jobId, or null if none found.
+*/
+getJobByUidAndJobId : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-forEachJob'>/**Iterate over the set of all jobs, invoking the supplied functor on each.  This is for
+</span> customers who need to examine each job; we'd much rather not have to generate
+ transient unified collections for them to iterate over and then discard, or creating
+ iterators every time a client needs to perform a sweep.
+*/
+forEachJob : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-forEachJob'>/**
+</span>*/
+forEachJob : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-forEachJob'>/**
+</span>*/
+forEachJob : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-forEachJobForSourceUid'>/**
+</span>*/
+forEachJobForSourceUid : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-readJobMapFromDisk'>/**
+</span>*/
+readJobMapFromDisk : function(  ) {},
+
+<span id='com-android-server-job-JobStore-method-waitForWriteToCompleteForTesting'>/**Wait for any pending write to the persistent store to clear
+</span>@param {Number} maxWaitMillis Maximum time from present to wait
+@return {Boolean} {@code true} if I/O cleared as expected, {@code false} if the wait
+     timed out before the pending write completed.
+*/
+waitForWriteToCompleteForTesting : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-media-MediaSessionRecord'>/**@class com.android.server.media.MediaSessionRecord
+</span> implements android.os.IBinder.DeathRecipient
+
+@extends java.lang.Object
+
+ This is the system implementation of a Session. Apps will interact with the
+ MediaSession wrapper class instead.
+*/
+var MediaSessionRecord = {
+
+<span id='com-android-server-media-MediaSessionRecord-method-getSessionBinder'>/**Get the session binder for the {@link MediaSession}.
+</span>@return {Object {ISession}} The session binder apps talk to.
+*/
+getSessionBinder : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getControllerBinder'>/**Get the controller binder for the {@link MediaController}.
+</span>@return {Object {ISessionController}} The controller binder apps talk to.
+*/
+getControllerBinder : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getSessionToken'>/**Get the session token for creating {@link MediaController}.
+</span>@return {Object {android.media.session.MediaSession.Token}} The session token.
+*/
+getSessionToken : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getPackageName'>/**Get the info for this session.
+</span>@return {String} Info that identifies this session.
+*/
+getPackageName : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getTag'>/**Get the tag for the session.
+</span>@return {String} The session's tag.
+*/
+getTag : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getMediaButtonReceiver'>/**Get the intent the app set for their media button receiver.
+</span>@return {Object {android.app.PendingIntent}} The pending intent set by the app or null.
+*/
+getMediaButtonReceiver : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getFlags'>/**Get this session's flags.
+</span>@return {Number} The flags for this session.
+*/
+getFlags : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-hasFlag'>/**Check if this session has the specified flag.
+</span>@param {Number} flag The flag to check.
+@return {Boolean} True if this session has that flag set, false otherwise.
+*/
+hasFlag : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getUid'>/**Get the UID this session was created for.
+</span>@return {Number} The UID for this session.
+*/
+getUid : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getUserId'>/**Get the user id this session was created for.
+</span>@return {Number} The user id for this session.
+*/
+getUserId : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-isSystemPriority'>/**Check if this session has system priorty and should receive media buttons
+</span> before any other sessions.
+@return {Boolean} True if this is a system priority session, false otherwise
+*/
+isSystemPriority : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-adjustVolume'>/**Send a volume adjustment to the session owner. Direction must be one of
+</span> {@link AudioManager#ADJUST_LOWER}, {@link AudioManager#ADJUST_RAISE},
+ {@link AudioManager#ADJUST_SAME}.
+@param {String} packageName The package that made the original volume request.
+@param {String} opPackageName The op package that made the original volume request.
+@param {Number} pid The pid that made the original volume request.
+@param {Number} uid The uid that made the original volume request.
+@param {Object {ISessionControllerCallback}} caller caller binder. can be {@code null} if it's from the volume key.
+@param {Boolean} asSystemService {@code true} if the event sent to the session as if it was come from
+          the system service instead of the app process. This helps sessions to distinguish
+          between the key injection by the app and key events from the hardware devices.
+          Should be used only when the volume key events aren't handled by foreground
+          activity. {@code false} otherwise to tell session about the real caller.
+@param {Number} direction The direction to adjust volume in.
+@param {Number} flags Any of the flags from {@link AudioManager}.
+@param {Boolean} useSuggested True to use adjustSuggestedStreamVolume instead of
+*/
+adjustVolume : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-isActive'>/**Check if this session has been set to active by the app.
+</span>@return {Boolean} True if the session is active, false otherwise.
+*/
+isActive : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getPlaybackState'>/**Get the playback state.
+</span>@return {Object {android.media.session.PlaybackState}} The current playback state.
+*/
+getPlaybackState : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-isPlaybackActive'>/**Check if the session is currently performing playback.
+</span>@return {Boolean} True if the session is performing playback, false otherwise.
+*/
+isPlaybackActive : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getPlaybackType'>/**Get the type of playback, either local or remote.
+</span>@return {Number} The current type of playback.
+*/
+getPlaybackType : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getAudioAttributes'>/**Get the local audio stream being used. Only valid if playback type is
+</span> local.
+@return {Object {android.media.AudioAttributes}} The audio stream the session is using.
+*/
+getAudioAttributes : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getVolumeControl'>/**Get the type of volume control. Only valid if playback type is remote.
+</span>@return {Number} The volume control type being used.
+*/
+getVolumeControl : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getMaxVolume'>/**Get the max volume that can be set. Only valid if playback type is
+</span> remote.
+@return {Number} The max volume that can be set.
+*/
+getMaxVolume : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getCurrentVolume'>/**Get the current volume for this session. Only valid if playback type is
+</span> remote.
+@return {Number} The current volume of the remote playback.
+*/
+getCurrentVolume : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getOptimisticVolume'>/**Get the volume we'd like it to be set to. This is only valid for a short
+</span> while after a call to adjust or set volume.
+@return {Number} The current optimistic volume or -1.
+*/
+getOptimisticVolume : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-isTransportControlEnabled'>/**
+</span>*/
+isTransportControlEnabled : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-binderDied'>/**
+</span>*/
+binderDied : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-onDestroy'>/**Finish cleaning up this session, including disconnecting if connected and
+</span> removing the death observer from the callback binder.
+*/
+onDestroy : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-getCallback'>/**
+</span>*/
+getCallback : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-sendMediaButton'>/**Sends media button.
+</span>@param {String} packageName caller package name
+@param {Number} pid caller pid
+@param {Number} uid caller uid
+@param {Boolean} asSystemService {@code true} if the event sent to the session as if it was come from
+          the system service instead of the app process.
+@param {Object {KeyEvent}} ke key events
+@param {Number} sequenceId (optional) sequence id. Use this only when a wake lock is needed.
+@param {Object {ResultReceiver}} cb (optional) result receiver to receive callback. Use this only when a wake lock is
+           needed.
+@return {Boolean} {@code true} if the attempt to send media button was successfuly.
+         {@code false} otherwise.
+*/
+sendMediaButton : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-media-MediaSessionRecord-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

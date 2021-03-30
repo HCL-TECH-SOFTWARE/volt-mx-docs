@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-display-BrightnessMappingStrategy'>/**@class com.android.server.display.BrightnessMappingStrategy
+</span>@extends java.lang.Object
+
+ A utility to map from an ambient brightness to a display's &quot;backlight&quot; brightness based on the
+ available display information and brightness configuration.
+
+ Note that without a mapping from the nits to a display backlight level, any
+ {@link BrightnessConfiguration}s that are set are just ignored.
+*/
+var BrightnessMappingStrategy = {
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-create'>/**
+</span>*/
+create : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-setLoggingEnabled'>/**Enable/disable logging.
+</span>@param {Boolean} loggingEnabled
+      Whether logging should be on/off.
+@return {Boolean} Whether the method succeeded or not.
+*/
+setLoggingEnabled : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-setBrightnessConfiguration'>/**Sets the {@link BrightnessConfiguration}.
+</span>@param {Object {BrightnessConfiguration}} config The new configuration. If {@code null} is passed, the default configuration is
+               used.
+@return {Boolean} Whether the brightness configuration has changed.
+*/
+setBrightnessConfiguration : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-getBrightness'>/**Returns the desired brightness of the display based on the current ambient lux, including
+</span> any context-related corrections.
+
+ The returned brightness will be in the range [0, 1.0], where 1.0 is the display at max
+ brightness and 0 is the display at minimum brightness.
+@param {Number} lux The current ambient brightness in lux.
+@param {String} packageName the foreground app package name.
+@param {Number} category the foreground app package category.
+@return {Number} The desired brightness of the display normalized to the range [0, 1.0].
+*/
+getBrightness : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-getBrightness'>/**Returns the desired brightness of the display based on the current ambient lux.
+</span>
+ The returned brightness wil be in the range [0, 1.0], where 1.0 is the display at max
+ brightness and 0 is the display at minimum brightness.
+@param {Number} lux The current ambient brightness in lux.
+@return {Number} The desired brightness of the display normalized to the range [0, 1.0].
+*/
+getBrightness : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-getAutoBrightnessAdjustment'>/**Returns the current auto-brightness adjustment.
+</span>
+ The returned adjustment is a value in the range [-1.0, 1.0] such that
+ {@code config_autoBrightnessAdjustmentMaxGamma&lt;sup&gt;-adjustment&lt;/sup&gt;} is used to gamma
+ correct the brightness curve.
+*/
+getAutoBrightnessAdjustment : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-setAutoBrightnessAdjustment'>/**Sets the auto-brightness adjustment.
+</span>@param {Number} adjustment The desired auto-brightness adjustment.
+@return {Boolean} Whether the auto-brightness adjustment has changed.
+@Deprecated The auto-brightness adjustment should not be set directly, but rather inferred
+ from user data points.
+*/
+setAutoBrightnessAdjustment : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-convertToNits'>/**Converts the provided backlight value to nits if possible.
+</span>
+ Returns -1.0f if there's no available mapping for the backlight to nits.
+*/
+convertToNits : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-addUserDataPoint'>/**Adds a user interaction data point to the brightness mapping.
+</span>
+ This data point &lt;b&gt;must&lt;/b&gt; exist on the brightness curve as a result of this call. This is
+ so that the next time we come to query what the screen brightness should be, we get what the
+ user requested rather than immediately changing to some other value.
+
+ Currently, we only keep track of one of these at a time to constrain what can happen to the
+ curve.
+*/
+addUserDataPoint : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-clearUserDataPoints'>/**Removes any short term adjustments made to the curve from user interactions.
+</span>
+ Note that this does *not* reset the mapping to its initial state, any brightness
+ configurations that have been applied will continue to be in effect. This solely removes the
+ effects of user interactions on the model.
+*/
+clearUserDataPoints : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-hasUserDataPoints'>/**
+</span>@return {Boolean} True if there are any short term adjustments applied to the curve.
+*/
+hasUserDataPoints : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-isDefaultConfig'>/**
+</span>@return {Boolean} True if the current brightness configuration is the default one.
+*/
+isDefaultConfig : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-getDefaultConfig'>/**
+</span>@return {Object {android.hardware.display.BrightnessConfiguration}} The default brightness configuration.
+*/
+getDefaultConfig : function(  ) {},
+
+<span id='com-android-server-display-BrightnessMappingStrategy-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

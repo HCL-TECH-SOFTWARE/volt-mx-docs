@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-backup-remote-RemoteCall'>/**@class com.android.server.backup.remote.RemoteCall
+</span>@extends java.lang.Object
+
+ A wrapper that encapsulates an outbound call from the system process, converting an asynchronous
+ operation into a synchronous operation with time-out and cancellation built-in. This was built to
+ be able to call one-way binder methods that accept a {@link IBackupCallback} as a callback and
+ handle the result inline.
+
+ &lt;p&gt;Create one {@link com.android.server.backup.remote.RemoteCall} object providing the actual call in the form of a {@link com.android.server.backup.remote.RemoteCallable} that accepts a {@link IBackupCallback}. Perform the call by calling {@link #call}(), at which point {@link com.android.server.backup.remote.RemoteCall} will execute the callable providing an implementation
+ of the callback that communicates the result back to this object. Even if the call returns
+ straight away (which is the case for one-way methods) the method will only return when either the
+ callback is called, time-out happens, or someone calls {@link #cancel}().
+
+ &lt;p&gt;This class was designed to have the method {@link #call}() called only once.
+*/
+var RemoteCall = {
+
+<span id='com-android-server-backup-remote-RemoteCall-method-execute'>/**Creates a {@link com.android.server.backup.remote.RemoteCall} object with {@code callable} and {@code timeoutMs} and calls
+</span> {@link #call}() on it immediately after.
+
+ &lt;p&gt;Note that you won't be able to cancel the call, to do that construct an object regularly
+ first, then use {@link #call}().
+@see #RemoteCall(RemoteCallable, long)
+@see #call()
+*/
+execute : function(  ) {},
+
+<span id='com-android-server-backup-remote-RemoteCall-method-call'>/**Kicks-off the callable provided in the constructor and blocks before returning, waiting for
+</span> the first of these to happen:
+
+ &lt;ul&gt;
+   &lt;li&gt;The callback passed to {@link com.android.server.backup.remote.RemoteCallable} is called with the result. We return a
+       present {@link com.android.server.backup.remote.RemoteResult} with the result.
+   &lt;li&gt;Time-out happens. We return {@link com.android.server.backup.remote.RemoteResult#FAILED_TIMED_OUT}.
+   &lt;li&gt;Someone calls {@link #cancel}() on this object. We return {@link com.android.server.backup.remote.RemoteResult#FAILED_CANCELLED}.
+ &lt;/ul&gt;
+
+ &lt;p&gt;This method can't be called from the main thread and was designed to be called only once.
+@return {Object {com.android.server.backup.remote.RemoteResult}} A {@link RemoteResult} with the result of the operation.
+@throws RemoteException If the callable throws it.
+*/
+call : function(  ) {},
+
+<span id='com-android-server-backup-remote-RemoteCall-method-cancel'>/**Attempts to cancel the operation. It will only be successful if executed before the callback
+</span> is called and before the time-out.
+
+ &lt;p&gt;This method can be called from any thread, any time, including the same thread that called
+ {@link #call}() (which is obviously only possible if the former is called before the latter).
+*/
+cancel : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-backup-transport-TransportClient'>/**@class com.android.server.backup.transport.TransportClient
+</span>@extends java.lang.Object
+
+ A {@link com.android.server.backup.transport.TransportClient} manages the connection to an {@link IBackupTransport} service, obtained
+ via the {@param bindIntent} parameter provided in the constructor. A {@link com.android.server.backup.transport.TransportClient} is
+ responsible for only one connection to the transport service, not more.
+
+ &lt;p&gt;After retrieved using {@link TransportManager#getTransportClient(String, String)}, you can
+ call either {@link #connect}(String), if you can block your thread, or {@link #connectAsync(TransportConnectionListener, String)}, otherwise, to obtain a {@link IBackupTransport} instance. It's meant to be passed around as a token to a connected transport.
+ When the connection is not needed anymore you should call {@link #unbind}(String) or indirectly
+ via {@link TransportManager#disposeOfTransportClient(TransportClient, String)}.
+
+ &lt;p&gt;DO NOT forget to unbind otherwise there will be dangling connections floating around.
+
+ &lt;p&gt;This class is thread-safe.
+
+ @see TransportManager
+*/
+var TransportClient = {
+
+<span id='com-android-server-backup-transport-TransportClient-method-getTransportComponent'>/**
+</span>*/
+getTransportComponent : function(  ) {},
+
+<span id='com-android-server-backup-transport-TransportClient-method-connectAsync'>/**Attempts to connect to the transport (if needed).
+</span>
+ &lt;p&gt;Note that being bound is not the same as connected. To be connected you also need to be
+ bound. You go from nothing to bound, then to bound and connected. To have a usable transport
+ binder instance you need to be connected. This method will attempt to connect and return an
+ usable transport binder regardless of the state of the object, it may already be connected,
+ or bound but not connected, not bound at all or even unusable.
+
+ &lt;p&gt;So, a {@link Context#bindServiceAsUser(Intent, ServiceConnection, int, UserHandle)} (or
+ one of its variants) can be called or not depending on the inner state. However, it won't be
+ called again if we're already bound. For example, if one was already requested but the
+ framework has not yet returned (meaning we're bound but still trying to connect) it won't
+ trigger another one, just piggyback on the original request.
+
+ &lt;p&gt;It's guaranteed that you are going to get a call back to {@param listener} after this
+ call. However, the {@param IBackupTransport} parameter, the transport binder, is not
+ guaranteed to be non-null, or if it's non-null it's not guaranteed to be usable - i.e. it can
+ throw {@link DeadObjectException}s on method calls. You should check for both in your code.
+ The reasons for a null transport binder are:
+
+ &lt;ul&gt;
+   &lt;li&gt;Some code called {@link #unbind}(String) before you got a callback.
+   &lt;li&gt;The framework had already called {@link ServiceConnection#onServiceDisconnected(ComponentName)} or {@link ServiceConnection#onBindingDied(ComponentName)} on this object's connection before.
+       Check the documentation of those methods for when that happens.
+   &lt;li&gt;The framework returns false for {@link Context#bindServiceAsUser(Intent,
+       ServiceConnection, int, UserHandle)} (or one of its variants). Check documentation for
+       when this happens.
+ &lt;/ul&gt;
+
+ For unusable transport binders check {@link DeadObjectException}.
+@param {Object {TransportConnectionListener}} listener The listener that will be called with the (possibly null or unusable) {@link
+     IBackupTransport} instance and this {@link TransportClient} object.
+@param {String} caller A {@link String} identifying the caller for logging/debugging purposes. This
+     should be a human-readable short string that is easily identifiable in the logs. Ideally
+     TAG.methodName(), where TAG is the one used in logcat. In cases where this is is not very
+     descriptive like MyHandler.handleMessage() you should put something that someone reading
+     the code would understand, like MyHandler/MSG_FOO.
+@see #connect(String)
+@see DeadObjectException
+@see ServiceConnection#onServiceConnected(ComponentName, IBinder)
+@see ServiceConnection#onServiceDisconnected(ComponentName)
+@see Context#bindServiceAsUser(Intent, ServiceConnection, int, UserHandle)
+*/
+connectAsync : function(  ) {},
+
+<span id='com-android-server-backup-transport-TransportClient-method-unbind'>/**Removes the transport binding.
+</span>@param {String} caller A {@link String} identifying the caller for logging/debugging purposes. Check
+     {@link #connectAsync(TransportConnectionListener, String)} for more details.
+*/
+unbind : function(  ) {},
+
+<span id='com-android-server-backup-transport-TransportClient-method-markAsDisposed'>/**Marks this TransportClient as disposed, allowing it to be GC'ed without warnings.
+</span>*/
+markAsDisposed : function(  ) {},
+
+<span id='com-android-server-backup-transport-TransportClient-method-connect'>/**Attempts to connect to the transport (if needed) and returns it.
+</span>
+ &lt;p&gt;Synchronous version of {@link #connectAsync(TransportConnectionListener, String)}. The
+ same observations about state are valid here. Also, what was said about the {@link IBackupTransport} parameter of {@link com.android.server.backup.transport.TransportConnectionListener} now apply to the return
+ value of this method.
+
+ &lt;p&gt;This is a potentially blocking operation, so be sure to call this carefully on the correct
+ threads. You can't call this from the process main-thread (it throws an exception if you do
+ so).
+
+ &lt;p&gt;In most cases only the first call to this method will block, the following calls should
+ return instantly. However, this is not guaranteed.
+@param {String} caller A {@link String} identifying the caller for logging/debugging purposes. Check
+     {@link #connectAsync(TransportConnectionListener, String)} for more details.
+@return {Object {IBackupTransport}} A {@link IBackupTransport} transport binder instance or null. If it's non-null it can
+     still be unusable - throws {@link DeadObjectException} on method calls
+*/
+connect : function(  ) {},
+
+<span id='com-android-server-backup-transport-TransportClient-method-connectOrThrow'>/**Tries to connect to the transport, if it fails throws {@link com.android.server.backup.transport.TransportNotAvailableException}.
+</span>
+ &lt;p&gt;Same as {@link #connect}(String) except it throws instead of returning null.
+@param {String} caller A {@link String} identifying the caller for logging/debugging purposes. Check
+     {@link #connectAsync(TransportConnectionListener, String)} for more details.
+@return {Object {IBackupTransport}} A {@link IBackupTransport} transport binder instance.
+@see #connect(String)
+@throws TransportNotAvailableException if connection attempt fails.
+*/
+connectOrThrow : function(  ) {},
+
+<span id='com-android-server-backup-transport-TransportClient-method-getConnectedTransport'>/**If the {@link com.android.server.backup.transport.TransportClient} is already connected to the transport, returns the transport,
+</span> otherwise throws {@link com.android.server.backup.transport.TransportNotAvailableException}.
+@param {String} caller A {@link String} identifying the caller for logging/debugging purposes. Check
+     {@link #connectAsync(TransportConnectionListener, String)} for more details.
+@return {Object {IBackupTransport}} A {@link IBackupTransport} transport binder instance.
+@throws TransportNotAvailableException if not connected.
+*/
+getConnectedTransport : function(  ) {},
+
+<span id='com-android-server-backup-transport-TransportClient-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

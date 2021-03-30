@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-job-controllers-JobStatus'>/**@class com.android.server.job.controllers.JobStatus
+</span>@extends java.lang.Object
+
+ Uniquely identifies a job internally.
+ Created from the public {@link android.app.job.JobInfo} object when it lands on the scheduler.
+ Contains current state of the requirements of the job, as well as a function to evaluate
+ whether it's ready to run.
+ This object is shared among the various controllers - hence why the different fields are atomic.
+ This isn't strictly necessary because each controller is only interested in a specific field,
+ and the receivers that are listening for global state change will all run on the main looper,
+ but we don't enforce that so this is safer.
+
+ Test: atest com.android.server.job.controllers.JobStatusTest
+ @hide
+*/
+var JobStatus = {
+
+<span id='com-android-server-job-controllers-JobStatus-property-NO_LATEST_RUNTIME'>/***/
+</span>NO_LATEST_RUNTIME : &quot;9223372036854775807&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-NO_EARLIEST_RUNTIME'>/***/
+</span>NO_EARLIEST_RUNTIME : &quot;0&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-OVERRIDE_SOFT'>/***/
+</span>OVERRIDE_SOFT : &quot;1&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-OVERRIDE_FULL'>/***/
+</span>OVERRIDE_FULL : &quot;2&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-DEFAULT_TRIGGER_UPDATE_DELAY'>/**If not specified, trigger update delay is 10 seconds. */
+</span>DEFAULT_TRIGGER_UPDATE_DELAY : &quot;10000&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-MIN_TRIGGER_UPDATE_DELAY'>/**The minimum possible update delay is 1/2 second. */
+</span>MIN_TRIGGER_UPDATE_DELAY : &quot;500&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-DEFAULT_TRIGGER_MAX_DELAY'>/**If not specified, trigger maxumum delay is 2 minutes. */
+</span>DEFAULT_TRIGGER_MAX_DELAY : &quot;120000&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-MIN_TRIGGER_MAX_DELAY'>/**The minimum possible update delay is 1 second. */
+</span>MIN_TRIGGER_MAX_DELAY : &quot;1000&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-dozeWhitelisted'>/***/
+</span>dozeWhitelisted : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-uidActive'>/***/
+</span>uidActive : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-TRACKING_BATTERY'>/** Flag for {@link #trackingControllers}: the battery controller is currently tracking this job.
+</span>*/
+TRACKING_BATTERY : &quot;1&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-TRACKING_CONNECTIVITY'>/** Flag for {@link #trackingControllers}: the network connectivity controller is currently
+</span> tracking this job.
+*/
+TRACKING_CONNECTIVITY : &quot;2&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-TRACKING_CONTENT'>/** Flag for {@link #trackingControllers}: the content observer controller is currently
+</span> tracking this job.
+*/
+TRACKING_CONTENT : &quot;4&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-TRACKING_IDLE'>/** Flag for {@link #trackingControllers}: the idle controller is currently tracking this job.
+</span>*/
+TRACKING_IDLE : &quot;8&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-TRACKING_STORAGE'>/** Flag for {@link #trackingControllers}: the storage controller is currently tracking this job.
+</span>*/
+TRACKING_STORAGE : &quot;16&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-TRACKING_TIME'>/** Flag for {@link #trackingControllers}: the time controller is currently tracking this job.
+</span>*/
+TRACKING_TIME : &quot;32&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-TRACKING_QUOTA'>/** Flag for {@link #trackingControllers}: the quota controller is currently tracking this job.
+</span>*/
+TRACKING_QUOTA : &quot;64&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-INTERNAL_FLAG_HAS_FOREGROUND_EXEMPTION'>/** Flag for {@link #mInternalFlags}: this job was scheduled when the app that owns the job
+</span> service (not necessarily the caller) was in the foreground and the job has no time
+ constraints, which makes it exempted from the battery saver job restriction.
+
+ @hide
+*/
+INTERNAL_FLAG_HAS_FOREGROUND_EXEMPTION : &quot;1&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-changedUris'>/***/
+</span>changedUris : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-changedAuthorities'>/***/
+</span>changedAuthorities : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-network'>/***/
+</span>network : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-lastEvaluatedPriority'>/***/
+</span>lastEvaluatedPriority : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-pendingWork'>/***/
+</span>pendingWork : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-executingWork'>/***/
+</span>executingWork : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-nextPendingWorkId'>/***/
+</span>nextPendingWorkId : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-overrideState'>/***/
+</span>overrideState : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-enqueueTime'>/***/
+</span>enqueueTime : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-madePending'>/***/
+</span>madePending : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-property-madeActive'>/***/
+</span>madeActive : &quot;null&quot;,
+<span id='com-android-server-job-controllers-JobStatus-method-getServiceToken'>/**Provide a handle to the service that this job will be run on.
+</span>*/
+getServiceToken : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-createFromJobInfo'>/**Create a newly scheduled job.
+</span>@param {Object {JobInfo}} callingUid Uid of the package that scheduled this job.
+@param {Number} sourcePkg Package name of the app that will actually run the job.  Null indicates
+     that the calling package is the source.
+@param {String} sourceUserId User id for whom this job is scheduled. -1 indicates this is same as the
+     caller.
+*/
+createFromJobInfo : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-enqueueWorkLocked'>/**
+</span>*/
+enqueueWorkLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-dequeueWorkLocked'>/**
+</span>*/
+dequeueWorkLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-hasWorkLocked'>/**
+</span>*/
+hasWorkLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-hasExecutingWorkLocked'>/**
+</span>*/
+hasExecutingWorkLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-completeWorkLocked'>/**
+</span>*/
+completeWorkLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-stopTrackingJobLocked'>/**
+</span>*/
+stopTrackingJobLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-prepareLocked'>/**
+</span>*/
+prepareLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-unprepareLocked'>/**
+</span>*/
+unprepareLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-isPreparedLocked'>/**
+</span>*/
+isPreparedLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getJob'>/**
+</span>*/
+getJob : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getJobId'>/**
+</span>*/
+getJobId : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getTargetSdkVersion'>/**
+</span>*/
+getTargetSdkVersion : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-printUniqueId'>/**
+</span>*/
+printUniqueId : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getNumFailures'>/**
+</span>*/
+getNumFailures : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getServiceComponent'>/**
+</span>*/
+getServiceComponent : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getSourcePackageName'>/**
+</span>*/
+getSourcePackageName : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getSourceUid'>/**
+</span>*/
+getSourceUid : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getSourceUserId'>/**
+</span>*/
+getSourceUserId : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getUserId'>/**
+</span>*/
+getUserId : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getStandbyBucket'>/**
+</span>*/
+getStandbyBucket : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getBaseHeartbeat'>/**
+</span>*/
+getBaseHeartbeat : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-setStandbyBucket'>/**
+</span>*/
+setStandbyBucket : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getWhenStandbyDeferred'>/**
+</span>*/
+getWhenStandbyDeferred : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-setWhenStandbyDeferred'>/**
+</span>*/
+setWhenStandbyDeferred : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getSourceTag'>/**
+</span>*/
+getSourceTag : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getUid'>/**
+</span>*/
+getUid : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getBatteryName'>/**
+</span>*/
+getBatteryName : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getTag'>/**
+</span>*/
+getTag : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getPriority'>/**
+</span>*/
+getPriority : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getFlags'>/**
+</span>*/
+getFlags : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getInternalFlags'>/**
+</span>*/
+getInternalFlags : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-addInternalFlags'>/**
+</span>*/
+addInternalFlags : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getSatisfiedConstraintFlags'>/**
+</span>*/
+getSatisfiedConstraintFlags : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-maybeAddForegroundExemption'>/**
+</span>*/
+maybeAddForegroundExemption : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getEstimatedNetworkBytes'>/**
+</span>*/
+getEstimatedNetworkBytes : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-hasConnectivityConstraint'>/**Does this job have any sort of networking constraint?
+</span>*/
+hasConnectivityConstraint : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-hasChargingConstraint'>/**
+</span>*/
+hasChargingConstraint : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-hasBatteryNotLowConstraint'>/**
+</span>*/
+hasBatteryNotLowConstraint : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-hasPowerConstraint'>/**
+</span>*/
+hasPowerConstraint : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-hasStorageNotLowConstraint'>/**
+</span>*/
+hasStorageNotLowConstraint : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-hasTimingDelayConstraint'>/**
+</span>*/
+hasTimingDelayConstraint : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-hasDeadlineConstraint'>/**
+</span>*/
+hasDeadlineConstraint : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-hasIdleConstraint'>/**
+</span>*/
+hasIdleConstraint : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-hasContentTriggerConstraint'>/**
+</span>*/
+hasContentTriggerConstraint : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getTriggerContentUpdateDelay'>/**
+</span>*/
+getTriggerContentUpdateDelay : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getTriggerContentMaxDelay'>/**
+</span>*/
+getTriggerContentMaxDelay : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-isPersisted'>/**
+</span>*/
+isPersisted : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getEarliestRunTime'>/**
+</span>*/
+getEarliestRunTime : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getLatestRunTimeElapsed'>/**
+</span>*/
+getLatestRunTimeElapsed : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getOriginalLatestRunTimeElapsed'>/**
+</span>*/
+getOriginalLatestRunTimeElapsed : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-setOriginalLatestRunTimeElapsed'>/**
+</span>*/
+setOriginalLatestRunTimeElapsed : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getFractionRunTime'>/**Return the fractional position of &quot;now&quot; within the &quot;run time&quot; window of
+</span> this job.
+ &lt;p&gt;
+ For example, if the earliest run time was 10 minutes ago, and the latest
+ run time is 30 minutes from now, this would return 0.25.
+ &lt;p&gt;
+ If the job has no window defined, returns 1. When only an earliest or
+ latest time is defined, it's treated as an infinitely small window at
+ that time.
+*/
+getFractionRunTime : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getPersistedUtcTimes'>/**
+</span>*/
+getPersistedUtcTimes : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-clearPersistedUtcTimes'>/**
+</span>*/
+clearPersistedUtcTimes : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getLastSuccessfulRunTime'>/**
+</span>*/
+getLastSuccessfulRunTime : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-getLastFailedRunTime'>/**
+</span>*/
+getLastFailedRunTime : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-isReady'>/**
+</span>@return {Boolean} Whether or not this job is ready to run, based on its requirements.
+*/
+isReady : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-isConstraintsSatisfied'>/**
+</span>@return {Boolean} Whether the constraints set on this job are satisfied.
+*/
+isConstraintsSatisfied : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-matches'>/**
+</span>*/
+matches : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-toString'>/**
+</span>*/
+toString : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-toShortString'>/**Convenience function to identify a job uniquely without pulling all the data that
+</span> {@link #toString}() returns.
+*/
+toShortString : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-toShortStringExceptUniqueId'>/**Convenience function to identify a job uniquely without pulling all the data that
+</span> {@link #toString}() returns.
+*/
+toShortStringExceptUniqueId : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-writeToShortProto'>/**Convenience function to dump data that identifies a job uniquely to proto. This is intended
+</span> to mimic {@link #toShortString}.
+*/
+writeToShortProto : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-job-controllers-JobStatus-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

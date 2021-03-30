@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-display-DisplayManagerService'>/**@class com.android.server.display.DisplayManagerService
+</span>@extends com.android.server.SystemService
+
+ Manages attached displays.
+ &lt;p&gt;
+ The {@link com.android.server.display.DisplayManagerService} manages the global lifecycle of displays,
+ decides how to configure logical displays based on the physical display devices currently
+ attached, sends notifications to the system and to applications when the state
+ changes, and so on.
+ &lt;/p&gt;&lt;p&gt;
+ The display manager service relies on a collection of {@link DisplayAdapter} components,
+ for discovering and configuring physical display devices attached to the system.
+ There are separate display adapters for each manner that devices are attached:
+ one display adapter for built-in local displays, one for simulated non-functional
+ displays when the system is headless, one for simulated overlay displays used for
+ development, one for wifi displays, etc.
+ &lt;/p&gt;&lt;p&gt;
+ Display adapters are only weakly coupled to the display manager service.
+ Display adapters communicate changes in display device state to the display manager
+ service asynchronously via a {@link DisplayAdapter.Listener} registered
+ by the display manager service.  This separation of concerns is important for
+ two main reasons.  First, it neatly encapsulates the responsibilities of these
+ two classes: display adapters handle individual display devices whereas
+ the display manager service handles the global state.  Second, it eliminates
+ the potential for deadlocks resulting from asynchronous display device discovery.
+ &lt;/p&gt;
+
+ &lt;h3&gt;Synchronization&lt;/h3&gt;
+ &lt;p&gt;
+ Because the display manager may be accessed by multiple threads, the synchronization
+ story gets a little complicated.  In particular, the window manager may call into
+ the display manager while holding a surface transaction with the expectation that
+ it can apply changes immediately.  Unfortunately, that means we can't just do
+ everything asynchronously (*grump*).
+ &lt;/p&gt;&lt;p&gt;
+ To make this work, all of the objects that belong to the display manager must
+ use the same lock.  We call this lock the synchronization root and it has a unique
+ type {@link com.android.server.display.DisplayManagerService.SyncRoot}.  Methods that require this lock are
+ named with the &quot;Locked&quot; suffix.
+ &lt;/p&gt;&lt;p&gt;
+ Where things get tricky is that the display manager is not allowed to make
+ any potentially reentrant calls, especially into the window manager.  We generally
+ avoid this by making all potentially reentrant out-calls asynchronous.
+ &lt;/p&gt;
+*/
+var DisplayManagerService = {
+
+<span id='com-android-server-display-DisplayManagerService-property-mSafeMode'>/***/
+</span>mSafeMode : &quot;null&quot;,
+<span id='com-android-server-display-DisplayManagerService-property-mOnlyCore'>/***/
+</span>mOnlyCore : &quot;null&quot;,
+<span id='com-android-server-display-DisplayManagerService-property-mCallbacks'>/***/
+</span>mCallbacks : &quot;null&quot;,
+<span id='com-android-server-display-DisplayManagerService-method-setupSchedulerPolicies'>/**
+</span>*/
+setupSchedulerPolicies : function(  ) {},
+
+<span id='com-android-server-display-DisplayManagerService-method-onStart'>/**
+</span>*/
+onStart : function(  ) {},
+
+<span id='com-android-server-display-DisplayManagerService-method-onBootPhase'>/**
+</span>*/
+onBootPhase : function(  ) {},
+
+<span id='com-android-server-display-DisplayManagerService-method-onSwitchUser'>/**
+</span>*/
+onSwitchUser : function(  ) {},
+
+<span id='com-android-server-display-DisplayManagerService-method-windowManagerAndInputReady'>/**
+</span>*/
+windowManagerAndInputReady : function(  ) {},
+
+<span id='com-android-server-display-DisplayManagerService-method-systemReady'>/**Called when the system is ready to go.
+</span>*/
+systemReady : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

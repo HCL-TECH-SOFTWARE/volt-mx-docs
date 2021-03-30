@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-input-InputManagerService'>/**@class com.android.server.input.InputManagerService
+</span> implements com.android.server.Watchdog.Monitor
+
+@extends IInputManager.Stub
+
+*/
+var InputManagerService = {
+
+<span id='com-android-server-input-InputManagerService-property-KEY_STATE_UNKNOWN'>/**The key state is unknown or the requested key itself is not supported. */
+</span>KEY_STATE_UNKNOWN : &quot;-1&quot;,
+<span id='com-android-server-input-InputManagerService-property-KEY_STATE_UP'>/**The key is up. /*/
+</span>KEY_STATE_UP : &quot;0&quot;,
+<span id='com-android-server-input-InputManagerService-property-KEY_STATE_DOWN'>/**The key is down. */
+</span>KEY_STATE_DOWN : &quot;1&quot;,
+<span id='com-android-server-input-InputManagerService-property-KEY_STATE_VIRTUAL'>/**The key is down but is a virtual key press that is being emulated by the system. */
+</span>KEY_STATE_VIRTUAL : &quot;2&quot;,
+<span id='com-android-server-input-InputManagerService-property-BTN_MOUSE'>/**Scan code: Mouse / trackball button. */
+</span>BTN_MOUSE : &quot;272&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_LID'>/**Switch code: Lid switch.  When set, lid is shut. */
+</span>SW_LID : &quot;0&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_TABLET_MODE'>/**Switch code: Tablet mode switch.
+</span> When set, the device is in tablet mode (i.e. no keyboard is connected).
+*/
+SW_TABLET_MODE : &quot;1&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_KEYPAD_SLIDE'>/**Switch code: Keypad slide.  When set, keyboard is exposed. */
+</span>SW_KEYPAD_SLIDE : &quot;10&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_HEADPHONE_INSERT'>/**Switch code: Headphone.  When set, headphone is inserted. */
+</span>SW_HEADPHONE_INSERT : &quot;2&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_MICROPHONE_INSERT'>/**Switch code: Microphone.  When set, microphone is inserted. */
+</span>SW_MICROPHONE_INSERT : &quot;4&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_LINEOUT_INSERT'>/**Switch code: Line out.  When set, Line out (hi-Z) is inserted. */
+</span>SW_LINEOUT_INSERT : &quot;6&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_JACK_PHYSICAL_INSERT'>/**Switch code: Headphone/Microphone Jack.  When set, something is inserted. */
+</span>SW_JACK_PHYSICAL_INSERT : &quot;7&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_CAMERA_LENS_COVER'>/**Switch code: Camera lens cover. When set the lens is covered. */
+</span>SW_CAMERA_LENS_COVER : &quot;9&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_LID_BIT'>/***/
+</span>SW_LID_BIT : &quot;1&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_TABLET_MODE_BIT'>/***/
+</span>SW_TABLET_MODE_BIT : &quot;2&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_KEYPAD_SLIDE_BIT'>/***/
+</span>SW_KEYPAD_SLIDE_BIT : &quot;1024&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_HEADPHONE_INSERT_BIT'>/***/
+</span>SW_HEADPHONE_INSERT_BIT : &quot;4&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_MICROPHONE_INSERT_BIT'>/***/
+</span>SW_MICROPHONE_INSERT_BIT : &quot;16&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_LINEOUT_INSERT_BIT'>/***/
+</span>SW_LINEOUT_INSERT_BIT : &quot;64&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_JACK_PHYSICAL_INSERT_BIT'>/***/
+</span>SW_JACK_PHYSICAL_INSERT_BIT : &quot;128&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_JACK_BITS'>/***/
+</span>SW_JACK_BITS : &quot;212&quot;,
+<span id='com-android-server-input-InputManagerService-property-SW_CAMERA_LENS_COVER_BIT'>/***/
+</span>SW_CAMERA_LENS_COVER_BIT : &quot;512&quot;,
+<span id='com-android-server-input-InputManagerService-method-setWindowManagerCallbacks'>/**
+</span>*/
+setWindowManagerCallbacks : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-setWiredAccessoryCallbacks'>/**
+</span>*/
+setWiredAccessoryCallbacks : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-start'>/**
+</span>*/
+start : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-systemRunning'>/**
+</span>*/
+systemRunning : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-getKeyCodeState'>/**Gets the current state of a key or button by key code.
+</span>@param {Number} deviceId The input device id, or -1 to consult all devices.
+@param {Number} sourceMask The input sources to consult, or {@link InputDevice#SOURCE_ANY} to
+ consider all input sources.  An input device is consulted if at least one of its
+ non-class input source bits matches the specified source mask.
+@param {Number} keyCode The key code to check.
+@return {Number} The key state.
+*/
+getKeyCodeState : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-getScanCodeState'>/**Gets the current state of a key or button by scan code.
+</span>@param {Number} deviceId The input device id, or -1 to consult all devices.
+@param {Number} sourceMask The input sources to consult, or {@link InputDevice#SOURCE_ANY} to
+ consider all input sources.  An input device is consulted if at least one of its
+ non-class input source bits matches the specified source mask.
+@param {Number} scanCode The scan code to check.
+@return {Number} The key state.
+*/
+getScanCodeState : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-getSwitchState'>/**Gets the current state of a switch by switch code.
+</span>@param {Number} deviceId The input device id, or -1 to consult all devices.
+@param {Number} sourceMask The input sources to consult, or {@link InputDevice#SOURCE_ANY} to
+ consider all input sources.  An input device is consulted if at least one of its
+ non-class input source bits matches the specified source mask.
+@param {Number} switchCode The switch code to check.
+@return {Number} The switch state.
+*/
+getSwitchState : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-hasKeys'>/**Determines whether the specified key codes are supported by a particular device.
+</span>@param {Number} deviceId The input device id, or -1 to consult all devices.
+@param {Number} sourceMask The input sources to consult, or {@link InputDevice#SOURCE_ANY} to
+ consider all input sources.  An input device is consulted if at least one of its
+ non-class input source bits matches the specified source mask.
+@param {Object {int[]}} keyCodes The array of key codes to check.
+@param {Object {boolean[]}} keyExists An array at least as large as keyCodes whose entries will be set
+ to true or false based on the presence or absence of support for the corresponding
+ key codes.
+@return {Boolean} True if the lookup was successful, false otherwise.
+*/
+hasKeys : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-monitorInput'>/**Creates an input channel that will receive all input from the input dispatcher.
+</span>@param {String} inputChannelName The input channel name.
+@param {Number} displayId Target display id.
+@return {Object {android.view.InputChannel}} The input channel.
+*/
+monitorInput : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-monitorGestureInput'>/**Creates an input monitor that will receive pointer events for the purposes of system-wide
+</span> gesture interpretation.
+@param {String} inputChannelName The input channel name.
+@param {Number} displayId Target display id.
+@return {Object {android.view.InputMonitor}} The input channel.
+*/
+monitorGestureInput : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-registerInputChannel'>/**Registers an input channel so that it can be used as an input event target.
+</span>@param {Object {InputChannel}} inputChannel The input channel to register.
+@param {Object {IBinder}} inputWindowHandle The handle of the input window associated with the
+ input channel, or null if none.
+*/
+registerInputChannel : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-unregisterInputChannel'>/**Unregisters an input channel.
+</span>@param {Object {InputChannel}} inputChannel The input channel to unregister.
+*/
+unregisterInputChannel : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-setInputFilter'>/**Sets an input filter that will receive all input events before they are dispatched.
+</span> The input filter may then reinterpret input events or inject new ones.
+
+ To ensure consistency, the input dispatcher automatically drops all events
+ in progress whenever an input filter is installed or uninstalled.  After an input
+ filter is uninstalled, it can no longer send input events unless it is reinstalled.
+ Any events it attempts to send after it has been uninstalled will be dropped.
+@param {Object {IInputFilter}} filter The input filter, or null to remove the current filter.
+*/
+setInputFilter : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-injectInputEvent'>/**
+</span>*/
+injectInputEvent : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-getInputDevice'>/**Gets information about the input device with the specified id.
+</span>@param {Number} deviceId The device id.
+@return {Object {android.view.InputDevice}} The input device or null if not found.
+*/
+getInputDevice : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-isInputDeviceEnabled'>/**
+</span>*/
+isInputDeviceEnabled : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-enableInputDevice'>/**
+</span>*/
+enableInputDevice : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-disableInputDevice'>/**
+</span>*/
+disableInputDevice : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-getInputDeviceIds'>/**Gets the ids of all input devices in the system.
+</span>@return {Number} The input device ids.
+*/
+getInputDeviceIds : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-getInputDevices'>/**Gets all input devices in the system.
+</span>@return {Object {android.view.InputDevice}} The array of input devices.
+*/
+getInputDevices : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-registerInputDevicesChangedListener'>/**
+</span>*/
+registerInputDevicesChangedListener : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-getTouchCalibrationForInputDevice'>/**
+</span>*/
+getTouchCalibrationForInputDevice : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-setTouchCalibrationForInputDevice'>/**
+</span>*/
+setTouchCalibrationForInputDevice : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-isInTabletMode'>/**
+</span>*/
+isInTabletMode : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-registerTabletModeChangedListener'>/**
+</span>*/
+registerTabletModeChangedListener : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-getKeyboardLayouts'>/**
+</span>*/
+getKeyboardLayouts : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-getKeyboardLayoutsForInputDevice'>/**
+</span>*/
+getKeyboardLayoutsForInputDevice : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-getKeyboardLayout'>/**
+</span>*/
+getKeyboardLayout : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-getCurrentKeyboardLayoutForInputDevice'>/**
+</span>*/
+getCurrentKeyboardLayoutForInputDevice : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-setCurrentKeyboardLayoutForInputDevice'>/**
+</span>*/
+setCurrentKeyboardLayoutForInputDevice : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-getEnabledKeyboardLayoutsForInputDevice'>/**
+</span>*/
+getEnabledKeyboardLayoutsForInputDevice : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-addKeyboardLayoutForInputDevice'>/**
+</span>*/
+addKeyboardLayoutForInputDevice : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-removeKeyboardLayoutForInputDevice'>/**
+</span>*/
+removeKeyboardLayoutForInputDevice : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-switchKeyboardLayout'>/**
+</span>*/
+switchKeyboardLayout : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-setFocusedApplication'>/**
+</span>*/
+setFocusedApplication : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-setFocusedDisplay'>/**
+</span>*/
+setFocusedDisplay : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-onDisplayRemoved'>/**Clean up input window handles of the given display.
+</span>*/
+onDisplayRemoved : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-requestPointerCapture'>/**
+</span>*/
+requestPointerCapture : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-setInputDispatchMode'>/**
+</span>*/
+setInputDispatchMode : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-setSystemUiVisibility'>/**
+</span>*/
+setSystemUiVisibility : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-tryPointerSpeed'>/**
+</span>*/
+tryPointerSpeed : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-updatePointerSpeedFromSettings'>/**
+</span>*/
+updatePointerSpeedFromSettings : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-updateShowTouchesFromSettings'>/**
+</span>*/
+updateShowTouchesFromSettings : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-updateAccessibilityLargePointerFromSettings'>/**
+</span>*/
+updateAccessibilityLargePointerFromSettings : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-vibrate'>/**
+</span>*/
+vibrate : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-cancelVibrate'>/**
+</span>*/
+cancelVibrate : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-setPointerIconType'>/**
+</span>*/
+setPointerIconType : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-setCustomPointerIcon'>/**
+</span>*/
+setCustomPointerIcon : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-dump'>/**
+</span>*/
+dump : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-monitor'>/**
+</span>*/
+monitor : function(  ) {},
+
+<span id='com-android-server-input-InputManagerService-method-canDispatchToDisplay'>/**Gets if an input device could dispatch to the given display&quot;.
+</span>@param {Number} deviceId The input device id.
+@param {Number} displayId The specific display id.
+@return {Boolean} True if the device could dispatch to the given display, false otherwise.
+*/
+canDispatchToDisplay : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

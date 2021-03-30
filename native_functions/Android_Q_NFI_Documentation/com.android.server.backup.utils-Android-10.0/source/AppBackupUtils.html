@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-backup-utils-AppBackupUtils'>/**@class com.android.server.backup.utils.AppBackupUtils
+</span>@extends java.lang.Object
+
+ Utility methods wrapping operations on ApplicationInfo and PackageInfo.
+*/
+var AppBackupUtils = {
+
+<span id='com-android-server-backup-utils-AppBackupUtils-method-appIsEligibleForBackup'>/**Returns whether app is eligible for backup.
+</span>
+ High level policy: apps are generally ineligible for backup if certain conditions apply. The
+ conditions are:
+
+ &lt;ol&gt;
+     &lt;li&gt;their manifest states android:allowBackup=&quot;false&quot;
+     &lt;li&gt;they run as a system-level uid but do not supply their own backup agent
+     &lt;li&gt;it is the special shared-storage backup package used for 'adb backup'
+ &lt;/ol&gt;
+*/
+appIsEligibleForBackup : function(  ) {},
+
+<span id='com-android-server-backup-utils-AppBackupUtils-method-appIsRunningAndEligibleForBackupWithTransport'>/**Returns whether an app is eligible for backup at runtime. That is, the app has to:
+</span> &lt;ol&gt;
+     &lt;li&gt;Return true for {@link #appIsEligibleForBackup(ApplicationInfo, int)}
+     &lt;li&gt;Return false for {@link #appIsStopped}(ApplicationInfo)
+     &lt;li&gt;Return false for {@link #appIsDisabled(ApplicationInfo, int)}
+     &lt;li&gt;Be eligible for the transport via
+         {@link BackupTransport#isAppEligibleForBackup(PackageInfo, boolean)}
+ &lt;/ol&gt;
+*/
+appIsRunningAndEligibleForBackupWithTransport : function(  ) {},
+
+<span id='com-android-server-backup-utils-AppBackupUtils-method-appIsStopped'>/**Checks if the app is in a stopped state.  This is not part of the general &quot;eligible for
+</span> backup?&quot; check because we *do* still need to restore data to apps in this state (e.g.
+ newly-installing ones).
+
+ &lt;p&gt;Reasons for such state:
+ &lt;ul&gt;
+     &lt;li&gt;The app has been force-stopped.
+     &lt;li&gt;The app has been cleared.
+     &lt;li&gt;The app has just been installed.
+ &lt;/ul&gt;
+*/
+appIsStopped : function(  ) {},
+
+<span id='com-android-server-backup-utils-AppBackupUtils-method-appGetsFullBackup'>/**Returns whether the app can get full backup. Does *not* check overall backup eligibility
+</span> policy!
+*/
+appGetsFullBackup : function(  ) {},
+
+<span id='com-android-server-backup-utils-AppBackupUtils-method-appIsKeyValueOnly'>/**Returns whether the app is only capable of doing key/value. We say it's not if it allows full
+</span> backup, and it is otherwise.
+*/
+appIsKeyValueOnly : function(  ) {},
+
+<span id='com-android-server-backup-utils-AppBackupUtils-method-signaturesMatch'>/**Returns whether the signatures stored {@param storedSigs}, coming from the source apk, match
+</span> the signatures of the apk installed on the device, the target apk. If the target resides in
+ the system partition we return true. Otherwise it's considered a match if both conditions
+ hold:
+
+ &lt;ul&gt;
+   &lt;li&gt;Source and target have at least one signature each
+   &lt;li&gt;Target contains all signatures in source, and nothing more
+ &lt;/ul&gt;
+
+ or if both source and target have exactly one signature, and they don't match, we check
+ if the app was ever signed with source signature (i.e. app has rotated key)
+ Note: key rotation is only supported for apps ever signed with one key, and those apps will
+ not be allowed to be signed by more certificates in the future
+
+ Note that if {@param target} is null we return false.
+*/
+signaturesMatch : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

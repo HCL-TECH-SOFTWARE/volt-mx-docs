@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-job-controllers-QuotaController'>/**@class com.android.server.job.controllers.QuotaController
+</span>@extends com.android.server.job.controllers.StateController
+
+ Controller that tracks whether an app has exceeded its standby bucket quota.
+
+ With initial defaults, each app in each bucket is given 10 minutes to run within its respective
+ time window. Active jobs can run indefinitely, working set jobs can run for 10 minutes within a
+ 2 hour window, frequent jobs get to run 10 minutes in an 8 hour window, and rare jobs get to run
+ 10 minutes in a 24 hour window. The windows are rolling, so as soon as a job would have some
+ quota based on its bucket, it will be eligible to run. When a job's bucket changes, its new
+ quota is immediately applied to it.
+
+ Job and session count limits are included to prevent abuse/spam. Each bucket has its own limit on
+ the number of jobs or sessions that can run within the window. Regardless of bucket, apps will
+ not be allowed to run more than 20 jobs within the past 10 minutes.
+
+ Jobs are throttled while an app is not in a foreground state. All jobs are allowed to run
+ freely when an app enters the foreground state and are restricted when the app leaves the
+ foreground state. However, jobs that are started while the app is in the TOP state do not count
+ towards any quota and are not restricted regardless of the app's state change.
+
+ Jobs will not be throttled when the device is charging. The device is considered to be charging
+ once the {@link BatteryManager#ACTION_CHARGING} intent has been broadcast.
+
+ Note: all limits are enforced per bucket window unless explicitly stated otherwise.
+ All stated values are configurable and subject to change. See {@link QcConstants} for current
+ defaults.
+
+ Test: atest com.android.server.job.controllers.QuotaControllerTest
+*/
+var QuotaController = {
+
+<span id='com-android-server-job-controllers-QuotaController-method-onSystemServicesReady'>/**
+</span>*/
+onSystemServicesReady : function(  ) {},
+
+<span id='com-android-server-job-controllers-QuotaController-method-maybeStartTrackingJobLocked'>/**
+</span>*/
+maybeStartTrackingJobLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-QuotaController-method-prepareForExecutionLocked'>/**
+</span>*/
+prepareForExecutionLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-QuotaController-method-maybeStopTrackingJobLocked'>/**
+</span>*/
+maybeStopTrackingJobLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-QuotaController-method-onConstantsUpdatedLocked'>/**
+</span>*/
+onConstantsUpdatedLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-QuotaController-method-onAppRemovedLocked'>/**
+</span>*/
+onAppRemovedLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-QuotaController-method-onUserRemovedLocked'>/**
+</span>*/
+onUserRemovedLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-QuotaController-method-dumpControllerStateLocked'>/**
+</span>*/
+dumpControllerStateLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-QuotaController-method-dumpControllerStateLocked'>/**
+</span>*/
+dumpControllerStateLocked : function(  ) {},
+
+<span id='com-android-server-job-controllers-QuotaController-method-dumpConstants'>/**
+</span>*/
+dumpConstants : function(  ) {},
+
+<span id='com-android-server-job-controllers-QuotaController-method-dumpConstants'>/**
+</span>*/
+dumpConstants : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

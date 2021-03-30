@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-content-SyncStorageEngine'>/**@class com.android.server.content.SyncStorageEngine
+</span>@extends java.lang.Object
+
+ Singleton that tracks the sync data and overall sync
+ history on the device.
+
+ @hide
+*/
+var SyncStorageEngine = {
+
+<span id='com-android-server-content-SyncStorageEngine-property-EVENT_START'>/**Enum value for a sync start event. */
+</span>EVENT_START : &quot;0&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-EVENT_STOP'>/**Enum value for a sync stop event. */
+</span>EVENT_STOP : &quot;1&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-SOURCE_OTHER'>/**Enum value for a sync with other sources. */
+</span>SOURCE_OTHER : &quot;0&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-SOURCE_LOCAL'>/**Enum value for a local-initiated sync. */
+</span>SOURCE_LOCAL : &quot;1&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-SOURCE_POLL'>/**Enum value for a poll-based sync (e.g., upon connection to network) */
+</span>SOURCE_POLL : &quot;2&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-SOURCE_USER'>/**Enum value for a user-initiated sync. */
+</span>SOURCE_USER : &quot;3&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-SOURCE_PERIODIC'>/**Enum value for a periodic sync. */
+</span>SOURCE_PERIODIC : &quot;4&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-SOURCE_FEED'>/**Enum a sync with a &quot;feed&quot; extra */
+</span>SOURCE_FEED : &quot;5&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-NOT_IN_BACKOFF_MODE'>/***/
+</span>NOT_IN_BACKOFF_MODE : &quot;-1&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-SOURCES'>/** String names for the sync source types.
+</span>
+ KEEP THIS AND {@link SyncStatusInfo#SOURCE_COUNT} IN SYNC.
+*/
+SOURCES : &quot;null&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-MESG_SUCCESS'>/***/
+</span>MESG_SUCCESS : &quot;success&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-MESG_CANCELED'>/***/
+</span>MESG_CANCELED : &quot;canceled&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-MAX_HISTORY'>/***/
+</span>MAX_HISTORY : &quot;100&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-STATUS_FILE_END'>/***/
+</span>STATUS_FILE_END : &quot;0&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-STATUS_FILE_ITEM'>/***/
+</span>STATUS_FILE_ITEM : &quot;100&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-STATISTICS_FILE_END'>/***/
+</span>STATISTICS_FILE_END : &quot;0&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-STATISTICS_FILE_ITEM_OLD'>/***/
+</span>STATISTICS_FILE_ITEM_OLD : &quot;100&quot;,
+<span id='com-android-server-content-SyncStorageEngine-property-STATISTICS_FILE_ITEM'>/***/
+</span>STATISTICS_FILE_ITEM : &quot;101&quot;,
+<span id='com-android-server-content-SyncStorageEngine-method-newTestInstance'>/**
+</span>*/
+newTestInstance : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-init'>/**
+</span>*/
+init : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getSingleton'>/**
+</span>*/
+getSingleton : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getSyncRandomOffset'>/**
+</span>*/
+getSyncRandomOffset : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-addStatusChangeListener'>/**
+</span>*/
+addStatusChangeListener : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-removeStatusChangeListener'>/**
+</span>*/
+removeStatusChangeListener : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-calculateDefaultFlexTime'>/**Figure out a reasonable flex time for cases where none is provided (old api calls).
+</span>@param {Number} syncTimeSeconds requested sync time from now.
+@return {Number} amount of seconds before syncTimeSeconds that the sync can occur.
+      I.e.
+      earliest_sync_time = syncTimeSeconds - calculateDefaultFlexTime(syncTimeSeconds)
+ The flex time is capped at a percentage of the {@link #DEFAULT_POLL_FREQUENCY_SECONDS}.
+*/
+calculateDefaultFlexTime : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getSyncAutomatically'>/**
+</span>*/
+getSyncAutomatically : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-setSyncAutomatically'>/**
+</span>*/
+setSyncAutomatically : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getIsSyncable'>/**
+</span>*/
+getIsSyncable : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-setIsSyncable'>/**
+</span>*/
+setIsSyncable : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getBackoff'>/**
+</span>*/
+getBackoff : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-setBackoff'>/**Update the backoff for the given endpoint. The endpoint may be for a provider/account and
+</span> the account or provider info be null, which signifies all accounts or providers.
+*/
+setBackoff : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-clearAllBackoffsLocked'>/**
+</span>*/
+clearAllBackoffsLocked : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getDelayUntilTime'>/**
+</span>*/
+getDelayUntilTime : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-setDelayUntilTime'>/**
+</span>*/
+setDelayUntilTime : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-setMasterSyncAutomatically'>/**
+</span>*/
+setMasterSyncAutomatically : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getMasterSyncAutomatically'>/**
+</span>*/
+getMasterSyncAutomatically : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getAuthorityCount'>/**
+</span>*/
+getAuthorityCount : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getAuthority'>/**
+</span>*/
+getAuthority : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-isSyncActive'>/**Returns true if there is currently a sync operation being actively processed for the given
+</span> target.
+*/
+isSyncActive : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-markPending'>/**
+</span>*/
+markPending : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-removeStaleAccounts'>/**Called when the set of account has changed, given the new array of
+</span> active accounts.
+*/
+removeStaleAccounts : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-addActiveSync'>/**Called when a sync is starting. Supply a valid ActiveSyncContext with information
+</span> about the sync.
+*/
+addActiveSync : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-removeActiveSync'>/**Called to indicate that a previously active sync is no longer active.
+</span>*/
+removeActiveSync : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-reportActiveChange'>/**To allow others to send active change reports, to poke clients.
+</span>*/
+reportActiveChange : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-insertStartSyncEvent'>/**Note that sync has started for the given operation.
+</span>*/
+insertStartSyncEvent : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-stopSyncEvent'>/**
+</span>*/
+stopSyncEvent : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getCurrentSyncsCopy'>/**
+</span>@param {Number} userId Id of user to return current sync info.
+@param {Boolean} canAccessAccounts Determines whether to redact Account information from the result.
+@return {Object {java.util.List}} a copy of the current syncs data structure. Will not return null.
+*/
+getCurrentSyncsCopy : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getCopyOfAuthorityWithSyncStatus'>/**Return a copy of the specified target with the corresponding sync status
+</span>*/
+getCopyOfAuthorityWithSyncStatus : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getStatusByAuthority'>/**Returns the status that matches the target.
+</span>@param {Object {SyncStorageEngine.EndPoint}} info the endpoint target we are querying status info for.
+@return {Object {android.content.SyncStatusInfo}} the SyncStatusInfo for the endpoint.
+*/
+getStatusByAuthority : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-isSyncPending'>/**Return true if the pending status is true of any matching authorities.
+</span>*/
+isSyncPending : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getSyncHistory'>/**Return an array of the current sync status for all authorities.  Note
+</span> that the objects inside the array are the real, live status objects,
+ so be careful what you do with them.
+*/
+getSyncHistory : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-getDayStatistics'>/**Return an array of the current per-day statistics.  Note
+</span> that the objects inside the array are the real, live status objects,
+ so be careful what you do with them.
+*/
+getDayStatistics : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-removeAuthority'>/**
+</span>*/
+removeAuthority : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-writeAllState'>/**
+</span>*/
+writeAllState : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-shouldGrantSyncAdaptersAccountAccess'>/**
+</span>*/
+shouldGrantSyncAdaptersAccountAccess : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-clearAndReadState'>/**public for testing
+</span>*/
+clearAndReadState : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-queueBackup'>/**Let the BackupManager know that account sync settings have changed. This will trigger
+</span> {@link com.android.server.backup.SystemBackupAgent} to run.
+*/
+queueBackup : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-setClockValid'>/**
+</span>*/
+setClockValid : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-isClockValid'>/**
+</span>*/
+isClockValid : function(  ) {},
+
+<span id='com-android-server-content-SyncStorageEngine-method-resetTodayStats'>/**
+</span>*/
+resetTodayStats : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

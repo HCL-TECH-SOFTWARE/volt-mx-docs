@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-connectivity-Vpn'>/**@class com.android.server.connectivity.Vpn
+</span>@extends java.lang.Object
+
+ @hide
+*/
+var Vpn = {
+
+<span id='com-android-server-connectivity-Vpn-method-setEnableTeardown'>/**Set whether this object is responsible for watching for {@link NetworkInfo}
+</span> teardown. When {@code false}, teardown is handled externally by someone
+ else.
+*/
+setEnableTeardown : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-updateCapabilities'>/**Updates {@link #mNetworkCapabilities} based on current underlying networks and returns a
+</span> defensive copy.
+
+ &lt;p&gt;Does not propagate updated capabilities to apps.
+@param {Object {Network}} defaultNetwork underlying network for VPNs following platform's default
+*/
+updateCapabilities : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-applyUnderlyingCapabilities'>/**
+</span>*/
+applyUnderlyingCapabilities : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-setLockdown'>/**Chooses whether to force all connections to go though VPN.
+</span>
+ Used to enable/disable legacy VPN lockdown.
+
+ This uses the same ip rule mechanism as
+ {@link #setAlwaysOnPackage(String, boolean, List&lt;String&gt;)}; previous settings from calling
+ that function will be replaced and saved with the always-on state.
+@param {Boolean} lockdown whether to prevent all traffic outside of a VPN.
+*/
+setLockdown : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-getLockdown'>/**Check whether to prevent all traffic outside of a VPN even when the VPN is not connected.
+</span>@return {Boolean} {@code true} if VPN lockdown is enabled.
+*/
+getLockdown : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-getAlwaysOn'>/**Returns whether VPN is configured as always-on.
+</span>*/
+getAlwaysOn : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-isAlwaysOnPackageSupported'>/**Checks if a VPN app supports always-on mode.
+</span>
+ In order to support the always-on feature, an app has to
+ &lt;ul&gt;
+     &lt;li&gt;target {@link VERSION_CODES#N API 24} or above, and
+     &lt;li&gt;not opt out through the {@link com.android.server.connectivity.VpnService#SERVICE_META_DATA_SUPPORTS_ALWAYS_ON}
+         meta-data field.
+ &lt;/ul&gt;
+@param {String} packageName the canonical package name of the VPN app
+@return {Boolean} {@code true} if and only if the VPN app exists and supports always-on mode
+*/
+isAlwaysOnPackageSupported : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-setAlwaysOnPackage'>/**Configures an always-on VPN connection through a specific application.
+</span> This connection is automatically granted and persisted after a reboot.
+
+ &lt;p&gt;The designated package should exist and declare a {@link com.android.server.connectivity.VpnService} in its
+    manifest guarded by {@link android.Manifest.permission.BIND_VPN_SERVICE},
+    otherwise the call will fail.
+
+ &lt;p&gt;Note that this method does not check if the VPN app supports always-on mode. The check is
+    delayed to {@link #startAlwaysOnVpn}(), which is always called immediately after this
+    method in {@link android.net.IConnectivityManager#setAlwaysOnVpnPackage}.
+@param {String} packageName the package to designate as always-on VPN supplier.
+@param {Boolean} lockdown whether to prevent traffic outside of a VPN, for example while connecting.
+@param {Object {java.util.List}} lockdownWhitelist packages to be whitelisted from lockdown.
+@return {Boolean} {@code true} if the package has been set as always-on, {@code false} otherwise.
+*/
+setAlwaysOnPackage : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-getAlwaysOnPackage'>/**
+</span>@return {String} the package name of the VPN controller responsible for always-on VPN,
+         or {@code null} if none is set or always-on VPN is controlled through
+         lockdown instead.
+*/
+getAlwaysOnPackage : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-getLockdownWhitelist'>/**
+</span>@return {Object {java.util.List}} an immutable list of packages whitelisted from always-on VPN lockdown.
+*/
+getLockdownWhitelist : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-startAlwaysOnVpn'>/**
+</span>@return {Boolean} {@code true} if the service was started, the service was already connected, or there
+         was no always-on VPN to start. {@code false} otherwise.
+*/
+startAlwaysOnVpn : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-prepare'>/**Prepare for a VPN application. This method is designed to solve
+</span> race conditions. It first compares the current prepared package
+ with {@code oldPackage}. If they are the same, the prepared
+ package is revoked and replaced with {@code newPackage}. If
+ {@code oldPackage} is {@code null}, the comparison is omitted.
+ If {@code newPackage} is the same package or {@code null}, the
+ revocation is omitted. This method returns {@code true} if the
+ operation is succeeded.
+
+ Legacy VPN is handled specially since it is not a real package.
+ It uses {@link com.android.server.connectivity.VpnConfig#LEGACY_VPN} as its package name, and
+ it can be revoked by itself.
+
+ Note: when we added VPN pre-consent in
+ https://android.googlesource.com/platform/frameworks/base/+/0554260
+ the names oldPackage and newPackage became misleading, because when
+ an app is pre-consented, we actually prepare oldPackage, not newPackage.
+
+ Their meanings actually are:
+
+ - oldPackage non-null, newPackage null: App calling VpnService#prepare().
+ - oldPackage null, newPackage non-null: ConfirmDialog calling prepareVpn().
+ - oldPackage null, newPackage=LEGACY_VPN: Used internally to disconnect
+   and revoke any current app VPN and re-prepare legacy vpn.
+
+ TODO: Rename the variables - or split this method into two - and end this confusion.
+ TODO: b/29032008 Migrate code from prepare(oldPackage=non-null, newPackage=LEGACY_VPN)
+ to prepare(oldPackage=null, newPackage=LEGACY_VPN)
+@param {String} oldPackage The package name of the old VPN application
+@param {String} newPackage The package name of the new VPN application
+@return {Boolean} true if the operation succeeded.
+*/
+prepare : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-setPackageAuthorization'>/**Set whether a package has the ability to launch VPNs without user intervention.
+</span>*/
+setPackageAuthorization : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-getNetworkInfo'>/**
+</span>*/
+getNetworkInfo : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-getNetId'>/**
+</span>*/
+getNetId : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-establish'>/**Establish a VPN network and return the file descriptor of the VPN interface. This methods
+</span> returns {@code null} if the application is revoked or not prepared.
+@param {Object {VpnConfig}} config The parameters to configure the network.
+@return {Object {android.os.ParcelFileDescriptor}} The file descriptor of the VPN interface.
+*/
+establish : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-onUserAdded'>/**Updates UID ranges for this VPN and also updates its internal capabilities.
+</span>
+ &lt;p&gt;Should be called on primary ConnectivityService thread.
+*/
+onUserAdded : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-onUserRemoved'>/**Updates UID ranges for this VPN and also updates its capabilities.
+</span>
+ &lt;p&gt;Should be called on primary ConnectivityService thread.
+*/
+onUserRemoved : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-onUserStopped'>/**Called when the user associated with this VPN has just been stopped.
+</span>*/
+onUserStopped : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-getVpnConfig'>/**Return the configuration of the currently running VPN.
+</span>*/
+getVpnConfig : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-interfaceStatusChanged'>/**
+</span>*/
+interfaceStatusChanged : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-addAddress'>/**
+</span>*/
+addAddress : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-removeAddress'>/**
+</span>*/
+removeAddress : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-setUnderlyingNetworks'>/**Updates underlying network set.
+</span>
+ &lt;p&gt;Note: Does not updates capabilities. Call {@link #updateCapabilities} from
+ ConnectivityService thread to get updated capabilities.
+*/
+setUnderlyingNetworks : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-getUnderlyingNetworks'>/**
+</span>*/
+getUnderlyingNetworks : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-getVpnInfo'>/**This method should only be called by ConnectivityService because it doesn't
+</span> have enough data to fill VpnInfo.primaryUnderlyingIface field.
+*/
+getVpnInfo : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-appliesToUid'>/**
+</span>*/
+appliesToUid : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-isBlockingUid'>/**
+</span>@param {Number} uid The target uid.
+@return {Boolean} {@code true} if {@code uid} is included in one of the mBlockedUsers ranges and the
+ VPN is not connected, or if the VPN is connected but does not apply to the {@code uid}.
+@apiNote This method don't check VPN lockdown status.
+@see #mBlockedUsers
+*/
+isBlockingUid : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-startLegacyVpn'>/**Start legacy VPN, controlling native daemons as needed. Creates a
+</span> secondary thread to perform connection work, returning quickly.
+
+ Should only be called to respond to Binder requests as this enforces caller permission. Use
+ {@link #startLegacyVpnPrivileged(VpnProfile, KeyStore, LinkProperties)} to skip the
+ permission check only when the caller is trusted (or the call is initiated by the system).
+*/
+startLegacyVpn : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-startLegacyVpnPrivileged'>/**Like {@link #startLegacyVpn(VpnProfile, KeyStore, LinkProperties)}, but does not check
+</span> permissions under the assumption that the caller is the system.
+
+ Callers are responsible for checking permissions if needed.
+*/
+startLegacyVpnPrivileged : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-stopLegacyVpnPrivileged'>/**Stop legacy VPN. Permissions must be checked by callers.
+</span>*/
+stopLegacyVpnPrivileged : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-getLegacyVpnInfo'>/**Return the information of the current ongoing legacy VPN.
+</span>*/
+getLegacyVpnInfo : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-getLegacyVpnInfoPrivileged'>/**Return the information of the current ongoing legacy VPN.
+</span> Callers are responsible for checking permissions if needed.
+*/
+getLegacyVpnInfoPrivileged : function(  ) {},
+
+<span id='com-android-server-connectivity-Vpn-method-getLegacyVpnConfig'>/**
+</span>*/
+getLegacyVpnConfig : function(  ) {},
+
+
+};</pre>
+</body>
+</html>

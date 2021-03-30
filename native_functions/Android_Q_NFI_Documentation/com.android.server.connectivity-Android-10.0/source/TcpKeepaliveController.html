@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='com-android-server-connectivity-TcpKeepaliveController'>/**@class com.android.server.connectivity.TcpKeepaliveController
+</span>@extends java.lang.Object
+
+ Manage tcp socket which offloads tcp keepalive.
+
+ The input socket will be changed to repair mode and the application
+ will not have permission to read/write data. If the application wants
+ to write data, it must stop tcp keepalive offload to leave repair mode
+ first. If a remote packet arrives, repair mode will be turned off and
+ offload will be stopped. The application will receive a callback to know
+ it can start reading data.
+
+ {start,stop}SocketMonitor are thread-safe, but care must be taken in the
+ order in which they are called. Please note that while calling
+ {@link #startSocketMonitor(FileDescriptor, Messenger, int)} multiple times
+ with either the same slot or the same FileDescriptor without stopping it in
+ between will result in an exception, calling {@link #stopSocketMonitor}(int)
+ multiple times with the same int is explicitly a no-op.
+ Please also note that switching the socket to repair mode is not synchronized
+ with either of these operations and has to be done in an orderly fashion
+ with stopSocketMonitor. Take care in calling these in the right order.
+ @hide
+*/
+var TcpKeepaliveController = {
+
+<span id='com-android-server-connectivity-TcpKeepaliveController-method-getTcpKeepalivePacket'>/**Build tcp keepalive packet.
+</span>*/
+getTcpKeepalivePacket : function(  ) {},
+
+<span id='com-android-server-connectivity-TcpKeepaliveController-method-startSocketMonitor'>/**Start monitoring incoming packets.
+</span>@param {Object {FileDescriptor}} fd socket fd to monitor.
+@param {Object {KeepaliveTracker.KeepaliveInfo}} ki a {@link KeepaliveInfo} that tracks information about a socket keepalive.
+@param {Number} slot keepalive slot.
+*/
+startSocketMonitor : function(  ) {},
+
+<span id='com-android-server-connectivity-TcpKeepaliveController-method-stopSocketMonitor'>/**Stop socket monitor
+</span>*/
+stopSocketMonitor : function(  ) {},
+
+
+};</pre>
+</body>
+</html>
